@@ -38,87 +38,87 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 		<tr>
 			<td><code>icon_changeColumnType</code></td>
 			<td><code>String</code></td>
-			<td><code><i class="context_icon material-icons">ballot</i></code></td>
+			<td><code>&lt;i class="context_icon material-icons"&gt;ballot&lt;/i&gt;</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_insertANewColumnBefore</code></td>
 			<td><code>String</code></td>
-			<td><code><i class="context_icon material-icons">add</i></code></td>
+			<td><code>&lt;i class="context_icon material-icons"&gt;add&lt;/i&gt;</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_insertANewColumnAfter</code></td>
 			<td><code>String</code></td>
-			<td><code><i class="context_icon material-icons">add</i></code></td>
+			<td><code>&lt;i class="context_icon material-icons"&gt;add&lt;/i&gt;</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_deleteSelectedColumns</code></td>
 			<td><code>String</code></td>
-			<td><code><i class="context_icon material-icons">delete</i></code></td>
+			<td><code>&lt;i class="context_icon material-icons"&gt;delete&lt;/i&gt;</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_renameThisColumn</code></td>
 			<td><code>String</code></td>
-			<td><code><i class="context_icon material-icons">create</i></code></td>
+			<td><code>&lt;i class="context_icon material-icons"&gt;create&lt;/i&gt;</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_orderAscending</code></td>
 			<td><code>String</code></td>
-			<td><code><i class="context_icon material-icons">sort</i></code></td>
+			<td><code>&lt;i class="context_icon material-icons"&gt;sort&lt;/i&gt;</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_orderDescending</code></td>
 			<td><code>String</code></td>
-			<td><code><i class="context_icon material-icons">sort</i></code></td>
+			<td><code>&lt;i class="context_icon material-icons"&gt;sort&lt;/i&gt;</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_insertANewRowBefore</code></td>
 			<td><code>String</code></td>
-			<td><code><i class="context_icon material-icons">add</i></code></td>
+			<td><code>&lt;i class="context_icon material-icons"&gt;add&lt;/i&gt;</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_insertANewRowAfter</code></td>
 			<td><code>String</code></td>
-			<td><code><i class="context_icon material-icons">add</i></code></td>
+			<td><code>&lt;i class="context_icon material-icons"&gt;add&lt;/i&gt;</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_deleteSelectedRows</code></td>
 			<td><code>String</code></td>
-			<td><code><i class="context_icon material-icons">delete</i></code></td>
+			<td><code>&lt;i class="context_icon material-icons"&gt;delete&lt;/i&gt;</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_addComments</code></td>
 			<td><code>String</code></td>
-			<td><code><i class="context_icon material-icons">insert_comment</i></code></td>
+			<td><code>&lt;i class="context_icon material-icons"&gt;insert_comment&lt;/i&gt;</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_clearComments</code></td>
 			<td><code>String</code></td>
-			<td><code><i class="context_icon material-icons">clear</i></code></td>
+			<td><code>&lt;i class="context_icon material-icons"&gt;clear&lt;/i&gt;</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_cut</code></td>
 			<td><code>String</code></td>
-			<td><code><i class="context_icon material-icons">content_cut</i></code></td>
+			<td><code>&lt;i class="context_icon material-icons"&gt;content_cut&lt;/i&gt;</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_copy</code></td>
 			<td><code>String</code></td>
-			<td><code><i class="context_icon material-icons">content_copy</i></code></td>
+			<td><code>&lt;i class="context_icon material-icons"&gt;content_copy&lt;/i&gt;</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_paste</code></td>
 			<td><code>String</code></td>
-			<td><code><i class="context_icon material-icons">content_paste</i></code></td>
+			<td><code>&lt;i class="context_icon material-icons"&gt;content_paste&lt;/i&gt;</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_saveAs</code></td>
 			<td><code>String</code></td>
-			<td><code><i class="context_icon material-icons">save</i></code></td>
+			<td><code>&lt;i class="context_icon material-icons"&gt;save&lt;/i&gt;</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_about</code></td>
 			<td><code>String</code></td>
-			<td><code><i class="context_icon material-icons">info</i></code></td>
+			<td><code>&lt;i class="context_icon material-icons"&gt;info&lt;/i&gt;</code></td>
 		</tr>
 		<tr>
 			<td><code>css</code></td>
