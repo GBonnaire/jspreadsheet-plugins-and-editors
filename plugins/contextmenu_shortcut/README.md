@@ -36,94 +36,94 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 	</thead>
 	<tbody>
 		<tr>
-			<td>```icon_changeColumnType```</td>
-			<td>```String```</td>
-			<td>```<i class="context_icon material-icons">ballot</i>```</td>
+			<td><code>icon_changeColumnType</code></td>
+			<td><code>String</code></td>
+			<td><code><i class="context_icon material-icons">ballot</i></code></td>
 		</tr>
 		<tr>
-			<td>```icon_insertANewColumnBefore```</td>
-			<td>```String```</td>
-			<td>```<i class="context_icon material-icons">add</i>```</td>
+			<td><code>icon_insertANewColumnBefore</code></td>
+			<td><code>String</code></td>
+			<td><code><i class="context_icon material-icons">add</i></code></td>
 		</tr>
 		<tr>
-			<td>```icon_insertANewColumnAfter```</td>
-			<td>```String```</td>
-			<td>```<i class="context_icon material-icons">add</i>```</td>
+			<td><code>icon_insertANewColumnAfter</code></td>
+			<td><code>String</code></td>
+			<td><code><i class="context_icon material-icons">add</i></code></td>
 		</tr>
 		<tr>
-			<td>```icon_deleteSelectedColumns```</td>
-			<td>```String```</td>
-			<td>```<i class="context_icon material-icons">delete</i>```</td>
+			<td><code>icon_deleteSelectedColumns</code></td>
+			<td><code>String</code></td>
+			<td><code><i class="context_icon material-icons">delete</i></code></td>
 		</tr>
 		<tr>
-			<td>```icon_renameThisColumn```</td>
-			<td>```String```</td>
-			<td>```<i class="context_icon material-icons">create</i>```</td>
+			<td><code>icon_renameThisColumn</code></td>
+			<td><code>String</code></td>
+			<td><code><i class="context_icon material-icons">create</i></code></td>
 		</tr>
 		<tr>
-			<td>```icon_orderAscending```</td>
-			<td>```String```</td>
-			<td>```<i class="context_icon material-icons">sort</i>```</td>
+			<td><code>icon_orderAscending</code></td>
+			<td><code>String</code></td>
+			<td><code><i class="context_icon material-icons">sort</i></code></td>
 		</tr>
 		<tr>
-			<td>```icon_orderDescending```</td>
-			<td>```String```</td>
-			<td>```<i class="context_icon material-icons">sort</i>```</td>
+			<td><code>icon_orderDescending</code></td>
+			<td><code>String</code></td>
+			<td><code><i class="context_icon material-icons">sort</i></code></td>
 		</tr>
 		<tr>
-			<td>```icon_insertANewRowBefore```</td>
-			<td>```String```</td>
-			<td>```<i class="context_icon material-icons">add</i>```</td>
+			<td><code>icon_insertANewRowBefore</code></td>
+			<td><code>String</code></td>
+			<td><code><i class="context_icon material-icons">add</i></code></td>
 		</tr>
 		<tr>
-			<td>```icon_insertANewRowAfter```</td>
-			<td>```String```</td>
-			<td>```<i class="context_icon material-icons">add</i>```</td>
+			<td><code>icon_insertANewRowAfter</code></td>
+			<td><code>String</code></td>
+			<td><code><i class="context_icon material-icons">add</i></code></td>
 		</tr>
 		<tr>
-			<td>```icon_deleteSelectedRows```</td>
-			<td>```String```</td>
-			<td>```<i class="context_icon material-icons">delete</i>```</td>
+			<td><code>icon_deleteSelectedRows</code></td>
+			<td><code>String</code></td>
+			<td><code><i class="context_icon material-icons">delete</i></code></td>
 		</tr>
 		<tr>
-			<td>```icon_addComments```</td>
-			<td>```String```</td>
-			<td>```<i class="context_icon material-icons">insert_comment</i>```</td>
+			<td><code>icon_addComments</code></td>
+			<td><code>String</code></td>
+			<td><code><i class="context_icon material-icons">insert_comment</i></code></td>
 		</tr>
 		<tr>
-			<td>```icon_clearComments```</td>
-			<td>```String```</td>
-			<td>```<i class="context_icon material-icons">clear</i>```</td>
+			<td><code>icon_clearComments</code></td>
+			<td><code>String</code></td>
+			<td><code><i class="context_icon material-icons">clear</i></code></td>
 		</tr>
 		<tr>
-			<td>```icon_cut```</td>
-			<td>```String```</td>
-			<td>```<i class="context_icon material-icons">content_cut</i>```</td>
+			<td><code>icon_cut</code></td>
+			<td><code>String</code></td>
+			<td><code><i class="context_icon material-icons">content_cut</i></code></td>
 		</tr>
 		<tr>
-			<td>```icon_copy```</td>
-			<td>```String```</td>
-			<td>```<i class="context_icon material-icons">content_copy</i>```</td>
+			<td><code>icon_copy</code></td>
+			<td><code>String</code></td>
+			<td><code><i class="context_icon material-icons">content_copy</i></code></td>
 		</tr>
 		<tr>
-			<td>```icon_paste```</td>
-			<td>```String```</td>
-			<td>```<i class="context_icon material-icons">content_paste</i>```</td>
+			<td><code>icon_paste</code></td>
+			<td><code>String</code></td>
+			<td><code><i class="context_icon material-icons">content_paste</i></code></td>
 		</tr>
 		<tr>
-			<td>```icon_saveAs```</td>
-			<td>```String```</td>
-			<td>```<i class="context_icon material-icons">save</i>```</td>
+			<td><code>icon_saveAs</code></td>
+			<td><code>String</code></td>
+			<td><code><i class="context_icon material-icons">save</i></code></td>
 		</tr>
 		<tr>
-			<td>```icon_about```</td>
-			<td>```String```</td>
-			<td>```<i class="context_icon material-icons">info</i>```</td>
+			<td><code>icon_about</code></td>
+			<td><code>String</code></td>
+			<td><code><i class="context_icon material-icons">info</i></code></td>
 		</tr>
 		<tr>
-			<td>```css```</td>
-			<td>```String```</td>
-			<td>```font-size:small; vertical-align:text-top; float:left; margin-left: -20px; margin-right: 2px;```</td>
+			<td><code>css</code></td>
+			<td><code>String</code></td>
+			<td><code>font-size:small; vertical-align:text-top; float:left; margin-left: -20px; margin-right: 2px;</code></td>
 		</tr>
 	</tbody>
 </table>
@@ -182,6 +182,7 @@ jexcel(document.getElementById('spreadsheet'), {
     ],
     ...
 });
+```
 
 ## Copyright and license
 
