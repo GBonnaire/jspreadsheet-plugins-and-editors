@@ -52,21 +52,9 @@ var jexcel_contextmenu_shortcut = (function(instance, options) {
         if (!plugin.options.hasOwnProperty(property) || plugin.options[property]==null ) {
             plugin.options[property] = defaultOptions[property];
         }
-        
-        if(property.substring(0,5)==="text_") {
-            var propertyText = "cms_" + property.substring(5,property.length);
-            if(instance.options.text[propertyText]) {
-                plugin.options[property] = instance.options.text[propertyText];
-            }
-        } 
    }
        
-    /**
-     * Jexcel events
-     */
-    plugin.onevent = function() {
-    }
-    
+   
     /**
      * Run on the context menu
      */
