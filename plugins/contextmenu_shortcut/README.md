@@ -174,7 +174,7 @@ jexcel(document.getElementById('spreadsheet'), {
 });
 ```
 
-### get started with options
+#### Example with options
 
 Use this way for defined icon of FontAwesome
 
