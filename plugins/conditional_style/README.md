@@ -4,7 +4,7 @@ The Conditional Style plugin like conditional style of Excel. It works even if a
 
 ![Preview plugin](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/plugins/conditional_style/preview.png)
 
-This plugin is **Paid** Contact me if interested [contact@gbonnaire.fr](mailto://contact@gbonnaire.fr)
+This plugin is **Premium** Contact me if you are interested to buy [contact@gbonnaire.fr](mailto://contact@gbonnaire.fr)
 
 ### Features
 
