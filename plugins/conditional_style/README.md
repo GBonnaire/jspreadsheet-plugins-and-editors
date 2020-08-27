@@ -189,15 +189,20 @@ jexcel(document.getElementById('spreadsheet'), {
 	plugins: [
       ...
    		{ name:'conditionalstyle', plugin:jexcel_conditionalstyle, options:{rules:[
-                {range:"B1:B10;1:1", criteria: "Honda", class:"cellAlert"}, // #Rule 1 : For Range B1:B10 and Row 1, cell = Honda use ClassCss cellAlert
-                {range:"G:G", criteria: ">3000", style:{"color": "red", "font-weight":"bold", "background-color": "LightPink"}, stopIfTrue:true}, // #Rule 2 : All data of Column G if value > 3000, apply this style and stop here (no check next rules if true)
-                {range:"F:F", criteria: true, style:"background-color:green", stopIfTrue:true}, // #Rule 3 : All data of Column F, if value = true (checkbox), apply style and stop here (no check next rules if true)
-                {criteria: "=IF(MOD(ROW(),2)==1, true, false)", style:{"background-color": "lightblue"}},  // #Rule 4 All sheet, If rule is even, apply style                      
-        ]}},
+   					// #Rules 1 : For Range B1:B10 and Row 1, cell = Honda use ClassCss cellAlert
+	                {range:"B1:B10;1:1", criteria: "Honda", class:"cellAlert"}, 
+	                // #Rule 2 : All data of Column G if value > 3000, apply this style and stop here (no check next rules if true)
+	                {range:"G:G", criteria: ">3000", style:{"color": "red", "font-weight":"bold", "background-color": "LightPink"}, stopIfTrue:true}, 
+	                // #Rule 3 : All data of Column F, if value = true (checkbox), apply style and stop here (no check next rules if true)
+	                {range:"F:F", criteria: true, style:"background-color:green", stopIfTrue:true}, 
+	                // #Rule 4 All sheet, If rule is even, apply style                      
+	                {criteria: "=IF(MOD(ROW(),2)==1, true, false)", style:{"background-color": "lightblue"}},  
+        	]}},
       ...  
     ],
     ...
 });
+```
 
 ## Copyright and license
 
