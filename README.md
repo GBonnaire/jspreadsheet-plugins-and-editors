@@ -13,6 +13,7 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 
 
 ## Plugins available
+- [Conditional style](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/plugins/conditional_style)
 - [Contextmenu Shortcut](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/contextmenu_shortcut) **Free**
 - [Copy Paste advanced (when access to clipboard navigator is denied)](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/plugins/copypaste_advanced) **Free**
 
@@ -21,8 +22,7 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 
 ## Comming soon
 - Comments advanced
-- Conditional style
-
+- 
 - Formula bar (like excel with autocomplete)
 - Formula editor (like excel with select other cell on formula)
 - Mobile (Select range on mobile, contextmenu on mobile)

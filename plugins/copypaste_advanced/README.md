@@ -40,7 +40,7 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 	</thead>
 	<tbody>
 		<tr>
-			<td><code>copy(optional boolean) -> array</code></td>
+			<td><code>copy(cut <optional boolean>) -> Array</code></td>
 			<td>Copy selected cells. If copy(true), you cut selected cell. This methods return same result of jexcel.current.copy().</td>
 			<td><code>jexcel.current.plugins.copypaste_adv.copy();</code></td>
 		</tr>
