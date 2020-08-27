@@ -8,11 +8,7 @@ This plugin is **Paid** Contact me if interested [contact@gbonnaire.fr](mailto:/
 
 ### Features
 
-- Add items cut, copy, paste on default toolbar
-- Add item paste on default context menu when it is not present
-- Upgrade copy/paste of JExcel when clipboard access is denied
-- Override copy methods of JExcel
-- Work on Mobile
+- Add feature conditional style on JExcel like Excel
 
 
 ## What is JExcel ?
@@ -84,24 +80,23 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 			<td><code>{criteria: "=IF(MOD(ROW(),2)==1, true, false)", style:{"background-color": "lightblue"}, stopIfTrue:true},</code></td>
 		</tr>
 		<tr>
-			<td><code>style</code></td>
+			<td><code>style (optional)</code></td>
 			<td>Style apply on cell if result of criteria is right</td>
 			<td><code>String</code></td>
 			<td><code>{criteria: "=IF(MOD(ROW(),2)==1, true, false)", style:{"background-color": "lightblue"}},</code></td>
 		</tr>
 		<tr>
-			<td><code>class</code></td>
+			<td><code>class (optional)</code></td>
 			<td>Class CSS apply on cell if result of critera is right</td>
 			<td><code>String</code></td>
 			<td><code>{range:"B1:B10;1:1", criteria: "Honda", class:"cellAlert"},</code></td>
 		</tr>
 		<tr>
-			<td><code>stopIfTrue</code></td>
+			<td><code>stopIfTrue (optional)</code></td>
 			<td>this option like Excel, if rule is apply, stop apply conditional style for this cell (no go check next rule). By Default is <code>false</code></td>
 			<td><code>Boolean</code></td>
 			<td><code>&lt;i class="context_icon material-icons"&gt;create&lt;/i&gt;</code></td>
 		</tr>
-		
 	</tbody>
 </table>
 
