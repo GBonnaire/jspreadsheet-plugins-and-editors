@@ -189,7 +189,7 @@ jexcel(document.getElementById('spreadsheet'), {
 	plugins: [
       ...
    		{ name:'conditionalstyle', plugin:jexcel_conditionalstyle, options:{rules:[
-   					// #Rules 1 : For Range B1:B10 and Row 1, cell = Honda use ClassCss cellAlert
+   			// #Rules 1 : For Range B1:B10 and Row 1, cell = Honda use ClassCss cellAlert
 	                {range:"B1:B10;1:1", criteria: "Honda", class:"cellAlert"}, 
 	                // #Rule 2 : All data of Column G if value > 3000, apply this style and stop here (no check next rules if true)
 	                {range:"G:G", criteria: ">3000", style:{"color": "red", "font-weight":"bold", "background-color": "LightPink"}, stopIfTrue:true}, 
