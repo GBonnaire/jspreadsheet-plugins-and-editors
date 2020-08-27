@@ -110,6 +110,16 @@ var jexcel_copypaste_advanced = (function(instance, options) {
     instance.copy = function(cut) {
         var data = BasedCopy(cut);
         jexcel.dataCopied = data;
+        return data;
+    }
+    
+    /**
+     * copy function
+     * @param {type} cut
+     * @returns {undefined}
+     */
+    plugin.copy = function(cut) {
+        return instance.copy(cut);
     }
 
     /**
@@ -119,7 +129,7 @@ var jexcel_copypaste_advanced = (function(instance, options) {
      * @param {type} text
      * @returns {undefined}
      */
-    plugin.paste = async function() {
+    plugin.paste = function() {
         var x = instance.selectedCell[0];
         var y = instance.selectedCell[1];
         if (navigator && navigator.clipboard) {
