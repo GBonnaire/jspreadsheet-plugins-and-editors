@@ -1,8 +1,8 @@
-## JExcel Plugin : contextmenu_shortcut
+## JExcel Plugin : Contextmenu shortcut
 
 ContextMenu_Shortcut is a plugin to improve the contextMenu of JExcel Pro. It allows you to change the base of shortcuts depending on whether you are on a Mac or a Windows. It also allows you to add icons for each menu item.
 
-![Contextmenu_shortcut In JExcel Pro](https://i.ibb.co/2tzfMhJ/Jexcel-plugin-contextmenu-shortcut.png)
+![Preview plugin](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/plugins/contextmenu_shortcut/preview.png)
 
 This plugin is **Free**
 
