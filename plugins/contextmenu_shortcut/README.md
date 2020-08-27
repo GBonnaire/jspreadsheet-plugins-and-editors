@@ -10,7 +10,8 @@ This plugin is **Free**
 
 jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional web-based interactive tables and spreadsheets. Compatible with most widely-used spreadsheet software, such as Excel or Google Spreadsheet, it offers users an unrivalled Excel-like user experience. It also works well with prominent modern frameworks and flexibly utilizes a large collection of events, extensions and configurations to meet different application requirements. Impress your clients with a better user experience and a great dynamic interactive data management tool.
 
-[Download JExcel Pro](https://www.jexcel.net) [Download JExcel CE](https://bossanova.uk/jexcel/)
+- [Download JExcel Pro](https://www.jexcel.net) 
+- [Download JExcel CE](https://bossanova.uk/jexcel/)
 
 ## Documentation
 
@@ -18,13 +19,13 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 
 - [JExcel Pro v5](https://www.jexcel.net/v5) or [JExcel Pro v7](https://www.jexcel.net/v7)
 
-- With default options of plugins, you should use [Material Design icons](https://material.io/resources/icons/). But you can you fontawesome
+- With default options of plugin, you should use [Material Design icons](https://material.io/resources/icons/). But, if you want, you can use fontawesome with editing all icons
 
 ```HTML
 <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
  ```   
 
-### Options of plugins
+### Options of plugin
 
 <table>
 	<thead>
