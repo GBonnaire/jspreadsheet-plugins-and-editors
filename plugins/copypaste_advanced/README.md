@@ -11,6 +11,7 @@ This plugin is **Free**
 - Add items cut, copy, paste on default toolbar
 - Add item paste on default context menu when it is not present
 - Upgrade copy/paste of JExcel when clipboard access is denied
+- Override copy methods of JExcel
 - Work on Mobile
 
 
@@ -39,8 +40,8 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 	</thead>
 	<tbody>
 		<tr>
-			<td><code>copy(optional boolean) -> Data</code></td>
-			<td>Copy selected cells. If copy(true), you cut selected cell</td>
+			<td><code>copy(optional boolean) -> array</code></td>
+			<td>Copy selected cells. If copy(true), you cut selected cell. This methods return same result of jexcel.current.copy().</td>
 			<td><code>jexcel.current.plugins.copypaste_adv.copy();</code></td>
 		</tr>
 		<tr>
