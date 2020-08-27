@@ -22,12 +22,10 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 
 ## Comming soon
 - Comments advanced
-- 
 - Formula bar (like excel with autocomplete)
 - Formula editor (like excel with select other cell on formula)
 - Mobile (Select range on mobile, contextmenu on mobile)
 - Print
 - Search advanced
-
 
 upcoming plugins / editors are already developed. They are currently in testing.
