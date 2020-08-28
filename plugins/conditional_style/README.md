@@ -2,7 +2,7 @@
 
 The Conditional Style plugin like conditional style of Excel. It works even if access to the clipboard is denied or in error.
 
-![Preview plugin](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/plugins/conditional_style/preview.png)
+![preview](https://user-images.githubusercontent.com/52194475/91465458-15fb1d00-e88e-11ea-960a-c79f42f55b7b.png)
 
 This plugin is **Premium** Contact me if you are interested to buy [contact@gbonnaire.fr](mailto://contact@gbonnaire.fr)
 

@@ -2,7 +2,7 @@
 
 The Copypaste_advanced plugin improves the copy paste functionality of JExcel. It works even if access to the clipboard is denied or in error.
 
-![Preview plugin](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/plugins/copypaste_advanced/preview.png)
+![preview](https://user-images.githubusercontent.com/52194475/91473978-ece08980-e899-11ea-9a89-ad0f8bc89d42.png)
 
 This plugin is **Free**
 
@@ -40,12 +40,12 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 	</thead>
 	<tbody>
 		<tr>
-			<td><code>copy(cut <optional boolean>) -> Array</code></td>
+			<td><code>copy(*Optional* Boolean cut) → Array</code></td>
 			<td>Copy selected cells. If copy(true), you cut selected cell. This methods return same result of jexcel.current.copy().</td>
 			<td><code>jexcel.current.plugins.copypaste_adv.copy();</code></td>
 		</tr>
 		<tr>
-			<td><code>paste() -> Void</code></td>
+			<td><code>paste() → Void</code></td>
 			<td>paste data copied on selected cell</td>
 			<td><code>jexcel.current.plugins.copypaste_adv.paste();</code></td>
 		</tr>

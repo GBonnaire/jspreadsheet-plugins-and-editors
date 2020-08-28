@@ -16,6 +16,7 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 
 ## Premium plugins
 - [Conditional style](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/plugins/conditional_style)
+- [Print](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/plugins/print)
 
 ## Free plugins
 - [Contextmenu Shortcut](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/contextmenu_shortcut)
@@ -29,7 +30,6 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 - Formula bar (like excel with autocomplete)
 - Formula editor (like excel with select other cell on formula)
 - Mobile (Select range on mobile, contextmenu on mobile)
-- Print
 - Search advanced
 
 upcoming plugins / editors are already developed. They are currently in testing.
