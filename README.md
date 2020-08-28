@@ -25,7 +25,7 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 ## Free Editors
 - [Date editors](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/editors/dates) including (date, datetime and time)
 
-## Comming soon
+## Coming soon
 - Comments advanced
 - Formula bar (like excel with autocomplete)
 - Formula editor (like excel with select other cell on formula)
