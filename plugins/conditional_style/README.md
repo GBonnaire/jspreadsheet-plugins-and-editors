@@ -1,6 +1,6 @@
 ## JExcel Plugin : Conditional Style
 
-The Conditional Style plugin like conditional style of Excel. It works even if access to the clipboard is denied or in error.
+The Conditional Style plugin like conditional style of Excel.
 
 ![preview](https://user-images.githubusercontent.com/52194475/91465458-15fb1d00-e88e-11ea-960a-c79f42f55b7b.png)
 
