@@ -114,7 +114,7 @@ var jexcel_statusbar = (function(instance, options) {
         // Append Information Element
         statusBarElement.appendChild(statusBarInformationElement);
        
-        el.appendChild(statusBarElement);
+        el.after(statusBarElement);
     }
     
     /**
@@ -184,6 +184,3 @@ var jexcel_statusbar = (function(instance, options) {
     
     return plugin;
 });
-
-
-/**/
