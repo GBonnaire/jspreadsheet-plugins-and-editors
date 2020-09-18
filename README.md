@@ -34,3 +34,7 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 - Search advanced (Premium)
 
 upcoming plugins / editors are already developed. They are currently in testing.
+
+# Repository
+
+You can find all products on [ProgiApp Repository : repo.gbonnaire.fr](https://repo.gbonnaire.fr)
