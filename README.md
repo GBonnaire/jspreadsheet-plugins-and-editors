@@ -11,12 +11,11 @@ There is a free plugins/editors and paid plugins/editors. For the paid plugins/e
 jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional web-based interactive tables and spreadsheets. Compatible with most widely-used spreadsheet software, such as Excel or Google Spreadsheet, it offers users an unrivalled Excel-like user experience. It also works well with prominent modern frameworks and flexibly utilizes a large collection of events, extensions and configurations to meet different application requirements. Impress your clients with a better user experience and a great dynamic interactive data management tool.
 
 - [Download JExcel Pro](https://www.jexcel.net) 
-- [Download JExcel CE](https://bossanova.uk/jexcel/)
 
 
 ## Premium plugins
-- [Conditional style](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/plugins/conditional_style)
-- [Print](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/plugins/print)
+- [Conditional style](https://repo.gbonnaire.fr/product/jexcel-plugin-conditionalstyle)
+- [Print](https://repo.gbonnaire.fr/product/jexcel-plugin-print)
 
 ## Free plugins
 - [Contextmenu Shortcut](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/contextmenu_shortcut)
@@ -28,10 +27,10 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 - [Date editors](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/editors/dates) including (date, datetime and time)
 
 ## Coming soon
-- Comments advanced
-- Formula bar (like excel with autocomplete)
-- Formula editor (like excel with select other cell on formula)
-- Mobile (Select range on mobile, contextmenu on mobile)
-- Search advanced
+- Comments advanced (Premium)
+- Formula bar (like excel with autocomplete) (Premium)
+- Formula editor (like excel with select other cell on formula) (Premium)
+- Mobile (Select range on mobile, contextmenu on mobile) (Premium)
+- Search advanced (Premium)
 
 upcoming plugins / editors are already developed. They are currently in testing.
