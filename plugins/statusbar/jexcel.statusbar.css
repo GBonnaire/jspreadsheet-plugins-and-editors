@@ -41,12 +41,17 @@
     text-decoration: none;
     display: inline-block;
     margin-right: 2px;
+    padding: 1px 3px 1px 3px;
+    height: 20px;
+    width: 30px;
 }
 
 .jexcel_statusbar .jexcel_statusbar_addrows input {
     width: 50px;
+    height: 20px;
     display: inline-block;
     border: 1px solid #CCCCCC;
+    padding: 1px 3px 1px 3px;
 }
 
 .jexcel_statusbar .jexcel_statusbar_addrows span {
