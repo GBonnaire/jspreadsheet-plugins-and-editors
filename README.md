@@ -15,6 +15,9 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 
 ## Premium plugins
 - [Conditional style](https://repo.gbonnaire.fr/product/jexcel-plugin-conditionalstyle)
+- [Formula Editors](https://repo.gbonnaire.fr/product/jexcel-plugin-editorsformula)
+- [Formula Bar](https://repo.gbonnaire.fr/product/jexcel-plugin-formulabar)
+- [Mobile](https://repo.gbonnaire.fr/product/jexcel-plugin-mobile)
 - [Print](https://repo.gbonnaire.fr/product/jexcel-plugin-print)
 
 ## Free plugins
@@ -30,9 +33,6 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 
 ## Coming soon
 - Comments advanced (Premium)
-- Formula bar (like excel with autocomplete) (Premium)
-- Formula editor (like excel with select other cell on formula) (Premium)
-- Mobile (Select range on mobile, contextmenu on mobile) (Premium)
 - Search advanced (Premium)
 
 upcoming plugins / editors are already developed. They are currently in testing.
