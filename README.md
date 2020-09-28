@@ -4,7 +4,7 @@ Here you find my Plugins and Editors for JExcel Pro (v5 and +).
 
 There is a free plugins/editors and paid plugins/editors. For the paid plugins/editors, you can find only readme and documentation here. For buy plugin contact me by mail on [contact@gbonnaire.fr](mailto://contact@gbonnaire.fr).
 
-[Web site plugins&editors JExcel Pro](https://git.jexcel.gbonnaire.Fr)
+[Web site plugins&editors JExcel Pro](https://repo.gbonnaire.Fr)
 
 ## What is JExcel ?
 
