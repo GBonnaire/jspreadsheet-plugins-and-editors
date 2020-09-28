@@ -110,7 +110,8 @@ jexcel(document.getElementById('spreadsheet'), {
                  showAddRowButton: false, 
                  formulas:{
                     "COUNT":"=COUNT({range})",
-                 }
+                 } // End formulas
+            } // End options
       },
       ...  
     ],
