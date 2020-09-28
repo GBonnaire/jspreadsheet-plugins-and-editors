@@ -61,6 +61,24 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 
 You can modify CSS file for change separator of formulas
 
+### For translation
+<table>
+	<thead>
+		<tr>
+			<th>Option name</th>
+			<th>Default Value</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>text_AddRowButton</code><br>
+				{*} = input box, previous this is button and after is text</td>
+			<td>Add {*} row(s)</td>
+		</tr>
+	</tbody>
+</table>
+
+
 ### Get started
 
 Header on page
