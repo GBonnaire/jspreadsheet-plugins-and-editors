@@ -4,7 +4,7 @@ Here you find my Plugins and Editors for JExcel Pro (v5 and +).
 
 There is a free plugins/editors and paid plugins/editors. For the paid plugins/editors, you can find only readme and documentation here. For buy plugin contact me by mail on [contact@gbonnaire.fr](mailto://contact@gbonnaire.fr).
 
-[Web site plugins&editors JExcel Pro](https://git.jexcel.gbonnaire.Fr)
+[Web site plugins&editors JExcel Pro](https://repo.gbonnaire.fr/category/jexcel)
 
 ## What is JExcel ?
 
@@ -15,6 +15,9 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 
 ## Premium plugins
 - [Conditional style](https://repo.gbonnaire.fr/product/jexcel-plugin-conditionalstyle)
+- [Formula Editors](https://repo.gbonnaire.fr/product/jexcel-plugin-editorsformula)
+- [Formula Bar](https://repo.gbonnaire.fr/product/jexcel-plugin-formulabar)
+- [Mobile](https://repo.gbonnaire.fr/product/jexcel-plugin-mobile)
 - [Print](https://repo.gbonnaire.fr/product/jexcel-plugin-print)
 
 ## Free plugins
@@ -30,9 +33,6 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 
 ## Coming soon
 - Comments advanced (Premium)
-- Formula bar (like excel with autocomplete) (Premium)
-- Formula editor (like excel with select other cell on formula) (Premium)
-- Mobile (Select range on mobile, contextmenu on mobile) (Premium)
 - Search advanced (Premium)
 
 upcoming plugins / editors are already developed. They are currently in testing.
