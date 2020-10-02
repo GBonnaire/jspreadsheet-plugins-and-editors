@@ -23,6 +23,7 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 ## Free plugins
 - [Contextmenu Shortcut](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/contextmenu_shortcut)
 - [Copy Paste advanced (when access to clipboard navigator is denied)](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/plugins/copypaste_advanced)
+- [Persistance Flag](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/persistanceFlag)
 - [Row Header rename](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/rowHeaderRename)
 - [Status bar](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/statusbar)
 
