@@ -1,7 +1,7 @@
 /**
  * Plugin for rename row header (Index)
  * 
- * @version 1.1.0
+ * @version 1.1.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * @description Can row index rename and header of index, resize row index
@@ -68,7 +68,7 @@ var jexcel_rowHeaderRename = (function(instance, options) {
         if(typeof plugin.options.rowIndexTitle == "object" && Array.isArray(plugin.options.rowIndexTitle)) {
             row.firstElementChild.innerText = plugin.options.rowIndexTitle[y % plugin.options.rowIndexTitle.length];
         } else if(typeof plugin.options.rowIndexTitle == "object") {
-            if(plugin.options.rowIndexTitle[j]) {
+            if(plugin.options.rowIndexTitle[y]) {
                 row.firstElementChild.innerText = plugin.options.rowIndexTitle[y];
             }
         } else if(typeof plugin.options.rowIndexTitle == "function") {
