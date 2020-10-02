@@ -26,11 +26,11 @@ var jexcel_persistanceFlag = (function(instance, options) {
     var defaultOptions = {
           showText: true,
           icon_error: 'error',
-          text_error: 'Not save',
+          text_error: 'Not updated',
           icon_success: 'check_circle',
-          text_success: 'Saved {date}',
+          text_success: 'Updated {date}',
           icon_progress: 'cached',
-          text_progress: 'In saving',
+          text_progress: 'In updating',
           dateFormat : { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }
     }
 
