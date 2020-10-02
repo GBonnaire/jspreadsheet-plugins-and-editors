@@ -1,7 +1,7 @@
 /**
  * Custom editor for textPattern
  * 
- * @version 1.0.0
+ * @version 1.0.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * 
@@ -20,7 +20,7 @@ jexcel.editors.textpattern = function() {
     }
 
     methods.updateCell = function(cell, value, x, y, instance, options) {
-        if(value) {
+        if(value!=null) {
             value = methods.parseValue(x, y, value, instance, options); 
             cell.innerHTML = value;
         }
