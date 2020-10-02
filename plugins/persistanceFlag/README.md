@@ -103,6 +103,7 @@ Header on page
 Initialize plugin on JExcel
 ```JavaScript
 jexcel(document.getElementById('spreadsheet'), {
+        toolbar: true, // or Array/object
 	...
 	plugins: [
       ...
@@ -140,6 +141,7 @@ Header on page
 Initialize plugin on JExcel
 ```JavaScript
 jexcel(document.getElementById('spreadsheet'), {
+        toolbar: true, // or Array/object
 	...
 	plugins: [
       ...
