@@ -1,7 +1,7 @@
 /**
  * Plugin statusbar of jExcel Pro
  * 
- * @version 1.0.0
+ * @version 1.1.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * @description Add status bar on bottom of JExcel
@@ -64,6 +64,10 @@ var jexcel_statusbar = (function(instance, options) {
             
             RangeSelection = [x1,y1,x2,y2];
             plugin.generateInformation();
+        } else if(event == "onblur") {
+            if(statusBarInformationElement) {
+                statusBarInformationElement.innerHTML = "";
+            }
         }
     }
 
