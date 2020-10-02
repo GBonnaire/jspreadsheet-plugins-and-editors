@@ -12,11 +12,11 @@ jexcel.editors.textpattern = function() {
     var methods = {};
 
     methods.createCell = function(cell, value, x, y, instance, options) {
-        if(value) {
+        if(value!=null) {
             value = methods.parseValue(x, y, value, instance, options); 
             cell.innerHTML = value;
         }
-        return value; // Save new date verified
+        return value; // Save new value verified
     }
 
     methods.updateCell = function(cell, value, x, y, instance, options) {
@@ -24,7 +24,7 @@ jexcel.editors.textpattern = function() {
             value = methods.parseValue(x, y, value, instance, options); 
             cell.innerHTML = value;
         }
-        return value; // Save new date verified
+        return value; // Save new value verified
     }
 
     methods.openEditor = function(cell, value, x, y, instance, options) {
