@@ -114,6 +114,14 @@ jexcel(document.getElementById('spreadsheet'), {
 });
 ```
 
+## CDN
+
+You can use this CDN link
+
+```HTML
+<script src="https://cdn.jsdelivr.net/gh/Guillaume-Bo/jexcel-plugins-and-editors@latest/plugins/copypaste_advanced/jexcel.copypaste_advanced.js"></script>
+```
+
 ## Copyright and license
 
 Copyright [GBonnaire.fr](https://www.gbonnaire.fr) and Code released under the MIT License
