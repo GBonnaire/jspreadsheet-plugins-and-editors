@@ -32,6 +32,10 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 - [Numeral](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/editors/numeric/jexcel.editor.numeral.js) (mask number advanced - Dependance with Numeraljs.com)
 - [TextPattern](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/editors/text/jexcel.editor.textpattern.js) (text editor with pattern and block bad input tape)
 
+## CDN for Free plugins and editors
+
+All file in JSDelivr : [Package JSDelivr.com](https://www.jsdelivr.com/package/gh/Guillaume-Bo/jexcel-plugins-and-editors)
+
 ## Coming soon
 - Comments advanced (Premium)
 - Search advanced (Premium)
