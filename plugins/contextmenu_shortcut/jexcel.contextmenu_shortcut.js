@@ -1,7 +1,7 @@
 /**
  * Plugin shortcut context menu of jExcel Pro & CE
  * 
- * @version 1.1.1
+ * @version 1.1.2
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * @description Replace shortcut with type of navigator and add icon
@@ -41,7 +41,7 @@ var jexcel_contextmenu_shortcut = (function(instance, options) {
           icon_paste:'<i class="context_icon material-icons">content_paste</i>',
           icon_saveAs:'<i class="context_icon material-icons">save</i>',
           icon_about:'<i class="context_icon material-icons">info</i>',
-          css:'font-size:small; vertical-align:text-top; float:left; margin-left: -20px; margin-right: 2px;',     
+          css:'font-size:small; vertical-align:text-top; float:left; margin-left: -20px; margin-right: 2px;line-height: 14px;',     
     }
     
    // Set default value
