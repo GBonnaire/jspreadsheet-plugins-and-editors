@@ -203,6 +203,13 @@ jexcel(document.getElementById('spreadsheet'), {
     ...
 });
 ```
+## CDN
+
+You can use this CDN link
+
+```HTML
+<script src="https://cdn.jsdelivr.net/gh/Guillaume-Bo/jexcel-plugins-and-editors@latest/plugins/contextmenu_shortcut/jexcel.contextmenu_shortcut.js"></script>
+```
 
 ## Copyright and license
 
