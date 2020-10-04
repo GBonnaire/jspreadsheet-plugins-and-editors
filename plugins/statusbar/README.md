@@ -141,8 +141,8 @@ jexcel(document.getElementById('spreadsheet'), {
 
 You can use this CDN link
 ```HTML
-<script src="https://cdn.jsdelivr.net/gh/Guillaume-Bo/jexcel-plugins-and-editors@master/plugins/statusbar/jexcel.statusbar.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Guillaume-Bo/jexcel-plugins-and-editors@master/plugins/statusbar/jexcel.statusbar.css" type="text/css" />
+<script src="https://cdn.jsdelivr.net/gh/Guillaume-Bo/jexcel-plugins-and-editors@latest/plugins/statusbar/jexcel.statusbar.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Guillaume-Bo/jexcel-plugins-and-editors@latest/plugins/statusbar/jexcel.statusbar.css" type="text/css" />
 ```
 
 
