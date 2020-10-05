@@ -1,13 +1,17 @@
 /**
  * Plugin CSS status bar of jExcel Pro
  * 
- * @version 1.0.1
+ * @version 1.0.2
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr 
  * 
  * 
  * @license This plugin is distribute under MIT License
  */
+
+.jexcel_content {
+    padding-bottom: 0px!important;
+}
 
 .jexcel_statusbar {
     position: relative;
@@ -20,7 +24,6 @@
     padding: 2px;
     margin-left: 1px;
     margin-right: 3px;
-    margin-top: -3px;
 }
 
 .jexcel_container.fullscreen .jexcel_statusbar {
@@ -48,7 +51,7 @@
 
 .jexcel_statusbar .jexcel_statusbar_addrows input {
     width: 50px;
-    height: 20px;
+    height: 16px;
     display: inline-block;
     border: 1px solid #CCCCCC;
     padding: 1px 3px 1px 3px;
