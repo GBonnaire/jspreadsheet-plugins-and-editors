@@ -1,7 +1,7 @@
 /**
  * Plugin statusbar of jExcel Pro
  * 
- * @version 1.1.0
+ * @version 1.1.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * @description Add status bar on bottom of JExcel
@@ -84,7 +84,7 @@ var jexcel_statusbar = (function(instance, options) {
         var textButton = plugin.options.text_AddRowButton.split('{*}');
         var divAddRows = document.createElement("div");
         divAddRows.classList.add("jexcel_statusbar_addrows");
-        if(!plugin.options.showAddRowButton) {
+        if(!plugin.options.showAddRowButton || plugin.options.allowInsertRow==false) {
             divAddRows.style.display = "none";
         }
         
