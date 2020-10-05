@@ -1,7 +1,7 @@
 /**
  * Plugin statusbar of jExcel Pro
  * 
- * @version 1.1.1
+ * @version 1.1.2
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * @description Add status bar on bottom of JExcel
@@ -84,7 +84,7 @@ var jexcel_statusbar = (function(instance, options) {
         var textButton = plugin.options.text_AddRowButton.split('{*}');
         var divAddRows = document.createElement("div");
         divAddRows.classList.add("jexcel_statusbar_addrows");
-        if(!plugin.options.showAddRowButton || plugin.options.allowInsertRow==false) {
+        if(!plugin.options.showAddRowButton || instance.options.allowInsertRow==false) {
             divAddRows.style.display = "none";
         }
         
@@ -129,7 +129,7 @@ var jexcel_statusbar = (function(instance, options) {
         var info = "";
         
         // Test if data is Empty
-        var isEmpty = (jexcel.current.getData(true).join("") == "");
+        var isEmpty = (instance.getData(true).join("") == "");
         
         // Create all parameters
         var RangeStart = jexcel.getColumnNameFromId([RangeSelection[0],RangeSelection[1]]);
@@ -155,7 +155,7 @@ var jexcel_statusbar = (function(instance, options) {
                     if(info!="") {
                         info += "<span class='divisor'></span>";
                     }
-                    info += label_formula + " : " + jexcel.current.executeFormula(prepareFormula(formula, parameters));
+                    info += label_formula + " : " + instance.executeFormula(prepareFormula(formula, parameters));
                 } else {
 
                 }
