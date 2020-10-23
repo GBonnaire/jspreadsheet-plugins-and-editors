@@ -1,7 +1,7 @@
 /**
  * Plugin statusbar of jExcel Pro
  * 
- * @version 1.1.2
+ * @version 1.1.3
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * @description Add status bar on bottom of JExcel
@@ -155,7 +155,10 @@ var jexcel_statusbar = (function(instance, options) {
                     if(info!="") {
                         info += "<span class='divisor'></span>";
                     }
-                    info += label_formula + " : " + instance.executeFormula(prepareFormula(formula, parameters));
+                    var result = instance.executeFormula(prepareFormula(formula, parameters));
+                    if(result!==null) {
+                        info += label_formula + " : " + result;
+                    }
                 } else {
 
                 }
