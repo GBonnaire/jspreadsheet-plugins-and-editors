@@ -46,7 +46,7 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
       <code>{y1}</code> : y start selection (first y = 0)<br>
       <code>{x2}</code> : x end selection<br>
       <code>{y2}</code> : y end selection<br>
-      the key property of object is the name showing before result
+      the key property of object is the name showing before result<br>If you use custom formula, for not show empty result, return null.
       </td>
 			<td><code>Object</code></td>
 			<td><code>{
