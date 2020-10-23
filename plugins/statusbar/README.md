@@ -42,6 +42,7 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 			<td><code>formulas</code></td>
 			<td>Object of formulas, you can use quick reference on formulas<br>
       <code>{range}</code> : Range name A1:B3<br>
+      <code>{cells}</code> : Array of cells (work with filtered row) [A1,A3,B1,B3]<br>
       <code>{x1}</code> : x start selection (first x = 0)<br>
       <code>{y1}</code> : y start selection (first y = 0)<br>
       <code>{x2}</code> : x end selection<br>

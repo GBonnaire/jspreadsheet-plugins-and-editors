@@ -1,13 +1,16 @@
 /**
  * Plugin statusbar of jExcel Pro
  * 
- * @version 1.1.3
+ * @version 1.2.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * @description Add status bar on bottom of JExcel
  * 
  * 
  * @license This plugin is distribute under MIT License
+ * 
+ * Release Note
+ * 1.2.0 : Add formula execute by cells selected (i.e. with results)
  */
 
 var jexcel_statusbar = (function(instance, options) {
@@ -53,7 +56,7 @@ var jexcel_statusbar = (function(instance, options) {
     /**
      * Jexcel events
      */
-    plugin.onevent = function(event) {
+    plugin.onevent = function(event) {        
         if(event=="onload") {
             plugin.createStatusbar(instance.content);
         } else if(event == "onselection") {
@@ -132,6 +135,13 @@ var jexcel_statusbar = (function(instance, options) {
         var isEmpty = (instance.getData(true).join("") == "");
         
         // Create all parameters
+        if(RangeSelection==null) {
+            RangeSelection = [];
+            RangeSelection[0] = Math.min.apply(Math,instance.getSelectedColumns(true));
+            RangeSelection[1] = Math.min.apply(Math,instance.getSelectedRows(true));
+            RangeSelection[2] = Math.max.apply(Math,instance.getSelectedColumns(true));
+            RangeSelection[3] = Math.max.apply(Math,instance.getSelectedRows(true));
+        }
         var RangeStart = jexcel.getColumnNameFromId([RangeSelection[0],RangeSelection[1]]);
         if(RangeSelection[0]!=RangeSelection[2] || RangeSelection[1]!=RangeSelection[3]) {
             var RangeEnd = jexcel.getColumnNameFromId([RangeSelection[2],RangeSelection[3]]);
@@ -139,8 +149,43 @@ var jexcel_statusbar = (function(instance, options) {
             var RangeEnd = "";
         }
         
+        // Convert range tokens
+        var tokensUpdate = function(tokens) {
+            var f = [];
+            var token = tokens.split(':');
+            var e1 = jexcel.getIdFromColumnName(token[0], true);
+            var e2 = jexcel.getIdFromColumnName(token[1], true);
+
+            if (e1[0] <= e2[0]) {
+                var x1 = e1[0];
+                var x2 = e2[0];
+            } else {
+                var x1 = e2[0];
+                var x2 = e1[0];
+            }
+
+            if (e1[1] <= e2[1]) {
+                var y1 = e1[1];
+                var y2 = e2[1];
+            } else {
+                var y1 = e2[1];
+                var y2 = e1[1];
+            }
+
+            for (var j = y1; j <= y2; j++) {
+                for (var i = x1; i <= x2; i++) {
+                    if(instance.results == null || instance.results.indexOf(j)!=-1) {
+                        f.push(jexcel.getColumnNameFromId([i, j]));
+                    }
+                }
+            }
+
+            return "[" + f.join(',') + "]";
+        }
+        
         var parameters = {};
-        parameters["range"] = RangeStart + (RangeEnd!=""?":"+RangeEnd:"")
+        parameters["range"] = RangeStart + (RangeEnd!=""?":"+RangeEnd:"");
+        parameters["cells"] = tokensUpdate(parameters["range"]);
         parameters["x1"] = RangeSelection[0];
         parameters["y1"] = RangeSelection[1];
         parameters["x2"] = RangeSelection[2];
@@ -169,6 +214,8 @@ var jexcel_statusbar = (function(instance, options) {
                 info += label_formula + " : " + prepareFormula(formula, parameters);
             }
         }
+        
+        RangeSelection = null;
         
         // Set informations
         statusBarInformationElement.innerHTML = info;
