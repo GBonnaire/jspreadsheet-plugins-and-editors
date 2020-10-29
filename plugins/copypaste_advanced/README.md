@@ -12,6 +12,7 @@ This plugin is **Free**
 - Add item paste on default context menu when it is not present
 - Upgrade copy/paste of JExcel when clipboard access is denied
 - Override copy methods of JExcel
+- Can copy scale like Excel
 - Work on Mobile
 
 
