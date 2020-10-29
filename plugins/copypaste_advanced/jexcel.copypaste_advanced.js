@@ -1,7 +1,7 @@
 /**
  * Plugin copy paste of jExcel Pro & CE
  * 
- * @version 1.0.1
+ * @version 1.1.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * @description upgrade copy paste function for work with clipboard permission denied or error
@@ -96,6 +96,59 @@ var jexcel_copypaste_advanced = (function(instance, options) {
         
         return items;
     }
+    
+    plugin.onevent = function(event) {
+        if(event=="onbeforepaste") {
+            var el = arguments[1];
+            
+        }
+    }
+    
+    var BasedOnBeforePaste = instance.options.onbeforepaste;
+    
+    instance.options.onbeforepaste = function(el, data, x1, y1) {
+        if(BasedOnBeforePaste!=null) {
+            var ret = BasedOnBeforePaste(...arguments);
+            if(ret===false) {
+                return false;
+            } else if(ret) {
+                var data = ret;
+            }
+        }
+        
+        var dataArray = instance.parseCSV(data, "\t");
+
+        var x2 = parseInt(instance.selectedCell[2]);
+        var y2 = parseInt(instance.selectedCell[3]);
+
+        var x_length = (x2 - x1) + 1;
+        var y_length = (y2 - y1) + 1;
+
+        var data_y_length = dataArray.length;
+        var data_x_length = dataArray[0].length;
+
+        var scale_x = Math.trunc(x_length/data_x_length);
+        var scale_y = Math.trunc(y_length/data_y_length);
+
+        // If not scale to do
+        if(scale_x==0 || scale_y == 0) {
+            return data;
+        }
+
+        // Scale data to range selected
+        var newData = [];
+        for(var ite_y = 0; ite_y<(data_y_length*scale_y); ite_y++) {
+            newData[ite_y] = [];
+            for(var ite_x = 0; ite_x<(data_x_length*scale_x); ite_x++) {
+                 newData[ite_y][ite_x] = dataArray[ite_y%data_y_length][ite_x%data_x_length];
+            }
+            newData[ite_y] = newData[ite_y].join("\t");
+        }
+        
+        newData = newData.join("\r\n");
+       
+        return newData;
+    }
 
     // Init overwrite function for keep old function
     var BasedCopy = instance.copy;
@@ -130,20 +183,21 @@ var jexcel_copypaste_advanced = (function(instance, options) {
      * @returns {undefined}
      */
     plugin.paste = function() {
-        var x = instance.selectedCell[0];
-        var y = instance.selectedCell[1];
+        var x1 = parseInt(instance.selectedCell[0]);
+        var y1 = parseInt(instance.selectedCell[1]);
+        
         if (navigator && navigator.clipboard) {
             navigator.clipboard.readText().then(function(text) {
                 if (text) {
-                    instance.paste(x, y, text);
+                    instance.paste(x1, y1, text);
                 }
             }).catch(function(err) {
                 if (jexcel.dataCopied) {
-                    instance.paste(x, y, jexcel.dataCopied);
+                    instance.paste(x1, y1, jexcel.dataCopied);
                 }
             });
         } else if (jexcel.dataCopied) {
-            instance.paste(x, y, jexcel.dataCopied);
+            instance.paste(x1, y1, jexcel.dataCopied);
         }
     }
 
