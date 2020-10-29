@@ -6,6 +6,8 @@ The Copypaste_advanced plugin improves the copy paste functionality of JExcel. I
 
 This plugin is **Free**
 
+Demo available here : [Demo copy paste advanced](https://demo.gbonnaire.fr/jExcel/plugin.copypasteadv.php)
+
 ### Features
 
 - Add items cut, copy, paste on default toolbar
