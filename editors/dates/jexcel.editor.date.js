@@ -1,7 +1,7 @@
 /**
  * Custom editor for date only (not datetime)
  * 
- * @version 1.1.0
+ * @version 1.1.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * 
@@ -72,7 +72,7 @@ jexcel.editors.date = function() {
                 var date_value = new Date(Math.round((value - 25569)*86400*1000));
                 value = date_value.getFullYear() + "-" + addzero((date_value.getMonth()*1+1),10) + "-" + addzero(date_value.getDate(),10);
             }
-            
+
             if(!isDateISOValid(value)) {
                 // Transform Date to Date ISO
                 var tmp_value = stringToDateISO(value, options.formatInput);
@@ -99,7 +99,7 @@ jexcel.editors.date = function() {
     }
     
     function isDateISOValid(str) {
-        var tester = /^([0-9]{4})\-(0[1-9]|1[012])\-((0|1|2)[1-9]|3[01])$/;
+        var tester = /^([0-9]{4})\-(0[1-9]|1[012])\-(0[1-9]|(1|2)[0-9]|3[01])$/;
         return tester.test(str);
     }
     
