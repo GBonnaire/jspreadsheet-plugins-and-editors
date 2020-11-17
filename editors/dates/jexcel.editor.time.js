@@ -1,7 +1,7 @@
 /**
  * Custom editor for time only (not datetime)
  * 
- * @version 1.1.0
+ * @version 1.1.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * 
@@ -51,8 +51,6 @@ jexcel.editors.time = function() {
         } else {
             editor.value = ret;
         } 
-
-        editor.value = value;
     }
 
     methods.closeEditor = function(cell, save) {

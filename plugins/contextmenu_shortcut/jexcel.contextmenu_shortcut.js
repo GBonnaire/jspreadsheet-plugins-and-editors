@@ -1,12 +1,15 @@
 /**
- * Plugin shortcut context menu of jExcel Pro & CE
+ * Plugin shortcut context menu of jExcel Pro
  * 
- * @version 1.1.2
+ * @version 1.2.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * @description Replace shortcut with type of navigator and add icon
  * 
  * @license This plugin is distribute under MIT License
+ * 
+ * Release Note :
+ * 1.2.0 : Use icon property of contextmenu by default, add isIconHTML property for use icon HTML with an other library
  */
 var jexcel_contextmenu_shortcut = (function(instance, options) {
     
@@ -24,24 +27,25 @@ var jexcel_contextmenu_shortcut = (function(instance, options) {
 
     // Options
     var defaultOptions = {
-          icon_changeColumnType:'<i class="context_icon material-icons">ballot</i>',
-          icon_insertANewColumnBefore:'<i class="context_icon material-icons">add</i>',
-          icon_insertANewColumnAfter:'<i class="context_icon material-icons">add</i>',
-          icon_deleteSelectedColumns:'<i class="context_icon material-icons">delete</i>',
-          icon_renameThisColumn:'<i class="context_icon material-icons">create</i>',
-          icon_orderAscending:'<i class="context_icon material-icons">sort</i>',
-          icon_orderDescending:'<i class="context_icon material-icons">sort</i>',
-          icon_insertANewRowBefore:'<i class="context_icon material-icons">add</i>',
-          icon_insertANewRowAfter:'<i class="context_icon material-icons">add</i>',
-          icon_deleteSelectedRows:'<i class="context_icon material-icons">delete</i>',
-          icon_addComments:'<i class="context_icon material-icons">insert_comment</i>',
-          icon_clearComments:'<i class="context_icon material-icons">clear</i>',
-          icon_cut:'<i class="context_icon material-icons">content_cut</i>',
-          icon_copy:'<i class="context_icon material-icons">content_copy</i>',
-          icon_paste:'<i class="context_icon material-icons">content_paste</i>',
-          icon_saveAs:'<i class="context_icon material-icons">save</i>',
-          icon_about:'<i class="context_icon material-icons">info</i>',
-          css:'font-size:small; vertical-align:text-top; float:left; margin-left: -20px; margin-right: 2px;line-height: 14px;',     
+          icon_changeColumnType:'ballot',
+          icon_insertANewColumnBefore:'add',
+          icon_insertANewColumnAfter:'add',
+          icon_deleteSelectedColumns:'delete',
+          icon_renameThisColumn:'create',
+          icon_orderAscending:'sort',
+          icon_orderDescending:'sort',
+          icon_insertANewRowBefore:'add',
+          icon_insertANewRowAfter:'add',
+          icon_deleteSelectedRows:'delete',
+          icon_addComments:'insert_comment',
+          icon_clearComments:'clear',
+          icon_cut:'content_cut',
+          icon_copy:'content_copy',
+          icon_paste:'content_paste',
+          icon_edit:'edit',
+          icon_saveAs:'save',
+          icon_about:'info',
+          isIconHTML: false,     
     }
     
    // Set default value
@@ -64,73 +68,125 @@ var jexcel_contextmenu_shortcut = (function(instance, options) {
             if(item.shortcut && shortcut_init!=shortcut_base) {
                item.shortcut = item.shortcut.replace(shortcut_init, shortcut_base);
             }
-            switch(item.title) {
-                case instance.options.text.changeColumnType:
-                    item.title = plugin.options.icon_changeColumnType + item.title;
-                    break;
-                case instance.options.text.insertANewColumnBefore:
-                    item.title = plugin.options.icon_insertANewColumnBefore + item.title;
-                    break;
-                case instance.options.text.insertANewColumnAfter:
-                    item.title = plugin.options.icon_insertANewColumnAfter + item.title;
-                    break;
-                case instance.options.text.deleteSelectedColumns:
-                    item.title = plugin.options.icon_deleteSelectedColumns + item.title;
-                    break;
-                case instance.options.text.renameThisColumn:
-                    item.title = plugin.options.icon_renameThisColumn + item.title;
-                    break;
-                case instance.options.text.orderAscending:
-                    item.title = plugin.options.icon_orderAscending + item.title;
-                    break;
-                case instance.options.text.orderDescending:
-                    item.title = plugin.options.icon_orderDescending + item.title;
-                    break;
-                case instance.options.text.insertANewRowBefore:
-                    item.title = plugin.options.icon_insertANewRowBefore + item.title;
-                    break;
-                case instance.options.text.insertANewRowAfter:
-                    item.title = plugin.options.icon_insertANewRowAfter + item.title;
-                    break;
-                case instance.options.text.deleteSelectedRows:
-                    item.title = plugin.options.icon_deleteSelectedRows + item.title;
-                    break;
-                case instance.options.text.addComments:
-                case instance.options.text.editComments:
-                case instance.options.text.comments:
-                    item.title = plugin.options.icon_addComments + item.title;
-                    break;
-                case instance.options.text.clearComments:
-                    item.title = plugin.options.icon_clearComments + item.title;
-                    break;
-                case instance.options.text.copy:
-                    item.title = plugin.options.icon_copy + item.title;
-                    break;
-                case instance.options.text.cut:
-                    item.title = plugin.options.icon_cut + item.title;
-                    break;
-                case instance.options.text.paste:
-                    item.title = plugin.options.icon_paste + item.title;
-                    break;
-                case instance.options.text.saveAs:
-                    item.title = plugin.options.icon_saveAs + item.title;
-                    break;
-                case instance.options.text.about:
-                    item.title = plugin.options.icon_about + item.title;
-                    break;
+            if(plugin.options.isIconHTML) {
+               switch(item.title) {
+                    case instance.options.text.changeColumnType:
+                        item.title = plugin.options.icon_changeColumnType + item.title;
+                        break;
+                    case instance.options.text.insertANewColumnBefore:
+                        item.title = plugin.options.icon_insertANewColumnBefore + item.title;
+                        break;
+                    case instance.options.text.insertANewColumnAfter:
+                        item.title = plugin.options.icon_insertANewColumnAfter + item.title;
+                        break;
+                    case instance.options.text.deleteSelectedColumns:
+                        item.title = plugin.options.icon_deleteSelectedColumns + item.title;
+                        break;
+                    case instance.options.text.renameThisColumn:
+                        item.title = plugin.options.icon_renameThisColumn + item.title;
+                        break;
+                    case instance.options.text.orderAscending:
+                        item.title = plugin.options.icon_orderAscending + item.title;
+                        break;
+                    case instance.options.text.orderDescending:
+                        item.title = plugin.options.icon_orderDescending + item.title;
+                        break;
+                    case instance.options.text.insertANewRowBefore:
+                        item.title = plugin.options.icon_insertANewRowBefore + item.title;
+                        break;
+                    case instance.options.text.insertANewRowAfter:
+                        item.title = plugin.options.icon_insertANewRowAfter + item.title;
+                        break;
+                    case instance.options.text.deleteSelectedRows:
+                        item.title = plugin.options.icon_deleteSelectedRows + item.title;
+                        break;
+                    case instance.options.text.addComments:
+                    case instance.options.text.editComments:
+                    case instance.options.text.comments:
+                        item.title = plugin.options.icon_addComments + item.title;
+                        break;
+                    case instance.options.text.clearComments:
+                        item.title = plugin.options.icon_clearComments + item.title;
+                        break;
+                    case instance.options.text.copy:
+                        item.title = plugin.options.icon_copy + item.title;
+                        break;
+                    case instance.options.text.cut:
+                        item.title = plugin.options.icon_cut + item.title;
+                        break;
+                    case instance.options.text.paste:
+                        item.title = plugin.options.icon_paste + item.title;
+                        break;
+                    case instance.options.text.saveAs:
+                        item.title = plugin.options.icon_saveAs + item.title;
+                        break;
+                    case instance.options.text.about:
+                        item.title = plugin.options.icon_about + item.title;
+                        break;
+                } 
+            } else {
+                switch(item.title) {
+                    case instance.options.text.changeColumnType:
+                        item.icon = plugin.options.icon_changeColumnType;
+                        break;
+                    case instance.options.text.insertANewColumnBefore:
+                        item.icon = plugin.options.icon_insertANewColumnBefore;
+                        break;
+                    case instance.options.text.insertANewColumnAfter:
+                        item.icon = plugin.options.icon_insertANewColumnAfter;
+                        break;
+                    case instance.options.text.deleteSelectedColumns:
+                        item.icon = plugin.options.icon_deleteSelectedColumns;
+                        break;
+                    case instance.options.text.renameThisColumn:
+                        item.icon = plugin.options.icon_renameThisColumn;
+                        break;
+                    case instance.options.text.orderAscending:
+                        item.icon = plugin.options.icon_orderAscending;
+                        break;
+                    case instance.options.text.orderDescending:
+                        item.icon = plugin.options.icon_orderDescending;
+                        break;
+                    case instance.options.text.insertANewRowBefore:
+                        item.icon = plugin.options.icon_insertANewRowBefore;
+                        break;
+                    case instance.options.text.insertANewRowAfter:
+                        item.icon = plugin.options.icon_insertANewRowAfter;
+                        break;
+                    case instance.options.text.deleteSelectedRows:
+                        item.icon = plugin.options.icon_deleteSelectedRows;
+                        break;
+                    case instance.options.text.addComments:
+                    case instance.options.text.editComments:
+                    case instance.options.text.comments:
+                        item.icon = plugin.options.icon_addComments;
+                        break;
+                    case instance.options.text.clearComments:
+                        item.icon = plugin.options.icon_clearComments;
+                        break;
+                    case instance.options.text.copy:
+                        item.icon = plugin.options.icon_copy;
+                        break;
+                    case instance.options.text.cut:
+                        item.icon = plugin.options.icon_cut;
+                        break;
+                    case instance.options.text.paste:
+                        item.icon = plugin.options.icon_paste;
+                        break;
+                    case instance.options.text.mobile_edit:
+                        item.icon = plugin.options.icon_edit;
+                        break;
+                    case instance.options.text.saveAs:
+                        item.icon = plugin.options.icon_saveAs;
+                        break;
+                    case instance.options.text.about:
+                        item.icon = plugin.options.icon_about;
+                        break;
+                }
             }
         }
         return items;
     }
-
-    function createClass(classContent) {
-        var style = document.createElement('style');
-        style.type = 'text/css';
-        style.innerHTML = classContent;
-        document.getElementsByTagName('head')[0].appendChild(style);
-    }
-    
-    createClass(".jcontextmenu .context_icon {"+plugin.options.css+"}");
     
     return plugin;
 });

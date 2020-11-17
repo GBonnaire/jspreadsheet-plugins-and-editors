@@ -1,7 +1,7 @@
 /**
  * Plugin statusbar of jExcel Pro
  * 
- * @version 1.2.0
+ * @version 1.2.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * @description Add status bar on bottom of JExcel
@@ -10,6 +10,7 @@
  * @license This plugin is distribute under MIT License
  * 
  * Release Note
+ * 1.2.1 : Fix bug with fullscreen + bug formula with 1 cell
  * 1.2.0 : Add formula execute by cells selected (i.e. with results)
  */
 
@@ -121,7 +122,7 @@ var jexcel_statusbar = (function(instance, options) {
         // Append Information Element
         statusBarElement.appendChild(statusBarInformationElement);
        
-        el.after(statusBarElement);
+        el.appendChild(statusBarElement);
     }
     
     /**
@@ -136,11 +137,7 @@ var jexcel_statusbar = (function(instance, options) {
         
         // Create all parameters
         if(RangeSelection==null) {
-            RangeSelection = [];
-            RangeSelection[0] = Math.min.apply(Math,instance.getSelectedColumns(true));
-            RangeSelection[1] = Math.min.apply(Math,instance.getSelectedRows(true));
-            RangeSelection[2] = Math.max.apply(Math,instance.getSelectedColumns(true));
-            RangeSelection[3] = Math.max.apply(Math,instance.getSelectedRows(true));
+            RangeSelection = instance.selectedCell;
         }
         var RangeStart = jexcel.getColumnNameFromId([RangeSelection[0],RangeSelection[1]]);
         if(RangeSelection[0]!=RangeSelection[2] || RangeSelection[1]!=RangeSelection[3]) {
@@ -153,9 +150,14 @@ var jexcel_statusbar = (function(instance, options) {
         var tokensUpdate = function(tokens) {
             var f = [];
             var token = tokens.split(':');
+            
+            if(!token[1]) {
+                return "[" + token[0] + "]"; 
+            }
+            
             var e1 = jexcel.getIdFromColumnName(token[0], true);
             var e2 = jexcel.getIdFromColumnName(token[1], true);
-
+            
             if (e1[0] <= e2[0]) {
                 var x1 = e1[0];
                 var x2 = e2[0];
@@ -179,17 +181,16 @@ var jexcel_statusbar = (function(instance, options) {
                     }
                 }
             }
-
             return "[" + f.join(',') + "]";
         }
         
         var parameters = {};
         parameters["range"] = RangeStart + (RangeEnd!=""?":"+RangeEnd:"");
         parameters["cells"] = tokensUpdate(parameters["range"]);
-        parameters["x1"] = RangeSelection[0];
-        parameters["y1"] = RangeSelection[1];
-        parameters["x2"] = RangeSelection[2];
-        parameters["y2"] = RangeSelection[3];
+        parameters["x1"] = parseInt(RangeSelection[0]);
+        parameters["y1"] = parseInt(RangeSelection[1]);
+        parameters["x2"] = parseInt(RangeSelection[2]);
+        parameters["y2"] = parseInt(RangeSelection[3]);
         
         
         // Execute all formulas

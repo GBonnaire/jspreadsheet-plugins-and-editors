@@ -1,7 +1,7 @@
 /**
  * Plugin CSS status bar of jExcel Pro
  * 
- * @version 1.0.2
+ * @version 1.2.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr 
  * 
@@ -14,27 +14,22 @@
 }
 
 .jexcel_statusbar {
-    position: relative;
+    position: sticky;
+    bottom: 0px;
+    left: 0px;
     background-color: #F3F3F3;
     border: 1px solid #CCCCCC;
-    border-top: 0px;
-    height: 20px;
-    min-width: fit-content;
+    height: 24px;
+    width: calc(100% - 3px);
     display: flex;
-    padding: 2px;
     margin-left: 1px;
-    margin-right: 3px;
-}
-
-.jexcel_container.fullscreen .jexcel_statusbar {
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
+    margin-right: 1px;
 }
 
 .jexcel_statusbar * {
     font-size:  12px;
     color: #666;
+    padding: 2px;
 }
 
 .jexcel_statusbar .jexcel_statusbar_addrows button {

@@ -41,109 +41,109 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 			<td><code>icon_changeColumnType</code></td>
 			<td>Icon for "Change column type"</td>
 			<td><code>String</code></td>
-			<td><code>&lt;i class="context_icon material-icons"&gt;ballot&lt;/i&gt;</code></td>
+			<td><code>ballot</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_insertANewColumnBefore</code></td>
 			<td>Icon for "Insert a new column before"</td>
 			<td><code>String</code></td>
-			<td><code>&lt;i class="context_icon material-icons"&gt;add&lt;/i&gt;</code></td>
+			<td><code>add</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_insertANewColumnAfter</code></td>
 			<td>Icon for "Insert a new column after"</td>
 			<td><code>String</code></td>
-			<td><code>&lt;i class="context_icon material-icons"&gt;add&lt;/i&gt;</code></td>
+			<td><code>add</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_deleteSelectedColumns</code></td>
 			<td>Icon for "Delete selected columns"</td>
 			<td><code>String</code></td>
-			<td><code>&lt;i class="context_icon material-icons"&gt;delete&lt;/i&gt;</code></td>
+			<td><code>delete</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_renameThisColumn</code></td>
 			<td>Icon for "Rename this column"</td>
 			<td><code>String</code></td>
-			<td><code>&lt;i class="context_icon material-icons"&gt;create&lt;/i&gt;</code></td>
+			<td><code>create</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_orderAscending</code></td>
 			<td>Icon for "Order ascending"</td>
 			<td><code>String</code></td>
-			<td><code>&lt;i class="context_icon material-icons"&gt;sort&lt;/i&gt;</code></td>
+			<td><code>sort</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_orderDescending</code></td>
 			<td>Icon for "Order descending"</td>
 			<td><code>String</code></td>
-			<td><code>&lt;i class="context_icon material-icons"&gt;sort&lt;/i&gt;</code></td>
+			<td><code>sort</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_insertANewRowBefore</code></td>
 			<td>Icon for "Insert a new row before"</td>
 			<td><code>String</code></td>
-			<td><code>&lt;i class="context_icon material-icons"&gt;add&lt;/i&gt;</code></td>
+			<td><code>add</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_insertANewRowAfter</code></td>
 			<td>Icon for "Insert a new row after"</td>
 			<td><code>String</code></td>
-			<td><code>&lt;i class="context_icon material-icons"&gt;add&lt;/i&gt;</code></td>
+			<td><code>add</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_deleteSelectedRows</code></td>
 			<td>Icon for "Delete Selected Rows"</td>
 			<td><code>String</code></td>
-			<td><code>&lt;i class="context_icon material-icons"&gt;delete&lt;/i&gt;</code></td>
+			<td><code>delete</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_addComments</code></td>
 			<td>Icon for "Add comment"</td>
 			<td><code>String</code></td>
-			<td><code>&lt;i class="context_icon material-icons"&gt;insert_comment&lt;/i&gt;</code></td>
+			<td><code>insert_comment</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_clearComments</code></td>
 			<td>Icon for "Clear comments"</td>
 			<td><code>String</code></td>
-			<td><code>&lt;i class="context_icon material-icons"&gt;clear&lt;/i&gt;</code></td>
+			<td><code>clear</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_cut</code></td>
 			<td>Icon for "Cut"</td>
 			<td><code>String</code></td>
-			<td><code>&lt;i class="context_icon material-icons"&gt;content_cut&lt;/i&gt;</code></td>
+			<td><code>content_cut</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_copy</code></td>
 			<td>Icon for "Copy"</td>
 			<td><code>String</code></td>
-			<td><code>&lt;i class="context_icon material-icons"&gt;content_copy&lt;/i&gt;</code></td>
+			<td><code>content_copy</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_paste</code></td>
 			<td>Icon for "Paste"</td>
 			<td><code>String</code></td>
-			<td><code>&lt;i class="context_icon material-icons"&gt;content_paste&lt;/i&gt;</code></td>
+			<td><code>content_paste</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_saveAs</code></td>
 			<td>Icon for "Save As"</td>
 			<td><code>String</code></td>
-			<td><code>&lt;i class="context_icon material-icons"&gt;save&lt;/i&gt;</code></td>
+			<td><code>save</code></td>
 		</tr>
 		<tr>
 			<td><code>icon_about</code></td>
 			<td>Icon for "About"</td>
 			<td><code>String</code></td>
-			<td><code>&lt;i class="context_icon material-icons"&gt;info&lt;/i&gt;</code></td>
+			<td><code>info</code></td>
 		</tr>
 		<tr>
-			<td><code>css</code></td>
-			<td>CSS for icons</td>
-			<td><code>String</code></td>
-			<td><code>font-size:small; vertical-align:text-top; float:left; margin-left: -20px; margin-right: 2px;</code></td>
+			<td><code>isIconHTML</code></td>
+			<td>Flag for defined is icon value is HTML or not (to use only is use an other library of icons i.e. <code>&lt;i class='fa fa-icons'>&gt;&lt;/i&gt;</code></td>
+			<td><code>Boolean</code></td>
+			<td><code>false</code></td>
 		</tr>
 	</tbody>
 </table>
@@ -196,7 +196,7 @@ jexcel(document.getElementById('spreadsheet'), {
 	plugins: [
       ...
         { name:'shortcut', plugin:jexcel_contextmenu_shortcut, options:{
-        	icon_addComments: '<i class="context_icon material-icons">add</i>',
+        	icon_addComments: 'add',
         }},
       ...  
     ],

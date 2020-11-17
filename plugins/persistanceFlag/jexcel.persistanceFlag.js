@@ -1,7 +1,7 @@
 /**
  * Plugin for change notification of persistance
  * 
- * @version 1.0.0
+ * @version 1.1.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * @description change notification of persistance
@@ -30,7 +30,8 @@ var jexcel_persistanceFlag = (function(instance, options) {
           icon_success: 'check_circle',
           text_success: 'Updated {date}',
           icon_progress: 'cached',
-          text_progress: 'In updating',
+          css_progress: '',
+          text_progress: 'Updating',
           dateFormat : { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }
     }
 
@@ -70,7 +71,7 @@ var jexcel_persistanceFlag = (function(instance, options) {
                overrideNotificationVisible = jSuites.notification.isVisible;
             }
             jSuites.notification = function (options) {
-                if(options.success==1) {
+                if(options.success) {
                    plugin.setSuccess();
                 } else {
                    plugin.setError();
@@ -111,9 +112,9 @@ var jexcel_persistanceFlag = (function(instance, options) {
                 iconElement.style.color = "inherit";
             }
             if(iconTurn===true) {
-                iconElement.classList.add("jexcel-spin");
+                iconElement.classList.add(plugin.options.css_progress);
             } else {
-                iconElement.classList.remove("jexcel-spin");
+                iconElement.classList.remove(plugin.options.css_progress);
             }
         }
         
@@ -137,8 +138,15 @@ var jexcel_persistanceFlag = (function(instance, options) {
     
     function createFlag(element) {
         flagElement = document.createElement("div");
-        flagElement.style.cssText = "position:absolute;right:0";
         flagElement.classList.add("jexcel-flagPersistance");
+        
+        /**
+         * @since 1.1.0 : With toolbar responsive
+         */
+        //flagElement.style.cssText = "position:absolute;right:0";
+        flagElement.classList.add("jtoolbar-item");
+        flagElement.style.cssText = "margin-left:auto;right:0"; // Align right
+        
         
         if(plugin.options.showText) {
             messageElement = document.createElement("span");
@@ -147,12 +155,14 @@ var jexcel_persistanceFlag = (function(instance, options) {
         
         iconElement = document.createElement("i");
         iconElement.classList.add("material-icons");
+        /**
+         * @since 1.1.0 : With toolbar responsive
+         */
+        iconElement.style.cssText = "display:inline-block";
+        
         flagElement.appendChild(iconElement);
         
-        element.toolbar.appendChild(flagElement);
-        
-        // Create Style animation
-        createClass(".jexcel-spin{animation:jexcel-spin 2s infinite linear}@keyframes jExcel-spin{0%{transform:rotate(0deg)}100%{transform:rotate(359deg)}}");
+        element.toolbar.children[0].appendChild(flagElement);
     }
     
     function createClass(classContent) {
