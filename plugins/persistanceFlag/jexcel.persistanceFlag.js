@@ -1,7 +1,7 @@
 /**
  * Plugin for change notification of persistance
  * 
- * @version 1.1.0
+ * @version 1.1.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * @description change notification of persistance
@@ -95,7 +95,7 @@ var jexcel_persistanceFlag = (function(instance, options) {
     
     
     
-    plugin.change = function(icon, message, iconTurn, iconColor) {
+    plugin.change = function(icon, message, applyCSS, iconColor) {
         
         if(message.indexOf("{date}")!=-1) {
             var date = new Date();
@@ -111,10 +111,12 @@ var jexcel_persistanceFlag = (function(instance, options) {
             } else {
                 iconElement.style.color = "inherit";
             }
-            if(iconTurn===true) {
-                iconElement.classList.add(plugin.options.css_progress);
-            } else {
-                iconElement.classList.remove(plugin.options.css_progress);
+            if(plugin.options.css_progress) {
+                if(applyCSS===true) {
+                    iconElement.classList.add(plugin.options.css_progress);
+                } else {
+                    iconElement.classList.remove(plugin.options.css_progress);
+                }
             }
         }
         

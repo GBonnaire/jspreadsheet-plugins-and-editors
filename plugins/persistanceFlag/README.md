@@ -33,6 +33,12 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 		</tr>
 	</thead>
 	<tbody>
+		<tr>
+			<td><code>css_progress</code></td>
+			<td>Your class css for animated icon in progress</td>
+			<td><code>String</code></td>
+			<td><code>(blank)</code></td>
+		</tr>
   <tr>
 			<td><code>dateFormat</code></td>
 			<td>Use in text <code>{date}</code> for add datetime</td>
