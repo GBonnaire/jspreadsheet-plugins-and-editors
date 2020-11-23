@@ -1,7 +1,7 @@
 /**
  * Custom editor for datetime
  * 
- * @version 1.1.0
+ * @version 1.2.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * 
@@ -15,10 +15,11 @@ jexcel.editors.datetime = function() {
             var tmp_value = methods.parseValue(x, y, value, instance, options); 
             if(tmp_value===false) {
                 cell.innerHTML = '#NOTDATETIMEVALID';
+            } else if(value.substring(0,1) != "=") {
+                cell.innerHTML = formatedDateOnLocalFormat(tmp_value, options.locales, options.formatOutputOnCell);
+                value = DateTimeToExcelDateTime(tmp_value);
             } else {
-                value = tmp_value;
-                cell.innerHTML = formatedDateOnLocalFormat(value, options.locales, options.formatOutputOnCell);
-                
+                cell.innerHTML = formatedDateOnLocalFormat(tmp_value, options.locales, options.formatOutputOnCell);
             }
         }
         return value; // Save new date verified
@@ -29,23 +30,47 @@ jexcel.editors.datetime = function() {
             var tmp_value = methods.parseValue(x, y, value, instance, options);
             if(tmp_value===false) {
                 cell.innerHTML = '#NOTDATETIMEVALID';
+            } else if(value.substring(0,1) != "=") {
+                cell.innerHTML = formatedDateOnLocalFormat(tmp_value, options.locales, options.formatOutputOnCell);
+                return DateTimeToExcelDateTime(tmp_value);
             } else {
                 cell.innerHTML = formatedDateOnLocalFormat(tmp_value, options.locales, options.formatOutputOnCell);
-                return tmp_value;
             }
         }
     }
 
     methods.openEditor = function(cell, value, x, y, instance, options) {
-
         var editor = jexcel.helpers.createEditor('input', cell);
-        editor.setAttribute('type', "datetime-local");
+        if(value.substring(0,1) != "=") {
+            editor.setAttribute('type', "datetime-local");
+            editor.style.fontSize = "10px";
+            if(parseFloat(value)+"" === value+"") {
+                value = ExcelDateTimeToDateTime(value);
+            }
+        }
+        
         if(options['min']) {
             editor.setAttribute('min', options['min']);
         }
         if(options['max']) {
             editor.setAttribute('max', options['max']);
         }
+        
+        editor.addEventListener('keyup', function(e) {
+            if(this.value=="") {
+                if(instance.options.parseFormulas == true && e.key=="=") {
+                    this.setAttribute('type', "text");
+                    this.style.fontSize = "12px";
+                    this.value = "=";
+                    this.focus();
+                } else if(this.getAttribute('type')=="text" || this.getAttribute('type')==null) {
+                    this.setAttribute('type', "datetime-local");
+                    this.style.fontSize = "10px";
+                    this.focus();
+                    this.focus();
+                }
+            } 
+        });
 
         editor.onblur = function() {
             instance.closeEditor(cell, true);
@@ -56,35 +81,28 @@ jexcel.editors.datetime = function() {
 
     methods.closeEditor = function(cell, save) {
         if (save) {
-            cell.innerHTML = cell.children[0].value;
+            var value = cell.children[0].value;
         } else {
-            cell.innerHTML  = '';
+            var value  = '';
         }
-
-        return cell.innerHTML;
+        
+        cell.innerHTML = value;
+        
+        if(value=="" || value.substring(0,1)=="=") {
+            return value;
+        } else {
+            return DateTimeToExcelDateTime(value);
+        }
     }
 
     methods.parseValue = function(x, y, value, instance, options) {
         if(value) {
+            if(value.substring(0,1)=="=" && instance.options.parseFormulas == true) {
+                value = instance.executeFormula(value, x, y);
+            } 
             // Date like Excel
             if(parseFloat(value)+"" === value+"") {
-                var utc_days  = Math.floor(value - 25569);
-                var utc_value = utc_days * 86400;                                        
-                var date_info = new Date(utc_value * 1000);
-
-                var fractional_day = value - Math.floor(value) + 0.0000001;
-
-                var total_seconds = Math.floor(86400 * fractional_day);
-
-                var seconds = total_seconds % 60;
-
-                total_seconds -= seconds;
-
-                var hours = Math.floor(total_seconds / (60 * 60));
-                var minutes = Math.floor(total_seconds / 60) % 60;
-
-                var tmp_date = new Date(date_info.getFullYear(), date_info.getMonth(), date_info.getDate(), hours, minutes, seconds);
-                value = tmp_date.toISOString().split(".")[0]; // Without timezone
+                value = ExcelDateTimeToDateTime(value);
             }
             
             if(!isDateTimeISOValid(value)) {
@@ -96,13 +114,18 @@ jexcel.editors.datetime = function() {
                     value = false;
                 }
             } else {
-                var tmp_date = new Date(value);
-                value = tmp_date.toISOString().split(".")[0]; // Without timezone
+                value = stringToDateTimeISO(value);
             }
-
             
         }
         return value;
+    }
+    
+    methods.get = function(options, value, extended) {
+        if(parseFloat(value)+"" === value+"") {
+            value = ExcelDateTimeToDateTime(value);
+        }
+        return formatedDateOnLocalFormat(value, options.locales, options.formatOutputOnCell);
     }
 
     function addzero(value, base) {
@@ -180,5 +203,30 @@ jexcel.editors.datetime = function() {
             return false;
         }
     }
+    
+    function DateTimeToExcelDateTime(inDate) { 
+        if(typeof inDate == "string") {
+            inDate = new Date(inDate);
+        }
+        var returnDateTime = 25569 + ((inDate.getTime() - (inDate.getTimezoneOffset() * 60 * 1000)) / (1000 * 60 * 60 * 24));
+        return returnDateTime.toString().substr(0,20);
+    }
+    
+    function ExcelDateTimeToDateTime(value) {
+        var date_value = new Date(Math.round((value - 25569)*(1000 * 60 * 60 * 24)));
+        
+        var fractional_day = value - Math.floor(value) + 0.0000001;
+
+        var total_seconds = Math.floor(86400 * fractional_day);
+        var seconds = total_seconds % 60;
+
+        total_seconds -= seconds;
+
+        var hours = Math.floor(total_seconds / (60 * 60));
+        var minutes = Math.floor(total_seconds / 60) % 60;
+
+        return date_value.getFullYear() + '-' + addzero(date_value.getMonth()*1+1,10) + '-' + addzero(date_value.getDate(),10) + 'T' + addzero(hours,10) + ':' + addzero(minutes,10) + ':' + addzero(seconds,10);
+    }
+    
     return methods;
 }();
