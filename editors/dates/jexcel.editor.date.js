@@ -1,7 +1,7 @@
 /**
  * Custom editor for date only (not datetime)
  * 
- * @version 1.2.1
+ * @version 1.2.2
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * 
@@ -123,7 +123,11 @@ jexcel.editors.date = function() {
         if(parseFloat(value)+"" === value+"") {
             value = methods.ExcelDateToDate(value);
         }
-        return formatedDateOnLocalFormat(value, options.locales, options.formatOutputOnCell);
+        if(options.returnISO) {
+            return value;
+        } else {
+            return formatedDateOnLocalFormat(value, options.locales, options.formatOutputOnCell);
+        }
     }
 
     function addzero(value, base) {
