@@ -1,7 +1,7 @@
 /**
  * Custom editor for date only (not datetime)
  * 
- * @version 1.2.0
+ * @version 1.2.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * 
@@ -17,7 +17,7 @@ jexcel.editors.date = function() {
                 cell.innerHTML = '#NOTDATEVALID';
             } else if(value.substring(0,1) != "=") {
                 cell.innerHTML = formatedDateOnLocalFormat(tmp_value, options.locales, options.formatOutputOnCell);
-                value = DateToExcelDate(tmp_value);
+                value = methods.DateToExcelDate(tmp_value);
             } else {
                 cell.innerHTML = formatedDateOnLocalFormat(tmp_value, options.locales, options.formatOutputOnCell);
             }
@@ -32,7 +32,7 @@ jexcel.editors.date = function() {
                 cell.innerHTML = '#NOTDATEVALID';
             } else if(value.substring(0,1) != "=") {
                 cell.innerHTML = formatedDateOnLocalFormat(tmp_value, options.locales, options.formatOutputOnCell);
-                return DateToExcelDate(tmp_value); // Save new date verified
+                return methods.DateToExcelDate(tmp_value); // Save new date verified
             } else {
                 cell.innerHTML = formatedDateOnLocalFormat(tmp_value, options.locales, options.formatOutputOnCell);
             }
@@ -46,7 +46,7 @@ jexcel.editors.date = function() {
             editor.setAttribute('type', "date");
             editor.style.fontSize = "10px";
             if(parseFloat(value)+"" === value+"") {
-                value = ExcelDateToDate(value);
+                value = methods.ExcelDateToDate(value);
             }
         }
         if(options['min']) {
@@ -92,7 +92,7 @@ jexcel.editors.date = function() {
         if(value=="" || value.substring(0,1)=="=") {
             return value;
         } else {
-            return DateToExcelDate(value);
+            return methods.DateToExcelDate(value);
         }
     }
     
@@ -103,7 +103,7 @@ jexcel.editors.date = function() {
             }     
             // Date like Excel
             if(parseFloat(value)+"" === value+"") {
-                value = ExcelDateToDate(value);
+                value = methods.ExcelDateToDate(value);
             }
 
             if(!isDateISOValid(value)) {
@@ -121,7 +121,7 @@ jexcel.editors.date = function() {
     
     methods.get = function(options, value, extended) {
         if(parseFloat(value)+"" === value+"") {
-            value = ExcelDateToDate(value);
+            value = methods.ExcelDateToDate(value);
         }
         return formatedDateOnLocalFormat(value, options.locales, options.formatOutputOnCell);
     }
@@ -183,7 +183,7 @@ jexcel.editors.date = function() {
         }
     }
     
-    function DateToExcelDate(inDate) { 
+    methods.DateToExcelDate = function(inDate) { 
         if(typeof inDate == "string") {
             inDate = new Date(inDate);
         }
@@ -191,7 +191,7 @@ jexcel.editors.date = function() {
         return parseInt(returnDateTime); // Return only date
     }
     
-    function ExcelDateToDate(value) {
+    methods.ExcelDateToDate = function(value) {
         var date_value = new Date(Math.round((value - 25569)*(1000 * 60 * 60 * 24)));
         return date_value.getFullYear() + "-" + addzero((date_value.getMonth()*1+1),10) + "-" + addzero(date_value.getDate(),10);
     }
