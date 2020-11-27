@@ -1,9 +1,9 @@
 /**
  * Custom editor for date only (not datetime)
  * 
- * @version 1.2.2
+ * @version 1.2.4
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
- * @website https://www.gbonnaire.fr
+ * @website https://repo.gbonnaire.fr
  * 
  * @license This plugin is distribute under MIT License
  */
@@ -106,7 +106,7 @@ jexcel.editors.date = function() {
                 value = methods.ExcelDateToDate(value);
             }
 
-            if(!isDateISOValid(value)) {
+            if(value && !isDateISOValid(value)) {
                 // Transform Date to Date ISO
                 var tmp_value = stringToDateISO(value, options.formatInput);
                 if(tmp_value !== false) {
@@ -123,11 +123,7 @@ jexcel.editors.date = function() {
         if(parseFloat(value)+"" === value+"") {
             value = methods.ExcelDateToDate(value);
         }
-        if(options.returnISO) {
-            return value;
-        } else {
-            return formatedDateOnLocalFormat(value, options.locales, options.formatOutputOnCell);
-        }
+        return formatedDateOnLocalFormat(value, options.locales, options.formatOutputOnCell);
     }
 
     function addzero(value, base) {
@@ -163,6 +159,8 @@ jexcel.editors.date = function() {
     }
     
     function stringToDateISO(str, format) {
+        
+        
         if(!format) {
             format="yyyy-mm-dd";
         } else {
@@ -174,9 +172,9 @@ jexcel.editors.date = function() {
         var dayIndex=format.indexOf("dd");
         var yearIndex=format.indexOf("yyyy");
         
-        var day=addzero(parseInt(str.substr(dayIndex,dayIndex*1+2)), 10);
-        var month=addzero(parseInt(str.substr(monthIndex,monthIndex*1+2)), 10);
-        var year=addzero(parseInt(str.substr(yearIndex,yearIndex*1+4)), 1000);
+        var day=addzero(parseInt(str.substring(dayIndex,dayIndex*1+2)), 10);
+        var month=addzero(parseInt(str.substring(monthIndex,monthIndex*1+2)), 10);
+        var year=addzero(parseInt(str.substring(yearIndex,yearIndex*1+4)), 1000);
 
         var newDateISO_str = year+"-"+month+"-"+day;
 

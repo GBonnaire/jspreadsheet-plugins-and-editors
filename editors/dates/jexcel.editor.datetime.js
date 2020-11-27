@@ -1,9 +1,9 @@
 /**
  * Custom editor for datetime
  * 
- * @version 1.2.2
+ * @version 1.2.4
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
- * @website https://www.gbonnaire.fr
+ * @website https://repo.gbonnaire.fr
  * 
  * @license This plugin is distribute under MIT License
  */
@@ -105,7 +105,7 @@ jexcel.editors.datetime = function() {
                 value = methods.ExcelDateTimeToDateTime(value);
             }
             
-            if(!isDateTimeISOValid(value)) {
+            if(value && !isDateTimeISOValid(value)) {
                 // Transform Date to Date ISO
                 var tmp_value = stringToDateTimeISO(value, options.formatInput);
                 if(tmp_value !== false) {
@@ -113,7 +113,7 @@ jexcel.editors.datetime = function() {
                 } else {
                     value = false;
                 }
-            } else {
+            } else if(value) {
                 value = stringToDateTimeISO(value);
             }
             
@@ -125,11 +125,7 @@ jexcel.editors.datetime = function() {
         if(parseFloat(value)+"" === value+"") {
             value = methods.ExcelDateTimeToDateTime(value);
         }
-        if(options.returnISO) {
-            return value;
-        } else {
-            return formatedDateOnLocalFormat(value, options.locales, options.formatOutputOnCell);
-        }
+        return formatedDateOnLocalFormat(value, options.locales, options.formatOutputOnCell);
     }
 
     function addzero(value, base) {
@@ -179,22 +175,22 @@ jexcel.editors.datetime = function() {
         var minuteIndex=format.indexOf("nn");
         var secondIndex=format.indexOf("ss");
         
-        var day=addzero(parseInt(str.substr(dayIndex,dayIndex*1+2)), 10);
-        var month=addzero(parseInt(str.substr(monthIndex,monthIndex*1+2)), 10);
-        var year=addzero(parseInt(str.substr(yearIndex,yearIndex*1+4)), 1000);
+        var day=addzero(parseInt(str.substring(dayIndex,dayIndex*1+2)), 10);
+        var month=addzero(parseInt(str.substring(monthIndex,monthIndex*1+2)), 10);
+        var year=addzero(parseInt(str.substring(yearIndex,yearIndex*1+4)), 1000);
         
         if(hourIndex!=-1 && str.length>(hourIndex*1+2)) {
-            var hour = addzero(parseInt(str.substr(hourIndex,hourIndex*1+2)), 10);
+            var hour = addzero(parseInt(str.substring(hourIndex,hourIndex*1+2)), 10);
         } else {
             var hour = "00";
         }
         if(minuteIndex!=-1 && str.length>(minuteIndex*1+2)) {
-            var minute = addzero(parseInt(str.substr(minuteIndex,minuteIndex*1+2)), 10);
+            var minute = addzero(parseInt(str.substring(minuteIndex,minuteIndex*1+2)), 10);
         } else {
             var minute = "00";
         }
         if(secondIndex!=-1 && str.length>(secondIndex*1+2)) {
-            var second = addzero(parseInt(str.substr(secondIndex,secondIndex*1+2)), 10);
+            var second = addzero(parseInt(str.substring(secondIndex,secondIndex*1+2)), 10);
         } else {
             var second = "00";
         }
@@ -213,7 +209,7 @@ jexcel.editors.datetime = function() {
             inDate = new Date(inDate);
         }
         var returnDateTime = 25569 + ((inDate.getTime() - (inDate.getTimezoneOffset() * 60 * 1000)) / (1000 * 60 * 60 * 24));
-        return returnDateTime.toString().substr(0,20);
+        return returnDateTime.toString().substring(0,20);
     }
     
     methods.ExcelDateTimeToDateTime = function (value) {
