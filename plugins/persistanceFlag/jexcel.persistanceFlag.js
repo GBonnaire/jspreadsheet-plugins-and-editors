@@ -1,7 +1,7 @@
 /**
  * Plugin for change notification of persistance
  * 
- * @version 1.1.1
+ * @version 1.2.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * @description change notification of persistance
@@ -17,6 +17,8 @@ var jexcel_persistanceFlag = (function(instance, options) {
     var iconElement = null;
     var overrideNotification = null;
     var overrideNotificationVisible = null;
+    var countQuery = 0;
+    var timeLoop = 0;
     
     // Set options
     plugin.options = Object.assign({},options);
@@ -63,40 +65,66 @@ var jexcel_persistanceFlag = (function(instance, options) {
                 createFlag(instance);
             }
         }
-        if(event=="onbeforesave" && instance.options.toolbar) {    
+        if(event=="onbeforesave" && instance.options.toolbar) { 
+            if(countQuery<0) {
+                countQuery = 0;
+            }
+            
             if(!overrideNotification) {
                overrideNotification = jSuites.notification;
             }
             if(!overrideNotificationVisible) {
                overrideNotificationVisible = jSuites.notification.isVisible;
             }
-            jSuites.notification = function (options) {
-                if(options.success) {
-                   plugin.setSuccess();
-                } else {
-                   plugin.setError();
-                   console.error(options);
+            
+            if(countQuery==0) {
+                jSuites.notification = function (options) {
+                    if(options.success) {
+                        countQuery--;
+                        if(countQuery==0) {
+                          plugin.setSuccess();
+                        }
+                    } else {
+                       countQuery = 0;
+                       plugin.setError();
+                       console.error(options);
+                    }
+                }
+                jSuites.notification.isVisible = function() {
+                    return false;
                 }
             }
-            jSuites.notification.isVisible = function() {
-                return false;
-            }
+            countQuery++;
             plugin.setInProgress();
         } else if(event=="onblur") {
-            if(overrideNotification) {
-                jSuites.notification = overrideNotification;
-            }
-            
-            if(overrideNotificationVisible) {
-                jSuites.notification.isVisible = overrideNotificationVisible;
-            }
+            if(countQuery == 0) {
+                reset();
+            } else {
+                setTimeout(reset, 1000);
+            }            
         }
     }
     
-    
+    function reset() {
+        if(countQuery == 0) {
+            timeLoop = 0;
+            if(overrideNotification) {
+                jSuites.notification = overrideNotification;
+            }
+
+            if(overrideNotificationVisible) {
+                jSuites.notification.isVisible = overrideNotificationVisible;
+            }
+        } else {
+            timeLoop ++;
+            if(timeLoop>5) {
+                countQuery = 0;
+            }
+            setTimeout(reset, 1000);
+        }
+    }
     
     plugin.change = function(icon, message, applyCSS, iconColor) {
-        
         if(message.indexOf("{date}")!=-1) {
             var date = new Date();
             var str_date = date.toLocaleDateString(undefined, plugin.options.dateFormat);
