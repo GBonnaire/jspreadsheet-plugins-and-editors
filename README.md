@@ -21,6 +21,7 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 - [Print](https://repo.gbonnaire.fr/product/jexcel-plugin-print)
 
 ## Free plugins
+- [Contextmenu_RowsAdvancedActions](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/contextmenu_rowsAdvancedActions)
 - [Contextmenu Shortcut](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/contextmenu_shortcut)
 - [Copy Paste advanced (when access to clipboard navigator is denied)](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/plugins/copypaste_advanced)
 - [Persistance Flag](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/persistanceFlag)
