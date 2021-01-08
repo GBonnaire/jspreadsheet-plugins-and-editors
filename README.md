@@ -1,10 +1,8 @@
 ## JExcel Plugins and Editors
 
-Here you find my Plugins and Editors for JExcel Pro (v5 and +).
+Here you find my Plugins and Editors for JExcel Pro / JSpreadsheet Pro.
 
-There is a free plugins/editors and paid plugins/editors. For the paid plugins/editors, you can find only readme and documentation here. For buy plugin contact me by mail on [contact@gbonnaire.fr](mailto://contact@gbonnaire.fr).
-
-[Web site plugins&editors JExcel Pro](https://repo.gbonnaire.fr/category/jexcel)
+There is a free plugins/editors and paid plugins/editors. For the paid plugins/editors, you can find only readme and documentation here. For buy plugin go to [Web site plugins&editors JExcel Pro](https://repo.gbonnaire.fr/category/jexcel).
 
 ## What is JExcel ?
 
@@ -19,6 +17,9 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 - [Formula Bar](https://repo.gbonnaire.fr/product/jexcel-plugin-formulabar)
 - [Mobile](https://repo.gbonnaire.fr/product/jexcel-plugin-mobile)
 - [Print](https://repo.gbonnaire.fr/product/jexcel-plugin-print)
+- [PivotTable](https://repo.gbonnaire.fr/product/jexcel-plugin-pivottable)
+- [Summary](https://repo.gbonnaire.fr/product/jexcel-plugin-summary)
+- [Search Advanced](https://repo.gbonnaire.fr/product/jexcel-plugin-search)
 
 ## Free plugins
 - [Contextmenu Rows Advanced Actions](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/contextmenu_rowsAdvancedActions)
@@ -37,11 +38,6 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 
 All file in JSDelivr : [Package JSDelivr.com](https://www.jsdelivr.com/package/gh/Guillaume-Bo/jexcel-plugins-and-editors)
 
-## Coming soon
-- Comments advanced (Premium)
-- Search advanced (Premium)
-
-upcoming plugins / editors are already developed. They are currently in testing.
 
 # Repository
 
