@@ -18,7 +18,9 @@ var jexcel_persistanceFlag = (function(instance, options) {
     var overrideNotification = null;
     var overrideNotificationVisible = null;
     var countQuery = 0;
+    var countSave = 0;
     var timeLoop = 0;
+    var timeoutReset = null;
     
     // Set options
     plugin.options = Object.assign({},options);
@@ -34,7 +36,8 @@ var jexcel_persistanceFlag = (function(instance, options) {
           icon_progress: 'cached',
           css_progress: '',
           text_progress: 'Updating',
-          dateFormat : { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }
+          dateFormat : { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' },
+          debug: false
     }
 
 
@@ -79,9 +82,12 @@ var jexcel_persistanceFlag = (function(instance, options) {
             
             if(countQuery==0) {
                 jSuites.notification = function (options) {
+                    if(plugin.options.debug) {
+                        console.log("DEBUG Flag", countQuery, options);
+                    }
                     if(options.success) {
                         countQuery--;
-                        if(countQuery==0) {
+                        if(countQuery<=0) {
                           plugin.setSuccess();
                         }
                     } else {
@@ -102,12 +108,21 @@ var jexcel_persistanceFlag = (function(instance, options) {
             } else {
                 setTimeout(reset, 1000);
             }            
+        } else if(event=="onsave") {
+            countSave++;
+            if(countQuery<=countSave) {
+                if(timeoutReset) {
+                    clearTimeout(timeoutReset);
+                }
+                timeoutReset = setTimeout(reset, 1000);
+            }
         }
     }
     
     function reset() {
-        if(countQuery == 0) {
+        if(countQuery <= 0) {
             timeLoop = 0;
+            countSave = 0;
             if(overrideNotification) {
                 jSuites.notification = overrideNotification;
             }
@@ -118,7 +133,9 @@ var jexcel_persistanceFlag = (function(instance, options) {
         } else {
             timeLoop ++;
             if(timeLoop>5) {
-                countQuery = 0;
+                console.error("TimeOut Reset", countQuery);
+                countQuery = 0;  
+                plugin.setSuccess();
             }
             setTimeout(reset, 1000);
         }
@@ -168,14 +185,8 @@ var jexcel_persistanceFlag = (function(instance, options) {
     
     function createFlag(element) {
         flagElement = document.createElement("div");
-        flagElement.classList.add("jexcel-flagPersistance");
-        
-        /**
-         * @since 1.1.0 : With toolbar responsive
-         */
-        //flagElement.style.cssText = "position:absolute;right:0";
         flagElement.classList.add("jtoolbar-item");
-        flagElement.style.cssText = "margin-left:auto;right:0"; // Align right
+        flagElement.classList.add("jexcel-flagPersistance");
         
         
         if(plugin.options.showText) {
