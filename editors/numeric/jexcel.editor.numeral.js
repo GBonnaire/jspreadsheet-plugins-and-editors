@@ -1,14 +1,14 @@
 /**
  * Custom editor for numeral
  * 
- * @version 1.2.0
+ * @version 1.2.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * 
  * @license This plugin is distribute under MIT License
  * 
  * @description
- * Version 1.2.0 : Add step on editor + option for allowFormula
+ * Version 1.2 : Add step on editor + option for allowFormula
  */
 
 jexcel.editors.numeral = function() {
@@ -30,10 +30,10 @@ var methods = {};
         } else {
             var editor = jexcel.helpers.createEditor('number', cell);
 
-            if(options.mask) {
-                var step = options.mask.replace(/#/g, "0");
-                step = step.substring(0,step.length-1)+"1";
-                editor.setAttribute("step", step);
+            if(options.step) {
+                editor.setAttribute("step", options.step);
+            } else {
+                editor.setAttribute("step", "any");
             }
             
             if(options.min) {
