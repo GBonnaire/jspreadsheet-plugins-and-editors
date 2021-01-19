@@ -1,7 +1,7 @@
 /**
  * Plugin for change notification of persistance
  * 
- * @version 1.2.0
+ * @version 1.2.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * @description change notification of persistance
@@ -15,12 +15,9 @@ var jexcel_persistanceFlag = (function(instance, options) {
     var flagElement = null;
     var messageElement = null;
     var iconElement = null;
-    var overrideNotification = null;
     var overrideNotificationVisible = null;
     var countQuery = 0;
-    var countSave = 0;
     var timeLoop = 0;
-    var timeoutReset = null;
     
     // Set options
     plugin.options = Object.assign({},options);
@@ -36,8 +33,7 @@ var jexcel_persistanceFlag = (function(instance, options) {
           icon_progress: 'cached',
           css_progress: '',
           text_progress: 'Updating',
-          dateFormat : { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' },
-          debug: false
+          dateFormat : { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }
     }
 
 
@@ -67,54 +63,39 @@ var jexcel_persistanceFlag = (function(instance, options) {
             if(instance.options.persistance) {
                 createFlag(instance);
             }
-        }
-        if(event=="onbeforesave" && instance.options.toolbar) { 
+        } else if(event=="onbeforesave" && instance.options.toolbar) { 
             if(countQuery<0) {
                 countQuery = 0;
             }
-            
-            if(!overrideNotification) {
-               overrideNotification = jSuites.notification;
-            }
+
             if(!overrideNotificationVisible) {
                overrideNotificationVisible = jSuites.notification.isVisible;
             }
             
             if(countQuery==0) {
-                jSuites.notification = function (options) {
-                    if(plugin.options.debug) {
-                        console.log("DEBUG Flag", countQuery, options);
-                    }
-                    if(options.success) {
-                        countQuery--;
-                        if(countQuery<=0) {
-                          plugin.setSuccess();
-                        }
-                    } else {
-                       countQuery = 0;
-                       plugin.setError();
-                       console.error(options);
-                    }
-                }
                 jSuites.notification.isVisible = function() {
-                    return false;
+                    return true;
                 }
             }
             countQuery++;
             plugin.setInProgress();
-        } else if(event=="onblur") {
+        } else if(event=="onblur" && instance.options.toolbar) {
             if(countQuery == 0) {
                 reset();
             } else {
                 setTimeout(reset, 1000);
             }            
-        } else if(event=="onsave") {
-            countSave++;
-            if(countQuery<=countSave) {
-                if(timeoutReset) {
-                    clearTimeout(timeoutReset);
+        } else if(event=="onsave" && instance.options.toolbar) {
+            var options = arguments[4];
+            if(options.success) {
+                countQuery--;
+                if(countQuery<=0) {
+                  plugin.setSuccess();
                 }
-                timeoutReset = setTimeout(reset, 1000);
+            } else {
+               countQuery = 0;
+               plugin.setError();
+               console.error(options);
             }
         }
     }
@@ -122,11 +103,6 @@ var jexcel_persistanceFlag = (function(instance, options) {
     function reset() {
         if(countQuery <= 0) {
             timeLoop = 0;
-            countSave = 0;
-            if(overrideNotification) {
-                jSuites.notification = overrideNotification;
-            }
-
             if(overrideNotificationVisible) {
                 jSuites.notification.isVisible = overrideNotificationVisible;
             }
@@ -196,9 +172,6 @@ var jexcel_persistanceFlag = (function(instance, options) {
         
         iconElement = document.createElement("i");
         iconElement.classList.add("material-icons");
-        /**
-         * @since 1.1.0 : With toolbar responsive
-         */
         iconElement.style.cssText = "display:inline-block";
         
         flagElement.appendChild(iconElement);
