@@ -51,7 +51,6 @@ var jexcel_contextmenu_rowAdvancedActions = (function(instance, options) {
             
             var positionDivisor = 0;
             for(var ite_items in items) {
-                console.log(items[ite_items]);
                 if(items[ite_items].type == "divisor" || items[ite_items].type == "line") {
                     positionDivisor = parseInt(ite_items)+1;
                     break;
