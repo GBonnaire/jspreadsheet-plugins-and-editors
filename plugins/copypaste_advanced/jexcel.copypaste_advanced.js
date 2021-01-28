@@ -382,8 +382,8 @@
             var table = html.querySelector("table");
             var styleToApply = {};
             if(table) {
-                var x = parseInt(instance.selectedCell[0]);
-                var y = parseInt(instance.selectedCell[1]);
+                var x = parseInt(jexcel.current.selectedCell[0]);
+                var y = parseInt(jexcel.current.selectedCell[1]);
                 var style = html.querySelector("style");
                 var collectionTR = table.querySelectorAll('tbody tr');
                 for(var ite_tr=0; ite_tr<collectionTR.length; ite_tr++) {
@@ -401,7 +401,7 @@
                     }
                 }
 
-                instance.setStyle(styleToApply,null, null, true);
+                jexcel.current.setStyle(styleToApply,null, null, true);
             }
         }
 
