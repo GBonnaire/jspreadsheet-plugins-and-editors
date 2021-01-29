@@ -11,7 +11,7 @@ This plugin is **Free**
 jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional web-based interactive tables and spreadsheets. Compatible with most widely-used spreadsheet software, such as Excel or Google Spreadsheet, it offers users an unrivalled Excel-like user experience. It also works well with prominent modern frameworks and flexibly utilizes a large collection of events, extensions and configurations to meet different application requirements. Impress your clients with a better user experience and a great dynamic interactive data management tool.
 
 - [Download JExcel Pro](https://www.jexcel.net) 
-- [Download JExcel CE](https://bossanova.uk/jexcel/)
+- [Download JSpreadsheet](https://www.jspreadsheet.com)
 
 ## Documentation
 
@@ -60,23 +60,30 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 			<td>Icon for "Delete selected columns"</td>
 			<td><code>String</code></td>
 			<td><code>delete</code></td>
+		</tr>		
+	</tbody>
+</table>
+
+### For translation
+you can defined on translation global to replace var <code>text_XXXX</code> by <code>contextmenurowsadvancedactions_</code>
+<table>
+	<thead>
+		<tr>
+			<th>Option name</th>
+			<th>Default Value</th>
 		</tr>
+	</thead>
+	<tbody>
 		<tr>
 			<td><code>text_moveup</code></td>
-			<td>Text for "move up rows"</td>
-			<td><code>String</code></td>
 			<td><code>Move up row(s) selected</code></td>
 		</tr>
 		<tr>
 			<td><code>text_movedown</code></td>
-			<td>Text for "move down rows"</td>
-			<td><code>String</code></td>
 			<td><code>Move down row(s) selected</code></td>
 		</tr>
 		<tr>
 			<td><code>text_duplicate</code></td>
-			<td>Text for "duplicate rows"</td>
-			<td><code>String</code></td>
 			<td><code>Duplicate row(s) selected</code></td>
 		</tr>
 	</tbody>
@@ -101,7 +108,7 @@ jexcel(document.getElementById('spreadsheet'), {
 	...
 	plugins: [
       ...
-      { name:'rowsAdvancedAction', plugin:jexcel_contextmenu_rowAdvancedActions},
+      { name:'rowsAdvancedAction', plugin:jss_contextmenu_rowAdvancedActions},
       ...  
     ],
     ...
@@ -115,6 +122,12 @@ You can use this CDN link
 
 ```HTML
 <script src="https://cdn.jsdelivr.net/gh/Guillaume-Bo/jexcel-plugins-and-editors@latest/plugins/contextmenu_rowAdvancedActions/jexcel.contextmenu_rowAdvancedActions.js"></script>
+```
+
+## NPM
+Coming soon (March 2021)
+```javascript
+import download from '@jspreadsheet/contextmenu_rowAdvancedActions';
 ```
 
 ## Copyright and license

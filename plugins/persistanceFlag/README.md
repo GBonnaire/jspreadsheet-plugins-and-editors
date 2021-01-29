@@ -13,13 +13,13 @@ This plugin is **Free**
 jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional web-based interactive tables and spreadsheets. Compatible with most widely-used spreadsheet software, such as Excel or Google Spreadsheet, it offers users an unrivalled Excel-like user experience. It also works well with prominent modern frameworks and flexibly utilizes a large collection of events, extensions and configurations to meet different application requirements. Impress your clients with a better user experience and a great dynamic interactive data management tool.
 
 - [Download JExcel Pro](https://www.jexcel.net) 
-- [Download JExcel CE](https://bossanova.uk/jexcel/)
+- [Download JSpreadsheet](https://www.jspreadsheet.com)
 
 ## Documentation
 
 ### Dependencies
 
-- [JExcel Pro v5](https://www.jexcel.net/v5) or [JExcel Pro v7](https://www.jexcel.net/v7)  
+- [JExcel Pro v7](https://www.jexcel.net/v7)  
 
 ### Options of plugin
 
@@ -39,7 +39,7 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 			<td><code>String</code></td>
 			<td><code>(blank)</code></td>
 		</tr>
-  <tr>
+  		<tr>
 			<td><code>dateFormat</code></td>
 			<td>Use in text <code>{date}</code> for add datetime</td>
 			<td><code>Object</code></td>
@@ -51,46 +51,49 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 			<td><code>String</code></td>
 			<td><code>error</code></td>
 		</tr>
-    <tr>
+    	<tr>
 			<td><code>icon_success</code></td>
 			<td>Material icon code</td>
 			<td><code>String</code></td>
 			<td><code>check_circle</code></td>
 		</tr>
-    <tr>
+    	<tr>
 			<td><code>icon_progress</code></td>
 			<td>Material icon code</td>
 			<td><code>String</code></td>
 			<td><code>cached</code></td>
 		</tr>
-    <tr>
+    	<tr>
 			<td><code>showText</code></td>
-			<td>Show text with flag
-      </td>
+			<td>Show text with flag</td>
 			<td><code>Boolean</code></td>
 			<td><code>true</code></td>
 		</tr>
-    <tr>
-      <td><code>text_error</code></td>
-			<td>Text for flag
-      </td>
-			<td><code>String</code></td>
+	</tbody>
+</table>
+
+### For translation
+you can defined on translation global to replace var <code>text_XXXX</code> by <code>flagpersistance_</code>
+<table>
+	<thead>
+		<tr>
+			<th>Option name</th>
+			<th>Default Value</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+	        <td><code>text_error</code></td>
 			<td><code>'Not updated'</code></td>
-    </tr>
-    <tr>
-      <td><code>text_progress</code></td>
-			<td>Text for flag
-      </td>
-			<td><code>String</code></td>
-			<td><code>'Updating'</code></td>
-    </tr>
-    <tr>
-      <td><code>text_success</code></td>
-			<td>Text for flag
-      </td>
-			<td><code>String</code></td>
-			<td><code>'Updated {date}'</code></td>
-    </tr>
+	    </tr>
+	    <tr>
+	        <td><code>text_progress</code></td>
+		    <td><code>'Updating'</code></td>
+	    </tr>
+	    <tr>
+	        <td><code>text_success</code></td>
+		    <td><code>'Updated {date}'</code></td>
+	    </tr>
 	</tbody>
 </table>
 
@@ -113,7 +116,7 @@ jexcel(document.getElementById('spreadsheet'), {
 	...
 	plugins: [
       ...
-      { name:'persistanceFlag', plugin:jexcel_persistanceFlag },
+      { name:'persistanceFlag', plugin:jss_persistanceFlag },
       ...  
     ],
     ...
@@ -151,7 +154,7 @@ jexcel(document.getElementById('spreadsheet'), {
 	...
 	plugins: [
       ...
-      { name:'persistanceFlag', plugin:jexcel_persistanceFlag, options:{showText:false} },
+      { name:'persistanceFlag', plugin:jss_persistanceFlag, options:{showText:false} },
       ...  
     ],
     ...
@@ -164,6 +167,12 @@ You can use this CDN link
 
 ```HTML
 <script src="https://cdn.jsdelivr.net/gh/Guillaume-Bo/jexcel-plugins-and-editors@latest/plugins/persistanceFlag/jexcel.persistanceFlag.js"></script>
+```
+
+## NPM
+Coming soon (March 2021)
+```javascript
+import download from '@jspreadsheet/persistanceFlag';
 ```
 
 ## Copyright and license

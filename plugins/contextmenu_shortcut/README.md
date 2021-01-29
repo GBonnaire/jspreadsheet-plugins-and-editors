@@ -11,13 +11,13 @@ This plugin is **Free**
 jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional web-based interactive tables and spreadsheets. Compatible with most widely-used spreadsheet software, such as Excel or Google Spreadsheet, it offers users an unrivalled Excel-like user experience. It also works well with prominent modern frameworks and flexibly utilizes a large collection of events, extensions and configurations to meet different application requirements. Impress your clients with a better user experience and a great dynamic interactive data management tool.
 
 - [Download JExcel Pro](https://www.jexcel.net) 
-- [Download JExcel CE](https://bossanova.uk/jexcel/)
+- [Download JSpreadsheet](https://www.jspreadsheet.com)
 
 ## Documentation
 
 ### Dependencies
 
-- [JExcel Pro v5](https://www.jexcel.net/v5) or [JExcel Pro v7](https://www.jexcel.net/v7)
+- [JExcel Pro v7](https://www.jexcel.net/v7)
 
 - With default options of plugin, you should use [Material Design icons](https://material.io/resources/icons/). But, if you want, you can use fontawesome with editing all icons
 
@@ -167,7 +167,7 @@ jexcel(document.getElementById('spreadsheet'), {
 	...
 	plugins: [
       ...
-      { name:'shortcut', plugin:jexcel_contextmenu_shortcut},
+      { name:'shortcut', plugin:jss_contextmenu_shortcut},
       ...  
     ],
     ...
@@ -195,7 +195,7 @@ jexcel(document.getElementById('spreadsheet'), {
 	...
 	plugins: [
       ...
-        { name:'shortcut', plugin:jexcel_contextmenu_shortcut, options:{
+        { name:'shortcut', plugin:jss_contextmenu_shortcut, options:{
         	icon_addComments: 'add',
         }},
       ...  
@@ -209,6 +209,12 @@ You can use this CDN link
 
 ```HTML
 <script src="https://cdn.jsdelivr.net/gh/Guillaume-Bo/jexcel-plugins-and-editors@latest/plugins/contextmenu_shortcut/jexcel.contextmenu_shortcut.js"></script>
+```
+
+## NPM
+Coming soon (March 2021)
+```javascript
+import download from '@jspreadsheet/contextmenu_shortcut';
 ```
 
 ## Copyright and license

@@ -16,6 +16,7 @@ Demo available here : [Demo copy paste advanced](https://demo.gbonnaire.fr/jExce
 - Override copy methods of JExcel
 - Can copy scale like Excel
 - Work on Mobile
+- Paste data from Excel (with or without style)
 
 
 ## What is JExcel ?
@@ -23,13 +24,59 @@ Demo available here : [Demo copy paste advanced](https://demo.gbonnaire.fr/jExce
 jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional web-based interactive tables and spreadsheets. Compatible with most widely-used spreadsheet software, such as Excel or Google Spreadsheet, it offers users an unrivalled Excel-like user experience. It also works well with prominent modern frameworks and flexibly utilizes a large collection of events, extensions and configurations to meet different application requirements. Impress your clients with a better user experience and a great dynamic interactive data management tool.
 
 - [Download JExcel Pro](https://www.jexcel.net) 
-- [Download JExcel CE](https://bossanova.uk/jexcel/)
+- [Download JSpreadsheet](https://www.jspreadsheet.com)
 
 ## Documentation
 
 ### Dependencies
 
 - [JExcel Pro v7](https://www.jexcel.net/v7) 
+
+### Options of plugin
+
+<table>
+	<thead>
+		<tr>
+			<th>Option name</th>
+			<th>Description</th>
+			<th>Type</th>
+			<th>Default Value</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>allow_pastestyle</code></td>
+			<td>Allow paste style on copy/paste</td>
+			<td><code>Boolean</code></td>
+			<td><code>true</code></td>
+		</tr>
+	</tbody>
+</table>
+
+### For translation
+you can defined on translation global to replace var <code>text_XXXX</code> by <code>copypasteadv_</code>
+<table>
+	<thead>
+		<tr>
+			<th>Option name</th>
+			<th>Default Value</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>text_paste_special</code></td>
+			<td><code>Paste special</code></td>
+		</tr>
+		<tr>
+			<td><code>text_paste_only_style</code></td>
+			<td><code>Paste only format</code></td>
+		</tr>
+		<tr>
+			<td><code>text_paste_only_value</code></td>
+			<td><code>Paste only value</code></td>
+		</tr>
+	</tbody>
+</table>
 
 ### Methods of plugin
 
@@ -48,7 +95,7 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 			<td><code>jexcel.current.plugins.copypaste_adv.copy();</code></td>
 		</tr>
 		<tr>
-			<td><code>paste() → Void</code></td>
+			<td><code>paste(*Optional* Boolean OnlyValue) → Void</code></td>
 			<td>paste data copied on selected cell</td>
 			<td><code>jexcel.current.plugins.copypaste_adv.paste();</code></td>
 		</tr>
@@ -73,7 +120,7 @@ jexcel(document.getElementById('spreadsheet'), {
 	...
 	plugins: [
       ...
-      { name:'copypaste_adv', plugin:jexcel_copypaste_advanced},
+      { name:'copypaste_adv', plugin:jss_copypaste_advanced},
       ...  
     ],
     ...
@@ -123,6 +170,12 @@ You can use this CDN link
 
 ```HTML
 <script src="https://cdn.jsdelivr.net/gh/Guillaume-Bo/jexcel-plugins-and-editors@latest/plugins/copypaste_advanced/jexcel.copypaste_advanced.js"></script>
+```
+
+## NPM
+Coming soon (March 2021)
+```javascript
+import download from '@jspreadsheet/copypaste_advanced';
 ```
 
 ## Copyright and license

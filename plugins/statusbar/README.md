@@ -12,13 +12,13 @@ This plugin is **Free**
 jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional web-based interactive tables and spreadsheets. Compatible with most widely-used spreadsheet software, such as Excel or Google Spreadsheet, it offers users an unrivalled Excel-like user experience. It also works well with prominent modern frameworks and flexibly utilizes a large collection of events, extensions and configurations to meet different application requirements. Impress your clients with a better user experience and a great dynamic interactive data management tool.
 
 - [Download JExcel Pro](https://www.jexcel.net) 
-- [Download JExcel CE](https://bossanova.uk/jexcel/)
+- [Download JSpreadsheet](https://www.jspreadsheet.com)
 
 ## Documentation
 
 ### Dependencies
 
-- [JExcel Pro v5](https://www.jexcel.net/v5) or [JExcel Pro v7](https://www.jexcel.net/v7)  
+- [JExcel Pro v7](https://www.jexcel.net/v7)  
 
 ### Options of plugin
 
@@ -63,6 +63,7 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 You can modify CSS file for change separator of formulas
 
 ### For translation
+you can defined on translation global to replace var <code>text_XXXX</code> by <code>statusbar_</code>
 <table>
 	<thead>
 		<tr>
@@ -99,7 +100,7 @@ jexcel(document.getElementById('spreadsheet'), {
 	...
 	plugins: [
       ...
-      { name:'statusBar', plugin:jexcel_statusbar },
+      { name:'statusBar', plugin:jss_statusbar },
       ...  
     ],
     ...
@@ -125,7 +126,7 @@ jexcel(document.getElementById('spreadsheet'), {
 	...
 	plugins: [
       ...
-      { name:'statusBar', plugin:jexcel_statusbar, options: { 
+      { name:'statusBar', plugin:jss_statusbar, options: { 
                  showAddRowButton: false, 
                  formulas:{
                     "COUNT":"=COUNT({range})",
@@ -146,6 +147,11 @@ You can use this CDN link
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Guillaume-Bo/jexcel-plugins-and-editors@latest/plugins/statusbar/jexcel.statusbar.css" type="text/css" />
 ```
 
+## NPM
+Coming soon (March 2021)
+```javascript
+import download from '@jspreadsheet/statusBar';
+```
 
 ## Copyright and license
 

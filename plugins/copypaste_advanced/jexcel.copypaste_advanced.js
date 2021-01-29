@@ -7,15 +7,16 @@
  * @description upgrade copy paste function for work with clipboard permission denied or error
  * and add button on toolbar copy/cut/paste
  * 
- * Version 2.0.0 special paste (paste only value, paste only style, paste style from clipboard)
- * 
  * @license This plugin is distribute under MIT License
+ * 
+ * ReleaseNote
+ * 2.0.0 : compatibility NPM + add special paste (paste only value, paste only style, paste style from clipboard)
  */
 
 ;(function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
-    global.jexcel_copypaste_advanced = factory();
+    global.jss_copypaste_advanced = factory();
 }(this, (function () {
     return (function(instance, options) {
         // Plugin object
@@ -465,3 +466,6 @@
     });
     
 })));
+
+// Compatibility Old version
+const jexcel_copypaste_advanced = jss_copypaste_advanced;

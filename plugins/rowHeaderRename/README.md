@@ -12,13 +12,13 @@ This plugin is **Free**
 jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional web-based interactive tables and spreadsheets. Compatible with most widely-used spreadsheet software, such as Excel or Google Spreadsheet, it offers users an unrivalled Excel-like user experience. It also works well with prominent modern frameworks and flexibly utilizes a large collection of events, extensions and configurations to meet different application requirements. Impress your clients with a better user experience and a great dynamic interactive data management tool.
 
 - [Download JExcel Pro](https://www.jexcel.net) 
-- [Download JExcel CE](https://bossanova.uk/jexcel/)
+- [Download JSpreadsheet](https://www.jspreadsheet.com)
 
 ## Documentation
 
 ### Dependencies
 
-- [JExcel Pro v5](https://www.jexcel.net/v5) or [JExcel Pro v7](https://www.jexcel.net/v7)  
+- [JExcel Pro v7](https://www.jexcel.net/v7)  
 
 ### Options of plugin
 
@@ -75,7 +75,7 @@ jexcel(document.getElementById('spreadsheet'), {
 	...
 	plugins: [
       ...
-      { name:'rowRename', plugin:jexcel_rowHeaderRename, options:{headerIndexTitle: "hours", rowIndexTitle:function(rowIndex) {return (rowIndex % 24) + ":00";}}},
+      { name:'rowRename', plugin:jss_rowHeaderRename, options:{headerIndexTitle: "hours", rowIndexTitle:function(rowIndex) {return (rowIndex % 24) + ":00";}}},
       ...  
     ],
     ...
@@ -100,7 +100,7 @@ jexcel(document.getElementById('spreadsheet'), {
 	...
 	plugins: [
       ...
-      { name:'rowRename', plugin:jexcel_rowHeaderRename, options:{headerIndexTitle: "Who ?", rowIndexTitle:["Me", "You", "Us"]}},
+      { name:'rowRename', plugin:jss_rowHeaderRename, options:{headerIndexTitle: "Who ?", rowIndexTitle:["Me", "You", "Us"]}},
       ...  
     ],
     ...
@@ -125,7 +125,7 @@ jexcel(document.getElementById('spreadsheet'), {
 	...
 	plugins: [
       ...
-      { name:'rowRename', plugin:jexcel_rowHeaderRename, options:{headerIndexTitle: "Name", rowIndexTitle:{0:"Tom", 1:"Pierre", 2:"Jean", 3:"William"}, widthRowIndex: 100}},
+      { name:'rowRename', plugin:jss_rowHeaderRename, options:{headerIndexTitle: "Name", rowIndexTitle:{0:"Tom", 1:"Pierre", 2:"Jean", 3:"William"}, widthRowIndex: 100}},
       ...  
     ],
     ...
@@ -137,6 +137,12 @@ jexcel(document.getElementById('spreadsheet'), {
 You can use this CDN link
 ```HTML
 <script src="https://cdn.jsdelivr.net/gh/Guillaume-Bo/jexcel-plugins-and-editors@latest/plugins/rowHeaderRename/jexcel.rowHeaderRename.js"></script>
+```
+
+## NPM
+Coming soon (March 2021)
+```javascript
+import download from '@jspreadsheet/rowHeaderRename';
 ```
 
 ## Copyright and license
