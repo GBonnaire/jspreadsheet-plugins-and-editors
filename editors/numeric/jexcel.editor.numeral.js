@@ -1,13 +1,14 @@
 /**
  * Custom editor for numeral
  * 
- * @version 1.2.1
+ * @version 1.3.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * 
  * @license This plugin is distribute under MIT License
  * 
  * @description
+ * Version 1.3 : Add decimal management
  * Version 1.2 : Add step on editor + option for allowFormula
  */
 
@@ -73,12 +74,22 @@ var methods = {};
         if ((''+value).substr(0,1) == '=' && instance.options.parseFormulas == true) {
             value = instance.executeFormula(value, x, y)
         }
+        
         // Mask?
         if(numeral(value).value()==value) {
             if (options && options.mask) {
+                if(options.decimal) {
+                    var rg = new RegExp(options.decimal, "g");
+                    options.mask = options.mask.replace(rg,".");
+                }
                 value = numeral(value).format(options.mask);
             } else {
                 value = numeral(value).value();
+            }
+            if(options && options.decimal) {
+                var rg = new RegExp(options.decimal, "gi");
+                value = value.replace(rg,"");
+                value = value.replace(".", options.decimal);
             }
         }
 

@@ -1,7 +1,7 @@
 /**
  * Plugin copy paste advance for jExcel Pro / jSpreadsheet
  * 
- * @version 2.0.0
+ * @version 2.0.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description upgrade copy paste function for work with clipboard permission denied or error
@@ -272,8 +272,15 @@
                 navigator.clipboard.read().then(function(data) {
                     data[0].getType("text/plain").then(function(item) {
                         var res = new Response(item).text().then(function(text) {
+                            if(onlyValue || !plugin.options.allow_pastestyle) {
+                                var bordersCopying = instance.borders.copying;
+                                instance.borders.copying = null;
+                            }
                             if(text) {
                                 instance.paste(x1, y1, text);
+                            }
+                            if(onlyValue || !plugin.options.allow_pastestyle) {
+                                instance.borders.copying = bordersCopying;
                             }
                         });
                         return res;
@@ -289,14 +296,28 @@
                     }
                 }).catch(function(err) {
                     if (jexcel.dataCopied) {
+                        if(onlyValue || !plugin.options.allow_pastestyle) {
+                            var bordersCopying = instance.borders.copying;
+                            instance.borders.copying = null;
+                        }
                         instance.paste(x1, y1, jexcel.dataCopied);
+                        if(onlyValue || !plugin.options.allow_pastestyle) {
+                            instance.borders.copying = bordersCopying;
+                        }
                     }
                     if(plugin.options.allow_pastestyle && !onlyValue && !instance.borders.copying && jexcel.styleCopied) {
                         plugin.pasteOnlyStyle();
                     }
                 });
             } else if (jexcel.dataCopied) {
+                if(onlyValue || !plugin.options.allow_pastestyle) {
+                    var bordersCopying = instance.borders.copying;
+                    instance.borders.copying = null;
+                }
                 instance.paste(x1, y1, jexcel.dataCopied);
+                if(onlyValue || !plugin.options.allow_pastestyle) {
+                    instance.borders.copying = bordersCopying;
+                }
                 if(plugin.options.allow_pastestyle && !onlyValue && !instance.borders.copying && jexcel.styleCopied) {
                     plugin.pasteOnlyStyle();
                 }
@@ -362,10 +383,7 @@
          * @returns {undefined}
          */
         plugin.pasteOnlyValue = function() {
-            var bordersCopying = instance.borders.copying;
-            instance.borders.copying = null;
             plugin.paste(true);
-            instance.borders.copying = bordersCopying;
         }
 
         /**
