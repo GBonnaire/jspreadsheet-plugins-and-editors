@@ -1,7 +1,7 @@
 /**
  * Custom editor for date only (not datetime)
  * 
- * @version 1.2.4
+ * @version 1.2.5
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * 
@@ -30,7 +30,7 @@ jexcel.editors.date = function() {
             var tmp_value = methods.parseValue(x, y, value, instance, options);
             if(tmp_value===false) {
                 cell.innerHTML = '#NOTDATEVALID';
-            } else if(value.substring(0,1) != "=") {
+            } else if(typeof value == "string" && value.substring(0,1) != "=") {
                 cell.innerHTML = formatedDateOnLocalFormat(tmp_value, options.locales, options.formatOutputOnCell);
                 return methods.DateToExcelDate(tmp_value); // Save new date verified
             } else {
@@ -42,7 +42,7 @@ jexcel.editors.date = function() {
     methods.openEditor = function(cell, value, x, y, instance, options) {
 
         var editor = jexcel.helpers.createEditor('input', cell);
-        if(value.substring(0,1) != "=") {
+        if(typeof value != "string" || value.substring(0,1) != "=") {
             editor.setAttribute('type', "date");
             editor.style.fontSize = "10px";
             if(parseFloat(value)+"" === value+"") {
@@ -98,7 +98,7 @@ jexcel.editors.date = function() {
     
     methods.parseValue = function(x, y, value, instance, options) {
         if(value) {
-            if(value.substring(0,1)=="=" && instance.options.parseFormulas == true) {
+            if(typeof value == "string" && value.substring(0,1)=="=" && instance.options.parseFormulas == true) {
                 value = instance.executeFormula(value, x, y);
             }     
             // Date like Excel
@@ -107,12 +107,17 @@ jexcel.editors.date = function() {
             }
 
             if(value && !isDateISOValid(value)) {
-                // Transform Date to Date ISO
-                var tmp_value = stringToDateISO(value, options.formatInput);
-                if(tmp_value !== false) {
-                    value = tmp_value;
+                if(isDateTimeISOValid(value)) {
+                    // Extract date
+                    value = value.substring(0,10);
                 } else {
-                    value = false;
+                    // Transform Date to Date ISO
+                    var tmp_value = stringToDateISO(value, options.formatInput);
+                    if(tmp_value !== false) {
+                        value = tmp_value;
+                    } else {
+                        value = false;
+                    }
                 }
             }       
         }
@@ -138,6 +143,11 @@ jexcel.editors.date = function() {
     
     function isDateISOValid(str) {
         var tester = /^([0-9]{4})\-(0[1-9]|1[012])\-(0[1-9]|(1|2)[0-9]|3[01])$/;
+        return tester.test(str);
+    }
+    
+    function isDateTimeISOValid(str) {
+        var tester = /^(\d{4}-[01]\d-[0-3]\d)$|^(\d{4}-[01]\d-[0-3]\d(T|\s)[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))$|^(\d{4}-[01]\d-[0-3]\d(T|\s)[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z)?)$|^(\d{4}-[01]\d-[0-3]\d(T|\s)[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))$/;
         return tester.test(str);
     }
     

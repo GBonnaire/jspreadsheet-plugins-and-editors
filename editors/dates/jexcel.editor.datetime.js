@@ -1,7 +1,7 @@
 /**
  * Custom editor for datetime
  * 
- * @version 1.2.4
+ * @version 1.2.5
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * 
@@ -139,7 +139,7 @@ jexcel.editors.datetime = function() {
     }
     
     function isDateTimeISOValid(str) {
-        var tester = /(\d{4}-[01]\d-[0-3]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))/;
+        var tester = /^(\d{4}-[01]\d-[0-3]\d)$|^(\d{4}-[01]\d-[0-3]\d(T|\s)[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))$|^(\d{4}-[01]\d-[0-3]\d(T|\s)[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z)?)$|^(\d{4}-[01]\d-[0-3]\d(T|\s)[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))$/;
         return tester.test(str);
     }
     
@@ -179,17 +179,18 @@ jexcel.editors.datetime = function() {
         var month=addzero(parseInt(str.substring(monthIndex,monthIndex*1+2)), 10);
         var year=addzero(parseInt(str.substring(yearIndex,yearIndex*1+4)), 1000);
         
-        if(hourIndex!=-1 && str.length>(hourIndex*1+2)) {
+        if(hourIndex!=-1 && str.length>=(hourIndex*1+2)) {
             var hour = addzero(parseInt(str.substring(hourIndex,hourIndex*1+2)), 10);
         } else {
             var hour = "00";
         }
-        if(minuteIndex!=-1 && str.length>(minuteIndex*1+2)) {
+        if(minuteIndex!=-1 && str.length>=(minuteIndex*1+2)) {
             var minute = addzero(parseInt(str.substring(minuteIndex,minuteIndex*1+2)), 10);
         } else {
             var minute = "00";
         }
-        if(secondIndex!=-1 && str.length>(secondIndex*1+2)) {
+        
+        if(secondIndex!=-1 && str.length>=(secondIndex*1+2)) {
             var second = addzero(parseInt(str.substring(secondIndex,secondIndex*1+2)), 10);
         } else {
             var second = "00";
