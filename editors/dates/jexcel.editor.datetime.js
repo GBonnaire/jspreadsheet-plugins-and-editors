@@ -1,7 +1,7 @@
 /**
  * Custom editor for datetime
  * 
- * @version 1.2.5
+ * @version 1.2.6
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * 
@@ -26,15 +26,19 @@ jexcel.editors.datetime = function() {
     }
 
     methods.updateCell = function(cell, value, x, y, instance, options) {
-        if (cell && value) {
-            var tmp_value = methods.parseValue(x, y, value, instance, options);
-            if(tmp_value===false) {
-                cell.innerHTML = '#NOTDATETIMEVALID';
-            } else if(value.substring(0,1) != "=") {
-                cell.innerHTML = formatedDateOnLocalFormat(tmp_value, options.locales, options.formatOutputOnCell);
-                return methods.DateTimeToExcelDateTime(tmp_value);
+        if (cell) {
+            if(value) {
+                var tmp_value = methods.parseValue(x, y, value, instance, options);
+                if(tmp_value===false) {
+                    cell.innerHTML = '#NOTDATETIMEVALID';
+                } else if(value.substring(0,1) != "=") {
+                    cell.innerHTML = formatedDateOnLocalFormat(tmp_value, options.locales, options.formatOutputOnCell);
+                    return methods.DateTimeToExcelDateTime(tmp_value);
+                } else {
+                    cell.innerHTML = formatedDateOnLocalFormat(tmp_value, options.locales, options.formatOutputOnCell);
+                }   
             } else {
-                cell.innerHTML = formatedDateOnLocalFormat(tmp_value, options.locales, options.formatOutputOnCell);
+                cell.innerHTML = "";
             }
         }
     }
