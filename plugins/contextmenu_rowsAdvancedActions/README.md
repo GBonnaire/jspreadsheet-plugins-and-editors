@@ -121,7 +121,7 @@ jexcel(document.getElementById('spreadsheet'), {
 You can use this CDN link
 
 ```HTML
-<script src="https://cdn.jsdelivr.net/gh/Guillaume-Bo/jexcel-plugins-and-editors@latest/plugins/contextmenu_rowAdvancedActions/jexcel.contextmenu_rowAdvancedActions.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Guillaume-Bo/jexcel-plugins-and-editors@latest/plugins/contextmenu_rowsAdvancedActions/jexcel.contextmenu_rowsAdvancedActions.js"></script>
 ```
 
 ## NPM
