@@ -42,4 +42,4 @@ All file in JSDelivr : [Package JSDelivr.com](https://www.jsdelivr.com/package/g
 
 # Repository
 
-You can find all products on [ProgiApp Repository : repo.gbonnaire.fr](https://repo.gbonnaire.fr)
+You can find all products on [ProgiDev Repository : repo.gbonnaire.fr](https://repo.gbonnaire.fr)
