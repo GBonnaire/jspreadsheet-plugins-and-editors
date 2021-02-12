@@ -31,7 +31,7 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 - [Status bar](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/statusbar)
 
 ## Free Editors
-- [Date editors](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/editors/dates) (including date, datetime and time)
+- [Date editors](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/editors/dates) (including date like Excel, datetime like Excel and time)
 - [Numeral](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/editors/numeric/jexcel.editor.numeral.js) (mask number advanced - Dependance with Numeraljs.com)
 - [TextPattern](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/editors/text/jexcel.editor.textpattern.js) (text editor with pattern and block bad input tape)
 
