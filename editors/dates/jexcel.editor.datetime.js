@@ -1,7 +1,7 @@
 /**
  * Custom editor for datetime
  * 
- * @version 1.2.6
+ * @version 1.2.7
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * 
@@ -15,7 +15,7 @@ jexcel.editors.datetime = function() {
             var tmp_value = methods.parseValue(x, y, value, instance, options); 
             if(tmp_value===false) {
                 cell.innerHTML = '#NOTDATETIMEVALID';
-            } else if(value.substring(0,1) != "=") {
+            } else if(typeof value == "string" && value.substring(0,1) != "=") {
                 cell.innerHTML = formatedDateOnLocalFormat(tmp_value, options.locales, options.formatOutputOnCell);
                 value = methods.DateTimeToExcelDateTime(tmp_value);
             } else {

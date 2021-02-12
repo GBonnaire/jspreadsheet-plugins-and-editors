@@ -5,6 +5,8 @@
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * 
+ * @dependency NumeralJS.com 
+ * 
  * @license This plugin is distribute under MIT License
  * 
  * @description
