@@ -41,7 +41,7 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 		</tr>
   		<tr>
 			<td><code>dateFormat</code></td>
-			<td>Use in text <code>{date}</code> for add datetime</td>
+			<td>Use in text <code>{date}</code> for add datetime or <code>{time}</code> for add onlytime</td>
 			<td><code>Object</code></td>
 			<td><code>{ year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }</code></td>
 		</tr>
@@ -68,6 +68,12 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 			<td>Show text with flag</td>
 			<td><code>Boolean</code></td>
 			<td><code>true</code></td>
+		</tr>
+		<tr>
+			<td><code>showOnlyTime</code></td>
+			<td>Show onlyt type with flag</td>
+			<td><code>Boolean</code></td>
+			<td><code>false</code></td>
 		</tr>
 	</tbody>
 </table>

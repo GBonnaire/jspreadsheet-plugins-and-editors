@@ -1,7 +1,7 @@
 /**
  * Plugin for change notification of persistance for jExcel Pro / jSpreadsheet
  * 
- * @version 1.3.0
+ * @version 1.4.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description change notification of persistance
@@ -9,6 +9,7 @@
  * @license This plugin is distribute under MIT License
  * 
  * ReleaseNote
+ * 1.4.0 add time and showOnlyTime
  * 1.3.0 add compatibility NPM
  */
 
@@ -35,6 +36,7 @@
         // Options
         var defaultOptions = {
               showText: true,
+              showOnlyTime: false,
               icon_error: 'error',
               text_error: 'Not updated',
               icon_success: 'check_circle',
@@ -129,8 +131,18 @@
         plugin.change = function(icon, message, applyCSS, iconColor) {
             if(message.indexOf("{date}")!=-1) {
                 var date = new Date();
-                var str_date = date.toLocaleDateString(undefined, plugin.options.dateFormat);
+                if(plugin.options.showOnlyTime) {
+                    var str_date = date.toLocaleTimeString(undefined);
+                } else {
+                    var str_date = date.toLocaleDateString(undefined, plugin.options.dateFormat);
+                }
                 message = message.replace("{date}", str_date);
+            }
+            
+            if(message.indexOf("{time}")!=-1) {
+                var date = new Date();
+                var str_date = date.toLocaleTimeString(undefined);
+                message = message.replace("{time}", str_date);
             }
 
 
