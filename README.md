@@ -22,7 +22,7 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 - [Search Advanced](https://repo.gbonnaire.fr/product/jexcel-plugin-search)
 
 ## Free plugins
-- [auto Width](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/autoWidth)
+- [Auto Width](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/autoWidth)
 - [Contextmenu Rows Advanced Actions](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/contextmenu_rowsAdvancedActions)
 - [Contextmenu Shortcut](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/contextmenu_shortcut)
 - [Copy Paste advanced (when access to clipboard navigator is denied)](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/plugins/copypaste_advanced)
