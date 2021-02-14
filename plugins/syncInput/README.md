@@ -38,7 +38,7 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 		<tr>
 			<td><code>checkRow</code></td>
 			<td>Function for checkRow before add in sync value </td>
-			<td><code>Function (row data, instance of jexcel, index rows) &rarr; shoudl return true or false</code></td>
+			<td><code>Function (row data, instance of jexcel, index rows) &rarr; should return true or false</code></td>
 			<td><code>null</code></td>
 		</tr>
 		<tr>

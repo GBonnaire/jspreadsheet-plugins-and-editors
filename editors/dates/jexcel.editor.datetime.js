@@ -1,7 +1,7 @@
 /**
  * Custom editor for datetime
  * 
- * @version 1.2.7
+ * @version 1.2.8
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * 
@@ -101,7 +101,7 @@ jexcel.editors.datetime = function() {
 
     methods.parseValue = function(x, y, value, instance, options) {
         if(value) {
-            if(value.substring(0,1)=="=" && instance.options.parseFormulas == true) {
+            if(typeof value == "string" && value.substring(0,1)=="=" && instance.options.parseFormulas == true) {
                 value = instance.executeFormula(value, x, y);
             } 
             // Date like Excel
