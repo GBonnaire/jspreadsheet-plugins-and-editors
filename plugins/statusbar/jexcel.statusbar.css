@@ -19,8 +19,8 @@
     left: 0px;
     background-color: #F3F3F3;
     border: 1px solid #CCCCCC;
-    height: 24px;
-    width: calc(100% - 3px);
+    width: calc(100% - 1px);
+    height: 26px;
     display: flex;
     margin-left: 1px;
     margin-right: 1px;
