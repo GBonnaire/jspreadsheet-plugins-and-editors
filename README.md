@@ -43,7 +43,7 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 
 ## CDN for Free plugins and editors
 
-All file in JSDelivr : [Package JSDelivr.com](https://www.jsdelivr.com/package/gh/Guillaume-Bo/jexcel-plugins-and-editors)
+All file in JSDelivr : [Package JSDelivr.com](https://www.jsdelivr.com/package/gh/GBonnaire/jspreadsheet-plugins-and-editors)
 
 
 # Repository
