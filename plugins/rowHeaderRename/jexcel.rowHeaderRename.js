@@ -11,6 +11,9 @@
  * ReleaseNote
  * 1.2.0 compatibility NPM
  */
+if (! jspreadsheet && typeof(require) === 'function') {
+    var jspreadsheet = require('jspreadsheet-pro');
+}
 ;(function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
@@ -51,7 +54,7 @@
         plugin.onevent = function(event) {
             if(event=="onload") { 
                 if(plugin.options.headerIndexTitle) {
-                    var HeaderIndex = jexcel.current.worksheet.querySelector('.jexcel_selectall');
+                    var HeaderIndex = jspreadsheet.current.worksheet.querySelector('.jexcel_selectall');
                     if(HeaderIndex) {
                         HeaderIndex.innerText = plugin.options.headerIndexTitle;
                         HeaderIndex.style.textAlign = "center";
@@ -59,7 +62,7 @@
                 }
 
                 if(plugin.options.widthRowIndex != 50) {
-                   var colGroup = jexcel.current.worksheet.querySelector('colgroup');
+                   var colGroup = jspreadsheet.current.worksheet.querySelector('colgroup');
                    var firstCol = colGroup.firstElementChild;
                    firstCol.width = plugin.options.widthRowIndex;
                 }
@@ -105,4 +108,4 @@
 })));
 
 // Compatibility Old version
-const jexcel_rowHeaderRename = jss_rowHeaderRename;
+window.jexcel_rowHeaderRename = jss_rowHeaderRename;

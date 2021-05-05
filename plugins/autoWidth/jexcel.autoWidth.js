@@ -9,6 +9,7 @@
  * 
  * @license This plugin is distribute under MIT License
  */
+
 ;(function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
@@ -19,7 +20,6 @@
         // Plugin object
         var plugin = {};
         var oldValue_styleTable = "";
-        var editable = instance.options.editable;
 
         /**
          * Jexcel events
@@ -93,6 +93,7 @@
          */
         function setWidthColumn(colsWidth) {
             // Autorize changement colsWidth
+            var editable = instance.options.editable;
             instance.options.editable = true;
             instance.ignoreEvents = true;
             instance.ignoreCloud = true;
@@ -140,4 +141,4 @@
 })));
 
 // Compatibility Old version
-const jexcel_autoWidth = jss_autoWidth;
+window.jexcel_autoWidth = jss_autoWidth;

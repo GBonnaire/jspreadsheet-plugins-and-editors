@@ -162,4 +162,4 @@
 })));   
 
 // Compatibility Old version
-const jexcel_contextmenu_rowAdvancedActions = jss_contextmenu_rowAdvancedActions;
+window.jexcel_contextmenu_rowAdvancedActions = jss_contextmenu_rowAdvancedActions;

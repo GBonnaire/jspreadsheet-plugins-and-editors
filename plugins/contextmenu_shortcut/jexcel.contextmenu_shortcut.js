@@ -201,4 +201,4 @@
 })));   
 
 // Compatibility Old version
-const jexcel_contextmenu_shortcut = jss_contextmenu_shortcut;
+window.jexcel_contextmenu_shortcut = jss_contextmenu_shortcut;

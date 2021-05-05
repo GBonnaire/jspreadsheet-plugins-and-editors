@@ -184,4 +184,4 @@
 })));
 
 // Compatibility Old version
-const jexcel_syncInput = jss_syncInput;
+window.jexcel_syncInput = jss_syncInput;

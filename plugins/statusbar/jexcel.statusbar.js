@@ -1,19 +1,40 @@
 /**
  * Plugin statusbar for jExcel Pro / jSpreadsheet
  * 
- * @version 1.3.0
+ * @version 1.3.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
- * @description Add status bar on bottom of JExcel
+ * @summary Add status bar on bottom of JExcel
+ * @namespace jss_statusbar
  * 
+ * @property {Object} options - List options of plugin
+ * @property {Boolean} [options.showAddRowButton=false] - Add button on right of bar for add row
+ * @property {String} [text_AddRowButton="Add {*} row(s)"] - Text for button, {*} is input field 
+ * @property {Object} [options.formulas] - Formulas showed on statusbar. object.key = title of formula, object.value = formula. In formula you can use this shortcut {range} (Ref to range selected), {cells} (Ref to array of cells selected), {x1} (Ref to start col of selection), {y1} (Ref to start row of selection), {x2} (Ref to end col to selection), {y2} (Ref to end row to selection)
  * 
+ * @link https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/plugins/statusbar/README.md Documentation official
+ * 
+ * @example 
+ * jexcel(document.getElementById('spreadsheet'), {
+ *	plugins: [
+ *       { name:'statusBar', plugin:jss_statusbar },
+ *     ],
+ * });
  * @license This plugin is distribute under MIT License
  * 
- * Release Note
- * 1.3.0 : NPM compatibily
- * 1.2.1 : Fix bug with fullscreen + bug formula with 1 cell
- * 1.2.0 : Add formula execute by cells selected (i.e. with results)
+ * @description Status bar is a plugin for add a status bar on bottom of the sheet like Excel. On this status bar you can add new row with button, and show information on selection (Range selected, Formulas, etc.)
+ * <h3>Release notes</h3>
+ * <ul>
+ * <li><h4>Version 1.3.1</h4>Transform jexcel to jspreadsheet</li>
+ * <li><h4>Version 1.3.0</h4>Compatibility for project dev in ES2015</li>
+ * <li><h4>Version 1.2.1</h4>Fix bug with fullscreen + bug formula with 1 cell</li>
+ * <li><h4>Version 1.2.0</h4>Add formula execute by cells selected (i.e. with results)</li>
+ * </ul>
  */
+
+if (! jspreadsheet && typeof(require) === 'function') {
+    var jspreadsheet = require('jspreadsheet-pro');
+}
 
 ;(function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -62,6 +83,7 @@
 
         /**
          * Jexcel events
+         * @private
          */
         plugin.onevent = function(event) {        
             if(event=="onload") {
@@ -83,7 +105,8 @@
 
         /**
          * Create all element of statusbar
-         * @param {type} el
+         * @memberOf jss_statusbar
+         * @param {HTMLElement} el - Element of Jexcel
          * @returns {undefined}
          */
         plugin.createStatusbar = function (el) {
@@ -107,7 +130,7 @@
             var buttonAddRows = document.createElement("button");
             buttonAddRows.innerHTML = textButton[0];
             buttonAddRows.onclick = function (e) {
-                jexcel.current.insertRow(parseInt(inputAddRows.value));
+                jspreadsheet.current.insertRow(parseInt(inputAddRows.value));
             }
 
             var spanAddRows = document.createElement("span");
@@ -133,7 +156,8 @@
 
         /**
          * Generation information
-         * @returns {void}
+         * @memberOf jss_statusbar
+         * @returns {undefined}
          */
         plugin.generateInformation = function() {
             var info = "";
@@ -145,9 +169,9 @@
             if(RangeSelection==null) {
                 RangeSelection = instance.selectedCell;
             }
-            var RangeStart = jexcel.getColumnNameFromId([RangeSelection[0],RangeSelection[1]]);
+            var RangeStart = jspreadsheet.getColumnNameFromId([RangeSelection[0],RangeSelection[1]]);
             if(RangeSelection[0]!=RangeSelection[2] || RangeSelection[1]!=RangeSelection[3]) {
-                var RangeEnd = jexcel.getColumnNameFromId([RangeSelection[2],RangeSelection[3]]);
+                var RangeEnd = jspreadsheet.getColumnNameFromId([RangeSelection[2],RangeSelection[3]]);
             } else {
                 var RangeEnd = "";
             }
@@ -161,8 +185,8 @@
                     return "[" + token[0] + "]"; 
                 }
 
-                var e1 = jexcel.getIdFromColumnName(token[0], true);
-                var e2 = jexcel.getIdFromColumnName(token[1], true);
+                var e1 = jspreadsheet.getIdFromColumnName(token[0], true);
+                var e2 = jspreadsheet.getIdFromColumnName(token[1], true);
 
                 if (e1[0] <= e2[0]) {
                     var x1 = e1[0];
@@ -183,7 +207,7 @@
                 for (var j = y1; j <= y2; j++) {
                     for (var i = x1; i <= x2; i++) {
                         if(instance.results == null || instance.results.indexOf(j)!=-1) {
-                            f.push(jexcel.getColumnNameFromId([i, j]));
+                            f.push(jspreadsheet.getColumnNameFromId([i, j]));
                         }
                     }
                 }
@@ -229,10 +253,11 @@
         }
 
         /**
-         * (private) Prepare function with formula
-         * @param {type} formula
-         * @param {type} parameters
-         * @returns {unresolved}
+         * Prepare function with formula
+         * @private
+         * @param {String} formula
+         * @param {Object} parameters
+         * @returns {String}
          */
         function prepareFormula(formula, parameters) {
             for(var parameter in parameters) {
@@ -249,4 +274,4 @@
 })));
 
 // Compatibility Old version
-const jexcel_statusbar = jss_statusbar;
+window.jexcel_statusbar = jss_statusbar;

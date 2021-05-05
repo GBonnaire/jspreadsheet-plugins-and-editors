@@ -10,8 +10,12 @@
  * @license This plugin is distribute under MIT License
  * 
  * ReleaseNote
+ * 2.0.1 : transform jexcel to jspreadsheet
  * 2.0.0 : compatibility NPM + add special paste (paste only value, paste only style, paste style from clipboard)
  */
+if (! jspreadsheet && typeof(require) === 'function') {
+    var jspreadsheet = require('jspreadsheet-pro');
+}
 
 ;(function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -70,7 +74,7 @@
                 }
             }
 
-            if(!flag_found_paste && position_copy!=-1 && (jexcel.dataCopied || (navigator && navigator.clipboard))) {
+            if(!flag_found_paste && position_copy!=-1 && (jspreadsheet.dataCopied || (navigator && navigator.clipboard))) {
                 // Add paste after copy
                 var item_paste = {
                             title: obj['options']['text']['paste'],
@@ -88,7 +92,7 @@
                 items.splice(position_copy+1, 0, item_paste);
             }
 
-            if(plugin.options.allow_pastestyle && position_copy!=-1 && (jexcel.styleCopied || (navigator && navigator.clipboard))) {
+            if(plugin.options.allow_pastestyle && position_copy!=-1 && (jspreadsheet.styleCopied || (navigator && navigator.clipboard))) {
                 var item_paste_special = {
                     title: plugin.options.text_paste_special,
                     submenu: [
@@ -214,11 +218,11 @@
             return newData;
         }
 
-        // Init overwrite function for keep old function
+        // Init override function for keep old function
         var BasedCopy = instance.copy;
 
         /**
-         * Overwrite copy
+         * override copy
          * @param {type} highlighted
          * @param {type} delimiter
          * @param {type} returnData
@@ -226,7 +230,7 @@
          */
         instance.copy = function(cut) {
             var data = BasedCopy(cut);
-            jexcel.dataCopied = data;
+            jspreadsheet.dataCopied = data;
             if(plugin.options.allow_pastestyle && instance.options.style) {
                 var xStart = parseInt(instance.selectedCell[0]);
                 var yStart = parseInt(instance.selectedCell[1]);
@@ -236,14 +240,14 @@
                 for(var y=yStart; y<=yEnd; y++) {
                     var rowStyle = [];
                     for(var x=xStart; x<=xEnd; x++) {
-                        var cellName = jexcel.getColumnNameFromId([x, y]);
+                        var cellName = jspreadsheet.getColumnNameFromId([x, y]);
                         rowStyle.push(instance.options.style[cellName]);
                     }
                     style.push(rowStyle);
                 }
-                jexcel.styleCopied = style;
+                jspreadsheet.styleCopied = style;
             } else {
-                jexcel.styleCopied = null;
+                jspreadsheet.styleCopied = null;
             }
             return data;
         }
@@ -295,30 +299,30 @@
                         });
                     }
                 }).catch(function(err) {
-                    if (jexcel.dataCopied) {
+                    if (jspreadsheet.dataCopied) {
                         if(onlyValue || !plugin.options.allow_pastestyle) {
                             var bordersCopying = instance.borders.copying;
                             instance.borders.copying = null;
                         }
-                        instance.paste(x1, y1, jexcel.dataCopied);
+                        instance.paste(x1, y1, jspreadsheet.dataCopied);
                         if(onlyValue || !plugin.options.allow_pastestyle) {
                             instance.borders.copying = bordersCopying;
                         }
                     }
-                    if(plugin.options.allow_pastestyle && !onlyValue && !instance.borders.copying && jexcel.styleCopied) {
+                    if(plugin.options.allow_pastestyle && !onlyValue && !instance.borders.copying && jspreadsheet.styleCopied) {
                         plugin.pasteOnlyStyle();
                     }
                 });
-            } else if (jexcel.dataCopied) {
+            } else if (jspreadsheet.dataCopied) {
                 if(onlyValue || !plugin.options.allow_pastestyle) {
                     var bordersCopying = instance.borders.copying;
                     instance.borders.copying = null;
                 }
-                instance.paste(x1, y1, jexcel.dataCopied);
+                instance.paste(x1, y1, jspreadsheet.dataCopied);
                 if(onlyValue || !plugin.options.allow_pastestyle) {
                     instance.borders.copying = bordersCopying;
                 }
-                if(plugin.options.allow_pastestyle && !onlyValue && !instance.borders.copying && jexcel.styleCopied) {
+                if(plugin.options.allow_pastestyle && !onlyValue && !instance.borders.copying && jspreadsheet.styleCopied) {
                     plugin.pasteOnlyStyle();
                 }
             }
@@ -341,7 +345,7 @@
                     for(var y=yStart; y<=yEnd; y++) {
                         var rowStyle = [];
                         for(var x=xStart; x<=xEnd; x++) {
-                            var cellName = jexcel.getColumnNameFromId([x, y]);
+                            var cellName = jspreadsheet.getColumnNameFromId([x, y]);
                             rowStyle.push(instance.options.style[cellName]);
                         }
                         style.push(rowStyle);
@@ -358,7 +362,7 @@
                     });
                 });
             } else {
-                styleToCopy = jexcel.styleCopied;
+                styleToCopy = jspreadsheet.styleCopied;
             }
 
             if(styleToCopy) {
@@ -370,7 +374,7 @@
                     var rowStyle = styleToCopy[ite_row];
                     for(var ite_col=0; ite_col<rowStyle.length; ite_col++) {
                         var style = rowStyle[ite_col];
-                        var cellName = jexcel.getColumnNameFromId([x+ite_col, y+ite_row]);
+                        var cellName = jspreadsheet.getColumnNameFromId([x+ite_col, y+ite_row]);
                         styleToApply[cellName] = style;
                     }
                 }
@@ -401,8 +405,8 @@
             var table = html.querySelector("table");
             var styleToApply = {};
             if(table) {
-                var x = parseInt(jexcel.current.selectedCell[0]);
-                var y = parseInt(jexcel.current.selectedCell[1]);
+                var x = parseInt(jspreadsheet.current.selectedCell[0]);
+                var y = parseInt(jspreadsheet.current.selectedCell[1]);
                 var style = html.querySelector("style");
                 var collectionTR = table.querySelectorAll('tbody tr');
                 for(var ite_tr=0; ite_tr<collectionTR.length; ite_tr++) {
@@ -415,12 +419,12 @@
                         } else {
                             var styleTD  = getStyleElement(td, null);
                         }
-                        var cellName = jexcel.getColumnNameFromId([x+ite_td, y+ite_tr]);
+                        var cellName = jspreadsheet.getColumnNameFromId([x+ite_td, y+ite_tr]);
                         styleToApply[cellName] = styleTD;
                     }
                 }
 
-                jexcel.current.setStyle(styleToApply,null, null, true);
+                jspreadsheet.current.setStyle(styleToApply,null, null, true);
             }
         }
 
@@ -454,15 +458,15 @@
         }
 
         /**
-         * overWrite pasteControl for add pasteStyleFromClipboard
-         * @type jexcel.pasteControls
+         * override pasteControl for add pasteStyleFromClipboard
+         * @type jspreadsheet.pasteControls
          */
         if(plugin.options.allow_pastestyle) {
-            var BasedPasteControls = jexcel.pasteControls;
-            jexcel.pasteControls = function(e) {
+            var BasedPasteControls = jspreadsheet.pasteControls;
+            jspreadsheet.pasteControls = function(e) {
                 BasedPasteControls(e);
-                if (jexcel.current && jexcel.current.selectedCell) {
-                    if (!jexcel.current.edition) {
+                if (jspreadsheet.current && jspreadsheet.current.selectedCell) {
+                    if (!jspreadsheet.current.edition) {
                         if (e && e.clipboardData && e.clipboardData.types && e.clipboardData.getData) {
                             if (((e.clipboardData.types instanceof DOMStringList) && e.clipboardData.types.contains("text/html")) || (e.clipboardData.types.indexOf && e.clipboardData.types.indexOf('text/html') !== -1)) {
                                 var pasteData = e.clipboardData.getData('text/html');
@@ -486,4 +490,4 @@
 })));
 
 // Compatibility Old version
-const jexcel_copypaste_advanced = jss_copypaste_advanced;
+window.jexcel_copypaste_advanced = jss_copypaste_advanced;
