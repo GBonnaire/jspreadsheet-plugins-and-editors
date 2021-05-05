@@ -148,9 +148,10 @@ You can use this CDN link
 ```
 
 ## NPM
-Coming soon (March 2021)
+Coming soon (2021)
+npm install @jspreadsheet/statusbar
 ```javascript
-import download from '@jspreadsheet/statusBar';
+import jss_statusBar from '@jspreadsheet/statusBar';
 ```
 
 ## Copyright and license

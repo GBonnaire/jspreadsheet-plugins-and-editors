@@ -140,10 +140,13 @@ You can use this CDN link
 ```
 
 ## NPM
-Coming soon (March 2021)
+Coming soon (2021)
+npm install @jspreadsheet/rowHeaderRename
 ```javascript
-import download from '@jspreadsheet/rowHeaderRename';
+import jss_rowHeaderRename from '@jspreadsheet/rowHeaderRename';
 ```
+
+
 
 ## Copyright and license
 

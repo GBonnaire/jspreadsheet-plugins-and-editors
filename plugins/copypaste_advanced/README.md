@@ -173,9 +173,10 @@ You can use this CDN link
 ```
 
 ## NPM
-Coming soon (March 2021)
+Coming soon (2021)
+npm install @jspreadsheet/copypaste_advanced
 ```javascript
-import download from '@jspreadsheet/copypaste_advanced';
+import jss_copypaste_advanced from  '@jspreadsheet/copypaste_advanced';
 ```
 
 ## Copyright and license

@@ -212,9 +212,10 @@ You can use this CDN link
 ```
 
 ## NPM
-Coming soon (March 2021)
+Coming soon (2021)
+npm install @jspreadsheet/contextmenu_shortcut
 ```javascript
-import download from '@jspreadsheet/contextmenu_shortcut';
+import jss_contextmenu_shortcut from '@jspreadsheet/contextmenu_shortcut';
 ```
 
 ## Copyright and license

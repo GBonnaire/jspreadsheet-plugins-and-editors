@@ -104,9 +104,10 @@ You can use this CDN link
 ```
 
 ## NPM
-Coming soon (March 2021)
+Coming soon (2021)
+npm install @jspreadsheet/inputSync
 ```javascript
-import download from '@jspreadsheet/inputSync';
+import jss_inputSync from '@jspreadsheet/inputSync';
 ```
 
 ## Copyright and license
