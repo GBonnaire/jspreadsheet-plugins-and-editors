@@ -1,0 +1,30 @@
+{
+    "name": "@jspreadsheet/contextmenu_rowsAdvancedActions",
+    "title": "Jspreadsheet plugins: add actions to rows.",
+    "description": "add new actions to rows for move and duplicate.",
+    "author": {
+        "name": "Guillaume Bonnaire <contact@gbonnaire.fr>",
+        "url": "https://repo.gbonnaire.fr"
+    },
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/GBonnaire/jspreadsheet-plugins-and-editors.git"
+    },
+    "keywords": [
+        "contextmenu",
+        "move",
+        "duplicate",
+        "spreadsheet",
+        "spreadsheets",
+        "tables",
+        "table",
+        "excel",
+        "grid",
+        "grid-editor",
+        "data-table",
+        "data-grid",
+        "data-spreadsheet"
+    ],
+    "main": "jexcel.contextmenu_rowsAdvancedActions.js",
+    "version": "1.1.0"
+}

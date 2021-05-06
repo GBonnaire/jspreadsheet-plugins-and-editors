@@ -1,0 +1,29 @@
+{
+    "name": "@jspreadsheet/rowHeaderRename",
+    "title": "Jspreadsheet plugins: rename row header.",
+    "description": "Rename row header with data or function.",
+    "author": {
+        "name": "Guillaume Bonnaire <contact@gbonnaire.fr>",
+        "url": "https://repo.gbonnaire.fr"
+    },
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/GBonnaire/jspreadsheet-plugins-and-editors.git"
+    },
+    "keywords": [
+        "autowidth",
+        "width",
+        "spreadsheet",
+        "spreadsheets",
+        "tables",
+        "table",
+        "excel",
+        "grid",
+        "grid-editor",
+        "data-table",
+        "data-grid",
+        "data-spreadsheet"
+    ],
+    "main": "jexcel.rowHeaderRename.js",
+    "version": "1.2.0"
+}

@@ -1,0 +1,30 @@
+{
+    "name": "@jspreadsheet/copypaste_advanced",
+    "title": "Jspreadsheet plugins: Copy paste advanced like Excel.",
+    "description": "Improve copy paste of JExcel with Scalling, paste style from Excel, copy paste onlystyle.",
+    "author": {
+        "name": "Guillaume Bonnaire <contact@gbonnaire.fr>",
+        "url": "https://repo.gbonnaire.fr"
+    },
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/GBonnaire/jspreadsheet-plugins-and-editors.git"
+    },
+    "keywords": [
+        "style",
+        "copy",
+        "paste",
+        "spreadsheet",
+        "spreadsheets",
+        "tables",
+        "table",
+        "excel",
+        "grid",
+        "grid-editor",
+        "data-table",
+        "data-grid",
+        "data-spreadsheet"
+    ],
+    "main": "jexcel.copypaste_advanced.js",
+    "version": "2.0.1"
+}

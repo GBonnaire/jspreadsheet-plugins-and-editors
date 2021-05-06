@@ -1,0 +1,29 @@
+{
+    "name": "@jspreadsheet/syncInput",
+    "title": "Jspreadsheet plugins: sync Input.",
+    "description": "synchronisation input text with data write in jspreadsheet",
+    "author": {
+        "name": "Guillaume Bonnaire <contact@gbonnaire.fr>",
+        "url": "https://repo.gbonnaire.fr"
+    },
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/GBonnaire/jspreadsheet-plugins-and-editors.git"
+    },
+    "keywords": [
+        "syncInput",
+        "input",
+        "spreadsheet",
+        "spreadsheets",
+        "tables",
+        "table",
+        "excel",
+        "grid",
+        "grid-editor",
+        "data-table",
+        "data-grid",
+        "data-spreadsheet"
+    ],
+    "main": "jexcel.syncInput.js",
+    "version": "1.0.0"
+}
