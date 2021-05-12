@@ -1,4 +1,4 @@
-## JExcel Plugins and Editors
+## jSpreadsheet Plugins and Editors
 
 Here you find my Plugins and Editors for JSpreadsheet Pro (Jexcel Pro).
 
@@ -8,7 +8,7 @@ There is a free plugins/editors and paid plugins/editors. For the paid plugins/e
 
 jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create exceptional web-based interactive tables and spreadsheets. Compatible with most widely-used spreadsheet software, such as Excel or Google Spreadsheet, it offers users an unrivalled Excel-like user experience. It also works well with prominent modern frameworks and flexibly utilizes a large collection of events, extensions and configurations to meet different application requirements. Impress your clients with a better user experience and a great dynamic interactive data management tool.
 
-- [Download JSpreadsheet Pro](https://www.jspreadsheet.net) 
+- [Download JSpreadsheet Pro](https://www.jspreadsheet.com) 
 
 
 ## Premium plugins

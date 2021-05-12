@@ -1,36 +1,35 @@
-## JExcel Plugin : Copy Paste Advanced
+## jSpreadsheet Plugin : Copy Paste Advanced
 
-The Copypaste_advanced plugin improves the copy paste functionality of JExcel. It works even if access to the clipboard is denied or in error.
+The Copypaste_advanced plugin improves the copy paste functionality of jSpreadsheet. It works even if access to the clipboard is denied or in error.
 
 ![preview](https://user-images.githubusercontent.com/52194475/91473978-ece08980-e899-11ea-9a89-ad0f8bc89d42.png)
 
 This plugin is **Free**
 
-Demo available here : [Demo copy paste advanced](https://demo.gbonnaire.fr/jExcel/plugin.copypasteadv.php)
+Demo available here : [Demo copy paste advanced](https://demo.gbonnaire.fr/jSpreadsheet/plugin.copypasteadv.php)
 
 ### Features
 
 - Add items cut, copy, paste on default toolbar
 - Add item paste on default context menu when it is not present
-- Upgrade copy/paste of JExcel when clipboard access is denied
-- Override copy methods of JExcel
+- Upgrade copy/paste of jSpreadsheet when clipboard access is denied
+- Override copy methods of jSpreadsheet
 - Can copy scale like Excel
 - Work on Mobile
 - Paste data from Excel (with or without style)
 
 
-## What is JExcel ?
+## What is jSpreadsheet ?
 
-jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional web-based interactive tables and spreadsheets. Compatible with most widely-used spreadsheet software, such as Excel or Google Spreadsheet, it offers users an unrivalled Excel-like user experience. It also works well with prominent modern frameworks and flexibly utilizes a large collection of events, extensions and configurations to meet different application requirements. Impress your clients with a better user experience and a great dynamic interactive data management tool.
+jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create exceptional web-based interactive tables and spreadsheets. Compatible with most widely-used spreadsheet software, such as Excel or Google Spreadsheet, it offers users an unrivalled Excel-like user experience. It also works well with prominent modern frameworks and flexibly utilizes a large collection of events, extensions and configurations to meet different application requirements. Impress your clients with a better user experience and a great dynamic interactive data management tool.
 
-- [Download JExcel Pro](https://www.jexcel.net) 
-- [Download JSpreadsheet](https://www.jspreadsheet.com)
+- [Download jSpreadsheet Pro](https://www.jspreadsheet.com) 
 
 ## Documentation
 
 ### Dependencies
 
-- [JExcel Pro v7](https://www.jexcel.net/v7) 
+- [jSpreadsheet Pro v7](https://www.jspreadsheet.com/v7) 
 
 ### Options of plugin
 
@@ -91,13 +90,13 @@ you can defined on translation global to replace var <code>text_XXXX</code> by <
 	<tbody>
 		<tr>
 			<td><code>copy(*Optional* Boolean cut) → Array</code></td>
-			<td>Copy selected cells. If copy(true), you cut selected cell. This methods return same result of jexcel.current.copy().</td>
-			<td><code>jexcel.current.plugins.copypaste_adv.copy();</code></td>
+			<td>Copy selected cells. If copy(true), you cut selected cell. This methods return same result of jSpreadsheet.current.copy().</td>
+			<td><code>jSpreadsheet.current.plugins.copypaste_adv.copy();</code></td>
 		</tr>
 		<tr>
 			<td><code>paste(*Optional* Boolean OnlyValue) → Void</code></td>
 			<td>paste data copied on selected cell</td>
-			<td><code>jexcel.current.plugins.copypaste_adv.paste();</code></td>
+			<td><code>jSpreadsheet.current.plugins.copypaste_adv.paste();</code></td>
 		</tr>
 	</tbody>
 </table>
@@ -106,17 +105,17 @@ you can defined on translation global to replace var <code>text_XXXX</code> by <
 
 Header on page
 ```HTML
-<script src="https://jexcel.net/v7/jexcel.js"></script>
-<script src="https://jexcel.net/v7/jsuites.js"></script>
-<link rel="stylesheet" href="https://jexcel.net/v7/jsuites.css" type="text/css" />
-<link rel="stylesheet" href="https://jexcel.net/v7/jexcel.css" type="text/css" />
+<script src="https://jspreadsheet.com/v7/jspreadsheet.js"></script>
+<script src="https://jspreadsheet.com/v7/jsuites.js"></script>
+<link rel="stylesheet" href="https://jspreadsheet.com/v7/jsuites.css" type="text/css" />
+<link rel="stylesheet" href="https://jspreadsheet.com/v7/jspreadsheet.css" type="text/css" />
 
-<script src="/path/to/jexcel.copypaste_advanced.js"></script>
+<script src="/path/to/copypaste_advanced.min.js"></script>
 ```
 
-Initialize plugin on JExcel
+Initialize plugin on jSpreadsheet
 ```JavaScript
-jexcel(document.getElementById('spreadsheet'), {
+jSpreadsheet(document.getElementById('spreadsheet'), {
 	...
 	plugins: [
       ...
@@ -130,31 +129,31 @@ jexcel(document.getElementById('spreadsheet'), {
 #### Example of code for custom toolbar
 
 ```JavaScript
-jexcel(document.getElementById('spreadsheet'), {
+jSpreadsheet(document.getElementById('spreadsheet'), {
 	...
 	toolbar: [
       ...
         {
 	        content: 'content_cut',
 	        onclick: function() {
-	            if (jexcel.current.selectedCell) {
-	                jexcel.current.copy(true);
+	            if (jSpreadsheet.current.selectedCell) {
+	                jSpreadsheet.current.copy(true);
 	            }
 	        }
 	    },
 	    {
 	        content: 'content_copy',
 	        onclick: function() {
-	            if (jexcel.current.selectedCell) {
-	                jexcel.current.copy();
+	            if (jSpreadsheet.current.selectedCell) {
+	                jSpreadsheet.current.copy();
 	            }
 	        }
 	    },
 	    {
 	        content: 'content_paste',
 	        onclick: function() {
-	            if (jexcel.current.selectedCell) {
-	                jexcel.current.plugins.copypaste_adv.paste();
+	            if (jSpreadsheet.current.selectedCell) {
+	                jSpreadsheet.current.plugins.copypaste_adv.paste();
 	            }
 	        }
 	    },
@@ -169,7 +168,7 @@ jexcel(document.getElementById('spreadsheet'), {
 You can use this CDN link
 
 ```HTML
-<script src="https://cdn.jsdelivr.net/gh/Guillaume-Bo/jexcel-plugins-and-editors@latest/plugins/copypaste_advanced/jexcel.copypaste_advanced.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/GBonnaire/jspreadsheet-plugins-and-editors@latest/plugins/copypaste_advanced.min.js"></script>
 ```
 
 ## NPM

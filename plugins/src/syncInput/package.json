@@ -24,6 +24,6 @@
         "data-grid",
         "data-spreadsheet"
     ],
-    "main": "jexcel.syncInput.js",
+    "main": "index.js",
     "version": "1.0.0"
 }

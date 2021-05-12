@@ -1,7 +1,7 @@
 {
-    "name": "@jspreadsheet/contextmenu_rowsAdvancedActions",
-    "title": "Jspreadsheet plugins: add actions to rows.",
-    "description": "add new actions to rows for move and duplicate.",
+    "name": "@jspreadsheet/copypaste_advanced",
+    "title": "Jspreadsheet plugins: Copy paste advanced like Excel.",
+    "description": "Improve copy paste of JExcel with Scalling, paste style from Excel, copy paste onlystyle.",
     "author": {
         "name": "Guillaume Bonnaire <contact@gbonnaire.fr>",
         "url": "https://repo.gbonnaire.fr"
@@ -11,9 +11,9 @@
         "url" : "https://github.com/GBonnaire/jspreadsheet-plugins-and-editors.git"
     },
     "keywords": [
-        "contextmenu",
-        "move",
-        "duplicate",
+        "style",
+        "copy",
+        "paste",
         "spreadsheet",
         "spreadsheets",
         "tables",
@@ -25,6 +25,6 @@
         "data-grid",
         "data-spreadsheet"
     ],
-    "main": "jexcel.contextmenu_rowsAdvancedActions.js",
-    "version": "1.1.0"
+    "main": "index.js",
+    "version": "2.0.1"
 }

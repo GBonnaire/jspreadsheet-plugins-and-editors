@@ -1,7 +1,7 @@
 {
-    "name": "@jspreadsheet/statusbar",
-    "title": "Jspreadsheet plugins: status bar.",
-    "description": "add status bar with information on select range.",
+    "name": "@jspreadsheet/contextmenu_rowsAdvancedActions",
+    "title": "Jspreadsheet plugins: add actions to rows.",
+    "description": "add new actions to rows for move and duplicate.",
     "author": {
         "name": "Guillaume Bonnaire <contact@gbonnaire.fr>",
         "url": "https://repo.gbonnaire.fr"
@@ -11,8 +11,9 @@
         "url" : "https://github.com/GBonnaire/jspreadsheet-plugins-and-editors.git"
     },
     "keywords": [
-        "statusbar",
-        "formula",
+        "contextmenu",
+        "move",
+        "duplicate",
         "spreadsheet",
         "spreadsheets",
         "tables",
@@ -24,6 +25,6 @@
         "data-grid",
         "data-spreadsheet"
     ],
-    "main": "jexcel.statusbar.js",
-    "version": "1.3.1"
+    "main": "index.js",
+    "version": "1.1.0"
 }

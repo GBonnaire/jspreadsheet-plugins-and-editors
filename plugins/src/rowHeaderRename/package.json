@@ -24,6 +24,6 @@
         "data-grid",
         "data-spreadsheet"
     ],
-    "main": "jexcel.rowHeaderRename.js",
+    "main": "index.js",
     "version": "1.2.0"
 }

@@ -1,7 +1,7 @@
 {
-    "name": "@jspreadsheet/contextmenu_shortcut",
-    "title": "Jspreadsheet plugins: add icon to contextmenu.",
-    "description": "add icon to contextmenu and change shortcut Cmd or Window.",
+    "name": "@jspreadsheet/persistanceFlag",
+    "title": "Jspreadsheet plugins: change persistance flag.",
+    "description": "Change persistance flag and add this flag into toolbar.",
     "author": {
         "name": "Guillaume Bonnaire <contact@gbonnaire.fr>",
         "url": "https://repo.gbonnaire.fr"
@@ -11,8 +11,8 @@
         "url" : "https://github.com/GBonnaire/jspreadsheet-plugins-and-editors.git"
     },
     "keywords": [
-        "contextmenu",
-        "shortcut",
+        "persistance",
+        "flag",
         "spreadsheet",
         "spreadsheets",
         "tables",
@@ -24,6 +24,6 @@
         "data-grid",
         "data-spreadsheet"
     ],
-    "main": "jexcel.contextmenu_shortcut.js",
-    "version": "1.3.0"
+    "main": "index.js",
+    "version": "1.4.1"
 }

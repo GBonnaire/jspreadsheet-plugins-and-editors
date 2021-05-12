@@ -1,4 +1,4 @@
-## JExcel Plugin : Row Header rename
+## jSpreadsheet Plugin : Row Header rename
 
  Row Header rename is a plugin for rename row header (Index) with custom name
 
@@ -7,18 +7,18 @@
 
 This plugin is **Free**
 
-## What is JExcel ?
+## What is jSpreadsheet ?
 
-jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional web-based interactive tables and spreadsheets. Compatible with most widely-used spreadsheet software, such as Excel or Google Spreadsheet, it offers users an unrivalled Excel-like user experience. It also works well with prominent modern frameworks and flexibly utilizes a large collection of events, extensions and configurations to meet different application requirements. Impress your clients with a better user experience and a great dynamic interactive data management tool.
+jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create exceptional web-based interactive tables and spreadsheets. Compatible with most widely-used spreadsheet software, such as Excel or Google Spreadsheet, it offers users an unrivalled Excel-like user experience. It also works well with prominent modern frameworks and flexibly utilizes a large collection of events, extensions and configurations to meet different application requirements. Impress your clients with a better user experience and a great dynamic interactive data management tool.
 
-- [Download JExcel Pro](https://www.jexcel.net) 
+- [Download jSpreadsheet Pro](https://www.jspreadsheet.com) 
 - [Download JSpreadsheet](https://www.jspreadsheet.com)
 
 ## Documentation
 
 ### Dependencies
 
-- [JExcel Pro v7](https://www.jexcel.net/v7)  
+- [jSpreadsheet Pro v7](https://www.jspreadsheet.com/v7)  
 
 ### Options of plugin
 
@@ -61,17 +61,17 @@ jExcel, a lightweight Vanilla JavaScript plugin, can help you create exceptional
 
 Header on page
 ```HTML
-<script src="https://jexcel.net/v7/jexcel.js"></script>
-<script src="https://jexcel.net/v7/jsuites.js"></script>
-<link rel="stylesheet" href="https://jexcel.net/v7/jsuites.css" type="text/css" />
-<link rel="stylesheet" href="https://jexcel.net/v7/jexcel.css" type="text/css" />
+<script src="https://jspreadsheet.com/v7/jspreadsheet.js"></script>
+<script src="https://jspreadsheet.com/v7/jsuites.js"></script>
+<link rel="stylesheet" href="https://jspreadsheet.com/v7/jsuites.css" type="text/css" />
+<link rel="stylesheet" href="https://jspreadsheet.com/v7/jspreadsheet.css" type="text/css" />
 
-<script src="/path/to/jexcel.rowHeaderRename.js"></script>
+<script src="/path/to/rowHeaderRename.min.js"></script>
 ```
 
-Initialize plugin on JExcel
+Initialize plugin on jSpreadsheet
 ```JavaScript
-jexcel(document.getElementById('spreadsheet'), {
+jSpreadsheet(document.getElementById('spreadsheet'), {
 	...
 	plugins: [
       ...
@@ -86,17 +86,17 @@ jexcel(document.getElementById('spreadsheet'), {
 
 Header on page
 ```HTML
-<script src="https://jexcel.net/v7/jexcel.js"></script>
-<script src="https://jexcel.net/v7/jsuites.js"></script>
-<link rel="stylesheet" href="https://jexcel.net/v7/jsuites.css" type="text/css" />
-<link rel="stylesheet" href="https://jexcel.net/v7/jexcel.css" type="text/css" />
+<script src="https://jspreadsheet.com/v7/jspreadsheet.js"></script>
+<script src="https://jspreadsheet.com/v7/jsuites.js"></script>
+<link rel="stylesheet" href="https://jspreadsheet.com/v7/jsuites.css" type="text/css" />
+<link rel="stylesheet" href="https://jspreadsheet.com/v7/jspreadsheet.css" type="text/css" />
 
-<script src="/path/to/jexcel.rowHeaderRename.js"></script>
+<script src="/path/to/rowHeaderRename.min.js"></script>
 ```
 
-Initialize plugin on JExcel
+Initialize plugin on jSpreadsheet
 ```JavaScript
-jexcel(document.getElementById('spreadsheet'), {
+jSpreadsheet(document.getElementById('spreadsheet'), {
 	...
 	plugins: [
       ...
@@ -111,17 +111,17 @@ jexcel(document.getElementById('spreadsheet'), {
 
 Header on page
 ```HTML
-<script src="https://jexcel.net/v7/jexcel.js"></script>
-<script src="https://jexcel.net/v7/jsuites.js"></script>
-<link rel="stylesheet" href="https://jexcel.net/v7/jsuites.css" type="text/css" />
-<link rel="stylesheet" href="https://jexcel.net/v7/jexcel.css" type="text/css" />
+<script src="https://jspreadsheet.com/v7/jspreadsheet.js"></script>
+<script src="https://jspreadsheet.com/v7/jsuites.js"></script>
+<link rel="stylesheet" href="https://jspreadsheet.com/v7/jsuites.css" type="text/css" />
+<link rel="stylesheet" href="https://jspreadsheet.com/v7/jspreadsheet.css" type="text/css" />
 
-<script src="/path/to/jexcel.rowHeaderRename.js"></script>
+<script src="/path/to/rowHeaderRename.min.js"></script>
 ```
 
-Initialize plugin on JExcel
+Initialize plugin on jSpreadsheet
 ```JavaScript
-jexcel(document.getElementById('spreadsheet'), {
+jSpreadsheet(document.getElementById('spreadsheet'), {
 	...
 	plugins: [
       ...
@@ -136,7 +136,7 @@ jexcel(document.getElementById('spreadsheet'), {
 
 You can use this CDN link
 ```HTML
-<script src="https://cdn.jsdelivr.net/gh/Guillaume-Bo/jexcel-plugins-and-editors@latest/plugins/rowHeaderRename/jexcel.rowHeaderRename.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/GBonnaire/jspreadsheet-plugins-and-editors@latest/plugins/rowHeaderRename.min.js"></script>
 ```
 
 ## NPM
