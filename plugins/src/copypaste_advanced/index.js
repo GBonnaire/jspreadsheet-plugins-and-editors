@@ -1,7 +1,7 @@
 /**
  * Plugin copy paste advance for jExcel Pro / jSpreadsheet
  * 
- * @version 2.0.1
+ * @version 2.1.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description upgrade copy paste function for work with clipboard permission denied or error
@@ -10,6 +10,7 @@
  * @license This plugin is distribute under MIT License
  * 
  * ReleaseNote
+ * 2.1.0 : add topmenu compatibility
  * 2.0.1 : transform jexcel to jspreadsheet
  * 2.0.0 : compatibility NPM + add special paste (paste only value, paste only style, paste style from clipboard)
  */
@@ -120,6 +121,77 @@ if (! jspreadsheet && typeof(require) === 'function') {
 
             return items;
         }
+        
+        
+        plugin.topMenu = function(name, items, menuButton, shortcut_base) {
+            if(name=="Edit") {
+                var flag_found_paste = false;
+                var position_copy = -1;
+                for(var ite_items in items) {
+                    var item = items[ite_items];
+                    if(item.title == instance.options.text.paste) {
+                        item.onclick = function() {
+                            if (instance.selectedCell) {
+                                plugin.paste();
+                            }
+                        }
+                        flag_found_paste = true;
+                        break;
+                    }
+
+                    if(item.title == instance.options.text.copy) {
+                        position_copy = parseInt(ite_items);
+                    }
+                }
+
+                if(!flag_found_paste && position_copy!=-1 && (jspreadsheet.dataCopied || (navigator && navigator.clipboard))) {
+                    // Add paste after copy
+                    var item_paste = {
+                                title: instance['options']['text']['paste'],
+                                icon: 'content_paste',
+                                shortcut: shortcut_base+' V',
+                                onclick: function() {
+                                    if (instance.selectedCell) {
+                                        if(plugin.options.allow_pastestyle) {
+                                            plugin.paste();
+                                        } else {
+                                            plugin.pasteOnlyValue();
+                                        }
+                                    }
+                                }
+                            }
+                    items.splice(position_copy+1, 0, item_paste);
+                }
+
+                if(plugin.options.allow_pastestyle && position_copy!=-1 && (jspreadsheet.styleCopied || (navigator && navigator.clipboard))) {
+                    var item_paste_special = {
+                        title: plugin.options.text_paste_special,
+                        submenu: [
+                            {
+                                title: plugin.options.text_paste_only_value,
+                                onclick: function() {
+                                    if(instance.selectedCell) {
+                                        plugin.pasteOnlyValue();
+                                    }
+                                }
+                            },
+                            {
+                                title: plugin.options.text_paste_only_style,
+                                onclick: function() {
+                                    if(instance.selectedCell) {
+                                        plugin.pasteOnlyStyle();
+                                    }
+                                }
+                            }
+                        ]
+                    };
+
+                    items.splice(position_copy+2, 0, item_paste_special);
+                }
+            }
+            
+            return items;
+        }
 
         /**
          * Run on toolbar
@@ -184,16 +256,14 @@ if (! jspreadsheet && typeof(require) === 'function') {
                 }
             }
 
-            var dataArray = instance.parseCSV(data, "\t");
-
             var x2 = parseInt(instance.selectedCell[2]);
             var y2 = parseInt(instance.selectedCell[3]);
 
             var x_length = (x2 - x1) + 1;
             var y_length = (y2 - y1) + 1;
 
-            var data_y_length = dataArray.length;
-            var data_x_length = dataArray[0].length;
+            var data_y_length = data.length;
+            var data_x_length = data[0].length;
 
             var scale_x = Math.trunc(x_length/data_x_length);
             var scale_y = Math.trunc(y_length/data_y_length);
@@ -208,7 +278,7 @@ if (! jspreadsheet && typeof(require) === 'function') {
             for(var ite_y = 0; ite_y<(data_y_length*scale_y); ite_y++) {
                 newData[ite_y] = [];
                 for(var ite_x = 0; ite_x<(data_x_length*scale_x); ite_x++) {
-                     newData[ite_y][ite_x] = dataArray[ite_y%data_y_length][ite_x%data_x_length];
+                     newData[ite_y][ite_x] = data[ite_y%data_y_length][ite_x%data_x_length];
                 }
                 newData[ite_y] = newData[ite_y].join("\t");
             }
@@ -269,6 +339,7 @@ if (! jspreadsheet && typeof(require) === 'function') {
             if(onlyValue==null) {
                 onlyValue = false;
             }
+            
             var x1 = parseInt(instance.selectedCell[0]);
             var y1 = parseInt(instance.selectedCell[1]);
 

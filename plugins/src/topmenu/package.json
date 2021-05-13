@@ -1,7 +1,7 @@
 {
-    "name": "@jspreadsheet/autoWidth",
-    "title": "Jspreadsheet plugins: auto width columns.",
-    "description": "Auto width columns of jexcel.",
+    "name": "@jspreadsheet/topmenu",
+    "title": "Jspreadsheet plugins: add topmenu bar on sheet of jSpreadsheet.",
+    "description": "Jspreadsheet plugins: add topmenu bar on sheet of jSpreadsheet",
     "author": {
         "name": "Guillaume Bonnaire <contact@gbonnaire.fr>",
         "url": "https://repo.gbonnaire.fr"
@@ -11,8 +11,11 @@
         "url" : "https://github.com/GBonnaire/jspreadsheet-plugins-and-editors.git"
     },
     "keywords": [
-        "autowidth",
-        "width",
+        "menu",
+        "topmenu",
+        "menubar",
+        "file",
+        "edit",
         "spreadsheet",
         "spreadsheets",
         "tables",
@@ -24,6 +27,6 @@
         "data-grid",
         "data-spreadsheet"
     ],
-    "main": "jexcel.autoWidth.js",
+    "main": "index.js",
     "version": "1.0.0"
 }

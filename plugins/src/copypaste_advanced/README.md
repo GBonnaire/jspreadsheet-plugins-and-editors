@@ -6,8 +6,6 @@ The Copypaste_advanced plugin improves the copy paste functionality of jSpreadsh
 
 This plugin is **Free**
 
-Demo available here : [Demo copy paste advanced](https://demo.gbonnaire.fr/jSpreadsheet/plugin.copypasteadv.php)
-
 ### Features
 
 - Add items cut, copy, paste on default toolbar
@@ -17,6 +15,7 @@ Demo available here : [Demo copy paste advanced](https://demo.gbonnaire.fr/jSpre
 - Can copy scale like Excel
 - Work on Mobile
 - Paste data from Excel (with or without style)
+- Add items on topmenu bar (plugin)
 
 
 ## What is jSpreadsheet ?
