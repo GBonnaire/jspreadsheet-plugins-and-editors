@@ -29,19 +29,20 @@ Demo of plugins premium and free are available on [Demo JSpreadsheet plugins GBo
 - [Tooltip](https://repo.gbonnaire.fr/product/jexcel-plugin-tooltip)
 
 ## Free plugins
-- [Auto Width](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/autoWidth)
-- [Contextmenu Rows Advanced Actions](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/contextmenu_rowsAdvancedActions)
-- [Contextmenu Shortcut](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/contextmenu_shortcut)
-- [Copy Paste advanced (when access to clipboard navigator is denied)](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/copypaste_advanced)
-- [Persistance Flag](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/persistanceFlag)
-- [Row Header rename](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/rowHeaderRename)
-- [Status bar](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/statusbar)
-- [Sync Input](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/plugins/syncInput)
+- [Auto Width](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/autoWidth)
+- [Contextmenu Rows Advanced Actions](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/contextmenu_rowsAdvancedActions)
+- [Contextmenu Shortcut](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/contextmenu_shortcut)
+- [Copy Paste advanced (when access to clipboard navigator is denied)](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/copypaste_advanced)
+- [Persistance Flag](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/persistanceFlag)
+- [Row Header rename](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/rowHeaderRename)
+- [Status bar](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/statusbar)
+- [Sync Input](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/syncInput)
+- [Top menu](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/syncInput)
 
 ## Free Editors
-- [Date editors](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/tree/master/editors/dates) (including date like Excel, datetime like Excel and time)
-- [Numeral](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/editors/numeric/jexcel.editor.numeral.js) (mask number advanced - Dependance with Numeraljs.com)
-- [TextPattern](https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/editors/text/jexcel.editor.textpattern.js) (text editor with pattern and block bad input tape)
+- [Date editors](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/editors/dates) (including date like Excel, datetime like Excel and time)
+- [Numeral](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/numeric/jexcel.editor.numeral.js) (mask number advanced - Dependance with Numeraljs.com)
+- [TextPattern](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/text/jexcel.editor.textpattern.js) (text editor with pattern and block bad input tape)
 
 ## CDN for Free plugins and editors
 
