@@ -56,12 +56,28 @@ if (! jspreadsheet && typeof(require) === 'function') {
                     if(i.options.allowExport == true) {
                         items.push({
                             icon: 'save',
-                            title: instance.options.text.saveAs+` CSV`,
+                            title: i.options.text.saveAs+` CSV`,
                             shortcut:shortcut_base + ' S',
                             onclick: function() {
-                                instance.download();
+                                i.download();
                             }
                         });    
+                    }
+                    if(i.options.about) {
+                        items.push({
+                            type:'line'
+                        });
+                        items.push({
+                            icon: 'info',
+                            title: i.options.text.about,
+                            onclick: function() {
+                                if(i.options.about === true) {
+                                    alert(jspreadsheet.version(true));
+                                } else {
+                                    alert(i.options.about);
+                                }
+                            }
+                        }); 
                     }
                             
                     return items;
@@ -255,7 +271,7 @@ if (! jspreadsheet && typeof(require) === 'function') {
             
             
             document.addEventListener("keydown", function(e) {
-               if (e.which == 27) { // Escape
+               if (e.which == 27 && flagActiveMenu == true) { // Escape
                    closeMenu();
                    e.preventDefault();
                    e.stopPropagation();
@@ -264,7 +280,7 @@ if (! jspreadsheet && typeof(require) === 'function') {
             
             // When click out of topmenu
             document.addEventListener("click", function(e) {
-                if(!isChildren(plugin.topmenu, e.target) || e.target == plugin.topmenu) {
+                if(flagActiveMenu && (!isChildren(plugin.topmenu, e.target) || e.target == plugin.topmenu)) {
                     closeMenu();
                     e.preventDefault();
                     e.stopPropagation();
