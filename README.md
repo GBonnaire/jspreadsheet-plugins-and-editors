@@ -10,6 +10,8 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 
 - [Download JSpreadsheet Pro](https://www.jspreadsheet.com) 
 
+## Demo of plugins
+Demo of plugins premium and free are available on [Demo JSpreadsheet plugins GBonnaire.fr](https://demo.gbonnaire.fr/jExcel/)
 
 ## Premium plugins
 - [Conditional style](https://repo.gbonnaire.fr/product/jexcel-plugin-conditionalstyle)
