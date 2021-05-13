@@ -187,6 +187,37 @@ Documentation available on [Quick Reference Contextmenu jSuites.net](https://jsu
     </tbody>
 </table>
 
+### Menu on plugin
+
+On your plugin, add function on your object like contextMenu : 
+
+example : 
+```javascript
+function example_plugin_jss(instance, options) {
+   var plugin = {};
+   
+   /* ... your code of your plugin ...*/
+   
+   plugin.topMenu = function(name, items, menuButton, shortcut_base) { 
+       /*... your code for new items ...*/
+       return items;
+   }
+   
+   /* ... your code of your plugin ...*/
+   
+   return plugin;
+}
+```
+
+this function is call when top menu is open
+
+Arguments of `topMenu`:
+- `name` : Name of top menu
+- `items` : Array
+- `menuButton` : Button in top menu
+- `shortcut_base` = "CTRL +" or "⌘ +"
+
+this function must return Array of items
 
 
 ### Get started
