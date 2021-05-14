@@ -1,18 +1,18 @@
 /**
  * Plugin for top menu
  * 
- * @version 1.0.0
+ * @version 1.0.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description add top menu on sheet
  * 
  * @license This plugin is distribute under MIT License
  */
-if (! jSuites && typeof(require) === 'function') {
+if(! jSuites && typeof(require) === 'function') {
     var jSuites = require('jsuites');
 }
 
-if (! jspreadsheet && typeof(require) === 'function') {
+if(! jspreadsheet && typeof(require) === 'function') {
     var jspreadsheet = require('jspreadsheet-pro');
 }
 
@@ -23,7 +23,7 @@ if (! jspreadsheet && typeof(require) === 'function') {
 }(this, (function () {
     return (function(instance, options) {
         var shortcut_base = "Ctrl +";
-        if (/(MacPPC|MacIntel|Mac_PowerPC|Macintosh|Mac OS X)/.test(window.navigator.userAgent)) {
+        if(/(MacPPC|MacIntel|Mac_PowerPC|Macintosh|Mac OS X)/.test(window.navigator.userAgent)) {
             shortcut_base = "⌘ +";
         }
         
@@ -53,6 +53,63 @@ if (! jspreadsheet && typeof(require) === 'function') {
                 "File": function(el, i, menuButton) {
                     var items = [];
                     
+                    var tabSelected = el.querySelector(".jtabs-selected");
+                    var countTab = Array.isArray(el.jspreadsheet) ? el.jspreadsheet.length : 1;
+
+                    if(countTab==1) {
+                        var iFirst = i;
+                    } else {
+                        var iFirst = el.jspreadsheet[0];
+                    }
+                    
+                    if(iFirst.options.tabs == true) {
+                        items.push({
+                            icon: 'tab',
+                            disabled: !i.options.editable,
+                            title: `New worksheet`,
+                            onclick: function() {
+                                i.createWorksheet();
+                            }
+                        });  
+                        
+                        
+                        
+                        if(iFirst.options.allowRenameWorksheet == true) {
+                            items.push({
+                                icon: 'edit',
+                                disabled: !i.options.editable,
+                                title: i.options.text.renameThisWorksheet  + ` (${tabSelected.innerText})`,
+                                onclick: function() {
+                                    if(tabSelected!=null) {
+                                        var newNameWorksheet = prompt(i.options.text.renameThisWorksheet, tabSelected.innerText);
+                                        if(newNameWorksheet) {
+                                            iFirst.renameWorksheet(tabSelected, newNameWorksheet);
+                                        }
+                                    }
+                                }
+                            }); 
+                        }
+                        
+                        if(iFirst.options.allowDeleteWorksheet == true && countTab>1) {
+                            items.push({
+                                icon: 'tab_unselected',
+                                disabled: !i.options.editable,
+                                title: i.options.text.deleteThisWorksheet + ` (${tabSelected.innerText})`,
+                                onclick: function () {
+                                    if(tabSelected!=null) {
+                                        if(confirm(i.options.text.areYouSureDeleteThisWorksheet, tabSelected.innerText)) {
+                                            iFirst.deleteWorksheet(tabSelected);
+                                        }
+                                    }
+                                }
+                            })
+                        };
+                        
+                        items.push({
+                            type:'line'
+                        });
+                    }
+                    
                     if(i.options.allowExport == true) {
                         items.push({
                             icon: 'save',
@@ -61,12 +118,13 @@ if (! jspreadsheet && typeof(require) === 'function') {
                             onclick: function() {
                                 i.download();
                             }
-                        });    
-                    }
-                    if(i.options.about) {
+                        });  
+                        
                         items.push({
                             type:'line'
                         });
+                    }
+                    if(i.options.about) {
                         items.push({
                             icon: 'info',
                             title: i.options.text.about,
@@ -143,40 +201,57 @@ if (! jspreadsheet && typeof(require) === 'function') {
                         }
                     });
                     
-                    if (navigator && navigator.clipboard && navigator.clipboard.readText) {
+                    if(navigator && navigator.clipboard && navigator.clipboard.readText) {
                         items.push({
                             icon: 'content_paste',
                             title: i.options.text.paste,
                             disabled: !i.options.editable,
                             shortcut: shortcut_base + ' V',
                             onclick: function () {
-                                if (i.selectedCell) {
+                                if(i.selectedCell) {
                                     navigator.clipboard.readText().then(function (text) {
-                                        if (text) {
+                                        if(text) {
                                             jspreadsheet.current.paste(i.selectedCell[0], i.selectedCell[1], text);
                                         }
                                     });
                                 }
                             }
-                        })
+                        });
                     };
                     
+                    items.push({
+                        type:'line'
+                    });
+                    
                     if(i.selectedCell!=null) {
-                        items.push({
-                            type:'line'
-                        });
                         var cellStart = jspreadsheet.getColumnNameFromId([i.selectedCell[0], i.selectedCell[1]]);
                         var cellEnd = jspreadsheet.getColumnNameFromId([i.selectedCell[2], i.selectedCell[3]]);
                         
-                        if(i.options.allowDeleteColumn == true) {
-                            var rangeColumnStart = cellStart.substring(0, cellStart.length - (""+i.selectedCell[1]).length);
-                            var rangeColumnEnd = cellEnd.substring(0, cellEnd.length - (""+i.selectedCell[3]).length);
-
-                            if(rangeColumnStart!=rangeColumnEnd) {
+                        var rangeColumnStart = cellStart.substring(0, cellStart.length - (""+i.selectedCell[1]).length);
+                        var rangeColumnEnd = cellEnd.substring(0, cellEnd.length - (""+i.selectedCell[3]).length);
+                        
+                        if(rangeColumnStart!=rangeColumnEnd) {
                                 var rangeColumn = `${rangeColumnStart} - ${rangeColumnEnd}`;
                             } else {
                                 var rangeColumn = rangeColumnStart;
                             }
+                        
+                        if(i.options.allowInsertColumn == true) {                            
+                            items.push({
+                                title: i.options.text.insertANewColumnBefore + ` (${rangeColumnStart})`,
+                                onclick: function () {
+                                    i.insertColumn(1, parseInt(i.selectedCell[0]), 1);
+                                }
+                            });
+                            items.push({
+                                title: i.options.text.insertANewColumnAfter + ` (${rangeColumnStart})`,
+                                onclick: function () {
+                                    i.insertColumn(1, parseInt(i.selectedCell[0]), 0);
+                                }
+                            });
+                        };
+                        
+                        if(i.options.allowDeleteColumn == true) {
                             items.push({
                                 title: i.options.text.deleteSelectedColumns + ` (${rangeColumn})`,
                                 disabled: !i.options.editable,
@@ -185,15 +260,44 @@ if (! jspreadsheet && typeof(require) === 'function') {
                                 }
                             });
                         }
+                        
+                        if(i.options.allowRenameColumn == true) {
+                            items.push({
+                                title: i.options.text.renameThisColumn + ` (${rangeColumnStart})`,
+                                onclick: function () {
+                                    i.setHeader(parseInt(i.selectedCell[0]));
+                                }
+                            });
+                        };
+                        
+                        items.push({
+                            type:'line'
+                        });
+                        
+                        var rangeRowStart = (+i.selectedCell[1] + 1);
+                        var rangeRowEnd = (+i.selectedCell[3] + 1);
+                        if(rangeRowStart != rangeRowEnd) {
+                            var rangeRow = `${rangeRowStart} - ${rangeRowEnd}`;
+                        } else {
+                            var rangeRow = rangeRowStart;
+                        }
+                        
+                        if(i.options.allowInsertRow == true) {
+                            items.push({
+                                title: i.options.text.insertANewRowBefore + ` (${rangeRowStart})`,
+                                onclick: function () {
+                                    i.insertRow(1, parseInt(i.selectedCell[1]), 1)
+                                }
+                            });
+                            items.push({
+                                title: i.options.text.insertANewRowAfter + ` (${rangeRowStart})`,
+                                onclick: function () {
+                                    i.insertRow(1, parseInt(i.selectedCell[1]))
+                                }
+                            });
+                        };
 
                         if(i.options.allowDeleteRow == true) {
-                            var rangeRowStart = (+i.selectedCell[1] + 1);
-                            var rangeRowEnd = (+i.selectedCell[3] + 1);
-                            if(rangeRowStart!=rangeRowEnd) {
-                                var rangeRow = `${rangeRowStart} - ${rangeRowEnd}`;
-                            } else {
-                                var rangeRow = rangeRowStart;
-                            }
                             items.push({
                                 title: i.options.text.deleteSelectedRows + ` (${rangeRow})`,
                                 disabled: !i.options.editable,
@@ -227,6 +331,44 @@ if (! jspreadsheet && typeof(require) === 'function') {
                         });
                     }
                     
+                    if(i.selectedCell!=null) {
+                        var cellStart = jspreadsheet.getColumnNameFromId([i.selectedCell[0], i.selectedCell[1]]);
+                        var cellEnd = jspreadsheet.getColumnNameFromId([i.selectedCell[2], i.selectedCell[3]]);
+                        
+                        var rangeColumnStart = cellStart.substring(0, cellStart.length - (""+i.selectedCell[1]).length);
+                        //var rangeColumnEnd = cellEnd.substring(0, cellEnd.length - (""+i.selectedCell[3]).length);
+                        
+                        if(i.options.columnSorting == true) {
+                            items.push({
+                                type: 'line'
+                            });
+                            items.push({
+                                title: i.options.text.orderAscending  + ` (${rangeColumnStart})`,
+                                onclick: function () {
+                                    i.orderBy(parseInt(i.selectedCell[0]), 0);
+                                }
+                            });
+                            items.push({
+                                title: i.options.text.orderDescending  + ` (${rangeColumnStart})`,
+                                onclick: function () {
+                                    i.orderBy(parseInt(i.selectedCell[0]), 1);
+                                }
+                            })
+                        }
+                    }
+                    
+                    if(i.options.filters == true) {
+                        items.push({
+                            type: 'line'
+                        });
+                        items.push({
+                           title: 'Reset filter(s)',
+                           onclick: function() {
+                               i.resetFilters();
+                           }
+                        });
+                    }
+                    
                     return items;
                 }
             }
@@ -238,7 +380,7 @@ if (! jspreadsheet && typeof(require) === 'function') {
            plugin.options = {};
        }
        for(var property in defaultOptions) {
-            if (!plugin.options.hasOwnProperty(property) || plugin.options[property]==null ) {
+            if(!plugin.options.hasOwnProperty(property) || plugin.options[property]==null ) {
                 plugin.options[property] = defaultOptions[property];
             }
 
@@ -260,7 +402,7 @@ if (! jspreadsheet && typeof(require) === 'function') {
         }
         
         /**
-         * run calculate width of columns and apply
+         * create main element for top menu
          * @private
          * @returns {undefined}
          */
@@ -271,7 +413,7 @@ if (! jspreadsheet && typeof(require) === 'function') {
             
             
             document.addEventListener("keydown", function(e) {
-               if (e.which == 27 && flagActiveMenu == true) { // Escape
+               if(e.which == 27 && flagActiveMenu == true) { // Escape
                    closeMenu();
                    e.preventDefault();
                    e.stopPropagation();
@@ -288,6 +430,10 @@ if (! jspreadsheet && typeof(require) === 'function') {
             });
         }
         
+        /**
+         * Loading all element on document
+         * @returns {undefined}
+         */
         function load() {
             instance.worksheet.insertBefore(plugin.topmenu, instance.worksheet.firstChild);
             
@@ -410,7 +556,7 @@ if (! jspreadsheet && typeof(require) === 'function') {
                 }(item.items, item.name));
                 
                 menuItem.addEventListener("mouseover", function(e) {
-                    if(flagActiveMenu) {
+                    if(flagActiveMenu && e.target != activeElement) {
                         this.dispatchEvent(new Event("click"));
                     }
                 });
