@@ -48,6 +48,9 @@ Demo of plugins premium and free are available on [Demo JSpreadsheet plugins GBo
 
 All file in JSDelivr : [Package JSDelivr.com](https://www.jsdelivr.com/package/gh/GBonnaire/jspreadsheet-plugins-and-editors)
 
+## NPM for Free plugins
+
+All free plugins are availables on NPM : [NPMJS jspreadsheet packages](https://www.npmjs.com/org/jspreadsheet)
 
 # Repository
 
