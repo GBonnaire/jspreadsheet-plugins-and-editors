@@ -60,10 +60,9 @@ You can use this CDN link
 ```
 
 ## NPM
-Coming soon (2021)
-npm install @jspreadsheet/autoWidth
+npm install @jspreadsheet/autowidth
 ```javascript
-import jss_autoWidth from '@jspreadsheet/autoWidth';
+import jss_autoWidth from '@jspreadsheet/autowidth';
 ```
 
 ## Copyright and license

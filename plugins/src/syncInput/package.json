@@ -1,5 +1,5 @@
 {
-    "name": "@jspreadsheet/syncInput",
+    "name": "@jspreadsheet/syncinput",
     "title": "Jspreadsheet plugins: sync Input.",
     "description": "synchronisation input text with data write in jspreadsheet",
     "author": {

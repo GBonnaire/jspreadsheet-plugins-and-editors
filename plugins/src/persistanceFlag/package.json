@@ -1,5 +1,5 @@
 {
-    "name": "@jspreadsheet/persistanceFlag",
+    "name": "@jspreadsheet/persistanceflag",
     "title": "Jspreadsheet plugins: change persistance flag.",
     "description": "Change persistance flag and add this flag into toolbar.",
     "author": {

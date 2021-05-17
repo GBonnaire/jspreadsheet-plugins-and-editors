@@ -175,10 +175,9 @@ You can use this CDN link
 ```
 
 ## NPM
-Coming soon (2021)
-npm install @jspreadsheet/persistanceFlag
+npm install @jspreadsheet/persistanceflag
 ```javascript
-import jss_persistanceFlag from  '@jspreadsheet/persistanceFlag';
+import jss_persistanceFlag from  '@jspreadsheet/persistanceflag';
 ```
 
 ## Copyright and license

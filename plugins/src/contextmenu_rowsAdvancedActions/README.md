@@ -124,10 +124,9 @@ You can use this CDN link
 ```
 
 ## NPM
-Coming soon (2021)
-npm install @jspreadsheet/contextmenu_rowsAdvancedActions
+npm install @jspreadsheet/contextmenu_rowsadvancedactions
 ```javascript
-import jss_contextmenu_rowAdvancedActions from '@jspreadsheet/contextmenu_rowsAdvancedActions';
+import jss_contextmenu_rowAdvancedActions from '@jspreadsheet/contextmenu_rowsadvancedactions';
 ```
 
 ## Copyright and license

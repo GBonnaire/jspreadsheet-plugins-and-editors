@@ -256,7 +256,6 @@ You can use this CDN link
 ```
 
 ## NPM
-Coming soon (2021)
 npm install @jspreadsheet/topmenu
 ```javascript
 import jss_topmenu from  '@jspreadsheet/topmenu';

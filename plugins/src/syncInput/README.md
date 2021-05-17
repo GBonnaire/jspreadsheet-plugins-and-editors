@@ -103,10 +103,9 @@ You can use this CDN link
 ```
 
 ## NPM
-Coming soon (2021)
-npm install @jspreadsheet/syncInput
+npm install @jspreadsheet/syncinput
 ```javascript
-import jss_syncInput from '@jspreadsheet/syncInput';
+import jss_syncInput from '@jspreadsheet/syncinput';
 ```
 
 ## Copyright and license

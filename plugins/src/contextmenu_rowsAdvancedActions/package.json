@@ -1,5 +1,5 @@
 {
-    "name": "@jspreadsheet/contextmenu_rowsAdvancedActions",
+    "name": "@jspreadsheet/contextmenu_rowsadvancedactions",
     "title": "Jspreadsheet plugins: add actions to rows.",
     "description": "add new actions to rows for move and duplicate.",
     "author": {
@@ -25,6 +25,6 @@
         "data-grid",
         "data-spreadsheet"
     ],
-    "main": "jexcel.contextmenu_rowsAdvancedActions.js",
+    "main": "index.js",
     "version": "1.1.0"
 }

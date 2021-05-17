@@ -1,5 +1,5 @@
 {
-    "name": "@jspreadsheet/rowHeaderRename",
+    "name": "@jspreadsheet/rowheaderrename",
     "title": "Jspreadsheet plugins: rename row header.",
     "description": "Rename row header with data or function.",
     "author": {
