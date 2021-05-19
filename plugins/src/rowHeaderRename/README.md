@@ -135,7 +135,7 @@ jSpreadsheet(document.getElementById('spreadsheet'), {
 
 You can use this CDN link
 ```HTML
-<script src="https://cdn.jsdelivr.net/gh/GBonnaire/jspreadsheet-plugins-and-editors@latest/plugins/rowHeaderRename.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/GBonnaire/jspreadsheet-plugins-and-editors@latest/plugins/dist/rowHeaderRename.min.js"></script>
 ```
 
 ## NPM
