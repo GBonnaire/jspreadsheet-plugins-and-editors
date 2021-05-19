@@ -251,8 +251,8 @@ jSpreadsheet(document.getElementById('spreadsheet'), {
 You can use this CDN link
 
 ```HTML
-<script src="https://cdn.jsdelivr.net/gh/GBonnaire/jspreadsheet-plugins-and-editors@latest/plugins/topmenu.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/GBonnaire/jspreadsheet-plugins-and-editors@latest/plugins/topmenu.min.css" type="text/css" />
+<script src="https://cdn.jsdelivr.net/gh/GBonnaire/jspreadsheet-plugins-and-editors@latest/plugins/dist/topmenu.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/GBonnaire/jspreadsheet-plugins-and-editors@latest/plugins/dist/topmenu.min.css" type="text/css" />
 ```
 
 ## NPM
