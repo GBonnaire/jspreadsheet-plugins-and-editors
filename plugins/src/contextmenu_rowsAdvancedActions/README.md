@@ -103,7 +103,7 @@ Header on page
 
 Initialize plugin on jSpreadsheet
 ```JavaScript
-jSpreadsheet(document.getElementById('spreadsheet'), {
+jspreadsheet(document.getElementById('spreadsheet'), {
 	...
 	plugins: [
       ...

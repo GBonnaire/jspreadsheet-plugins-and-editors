@@ -114,7 +114,7 @@ Header on page
 
 Initialize plugin on jSpreadsheet
 ```JavaScript
-jSpreadsheet(document.getElementById('spreadsheet'), {
+jspreadsheet(document.getElementById('spreadsheet'), {
 	...
 	plugins: [
       ...
@@ -128,7 +128,7 @@ jSpreadsheet(document.getElementById('spreadsheet'), {
 #### Example of code for custom toolbar
 
 ```JavaScript
-jSpreadsheet(document.getElementById('spreadsheet'), {
+jspreadsheet(document.getElementById('spreadsheet'), {
 	...
 	toolbar: [
       ...

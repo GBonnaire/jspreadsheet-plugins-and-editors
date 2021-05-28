@@ -1,7 +1,7 @@
 /**
  * Plugin for top menu
  * 
- * @version 1.0.1
+ * @version 1.0.3
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description add top menu on sheet
@@ -227,8 +227,8 @@ if(! jspreadsheet && typeof(require) === 'function') {
                         var cellStart = jspreadsheet.getColumnNameFromId([i.selectedCell[0], i.selectedCell[1]]);
                         var cellEnd = jspreadsheet.getColumnNameFromId([i.selectedCell[2], i.selectedCell[3]]);
                         
-                        var rangeColumnStart = cellStart.substring(0, cellStart.length - (""+i.selectedCell[1]).length);
-                        var rangeColumnEnd = cellEnd.substring(0, cellEnd.length - (""+i.selectedCell[3]).length);
+                        var rangeColumnStart = cellStart.substring(0, cellStart.length - (""+(+i.selectedCell[1]+1)).length);
+                        var rangeColumnEnd = cellEnd.substring(0, cellEnd.length - (""+(+i.selectedCell[3]+1)).length);
                         
                         if(rangeColumnStart!=rangeColumnEnd) {
                                 var rangeColumn = `${rangeColumnStart} - ${rangeColumnEnd}`;
@@ -335,8 +335,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                         var cellStart = jspreadsheet.getColumnNameFromId([i.selectedCell[0], i.selectedCell[1]]);
                         var cellEnd = jspreadsheet.getColumnNameFromId([i.selectedCell[2], i.selectedCell[3]]);
                         
-                        var rangeColumnStart = cellStart.substring(0, cellStart.length - (""+i.selectedCell[1]).length);
-                        //var rangeColumnEnd = cellEnd.substring(0, cellEnd.length - (""+i.selectedCell[3]).length);
+                        var rangeColumnStart = cellStart.substring(0, cellStart.length - (""+(+i.selectedCell[1]+1)).length);
                         
                         if(i.options.columnSorting == true) {
                             items.push({
@@ -399,6 +398,17 @@ if(! jspreadsheet && typeof(require) === 'function') {
             if(event=="onload") {      
                 load();
             } 
+        }
+        
+        /**
+         * Jexcel contextmenu
+         */
+        plugin.contextMenu = function(obj, x, y, e, items) {
+            if(isChildren(plugin.topmenu,e.target)) {
+                return [];
+            }
+            
+            return items;
         }
         
         /**
