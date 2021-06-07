@@ -1,11 +1,13 @@
 /**
  * Plugin for top menu
  * 
- * @version 1.0.3
+ * @version 1.1.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description add top menu on sheet
- * 
+ * ReleaseNote:
+ * 1.1 : New organisation item
+ * 1.0 : Init plugin
  * @license This plugin is distribute under MIT License
  */
 if(! jSuites && typeof(require) === 'function') {
@@ -49,6 +51,13 @@ if(! jspreadsheet && typeof(require) === 'function') {
             text_file: 'File',
             text_edit: 'Edit',
             text_view: 'View',
+            text_item_rename: 'Raname',
+            text_item_insert: 'Insert',
+            text_item_delete: 'Delete',
+            text_item_newworksheet : 'New worksheet',
+            text_item_fullscreenexit: 'Exit fullscreen',
+            text_item_fullscreenenter: 'Enter fullscreen',
+            text_item_resetfilters: 'Reset filter(s)',
             menus: {
                 "File": function(el, i, menuButton) {
                     var items = [];
@@ -66,7 +75,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                         items.push({
                             icon: 'tab',
                             disabled: !i.options.editable,
-                            title: `New worksheet`,
+                            title: plugin.options.text_item_newworksheet,
                             onclick: function() {
                                 i.createWorksheet();
                             }
@@ -219,11 +228,18 @@ if(! jspreadsheet && typeof(require) === 'function') {
                         });
                     };
                     
-                    items.push({
-                        type:'line'
-                    });
+                    
                     
                     if(i.selectedCell!=null) {
+                        items.push({
+                            type:'line'
+                        });
+                        
+                        var itemsInsert = [];
+                        var itemsDelete = [];
+                        var itemsRename = [];
+                        
+                        
                         var cellStart = jspreadsheet.getColumnNameFromId([i.selectedCell[0], i.selectedCell[1]]);
                         var cellEnd = jspreadsheet.getColumnNameFromId([i.selectedCell[2], i.selectedCell[3]]);
                         
@@ -237,13 +253,13 @@ if(! jspreadsheet && typeof(require) === 'function') {
                             }
                         
                         if(i.options.allowInsertColumn == true) {                            
-                            items.push({
+                            itemsInsert.push({
                                 title: i.options.text.insertANewColumnBefore + ` (${rangeColumnStart})`,
                                 onclick: function () {
                                     i.insertColumn(1, parseInt(i.selectedCell[0]), 1);
                                 }
                             });
-                            items.push({
+                            itemsInsert.push({
                                 title: i.options.text.insertANewColumnAfter + ` (${rangeColumnStart})`,
                                 onclick: function () {
                                     i.insertColumn(1, parseInt(i.selectedCell[0]), 0);
@@ -252,7 +268,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                         };
                         
                         if(i.options.allowDeleteColumn == true) {
-                            items.push({
+                            itemsDelete.push({
                                 title: i.options.text.deleteSelectedColumns + ` (${rangeColumn})`,
                                 disabled: !i.options.editable,
                                 onclick: function () {
@@ -262,17 +278,13 @@ if(! jspreadsheet && typeof(require) === 'function') {
                         }
                         
                         if(i.options.allowRenameColumn == true) {
-                            items.push({
+                            itemsRename.push({
                                 title: i.options.text.renameThisColumn + ` (${rangeColumnStart})`,
                                 onclick: function () {
                                     i.setHeader(parseInt(i.selectedCell[0]));
                                 }
                             });
                         };
-                        
-                        items.push({
-                            type:'line'
-                        });
                         
                         var rangeRowStart = (+i.selectedCell[1] + 1);
                         var rangeRowEnd = (+i.selectedCell[3] + 1);
@@ -283,13 +295,13 @@ if(! jspreadsheet && typeof(require) === 'function') {
                         }
                         
                         if(i.options.allowInsertRow == true) {
-                            items.push({
+                            itemsInsert.push({
                                 title: i.options.text.insertANewRowBefore + ` (${rangeRowStart})`,
                                 onclick: function () {
                                     i.insertRow(1, parseInt(i.selectedCell[1]), 1)
                                 }
                             });
-                            items.push({
+                            itemsInsert.push({
                                 title: i.options.text.insertANewRowAfter + ` (${rangeRowStart})`,
                                 onclick: function () {
                                     i.insertRow(1, parseInt(i.selectedCell[1]))
@@ -298,7 +310,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                         };
 
                         if(i.options.allowDeleteRow == true) {
-                            items.push({
+                            itemsDelete.push({
                                 title: i.options.text.deleteSelectedRows + ` (${rangeRow})`,
                                 disabled: !i.options.editable,
                                 onclick: function () {
@@ -306,6 +318,32 @@ if(! jspreadsheet && typeof(require) === 'function') {
                                 }
                             });
                         }
+                        
+                        if(itemsInsert.length>0) {
+                            items.push({
+                                title: plugin.options.text_item_insert,
+                                icon: 'add',
+                                submenu: itemsInsert
+                            });
+                        }
+                        
+                        if(itemsDelete.length>0) {
+                            items.push({
+                                title: plugin.options.text_item_delete,
+                                icon: 'remove',
+                                submenu: itemsDelete
+                            });
+                        }
+                        
+                        if(itemsRename.length>0) {
+                            items.push({
+                                title: plugin.options.text_item_rename,
+                                icon: 'edit',
+                                submenu: itemsRename
+                            });
+                        }
+                        
+                        
                     }
                     
                     return items;
@@ -316,7 +354,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                     if(el.classList.contains("fullscreen")) {
                         items.push({
                             icon: 'fullscreen_exit',
-                            title: 'Exit fullscreen',
+                            title: plugin.options.text_item_fullscreenexit,
                             onclick: function() {
                                 instance.fullscreen(false);
                             }
@@ -324,7 +362,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                     } else {
                         items.push({
                             icon: 'fullscreen',
-                            title: 'Enter fullscreen',
+                            title: plugin.options.text_item_fullscreenenter,
                             onclick: function() {
                                 instance.fullscreen(true);
                             }
@@ -361,7 +399,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                             type: 'line'
                         });
                         items.push({
-                           title: 'Reset filter(s)',
+                           title: plugin.options.text_item_resetfilters,
                            onclick: function() {
                                i.resetFilters();
                            }
