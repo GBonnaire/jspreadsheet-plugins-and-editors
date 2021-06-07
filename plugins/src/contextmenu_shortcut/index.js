@@ -1,7 +1,7 @@
 /**
  * Plugin shortcut context menu for jExcel Pro / jSpreadSheet
  * 
- * @version 1.3.0
+ * @version 1.3.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description Replace shortcut with type of navigator and add icon
@@ -17,6 +17,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
     global.jss_contextmenu_shortcut = factory();
+    global.jexcel_contextmenu_shortcut = global.jss_contextmenu_shortcut;
 }(this, (function () {
     return (function(instance, options) {
     
@@ -199,6 +200,3 @@
     });
     
 })));   
-
-// Compatibility Old version
-window.jexcel_contextmenu_shortcut = jss_contextmenu_shortcut;

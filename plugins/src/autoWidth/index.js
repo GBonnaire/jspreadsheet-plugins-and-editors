@@ -1,7 +1,7 @@
 /**
  * Plugin for auto width cols
  * 
- * @version 1.0.0
+ * @version 1.0.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description auto size width of columns
@@ -14,6 +14,9 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
     global.jss_autoWidth = factory();
+    
+    // Compatibility Old version
+    global.jexcel_autoWidth = global.jss_autoWidth;
 }(this, (function () {
     return (function(instance, options) {
 
@@ -139,6 +142,3 @@
     });
 
 })));
-
-// Compatibility Old version
-window.jexcel_autoWidth = jss_autoWidth;

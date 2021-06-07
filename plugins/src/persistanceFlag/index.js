@@ -1,7 +1,7 @@
 /**
  * Plugin for change notification of persistance for jExcel Pro / jSpreadsheet
  * 
- * @version 1.4.1
+ * @version 1.4.2
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  *  
@@ -9,6 +9,7 @@
  * 
  * @description change notification of persistance
  * ReleaseNote
+ * 1.4.2 fix bug compatibility
  * 1.4.1 add require
  * 1.4.0 add time and showOnlyTime
  * 1.3.0 add compatibility NPM
@@ -21,6 +22,9 @@ if (! jSuites && typeof(require) === 'function') {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
     global.jss_persistanceFlag = factory();
+        
+    // Compatibility Old version   
+    global.jexcel_persistanceFlag = global.jss_persistanceFlag;
 }(this, (function () {
     return (function(instance, options) {
 
@@ -215,6 +219,3 @@ if (! jSuites && typeof(require) === 'function') {
     });
     
 })));   
-    
- // Compatibility Old version   
-window.jexcel_persistanceFlag = jss_persistanceFlag;

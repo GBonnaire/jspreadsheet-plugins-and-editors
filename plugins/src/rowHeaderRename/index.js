@@ -1,7 +1,7 @@
 /**
  * Plugin for rename row header (Index) for jExcel Pro / jSpreadsheet
  * 
- * @version 1.2.0
+ * @version 1.2.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description Can row index rename and header of index, resize row index
@@ -18,6 +18,9 @@ if (! jspreadsheet && typeof(require) === 'function') {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
     global.jss_rowHeaderRename = factory();
+    
+    // Compatibility Old version
+    global.jexcel_rowHeaderRename = global.jss_rowHeaderRename;
 }(this, (function () {
     return (function(instance, options) {
 
@@ -106,6 +109,3 @@ if (! jspreadsheet && typeof(require) === 'function') {
 
     
 })));
-
-// Compatibility Old version
-window.jexcel_rowHeaderRename = jss_rowHeaderRename;

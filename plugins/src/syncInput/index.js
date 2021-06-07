@@ -1,7 +1,7 @@
 /**
  * Plugin for sync data (json) in Jexcel in input
  * 
- * @version 1.0.0
+ * @version 1.0.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description sync data (json) in Jexcel in input
@@ -12,6 +12,8 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
     global.jss_syncInput = factory();
+    // Compatibility Old version
+    global.jexcel_syncInput = global.jss_syncInput;
 }(this, (function () {
     return (function(instance, options) {
 
@@ -182,6 +184,3 @@
     });
 
 })));
-
-// Compatibility Old version
-window.jexcel_syncInput = jss_syncInput;

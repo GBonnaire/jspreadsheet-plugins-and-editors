@@ -1,7 +1,7 @@
 /**
  * Plugin copy paste advance for jExcel Pro / jSpreadsheet
  * 
- * @version 2.1.0
+ * @version 2.1.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description upgrade copy paste function for work with clipboard permission denied or error
@@ -22,6 +22,7 @@ if (! jspreadsheet && typeof(require) === 'function') {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
     global.jss_copypaste_advanced = factory();
+    global.jexcel_copypaste_advanced = global.jss_copypaste_advanced;
 }(this, (function () {
     return (function(instance, options) {
         // Plugin object
@@ -559,6 +560,3 @@ if (! jspreadsheet && typeof(require) === 'function') {
     });
     
 })));
-
-// Compatibility Old version
-window.jexcel_copypaste_advanced = jss_copypaste_advanced;
