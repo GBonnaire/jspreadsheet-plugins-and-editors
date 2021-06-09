@@ -87,12 +87,12 @@ you can defined on translation global to replace var <code>text_XXXX</code> by <
 		<tr>
 			<td><code>add(String title, *Optional* Array/Function items, *Optional* Int position) → Void</code></td>
 			<td>add new top menu. You can use directly <code>instance.addTopmenu</code> with same arguments</td>
-			<td><code>jSpreadsheet.current.plugins.topmenu.add("Format");</code></td>
+			<td><code>jspreadsheet.current.plugins.topmenu.add("Format");</code></td>
 		</tr>
 		<tr>
 			<td><code>refresh() → Void</code></td>
 			<td>Refresh top menu</td>
-			<td><code>jSpreadsheet.current.plugins.topmenu.refresh();</code></td>
+			<td><code>jspreadsheet.current.plugins.topmenu.refresh();</code></td>
 		</tr>
 	</tbody>
 </table>
