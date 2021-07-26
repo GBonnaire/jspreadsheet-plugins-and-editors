@@ -40,7 +40,9 @@ Demo of plugins premium and free are available on [Demo JSpreadsheet plugins GBo
 - [Top menu](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/topmenu)
 
 ## Free Editors
+- [Currency](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/numeric/jexcel.editor.currency.js) (mask number for currency)
 - [Date editors](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/editors/dates) (including date like Excel, datetime like Excel and time)
+- [Dropdown advanced (icons, images, images+names)](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/editors/dropdown)
 - [Numeral](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/numeric/jexcel.editor.numeral.js) (mask number advanced - Dependance with Numeraljs.com)
 - [TextPattern](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/text/jexcel.editor.textpattern.js) (text editor with pattern and block bad input tape)
 
