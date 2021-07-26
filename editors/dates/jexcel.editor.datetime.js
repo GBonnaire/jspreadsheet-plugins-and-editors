@@ -1,13 +1,13 @@
 /**
  * Custom editor for datetime
  * 
- * @version 1.2.8
+ * @version 1.2.9
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * 
  * @license This plugin is distribute under MIT License
  */
-jexcel.editors.datetime = function() {
+jspreadsheet.editors.datetime = function() {
     var methods = {};
 
     methods.createCell = function(cell, value, x, y, instance, options) {
@@ -44,7 +44,7 @@ jexcel.editors.datetime = function() {
     }
 
     methods.openEditor = function(cell, value, x, y, instance, options) {
-        var editor = jexcel.helpers.createEditor('input', cell);
+        var editor = jspreadsheet.helpers.createEditor('input', cell);
         if(value.substring(0,1) != "=") {
             editor.setAttribute('type', "datetime-local");
             editor.style.fontSize = "10px";

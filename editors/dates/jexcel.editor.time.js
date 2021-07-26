@@ -1,14 +1,14 @@
 /**
  * Custom editor for time only (not datetime)
  * 
- * @version 1.1.1
+ * @version 1.1.2
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * 
  * @license This plugin is distribute under MIT License
  */
 
-jexcel.editors.time = function() {
+jspreadsheet.editors.time = function() {
     var methods = {};
     var regExpTest = RegExp('^(([0-1]?[0-9])|([2][0-3])):[0-5][0-9]$');
 
@@ -36,7 +36,7 @@ jexcel.editors.time = function() {
 
     methods.openEditor = function(cell, value, x, y, instance, options) {
 
-        var editor = jexcel.helpers.createEditor('input', cell);
+        var editor = jspreadsheet.helpers.createEditor('input', cell);
         editor.setAttribute('type', "time");
 
 

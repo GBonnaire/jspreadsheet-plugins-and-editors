@@ -1,20 +1,45 @@
 /**
- * Custom editor for numeral
- * 
- * @version 1.3.1
+ * Custom editor for currency
+ * documentation of options : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
+ * @version 1.0.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
- * @website https://www.gbonnaire.fr
+ * @website https://repo.gbonnaire.fr
+ * @example 
+ * jspreadsheet(document.getElementById('spreadsheet'), {
+ *    columns: [
+ *          {
+ *              type: 'currency',
+ *              title: "currency",         
+ *          },
+ *          {
+ *              type: 'currency',
+ *              title: "currency EURO",
+ *              currency: "EUR",
+ *              currencyDisplay: "symbol",
+ *          },
+ *          {
+ *              type: 'currency',
+ *              title: "currency Dollars",
+ *              locales: "en-US",
+ *              currency: "USD",
+ *              currencyDisplay: "code",                
+ *          },
+ *          {
+ *              type: 'currency',
+ *              title: "currency INR",
+ *              locales: "en-IN",
+ *          },
+ *    ],
+ * });
  * 
- * @dependency NumeralJS.com 
  * 
  * @license This plugin is distribute under MIT License
  * 
  * @description
- * Version 1.3 : Add decimal management
- * Version 1.2 : Add step on editor + option for allowFormula
+ * Version 1.0 : Create version
  */
 
-jspreadsheet.editors.numeral = function() {
+jspreadsheet.editors.currency = function() {
 var methods = {};
 
     methods.createCell = function(cell, value, x, y, instance, options) {
@@ -29,9 +54,9 @@ var methods = {};
 
     methods.openEditor = function(cell, value, x, y, instance, options) {
         if((''+value).substr(0,1) == '=' || options.allowFormula==true) {
-            var editor = jspreadsheet.helpers.createEditor('input', cell);
+            var editor = jexcel.helpers.createEditor('input', cell);
         } else {
-            var editor = jspreadsheet.helpers.createEditor('number', cell);
+            var editor = jexcel.helpers.createEditor('number', cell);
 
             if(options.step) {
                 editor.setAttribute("step", options.step);
@@ -90,25 +115,35 @@ var methods = {};
             value = instance.executeFormula(value, x, y)
         }
         
-        // Mask?
-        if(numeral(value).value()==value) {
-            if (options && options.mask) {
-                if(options.decimal) {
-                    var rg = new RegExp(options.decimal, "g");
-                    options.mask = options.mask.replace(rg,".");
-                }
-                value = numeral(value).format(options.mask);
-            } else {
-                value = numeral(value).value();
-            }
-            if(options && options.decimal) {
-                var rg = new RegExp(options.decimal, "gi");
-                value = value.replace(rg,"");
-                value = value.replace(".", options.decimal);
-            }
+        // Mask
+        if(value!=="") {
+            value = _applyMaskCurrency(value, options);
         }
 
         return value;
+    }
+    
+    methods.get = function(options, value, extended) {
+        return _applyMaskCurrency(value, options);
+    }
+    
+    /**
+     * Mask for currency 
+     * @param {String} value
+     * @param {Object} options
+     * @returns {String}
+     */
+    function _applyMaskCurrency(value, options) {
+        value = parseFloat(value);
+        
+        
+        if(!options.currency) {
+            return Intl.NumberFormat().format(value);
+        }
+        
+        options.style = "currency";
+        
+        return new Intl.NumberFormat(options.locales, options).format(value);
     }
 
     return methods;
