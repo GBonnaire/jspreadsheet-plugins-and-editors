@@ -14,7 +14,8 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 Demo of plugins premium and free are available on [Demo JSpreadsheet plugins GBonnaire.fr](https://demo.gbonnaire.fr/jExcel/)
 
 ## Comming soon :
-Comming soon migration for all my plugins and editors for new version of jspreadsheet v8 Pro Base & Premium.
+ - Migration for all my plugins and editors for new version of jspreadsheet v8 Pro Base & Premium - For Sept 2021
+ - Package for premium plugin with license for NPM Version - For Sept 2021
 
 ## Premium plugins for v7Pro
 - [Conditional style](https://repo.gbonnaire.fr/product/jexcel-plugin-conditionalstyle)
