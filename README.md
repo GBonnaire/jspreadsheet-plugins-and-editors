@@ -1,4 +1,4 @@
-## jSpreadsheet Plugins and Editors
+## JSpreadsheet Plugins and Editors
 
 Here you find my Plugins and Editors for JSpreadsheet Pro (Jexcel Pro).
 
@@ -13,8 +13,8 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 ## Demo of plugins
 Demo of plugins premium and free are available on [Demo JSpreadsheet plugins GBonnaire.fr](https://demo.gbonnaire.fr/jExcel/)
 
-## Plugins for v8Pro
-### Comming soon!
+## Comming soon :
+Comming soon migration for all my plugins and editors for new version of jspreadsheet v8 Pro Base & Premium.
 
 ## Premium plugins for v7Pro
 - [Conditional style](https://repo.gbonnaire.fr/product/jexcel-plugin-conditionalstyle)
@@ -60,3 +60,5 @@ All free plugins are availables on NPM : [NPMJS jspreadsheet packages](https://w
 # Repository
 
 You can find all products on [ProgiDev Repository : repo.gbonnaire.fr](https://repo.gbonnaire.fr)
+
+You not found your plugin, or you want a custom plugin for your application, contact me on contact@gbonnaire.fr (Français / English)
