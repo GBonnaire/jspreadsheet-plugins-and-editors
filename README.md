@@ -13,7 +13,10 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 ## Demo of plugins
 Demo of plugins premium and free are available on [Demo JSpreadsheet plugins GBonnaire.fr](https://demo.gbonnaire.fr/jExcel/)
 
-## Premium plugins
+## Plugins for v8Pro
+### Comming soon!
+
+## Premium plugins for v7Pro
 - [Conditional style](https://repo.gbonnaire.fr/product/jexcel-plugin-conditionalstyle)
 - [Formula](https://repo.gbonnaire.fr/product/jexcel-plugin-formula)
 - [Formula Editors](https://repo.gbonnaire.fr/product/jexcel-plugin-editorsformula) - *deprecated : Replace by Formula*
@@ -28,7 +31,7 @@ Demo of plugins premium and free are available on [Demo JSpreadsheet plugins GBo
 - [Summary](https://repo.gbonnaire.fr/product/jexcel-plugin-summary)
 - [Tooltip](https://repo.gbonnaire.fr/product/jexcel-plugin-tooltip)
 
-## Free plugins
+## Free plugins for v7Pro
 - [Auto Width](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/autoWidth)
 - [Contextmenu Rows Advanced Actions](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/contextmenu_rowsAdvancedActions)
 - [Contextmenu Shortcut](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/contextmenu_shortcut)
@@ -39,7 +42,7 @@ Demo of plugins premium and free are available on [Demo JSpreadsheet plugins GBo
 - [Sync Input](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/syncInput)
 - [Top menu](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/topmenu)
 
-## Free Editors
+## Free Editors for v7Pro
 - [Currency](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/numeric/jexcel.editor.currency.js) (mask number for currency)
 - [Date editors](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/editors/dates) (including date like Excel, datetime like Excel and time)
 - [Dropdown advanced (icons, images, images+names)](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/editors/dropdown)
