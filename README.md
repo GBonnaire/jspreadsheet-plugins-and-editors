@@ -14,8 +14,8 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 Demo of plugins premium and free are available on [Demo JSpreadsheet plugins GBonnaire.fr](https://demo.gbonnaire.fr/jExcel/)
 
 ## Comming soon :
- - Migration for all my plugins and editors for new version of jspreadsheet v8 Pro Base & Premium - For Sept 2021
- - Package for premium plugin with license for NPM Version - For Sept 2021
+ - Migration for all my plugins and editors for new version of jspreadsheet v8 Pro Base & Premium - For Oct 2021
+ - Package for premium plugin with license for NPM Version - For Oct 2021
 
 ## Premium plugins for v7Pro
 - [Conditional style](https://repo.gbonnaire.fr/product/jexcel-plugin-conditionalstyle)
@@ -49,6 +49,16 @@ Demo of plugins premium and free are available on [Demo JSpreadsheet plugins GBo
 - [Dropdown advanced (icons, images, images+names)](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/editors/dropdown)
 - [Numeral](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/numeric/jexcel.editor.numeral.js) (mask number advanced - Dependance with Numeraljs.com)
 - [TextPattern](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/text/jexcel.editor.textpattern.js) (text editor with pattern and block bad input tape)
+
+## Free plugins for v8Pro
+- [Auto Width](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/autoWidth)
+- [Contextmenu Rows Advanced Actions](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/contextmenu_rowsAdvancedActions)
+- [Copy Paste advanced (when access to clipboard navigator is denied)](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/copypaste_advanced)
+- [Persistence Flag](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/persistenceFlag)
+- [Row Header rename](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/rowHeaderRename)
+- [Status bar](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/statusbar)
+- [Sync Input](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/syncInput)
+- [Top menu](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/topmenu)
 
 ## CDN for Free plugins and editors
 
