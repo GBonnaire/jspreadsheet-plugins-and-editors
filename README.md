@@ -44,6 +44,7 @@ Demo of plugins premium and free are available on [Demo JSpreadsheet plugins GBo
 - [Top menu](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/topmenu)
 
 ## Free Editors for v7Pro
+In editor use only file with name start by `jexcel.`
 - [Currency](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/numeric/jexcel.editor.currency.js) (mask number for currency)
 - [Date editors](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/editors/dates) (including date like Excel, datetime like Excel and time)
 - [Dropdown advanced (icons, images, images+names)](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/editors/dropdown)
@@ -59,6 +60,14 @@ Demo of plugins premium and free are available on [Demo JSpreadsheet plugins GBo
 - [Status bar](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/statusbar)
 - [Sync Input](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/syncInput)
 - [Top menu](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/topmenu)
+
+## Free Editors for v8Pro
+In editor use only file with name start by `jss.`
+- [Currency](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/numeric/jss.editor.currency.js) (mask number for currency)
+- [Date editors](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/editors/dates) (including date like Excel, datetime like Excel and time, use only file with name start by jss.)
+- [Dropdown advanced (icons, images, images+names)](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/editors/dropdown) (use only file with name start by jss.
+- [Numeral](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/numeric/jss.editor.numeral.js) (mask number advanced - Dependance with Numeraljs.com)
+- [TextPattern](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/text/jss.editor.textpattern.js) (text editor with pattern and block bad input tape)
 
 ## CDN for Free plugins and editors
 
