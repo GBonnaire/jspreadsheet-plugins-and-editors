@@ -1,0 +1,35 @@
+{
+    "name": "@jspreadsheet/topmenu",
+    "title": "Jspreadsheet plugins: add topmenu bar on sheet of jSpreadsheet.",
+    "description": "Jspreadsheet plugins: add topmenu bar on sheet of jSpreadsheet",
+    "author": {
+        "name": "Guillaume Bonnaire <contact@gbonnaire.fr>",
+        "url": "https://repo.gbonnaire.fr"
+    },
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/GBonnaire/jspreadsheet-plugins-and-editors.git"
+    },
+    "keywords": [
+        "menu",
+        "topmenu",
+        "menubar",
+        "file",
+        "edit",
+        "spreadsheet",
+        "spreadsheets",
+        "tables",
+        "table",
+        "excel",
+        "grid",
+        "grid-editor",
+        "data-table",
+        "data-grid",
+        "data-spreadsheet"
+    ],
+    "dependencies": {
+        "jspreadsheet-pro": "^8.0.0"
+    },
+    "main": "index.js",
+    "version": "1.1.0"
+}

@@ -1,0 +1,32 @@
+{
+    "name": "@jspreadsheet/statusbar",
+    "title": "Jspreadsheet plugins: status bar.",
+    "description": "add status bar with information on select range.",
+    "author": {
+        "name": "Guillaume Bonnaire <contact@gbonnaire.fr>",
+        "url": "https://repo.gbonnaire.fr"
+    },
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/GBonnaire/jspreadsheet-plugins-and-editors.git"
+    },
+    "keywords": [
+        "statusbar",
+        "formula",
+        "spreadsheet",
+        "spreadsheets",
+        "tables",
+        "table",
+        "excel",
+        "grid",
+        "grid-editor",
+        "data-table",
+        "data-grid",
+        "data-spreadsheet"
+    ],
+    "dependencies": {
+        "jspreadsheet-pro": "^8.0.0"
+    },
+    "main": "index.js",
+    "version": "1.3.2"
+}

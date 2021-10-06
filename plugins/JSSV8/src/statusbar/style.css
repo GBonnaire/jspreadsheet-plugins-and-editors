@@ -1,0 +1,75 @@
+/**
+ * Plugin CSS status bar for Jspreadsheet Pro
+ * 
+ * @version 2.0.0
+ * @author Guillaume Bonnaire <contact@gbonnaire.fr>
+ * @website https://repo.gbonnaire.fr 
+ * 
+ * 
+ * @license This plugin is distribute under MIT License
+ */
+
+.jss_content {
+    padding-bottom: 0px!important;
+}
+
+.jss_statusbar {
+    position: sticky;
+    bottom: 0px;
+    left: 0px;
+    background-color: #F3F3F3;
+    border: 1px solid #CCCCCC;
+    width: calc(100% - 3px);
+    height: 26px;
+    display: flex;
+    margin-left: 1px;
+    margin-right: 1px;
+    z-index: 2;
+}
+
+.jss_statusbar * {
+    font-size:  12px;
+    color: #666;
+    padding: 2px;
+}
+
+.jss_statusbar .jss_statusbar_addrows button {
+    background-color: #F3F3F3;
+    border: 1px solid #CCCCCC; 
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 2px;
+    padding: 1px 3px 1px 3px;
+    height: 20px;
+}
+
+.jss_statusbar .jss_statusbar_addrows input {
+    width: 50px;
+    height: 16px;
+    display: inline-block;
+    border: 1px solid #CCCCCC;
+    padding: 1px 3px 1px 3px;
+}
+
+.jss_statusbar .jss_statusbar_addrows span {
+    font-size:  13px;
+}
+
+.jss_statusbar .jss_statusbar_information {
+    flex-grow: 100;
+    text-align: right;
+    vertical-align: middle;
+    font-size:  13px;
+    padding-right: 5px;
+}
+
+.jss_statusbar .jss_statusbar_information .divisor:before {
+    content: " | ";
+}
+
+.jss_statusbar .jss_statusbar_information .divisor {
+    color: #CCCCCC;
+    margin-left: 2px;
+    margin-right: 2px;        
+}
