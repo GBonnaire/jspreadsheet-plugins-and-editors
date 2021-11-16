@@ -2,7 +2,7 @@
 
 Here you find my Plugins and Editors for JSpreadsheet Pro (Jexcel Pro).
 
-There is a free plugins/editors and paid plugins/editors. For the paid plugins/editors, you can find only readme and documentation here. For buy plugin go to [Web site plugins&editors JSpreadsheet Pro](https://repo.gbonnaire.fr/category/jexcel).
+There is a free plugins/editors and paid plugins/editors. For the paid plugins/editors, you can find only readme and documentation here. For buy plugin go to [Web site plugins&editors JSpreadsheet Pro](https://repo.gbonnaire.fr/category/jspreadsheetpro).
 
 ## What is JSpreadsheet ?
 
@@ -13,9 +13,36 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 ## Demo of plugins
 Demo of plugins premium and free are available on [Demo JSpreadsheet plugins GBonnaire.fr](https://demo.gbonnaire.fr/jExcel/)
 
-## Comming soon :
- - Migration for all my plugins and editors for new version of jspreadsheet v8 Pro Base & Premium - For Oct 2021
- - Package for premium plugin with license for NPM Version - For Oct 2021
+## NEWS - November 2021
+You can buy premium plugin on [Web site plugins&editors JSpreadsheet Pro](https://repo.gbonnaire.fr/category/jspreadsheetpro) and install packages with NPM
+
+## Premium plugins for v8Pro
+- [Conditional style](https://repo.gbonnaire.fr/product/jss-plugin-conditionalstyle)
+- [Formula](https://repo.gbonnaire.fr/product/jss-plugin-formula)
+- [Open File](https://repo.gbonnaire.fr/product/jss-plugin-openfile)
+- [Print](https://repo.gbonnaire.fr/product/jss-plugin-print)
+- [Statistics Formula](https://repo.gbonnaire.fr/product/jss-formula-statistics)
+- [Summary](https://repo.gbonnaire.fr/product/jss-plugin-summary)
+- [Tooltip](https://repo.gbonnaire.fr/product/jss-plugin-tooltip)
+
+## Free plugins for v8Pro
+- [Auto Width](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/autoWidth)
+- [Contextmenu Rows Advanced Actions](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/contextmenu_rowsAdvancedActions)
+- [Copy Paste advanced (when access to clipboard navigator is denied)](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/copypaste_advanced)
+- [Persistence Flag](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/persistenceFlag)
+- [Row Header rename](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/rowHeaderRename)
+- [Status bar](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/statusbar)
+- [Sync Input](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/syncInput)
+- [Top menu](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/topmenu)
+
+## Free Editors for v8Pro
+In editor use only file with name start by `jss.`
+- [Currency](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/numeric/jss.editor.currency.js) (mask number for currency)
+- [Date editors](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/editors/dates) (including date like Excel, datetime like Excel and time, use only file with name start by jss.)
+- [Dropdown advanced (icons, images, images+names)](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/editors/dropdown) (use only file with name start by jss.
+- [Numeral](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/numeric/jss.editor.numeral.js) (mask number advanced - Dependance with Numeraljs.com)
+- [TextPattern](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/text/jss.editor.textpattern.js) (text editor with pattern and block bad input tape)
+
 
 ## Premium plugins for v7Pro
 - [Conditional style](https://repo.gbonnaire.fr/product/jexcel-plugin-conditionalstyle)
@@ -51,29 +78,11 @@ In editor use only file with name start by `jexcel.`
 - [Numeral](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/numeric/jexcel.editor.numeral.js) (mask number advanced - Dependance with Numeraljs.com)
 - [TextPattern](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/text/jexcel.editor.textpattern.js) (text editor with pattern and block bad input tape)
 
-## Free plugins for v8Pro
-- [Auto Width](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/autoWidth)
-- [Contextmenu Rows Advanced Actions](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/contextmenu_rowsAdvancedActions)
-- [Copy Paste advanced (when access to clipboard navigator is denied)](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/copypaste_advanced)
-- [Persistence Flag](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/persistenceFlag)
-- [Row Header rename](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/rowHeaderRename)
-- [Status bar](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/statusbar)
-- [Sync Input](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/syncInput)
-- [Top menu](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/topmenu)
-
-## Free Editors for v8Pro
-In editor use only file with name start by `jss.`
-- [Currency](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/numeric/jss.editor.currency.js) (mask number for currency)
-- [Date editors](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/editors/dates) (including date like Excel, datetime like Excel and time, use only file with name start by jss.)
-- [Dropdown advanced (icons, images, images+names)](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/editors/dropdown) (use only file with name start by jss.
-- [Numeral](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/numeric/jss.editor.numeral.js) (mask number advanced - Dependance with Numeraljs.com)
-- [TextPattern](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/text/jss.editor.textpattern.js) (text editor with pattern and block bad input tape)
-
 ## CDN for Free plugins and editors
 
 All file in JSDelivr : [Package JSDelivr.com](https://www.jsdelivr.com/package/gh/GBonnaire/jspreadsheet-plugins-and-editors)
 
-## NPM for Free plugins
+## NPM for Free plugins (for v7 only, comming soon for v8)
 
 All free plugins are availables on NPM : [NPMJS jspreadsheet packages](https://www.npmjs.com/org/jspreadsheet)
 
