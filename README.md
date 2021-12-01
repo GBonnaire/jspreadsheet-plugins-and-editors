@@ -42,6 +42,7 @@ In editor use only file with name start by `jss.`
 - [Dropdown advanced (icons, images, images+names)](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/editors/dropdown) (use only file with name start by jss.
 - [Numeral](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/numeric/jss.editor.numeral.js) (mask number advanced - Dependance with Numeraljs.com)
 - [TextPattern](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/text/jss.editor.textpattern.js) (text editor with pattern and block bad input tape)
+- [TextLocale](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/text/jss.editor.textlocale.js) (text editor locales format in render and in formula)
 
 
 ## Premium plugins for v7Pro
