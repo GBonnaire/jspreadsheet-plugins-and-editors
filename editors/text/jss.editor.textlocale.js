@@ -1,7 +1,7 @@
 /**
  * Custom editor for textLocal
  * 
- * @version 1.0.0
+ * @version 1.0.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * @example 
@@ -29,12 +29,16 @@
 
     methods.createCell = function(cell, value, x, y, instance, options) {
         _init(options);
-        cell.innerText = methods.parseValue(x, y, value, instance, options);
+        return methods.updateCell(cell, value, x, y, instance, options);
     }
 
     methods.updateCell = function(cell, value, x, y, instance, options) {
         if (cell) {
-            cell.innerText = methods.parseValue(x, y, value, instance, options);
+            var v = methods.parseValue(x, y, value, instance, options);
+            cell.innerText = v;
+            if(_isNumber(v)) {
+                return _getValueNumber(v);
+            }
         }
     }
 
@@ -109,4 +113,3 @@
 
     return methods;
 }();
-
