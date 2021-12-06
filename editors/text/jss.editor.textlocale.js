@@ -1,7 +1,7 @@
 /**
  * Custom editor for textLocal
  * 
- * @version 1.0.2
+ * @version 1.0.3
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * @example 
@@ -35,7 +35,7 @@
     methods.updateCell = function(cell, value, x, y, instance, options) {
         if (cell) {
             cell.innerText = methods.parseValue(x, y, value, instance, options);
-            if(_isNumber(value)) {
+            if(value!="" && _isNumber(value)) {
                 return _getValueNumber(value);
             }
         }
