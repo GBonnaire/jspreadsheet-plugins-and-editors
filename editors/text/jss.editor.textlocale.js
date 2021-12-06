@@ -34,8 +34,7 @@
 
     methods.updateCell = function(cell, value, x, y, instance, options) {
         if (cell) {
-            var v = methods.parseValue(x, y, value, instance, options);
-            cell.innerText = v;
+            cell.innerText = methods.parseValue(x, y, value, instance, options);
             if(_isNumber(value)) {
                 return _getValueNumber(value);
             }
