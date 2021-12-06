@@ -1,7 +1,7 @@
 /**
  * Plugin for auto width cols
  * 
- * @version 2.0.0
+ * @version 2.1.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description auto size width of columns
@@ -9,7 +9,7 @@
  * 
  * @license This plugin is distribute under MIT License
  */
-if (! jspreadsheet && typeof(require) === 'function') {
+ if (! jspreadsheet && typeof(require) === 'function') {
     var jspreadsheet = require('jspreadsheet-pro');
 }
 
@@ -32,6 +32,8 @@ if (! jspreadsheet && typeof(require) === 'function') {
         
         var oldValue_styleTable = "";
         
+        var columnsToResize = [];
+        
         // Options
         var defaultOptions = {
             fullsizeTable: false,
@@ -48,27 +50,31 @@ if (! jspreadsheet && typeof(require) === 'function') {
         }
 
         /**
-         * Jexcel events
+         * jspreadsheet events
          */
-        plugin.onevent = function(event) {
+        plugin.onevent = function(event, worksheet) {
             if(event=="onresizecolumn") {      
-                var worksheet = arguments[1];
                 run(worksheet);
             } 
         }
         
-        plugin.init = function(worksheet) {
-            enableIgnoreDispatch(worksheet.parent);
+        plugin.beforeinit = function(worksheet) {
+            columnsToResize = [];
             for(var ite_col=0; ite_col<worksheet.options.columns.length; ite_col++) {
                 var column = worksheet.options.columns[ite_col];
-                if(column.width==null || column.width=='') {
-                    worksheet.options.columns[ite_col].width="auto";
+                if(column.width==null || column.width=='' || column.width=='auto') {
+                    columnsToResize.push(ite_col);
+                    worksheet.options.columns[ite_col].width = 100;
                 }
             }
-            disableIgnoreDispatch(worksheet.parent);
-            run(worksheet);
         }
         
+        plugin.init = function(worksheet) { 
+            enableIgnoreDispatch(worksheet.parent);
+            disableIgnoreDispatch(worksheet.parent);
+            run(worksheet); 
+        }
+
         /**
          * run calculate width of columns and apply
          * @returns {undefined}
@@ -107,21 +113,20 @@ if (! jspreadsheet && typeof(require) === 'function') {
         
         /**
          * get Width offset of columns
-         * @returns {jexcel.autoWidthL#16.jexcel.autoWidthL#16#L#17.getWidthColumns.cols}
+         * @returns {Array}
          */
         function getWidthColumns(worksheet) {
             var cols = [];
-            var tr = worksheet.table.querySelector("tbody>tr");
+            var tr = worksheet.rows[0].element;
             if(tr) {
-                var tds = tr.querySelectorAll("td");
-                for(var ite_td=0; ite_td<tds.length; ite_td++) {
-                    if(ite_td==0) { // Skip index
+                for(var ite_td=0; ite_td < tr.children.length; ite_td++) {
+                    if(ite_td == 0) { // Skip index
                         continue; 
                     }
-                    var td = tds[ite_td];
+                    var td = tr.children[ite_td];
                     cols.push(td.offsetWidth);
                 }
-            }            
+            }     
             return cols;
         }
         
@@ -158,14 +163,17 @@ if (! jspreadsheet && typeof(require) === 'function') {
                         continue;
                     }
                     
-                    if(column.width !== "auto") {
+                    if(columnsToResize.indexOf(ite_col) == -1) {
                         width_table = Math.max(0, width_table - parseFloat(column.width));
-                        cols_size_total = Math.max(0, cols_size_total - colsWidth[ite_col])
+                        cols_size_total = Math.max(0, cols_size_total - colsWidth[ite_col]);
                     } else if(colsWidth[ite_col]<100) {
                         cols_size_total = Math.max(0, cols_size_total + (100-colsWidth[ite_col]));
-                    }
+                    } 
                 }
             }
+            
+            width_table = width_table - 7;
+            
             // Parse cols - set width
             for(var ite_col=0; ite_col<worksheet.options.columns.length; ite_col++) {
                 var column = worksheet.options.columns[ite_col];
@@ -173,7 +181,7 @@ if (! jspreadsheet && typeof(require) === 'function') {
                 if(column.type == "hidden") {
                     continue;
                 }
-                if(column.width==="auto") {
+                if(columnsToResize.indexOf(ite_col) > -1) {
                     if(colsWidth[ite_col]) {
                         var newWidth = Math.max(worksheet.options.defaultColWidth, colsWidth[ite_col]);
                     } else {
