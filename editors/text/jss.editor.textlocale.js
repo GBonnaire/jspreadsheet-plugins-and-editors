@@ -1,7 +1,7 @@
 /**
  * Custom editor for textLocal
  * 
- * @version 1.0.1
+ * @version 1.0.2
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * @example 
@@ -36,14 +36,17 @@
         if (cell) {
             var v = methods.parseValue(x, y, value, instance, options);
             cell.innerText = v;
-            if(_isNumber(v)) {
-                return _getValueNumber(v);
+            if(_isNumber(value)) {
+                return _getValueNumber(value);
             }
         }
     }
 
     methods.openEditor = function(cell, value, x, y, instance, options) {  
         editor = instance.parent.input;  
+        if(typeof value == "number") {
+            value = _getValueProcessed(value, options);
+        }
         editor.innerText = value;
         editor.focus();
     }
