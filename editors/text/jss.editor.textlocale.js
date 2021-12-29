@@ -1,7 +1,7 @@
 /**
  * Custom editor for textLocal
  * 
- * @version 1.0.3
+ * @version 1.0.4
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * @example 
