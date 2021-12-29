@@ -86,7 +86,7 @@
     }
 
     function _isNumber(value) {
-        var rg = new RegExp("([^0-9\\"+thousandSeparator+"\\"+decimalSeparator+"]+)", "gm");
+        var rg = new RegExp("([^\\-0-9\\"+thousandSeparator+"\\"+decimalSeparator+"]+)", "gm");
         return value.toString().trim().replace(rg, "") == value.toString().trim();
     }
     
