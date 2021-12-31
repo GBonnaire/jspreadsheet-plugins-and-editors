@@ -18,7 +18,7 @@ You can buy premium plugin on [Web site plugins&editors JSpreadsheet Pro](https:
 
 ## Premium plugins for v8Pro
 - [Conditional style](https://repo.gbonnaire.fr/product/jss-plugin-conditionalstyle)
-- [Formula](https://repo.gbonnaire.fr/product/jss-plugin-formula)
+- [Formula editors advanced](https://repo.gbonnaire.fr/product/jss-plugin-formula)
 - [Open File](https://repo.gbonnaire.fr/product/jss-plugin-openfile)
 - [Print](https://repo.gbonnaire.fr/product/jss-plugin-print)
 - [Statistics Formula](https://repo.gbonnaire.fr/product/jss-formula-statistics)
