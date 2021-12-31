@@ -47,9 +47,7 @@ In editor use only file with name start by `jss.`
 
 ## Premium plugins for v7Pro
 - [Conditional style](https://repo.gbonnaire.fr/product/jexcel-plugin-conditionalstyle)
-- [Formula](https://repo.gbonnaire.fr/product/jexcel-plugin-formula)
-- [Formula Editors](https://repo.gbonnaire.fr/product/jexcel-plugin-editorsformula) - *deprecated : Replace by Formula*
-- [Formula Bar](https://repo.gbonnaire.fr/product/jexcel-plugin-formulabar) - *deprecated : Replace by Formula*
+- [Formula editors advanced](https://repo.gbonnaire.fr/product/jexcel-plugin-formula)
 - [Mobile](https://repo.gbonnaire.fr/product/jexcel-plugin-mobile)
 - [Open File](https://repo.gbonnaire.fr/product/jexcel-plugin-openfile)
 - [PivotTable](https://repo.gbonnaire.fr/product/jexcel-plugin-pivottable)
