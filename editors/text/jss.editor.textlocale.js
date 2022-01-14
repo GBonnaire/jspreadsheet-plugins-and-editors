@@ -1,7 +1,7 @@
 /**
  * Custom editor for textLocal
  * 
- * @version 1.0.4
+ * @version 1.0.5
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://www.gbonnaire.fr
  * @example 
@@ -92,7 +92,10 @@
     
     function _parseFormula(value, options) {
         var rg = new RegExp("([0-9\\"+thousandSeparator+"\\"+decimalSeparator+"]+)", "gm");
-        return value.toString().replace(rg, _getValueNumber);
+        var rgArgs = new RegExp("([;])", "gm");
+        var formulaWithNumberGoodFormat = value.toString().replace(rg, _getValueNumber);
+        var formulaWithGoodArgs = formulaWithNumberGoodFormat.replace(rgArgs, ","); 
+        return formulaWithGoodArgs;
     }
     function _getValueProcessed(value, options) {
         if(typeof value == "string") {
