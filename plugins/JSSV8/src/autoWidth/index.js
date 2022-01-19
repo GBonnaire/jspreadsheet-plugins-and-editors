@@ -1,7 +1,7 @@
 /**
  * Plugin for auto width cols
  * 
- * @version 2.1.0
+ * @version 2.1.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description auto size width of columns
@@ -9,7 +9,7 @@
  * 
  * @license This plugin is distribute under MIT License
  */
- if (! jspreadsheet && typeof(require) === 'function') {
+if (! jspreadsheet && typeof(require) === 'function') {
     var jspreadsheet = require('jspreadsheet-pro');
 }
 
@@ -70,9 +70,7 @@
         }
         
         plugin.init = function(worksheet) { 
-            enableIgnoreDispatch(worksheet.parent);
-            disableIgnoreDispatch(worksheet.parent);
-            run(worksheet); 
+            run(worksheet);             
         }
 
         /**
@@ -89,6 +87,7 @@
         
         /**
          * save old style before change
+         * @param {object} worksheet
          * @returns {undefined}
          */
         function saveStyle(worksheet) {
@@ -97,6 +96,7 @@
         
         /**
          * set style table layout
+         * @param {object} worksheet
          * @returns {undefined}
          */
         function setLayoutAuto(worksheet) {
@@ -105,6 +105,7 @@
         
         /**
          * remove style table layout
+         * @param {object} worksheet
          * @returns {undefined}
          */
         function removeLayoutAuto(worksheet) {
@@ -113,6 +114,7 @@
         
         /**
          * get Width offset of columns
+         * @param {object} worksheet
          * @returns {Array}
          */
         function getWidthColumns(worksheet) {
@@ -133,6 +135,7 @@
         /**
          * defined new columns width
          * @param {array} colsWidth
+         * @param {object} worksheet
          * @returns {undefined}
          */
         function setWidthColumn(colsWidth, worksheet) {
@@ -190,7 +193,6 @@
                     if(plugin.options.fullsizeTable && cols_size_total < width_table) {
                         newWidth = (newWidth / cols_size_total) * width_table;
                     }
-                    
                     worksheet.setWidth(ite_col, newWidth);
                 }
             }
