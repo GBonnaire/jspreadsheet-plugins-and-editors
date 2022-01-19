@@ -1,7 +1,7 @@
 /**
  * Plugin statusbar for JSpreadsheet Pro
  * 
- * @version 2.0.0
+ * @version 2.0.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @summary Add status bar on bottom of JExcel
@@ -41,7 +41,7 @@ if(! jSuites && typeof(require) === 'function') {
 }
 
 if (! jspreadsheet && typeof(require) === 'function') {
-    var jspreadsheet = require('jspreadsheet-pro');
+    var jspreadsheet = require('jspreadsheet');
 }
 
 ;(function (global, factory) {

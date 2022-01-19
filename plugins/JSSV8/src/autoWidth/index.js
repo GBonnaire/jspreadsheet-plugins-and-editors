@@ -1,7 +1,7 @@
 /**
  * Plugin for auto width cols
  * 
- * @version 2.1.1
+ * @version 2.1.3
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description auto size width of columns
@@ -10,7 +10,7 @@
  * @license This plugin is distribute under MIT License
  */
 if (! jspreadsheet && typeof(require) === 'function') {
-    var jspreadsheet = require('jspreadsheet-pro');
+    var jspreadsheet = require('jspreadsheet');
 }
 
 ;(function (global, factory) {

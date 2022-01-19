@@ -3,7 +3,7 @@
  * 
  * @deprecated on version 8, please use rows title property
  * 
- * @version 2.0.0
+ * @version 2.0.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description Can row index rename and header of index, resize row index
@@ -15,7 +15,7 @@
  * 1.2 compatibility NPM
  */
 if (! jspreadsheet && typeof(require) === 'function') {
-    var jspreadsheet = require('jspreadsheet-pro');
+    var jspreadsheet = require('jspreadsheet');
 }
 ;(function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :

@@ -11,7 +11,7 @@
         "url" : "https://github.com/GBonnaire/jspreadsheet-plugins-and-editors.git"
     },
     "keywords": [
-        "autowidth",
+        "header",
         "width",
         "spreadsheet",
         "spreadsheets",
@@ -25,8 +25,8 @@
         "data-spreadsheet"
     ],
     "dependencies": {
-        "jspreadsheet-pro": "^8.0.0"
+        "jspreadsheet": "^8.0.0"
     },
     "main": "index.js",
-    "version": "1.2.1"
+    "version": "2.0.1"
 }

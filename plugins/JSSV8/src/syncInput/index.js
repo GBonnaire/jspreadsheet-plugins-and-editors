@@ -1,7 +1,7 @@
 /**
  * Plugin for sync data (json) in jSpreadsheet pro in input
  * 
- * @version 2.0.0
+ * @version 2.0.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description sync data (json) in Jexcel in input
@@ -15,7 +15,7 @@ if(! jSuites && typeof(require) === 'function') {
 }
 
 if(! jspreadsheet && typeof(require) === 'function') {
-    var jspreadsheet = require('jspreadsheet-pro');
+    var jspreadsheet = require('jspreadsheet');
 }
 
 ;(function (global, factory) {

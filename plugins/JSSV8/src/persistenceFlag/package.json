@@ -11,7 +11,7 @@
         "url" : "https://github.com/GBonnaire/jspreadsheet-plugins-and-editors.git"
     },
     "keywords": [
-        "persistece",
+        "persistence",
         "flag",
         "spreadsheet",
         "spreadsheets",
@@ -25,8 +25,8 @@
         "data-spreadsheet"
     ],
     "dependencies": {
-        "jspreadsheet-pro": "^8.0.0"
+        "jspreadsheet": "^8.0.0"
     },
     "main": "index.js",
-    "version": "1.4.2"
+    "version": "2.0.0"
 }
