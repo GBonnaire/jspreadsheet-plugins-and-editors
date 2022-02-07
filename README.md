@@ -13,10 +13,9 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 ## Demo of plugins
 Demo of plugins premium and free are available on [Demo JSpreadsheet plugins GBonnaire.fr](https://demo.gbonnaire.fr/jExcel/)
 
-## NEWS - November 2021
+## Premium plugins for v8Pro
 You can buy premium plugin on [Web site plugins&editors JSpreadsheet Pro](https://repo.gbonnaire.fr/category/jspreadsheetpro) and install packages with NPM
 
-## Premium plugins for v8Pro
 - [Conditional style](https://repo.gbonnaire.fr/product/jss-plugin-conditionalstyle)
 - [Formula editors advanced](https://repo.gbonnaire.fr/product/jss-plugin-formula)
 - [Open File](https://repo.gbonnaire.fr/product/jss-plugin-openfile)
@@ -81,7 +80,7 @@ In editor use only file with name start by `jexcel.`
 
 All file in JSDelivr : [Package JSDelivr.com](https://www.jsdelivr.com/package/gh/GBonnaire/jspreadsheet-plugins-and-editors)
 
-## NPM for Free plugins (for v7 only, comming soon for v8)
+## NPM for Free plugins
 
 All free plugins are availables on NPM : [NPMJS jspreadsheet packages](https://www.npmjs.com/org/jspreadsheet)
 
