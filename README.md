@@ -79,6 +79,7 @@ In editor use only file with name start by `jexcel.`
 ## CDN for Free plugins and editors
 
 All files in JSDelivr : [Package JSDelivr.com](https://www.jsdelivr.com/package/gh/GBonnaire/jspreadsheet-plugins-and-editors)
+
 [![](https://data.jsdelivr.com/v1/package/gh/GBonnaire/jspreadsheet-plugins-and-editors/badge)](https://www.jsdelivr.com/package/gh/GBonnaire/jspreadsheet-plugins-and-editors)
 
 ## NPM for Free plugins
