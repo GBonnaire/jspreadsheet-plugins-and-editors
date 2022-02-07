@@ -78,7 +78,8 @@ In editor use only file with name start by `jexcel.`
 
 ## CDN for Free plugins and editors
 
-All file in JSDelivr : [Package JSDelivr.com](https://www.jsdelivr.com/package/gh/GBonnaire/jspreadsheet-plugins-and-editors)
+All files in JSDelivr : [Package JSDelivr.com](https://www.jsdelivr.com/package/gh/GBonnaire/jspreadsheet-plugins-and-editors)
+[![](https://data.jsdelivr.com/v1/package/gh/GBonnaire/jspreadsheet-plugins-and-editors/badge)](https://www.jsdelivr.com/package/gh/GBonnaire/jspreadsheet-plugins-and-editors)
 
 ## NPM for Free plugins
 
@@ -86,6 +87,6 @@ All free plugins are availables on NPM : [NPMJS jspreadsheet packages](https://w
 
 # Repository
 
-You can find all products on [ProgiDev Repository : repo.gbonnaire.fr](https://repo.gbonnaire.fr)
+You can find all premium products on [ProgiDev Repository : repo.gbonnaire.fr](https://repo.gbonnaire.fr)
 
-You not found your plugin, or you want a custom plugin for your application, contact me on contact@gbonnaire.fr (Français / English)
+If you doesn't found your plugin, or you want a custom plugin for your application, contact me on contact@gbonnaire.fr (Français / English)
