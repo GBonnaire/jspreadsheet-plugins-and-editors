@@ -8,12 +8,12 @@
  * jspreadsheet(document.getElementById('spreadsheet'), {
  *    columns: [
  *          {
- *              type: 'textlocal',
- *              local: "nl-NL",         
+ *              type: 'textlocale',
+ *              locale: "nl-NL",         
  *          },
  *          {
- *              type: 'textlocal',
- *              local: "fr-FR",         
+ *              type: 'textlocale',
+ *              locale: "fr-FR",         
  *          },
  *    ],
  * });
