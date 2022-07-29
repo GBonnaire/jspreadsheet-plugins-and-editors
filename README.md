@@ -13,7 +13,7 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 ## Demo of plugins
 Demo of plugins premium and free are available on [Demo JSpreadsheet plugins GBonnaire.fr](https://demo.gbonnaire.fr/jExcel/)
 
-## Premium plugins for v8Pro
+## Premium plugins for v8Pro+
 You can buy premium plugin on [Web site plugins&editors JSpreadsheet Pro](https://repo.gbonnaire.fr/category/jspreadsheetpro) and install packages with NPM
 
 - [Conditional style](https://repo.gbonnaire.fr/product/jss-plugin-conditionalstyle)
@@ -24,7 +24,7 @@ You can buy premium plugin on [Web site plugins&editors JSpreadsheet Pro](https:
 - [Summary](https://repo.gbonnaire.fr/product/jss-plugin-summary)
 - [Tooltip](https://repo.gbonnaire.fr/product/jss-plugin-tooltip)
 
-## Free plugins for v8Pro
+## Free plugins for v8Pro+
 - [Auto Width](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/autoWidth)
 - [Contextmenu Rows Advanced Actions](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/contextmenu_rowsAdvancedActions)
 - [Copy Paste advanced (when access to clipboard navigator is denied)](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/copypaste_advanced)
@@ -34,7 +34,7 @@ You can buy premium plugin on [Web site plugins&editors JSpreadsheet Pro](https:
 - [Sync Input](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/syncInput)
 - [Top menu](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/topmenu)
 
-## Free Editors for v8Pro
+## Free Editors for v8Pro+
 In editor use only file with name start by `jss.`
 - [Currency](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/editors/numeric/jss.editor.currency.js) (mask number for currency)
 - [Date editors](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/editors/dates) (including date like Excel, datetime like Excel and time, use only file with name start by jss.)
