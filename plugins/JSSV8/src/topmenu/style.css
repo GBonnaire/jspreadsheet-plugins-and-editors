@@ -1,7 +1,7 @@
 /**
  * Plugin CSS top menu bar
  * 
- * @version 2.0.1
+ * @version 2.0.2
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr 
  * 
@@ -12,7 +12,7 @@
 .jss-topmenu {
   background-color: #f3f3f3;
   overflow: hidden;
-  
+
   border: 1px solid #ccc;
   padding: 0px 4px;
   margin: 1px 2px 2px 1px;
@@ -41,6 +41,6 @@
 }
 
 .jss_container.fullscreen .jss-topmenu {
-    position: relative;
-    margin: 1px 0 0 1px;
+  position: relative;
+  margin: 1px 0 0 1px;
 }

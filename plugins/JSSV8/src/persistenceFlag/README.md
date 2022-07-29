@@ -18,7 +18,9 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 
 ### Dependencies
 
-- [jSpreadsheet Pro v8](https://www.jspreadsheet.com/v8)  
+- [jSpreadsheet Pro v8](https://www.jspreadsheet.com/v8)
+  or
+- [jSpreadsheet Pro v9](https://www.jspreadsheet.com/v9) 
 
 ### Options of plugin
 
@@ -33,7 +35,7 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 	</thead>
 	<tbody>
 		<tr>
-			<td><code>css_progress</code></td>
+			<td><code>cssProgress</code></td>
 			<td>Your class css for animated icon in progress</td>
 			<td><code>String</code></td>
 			<td><code>(blank)</code></td>
@@ -45,19 +47,19 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 			<td><code>{ year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }</code></td>
 		</tr>
 		<tr>
-			<td><code>icon_error</code></td>
+			<td><code>iconError</code></td>
 			<td>Material icon code</td>
 			<td><code>String</code></td>
 			<td><code>error</code></td>
 		</tr>
     	<tr>
-			<td><code>icon_success</code></td>
+			<td><code>iconSuccess</code></td>
 			<td>Material icon code</td>
 			<td><code>String</code></td>
 			<td><code>check_circle</code></td>
 		</tr>
     	<tr>
-			<td><code>icon_progress</code></td>
+			<td><code>iconProgress</code></td>
 			<td>Material icon code</td>
 			<td><code>String</code></td>
 			<td><code>cached</code></td>
@@ -70,7 +72,7 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 		</tr>
 		<tr>
 			<td><code>showOnlyTime</code></td>
-			<td>Show onlyt type with flag</td>
+			<td>Show only type with flag</td>
 			<td><code>Boolean</code></td>
 			<td><code>false</code></td>
 		</tr>
@@ -88,15 +90,15 @@ you can use jSuites dictionary for translate this plugin
 	</thead>
 	<tbody>
 		<tr>
-	        <td><code>text_error</code></td>
+	        <td><code>textError</code></td>
 			<td><code>'Not updated'</code></td>
 	    </tr>
 	    <tr>
-	        <td><code>text_progress</code></td>
+	        <td><code>textProgress</code></td>
 		    <td><code>'Updating'</code></td>
 	    </tr>
 	    <tr>
-	        <td><code>text_success</code></td>
+	        <td><code>textSuccess</code></td>
 		    <td><code>'Updated {date}'</code></td>
 	    </tr>
 	</tbody>

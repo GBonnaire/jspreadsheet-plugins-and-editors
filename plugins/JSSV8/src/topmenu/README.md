@@ -25,7 +25,9 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 
 ### Dependencies
 
-- [jSpreadsheet Pro v8](https://www.jspreadsheet.com/v8) 
+- [jSpreadsheet Pro v8](https://www.jspreadsheet.com/v8)
+or
+- [jSpreadsheet Pro v9](https://www.jspreadsheet.com/v9)
 
 ### Options of plugin
 

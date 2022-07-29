@@ -1,7 +1,7 @@
 /**
  * Plugin for top menu
- * 
- * @version 2.0.1
+ *
+ * @version 2.0.2
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description add top menu on sheet
@@ -21,34 +21,34 @@ if(! jspreadsheet && typeof(require) === 'function') {
 
 ;(function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    global.jss_topmenu = factory();
+        typeof define === 'function' && define.amd ? define(factory) :
+            global.jss_topmenu = factory();
 }(this, (function () {
     return (function(spreadsheet, options, spreadsheetConfig) {
-        var shortcut_base = "Ctrl +";
+        let shortcut_base = "Ctrl +";
         if(/(MacPPC|MacIntel|Mac_PowerPC|Macintosh|Mac OS X)/.test(window.navigator.userAgent)) {
             shortcut_base = "⌘ +";
         }
-        
+
         // Plugin object
-        var plugin = {};
-        
+        const plugin = {};
+
         // Set options
         plugin.options = Object.assign({},options);
-        
+
         // var global
         plugin.topmenu = null;
         plugin.menus = [];
-        
+
         // var
-        var contextMenuElement = null;
-        var contextMenu = null;
-        
-        var activeElement = null;
-        var flagActiveMenu = false;
-        
+        let contextMenuElement = null;
+        let contextMenu = null;
+
+        let activeElement = null;
+        let flagActiveMenu = false;
+
         // Options
-        var defaultOptions = {
+        let defaultOptions = {
             text_file: jSuites.translate('File'),
             text_edit: jSuites.translate('Edit'),
             text_view: jSuites.translate('View'),
@@ -61,12 +61,12 @@ if(! jspreadsheet && typeof(require) === 'function') {
             text_item_resetfilters: jSuites.translate('Reset filter(s)'),
             menus: {
                 "File": function(el, i, menuButton) {
-                    var items = [];
-                    
-                    var tabSelected = el.querySelector(".jtabs-selected");
-                    var WorksheetIndex = spreadsheet.getWorksheetActive();
-                    var countTab = Array.isArray(el.jspreadsheet) ? el.jspreadsheet.length : 1;
-                    
+                    let items = [];
+
+                    let tabSelected = el.querySelector(".jtabs-selected");
+                    let WorksheetIndex = spreadsheet.getWorksheetActive();
+                    let countTab = Array.isArray(el.jspreadsheet) ? el.jspreadsheet.length : 1;
+
                     if(spreadsheet.config.tabs == true) {
                         items.push({
                             icon: 'tab',
@@ -75,10 +75,10 @@ if(! jspreadsheet && typeof(require) === 'function') {
                             onclick: function() {
                                 i.createWorksheet();
                             }
-                        });  
-                        
-                        
-                        
+                        });
+
+
+
                         if(spreadsheet.config.allowRenameWorksheet == true) {
                             items.push({
                                 icon: 'edit',
@@ -86,15 +86,15 @@ if(! jspreadsheet && typeof(require) === 'function') {
                                 title: jSuites.translate('Rename this worksheet')  + ` (${tabSelected.innerText})`,
                                 onclick: function() {
                                     if(tabSelected!=null) {
-                                        var newNameWorksheet = prompt(jSuites.translate('Rename this worksheet') , tabSelected.innerText);
+                                        let newNameWorksheet = prompt(jSuites.translate('Rename this worksheet') , tabSelected.innerText);
                                         if(newNameWorksheet) {
                                             spreadsheet.renameWorksheet(WorksheetIndex, newNameWorksheet);
                                         }
                                     }
                                 }
-                            }); 
+                            });
                         }
-                        
+
                         if(spreadsheet.config.allowDeleteWorksheet == true && countTab>1) {
                             items.push({
                                 icon: 'tab_unselected',
@@ -107,14 +107,14 @@ if(! jspreadsheet && typeof(require) === 'function') {
                                         }
                                     }
                                 }
-                            })
-                        };
-                        
+                            });
+                        }
+
                         items.push({
                             type:'line'
                         });
                     }
-                    
+
                     if(spreadsheet.config.allowExport == true) {
                         items.push({
                             icon: 'save',
@@ -123,8 +123,8 @@ if(! jspreadsheet && typeof(require) === 'function') {
                             onclick: function() {
                                 i.download();
                             }
-                        });  
-                        
+                        });
+
                         items.push({
                             type:'line'
                         });
@@ -140,13 +140,13 @@ if(! jspreadsheet && typeof(require) === 'function') {
                                     alert(spreadsheet.config.about);
                                 }
                             }
-                        }); 
+                        });
                     }
                     return items;
                 },
                 "Edit": function(el, i, menuButton) {
-                    var items = [];
-                    
+                    let items = [];
+
                     items.push({
                         icon: 'undo',
                         title: jSuites.translate('Undo'),
@@ -160,7 +160,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                             }
                         }
                     });
-                    
+
                     items.push({
                         icon: 'redo',
                         title: jSuites.translate('Redo'),
@@ -174,11 +174,11 @@ if(! jspreadsheet && typeof(require) === 'function') {
                             }
                         }
                     });
-                    
+
                     items.push({
                         type:'line'
                     });
-                    
+
                     items.push({
                         icon: 'content_cut',
                         title: jSuites.translate('Cut'),
@@ -191,7 +191,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                             }
                         }
                     });
-                    
+
                     items.push({
                         icon: 'content_copy',
                         title: jSuites.translate('Copy'),
@@ -204,7 +204,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                             }
                         }
                     });
-                    
+
                     if(navigator && navigator.clipboard && navigator.clipboard.readText) {
                         items.push({
                             icon: 'content_paste',
@@ -221,33 +221,34 @@ if(! jspreadsheet && typeof(require) === 'function') {
                                 }
                             }
                         });
-                    };
-                    
-                    
-                    
+                    }
+
+
+
                     if(i.selectedCell!=null) {
                         items.push({
                             type:'line'
                         });
-                        
-                        var itemsInsert = [];
-                        var itemsDelete = [];
-                        var itemsRename = [];
-                        
-                        
-                        var cellStart = jspreadsheet.helpers.getColumnNameFromCoords(i.selectedCell[0], i.selectedCell[1]);
-                        var cellEnd = jspreadsheet.helpers.getColumnNameFromCoords(i.selectedCell[2], i.selectedCell[3]);
-                        
-                        var rangeColumnStart = cellStart.substring(0, cellStart.length - (""+(+i.selectedCell[1]+1)).length);
-                        var rangeColumnEnd = cellEnd.substring(0, cellEnd.length - (""+(+i.selectedCell[3]+1)).length);
-                        
+
+                        let itemsInsert = [];
+                        let itemsDelete = [];
+                        let itemsRename = [];
+
+
+                        let cellStart = jspreadsheet.helpers.getColumnNameFromCoords(i.selectedCell[0], i.selectedCell[1]);
+                        let cellEnd = jspreadsheet.helpers.getColumnNameFromCoords(i.selectedCell[2], i.selectedCell[3]);
+
+                        let rangeColumnStart = cellStart.substring(0, cellStart.length - (""+(+i.selectedCell[1]+1)).length);
+                        let rangeColumnEnd = cellEnd.substring(0, cellEnd.length - (""+(+i.selectedCell[3]+1)).length);
+
+                        let rangeColumn;
                         if(rangeColumnStart!=rangeColumnEnd) {
-                                var rangeColumn = `${rangeColumnStart} - ${rangeColumnEnd}`;
-                            } else {
-                                var rangeColumn = rangeColumnStart;
-                            }
-                        
-                        if(i.options.allowInsertColumn == true) {                            
+                            rangeColumn = `${rangeColumnStart} - ${rangeColumnEnd}`;
+                        } else {
+                            rangeColumn = rangeColumnStart;
+                        }
+
+                        if(i.options.allowInsertColumn == true) {
                             itemsInsert.push({
                                 title: jSuites.translate('Insert a new column before') + ` (${rangeColumnStart})`,
                                 onclick: function () {
@@ -260,8 +261,8 @@ if(! jspreadsheet && typeof(require) === 'function') {
                                     i.insertColumn(1, parseInt(i.selectedCell[0]), 0);
                                 }
                             });
-                        };
-                        
+                        }
+
                         if(i.options.allowDeleteColumn == true) {
                             itemsDelete.push({
                                 title: jSuites.translate('Delete selected columns') + ` (${rangeColumn})`,
@@ -271,7 +272,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                                 }
                             });
                         }
-                        
+
                         if(i.options.allowRenameColumn == true) {
                             itemsRename.push({
                                 title: jSuites.translate('Rename this column') + ` (${rangeColumnStart})`,
@@ -279,30 +280,31 @@ if(! jspreadsheet && typeof(require) === 'function') {
                                     i.setHeader(parseInt(i.selectedCell[0]));
                                 }
                             });
-                        };
-                        
-                        var rangeRowStart = (+i.selectedCell[1] + 1);
-                        var rangeRowEnd = (+i.selectedCell[3] + 1);
-                        if(rangeRowStart != rangeRowEnd) {
-                            var rangeRow = `${rangeRowStart} - ${rangeRowEnd}`;
-                        } else {
-                            var rangeRow = rangeRowStart;
                         }
-                        
+
+                        let rangeRowStart = (+i.selectedCell[1] + 1);
+                        let rangeRowEnd = (+i.selectedCell[3] + 1);
+                        let rangeRow;
+                        if(rangeRowStart != rangeRowEnd) {
+                            rangeRow = `${rangeRowStart} - ${rangeRowEnd}`;
+                        } else {
+                            rangeRow = rangeRowStart;
+                        }
+
                         if(i.options.allowInsertRow == true) {
                             itemsInsert.push({
                                 title: jSuites.translate('Insert a new row before') + ` (${rangeRowStart})`,
                                 onclick: function () {
-                                    i.insertRow(1, parseInt(i.selectedCell[1]), 1)
+                                    i.insertRow(1, parseInt(i.selectedCell[1]), 1);
                                 }
                             });
                             itemsInsert.push({
                                 title: jSuites.translate('Insert a new row after') + ` (${rangeRowStart})`,
                                 onclick: function () {
-                                    i.insertRow(1, parseInt(i.selectedCell[1]))
+                                    i.insertRow(1, parseInt(i.selectedCell[1]));
                                 }
                             });
-                        };
+                        }
 
                         if(i.options.allowDeleteRow == true) {
                             itemsDelete.push({
@@ -313,7 +315,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                                 }
                             });
                         }
-                        
+
                         if(itemsInsert.length>0) {
                             items.push({
                                 title: plugin.options.text_item_insert,
@@ -321,7 +323,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                                 submenu: itemsInsert
                             });
                         }
-                        
+
                         if(itemsDelete.length>0) {
                             items.push({
                                 title: plugin.options.text_item_delete,
@@ -329,7 +331,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                                 submenu: itemsDelete
                             });
                         }
-                        
+
                         if(itemsRename.length>0) {
                             items.push({
                                 title: plugin.options.text_item_rename,
@@ -337,15 +339,15 @@ if(! jspreadsheet && typeof(require) === 'function') {
                                 submenu: itemsRename
                             });
                         }
-                        
-                        
+
+
                     }
-                    
+
                     return items;
                 },
                 "View": function(el, i, menuButton) {
-                    var items = [];
-                    
+                    let items = [];
+
                     if(el.classList.contains("fullscreen")) {
                         items.push({
                             icon: 'fullscreen_exit',
@@ -363,13 +365,13 @@ if(! jspreadsheet && typeof(require) === 'function') {
                             }
                         });
                     }
-                    
+
                     if(i.selectedCell!=null) {
-                        var cellStart = jspreadsheet.helpers.getColumnNameFromCoords(i.selectedCell[0], i.selectedCell[1]);
-                        var cellEnd = jspreadsheet.helpers.getColumnNameFromCoords(i.selectedCell[2], i.selectedCell[3]);
-                        
-                        var rangeColumnStart = cellStart.substring(0, cellStart.length - (""+(+i.selectedCell[1]+1)).length);
-                        
+                        const cellStart = jspreadsheet.helpers.getColumnNameFromCoords(i.selectedCell[0], i.selectedCell[1]);
+                        //const cellEnd = jspreadsheet.helpers.getColumnNameFromCoords(i.selectedCell[2], i.selectedCell[3]);
+
+                        const rangeColumnStart = cellStart.substring(0, cellStart.length - (""+(+i.selectedCell[1]+1)).length);
+
                         if(i.options.columnSorting == true) {
                             items.push({
                                 type: 'line'
@@ -385,51 +387,47 @@ if(! jspreadsheet && typeof(require) === 'function') {
                                 onclick: function () {
                                     i.orderBy(parseInt(i.selectedCell[0]), 1);
                                 }
-                            })
+                            });
                         }
                     }
-                    
+
                     if(i.options.filters == true) {
                         items.push({
                             type: 'line'
                         });
                         items.push({
-                           title: plugin.options.text_item_resetfilters,
-                           onclick: function() {
-                               i.resetFilters();
-                           }
+                            title: plugin.options.text_item_resetfilters,
+                            onclick: function() {
+                                i.resetFilters();
+                            }
                         });
                     }
-                    
+
                     return items;
                 }
             }
+        };
+
+
+        // Set default value
+        if(plugin.options==null) {
+            plugin.options = {};
         }
-
-
-       // Set default value
-       if(plugin.options==null) {
-           plugin.options = {};
-       }
-       for(var property in defaultOptions) {
+        for(let property in defaultOptions) {
             if(!plugin.options.hasOwnProperty(property) || plugin.options[property]==null ) {
                 plugin.options[property] = defaultOptions[property];
             }
-       }
-        
-        /**
-         * On load
-         * @type onload
-         */
-        var baseOnload = spreadsheetConfig.onload;
-        spreadsheetConfig.onload = function() {
-            // load ended
-            if(baseOnload) {
-                baseOnload.apply(spreadsheet, arguments);
-            }
-            load();
         }
-        
+
+        /**
+         * JSS events
+         */
+        plugin.onevent = function(event, worksheet) {
+            if(event == "onload") {
+                load();
+            }
+        };
+
         /**
          * JSpreadsheet contextmenu
          */
@@ -437,10 +435,10 @@ if(! jspreadsheet && typeof(require) === 'function') {
             if(isChildren(plugin.topmenu,e.target)) {
                 return [];
             }
-            
+
             return items;
-        }
-        
+        };
+
         /**
          * create main element for top menu
          * @private
@@ -450,16 +448,16 @@ if(! jspreadsheet && typeof(require) === 'function') {
             parseMenu();
             createTopmenubar();
             createMenus();
-            
-            
+
+
             document.addEventListener("keydown", function(e) {
-               if(e.which == 27 && flagActiveMenu == true) { // Escape
-                   closeMenu();
-                   e.preventDefault();
-                   e.stopPropagation();
-               }
+                if(e.which == 27 && flagActiveMenu == true) { // Escape
+                    closeMenu();
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
             });
-            
+
             // When click out of topmenu
             document.addEventListener("click", function(e) {
                 if(flagActiveMenu && (!isChildren(plugin.topmenu, e.target) || e.target == plugin.topmenu)) {
@@ -469,37 +467,37 @@ if(! jspreadsheet && typeof(require) === 'function') {
                 }
             });
         }
-        
+
         /**
          * Loading all element on document
          * @returns {undefined}
          */
         function load() {
             spreadsheet.tools.insertBefore(plugin.topmenu, spreadsheet.tools.firstChild);
-            
+
             contextMenuElement = document.createElement("DIV");
             contextMenuElement.className = 'jexcel_contextmenu';
-            
+
             contextMenu = jSuites.contextmenu(contextMenuElement, {
                 onclick:function() {
                     closeMenu();
                 }
             });
-            
+
             spreadsheet.el.append(contextMenuElement);
         }
-        
+
         /**
          * parseMenu
          * @private
          * @returns {undefined}
          */
         function parseMenu() {
-            for(var menuName in plugin.options.menus) {
+            for(let menuName in plugin.options.menus) {
                 plugin.menus.push({name:menuName, items:plugin.options.menus[menuName]});
-            }            
+            }
         }
-        
+
         /**
          * create element top menu
          * @private
@@ -507,12 +505,12 @@ if(! jspreadsheet && typeof(require) === 'function') {
          */
         function createTopmenubar() {
             plugin.topmenu = document.createElement("DIV");
-            
+
             plugin.topmenu.classList.add("jss-topmenu");
             plugin.topmenu.classList.add('jexcel_object');
         }
-        
-        
+
+
         /**
          * Check if DOMElement is children of parent or = parent
          * @private
@@ -529,18 +527,18 @@ if(! jspreadsheet && typeof(require) === 'function') {
             }
             return isChildren(parent, child.parentNode);
         }
-        
-        
+
+
         /**
          * CreateMenus
          * @private
          * @returns {undefined}
          */
         function createMenus() {
-            for(var ite_menu=0; ite_menu<plugin.menus.length; ite_menu++) {
-                var item = plugin.menus[ite_menu];
-                
-                var menuItem = document.createElement("BUTTON");
+            for(let ite_menu=0; ite_menu<plugin.menus.length; ite_menu++) {
+                const item = plugin.menus[ite_menu];
+
+                const menuItem = document.createElement("BUTTON");
                 switch(item.name) {
                     case "File":
                         menuItem.innerHTML = plugin.options.text_file;
@@ -554,7 +552,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                     default:
                         menuItem.innerHTML = item.name;
                 }
-                
+
                 menuItem.addEventListener("click", function(menuItems, name) {
                     return function(e) {
                         if(flagActiveMenu) {
@@ -562,50 +560,51 @@ if(! jspreadsheet && typeof(require) === 'function') {
                                 closeMenu();
                                 return;
                             }
-                        } 
-                        
+                        }
+
                         flagActiveMenu = true;
                         setActiveButton(this);
 
-                        var clientRect = e.target.getBoundingClientRect();
-                        var clientX = clientRect.left;
-                        var clientY = clientRect.top+clientRect.height;
+                        let clientRect = e.target.getBoundingClientRect();
+                        let clientX = clientRect.left;
+                        let clientY = clientRect.top+clientRect.height;
 
-                        var coords = {x:clientX, y:clientY};
+                        let coords = {x:clientX, y:clientY};
 
                         // Init items
+                        let items;
                         if(typeof menuItems == "function") {
-                            var items = menuItems(spreadsheet.el, getCurrentWorksheet(), this);
+                            items = menuItems(spreadsheet.el, getCurrentWorksheet(), this);
                         } else {
-                            var items = menuItems.slice();
+                            items = menuItems.slice();
                         }
-                        
+
                         // Override with plugins
-                        for(var pluginName in spreadsheet.plugins) {
-                            var pluginJSS = spreadsheet.plugins[pluginName];
-                            if(pluginJSS["topMenu"] && typeof pluginJSS.topMenu == "function") {
+                        for(let pluginName in spreadsheet.plugins) {
+                            let pluginJSS = spreadsheet.plugins[pluginName];
+                            if(pluginJSS.topMenu && typeof pluginJSS.topMenu == "function") {
                                 items = pluginJSS.topMenu(name, items, this, shortcut_base);
                             }
                         }
-                        
+
                         contextMenu.open(coords, items);
-                        
+
                         e.preventDefault();
                         e.stopPropagation();
-                    }
+                    };
                 }(item.items, item.name));
-                
+
                 menuItem.addEventListener("mouseover", function(e) {
                     if(flagActiveMenu && e.target != activeElement) {
                         this.dispatchEvent(new Event("click"));
                     }
                 });
-                
-                    
+
+
                 plugin.topmenu.append(menuItem);
             }
         }
-        
+
         /**
          * setActiveButton
          * @private
@@ -619,7 +618,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
             el.classList.add("active");
             activeElement = el;
         }
-        
+
         /**
          * removeActiveButton
          * @private
@@ -630,15 +629,15 @@ if(! jspreadsheet && typeof(require) === 'function') {
             if(activeElement==el) {
                 activeElement = null;
             }
-            
+
             if(el==null) {
                 return;
             }
-            
+
             el.classList.remove("active");
             contextMenu.close();
         }
-        
+
         /**
          * closeMenu
          * @private
@@ -649,7 +648,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
             removeActiveButton(activeElement);
             flagActiveMenu = false;
         }
-        
+
         /**
          * get current worksheet
          * @returns {object}
@@ -663,7 +662,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
             }
             return spreadsheet.worksheets[0];
         }
-        
+
         /**
          * add menu
          * @param {String} title
@@ -676,19 +675,19 @@ if(! jspreadsheet && typeof(require) === 'function') {
                 if(items==null) {
                     items=[];
                 }
-               if(position!=null) {
-                   plugin.menus.splice(position, 0, {name: title, items: items});
+                if(position!=null) {
+                    plugin.menus.splice(position, 0, {name: title, items: items});
                 } else {
-                   plugin.menus.push({name: title, items: items});
+                    plugin.menus.push({name: title, items: items});
                 }
 
-                plugin.refresh(); 
+                plugin.refresh();
             } else {
                 console.error("Topmenu bar is not loaded");
             }
-        }
+        };
         spreadsheet.addTopmenu = plugin.add;
-        
+
         /**
          * Refresh top menu
          * @returns {undefined}
@@ -696,8 +695,8 @@ if(! jspreadsheet && typeof(require) === 'function') {
         plugin.refresh = function() {
             plugin.topmenu.innerHTML = "";
             createMenus();
-        }
-        
+        };
+
         init();
         return plugin;
     });

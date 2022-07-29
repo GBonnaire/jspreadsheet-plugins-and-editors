@@ -20,7 +20,9 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 
 ### Dependencies
 
-- [jSpreadsheet Pro v8](https://www.jspreadsheet.com/v8) 
+- [jSpreadsheet Pro v8](https://www.jspreadsheet.com/v8)
+  or
+- [jSpreadsheet Pro v9](https://www.jspreadsheet.com/v9)
 
 ### Options of plugin
 
@@ -67,7 +69,7 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 		<tr>
 			<td><code>worksheetId</code></td>
 			<td>synchronize specifics worksheet identify with worksheetId, by default it's first worksheet loaded</td>
-			<td><code>String</code></td>
+			<td><code>String or Array of Id</code></td>
 			<td><code>null</code></td>
 		</tr>
 	</tbody>

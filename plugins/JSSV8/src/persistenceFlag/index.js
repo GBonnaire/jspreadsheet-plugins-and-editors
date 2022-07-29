@@ -1,14 +1,15 @@
 /**
  * Plugin for change notification of persistence for jSpreadsheet Pro
- * 
- * @version 2.0.0
+ *
+ * @version 2.0.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
- *  
+ *
  * @license This plugin is distribute under MIT License
- * 
+ *
  * @description change notification of persistence
  * ReleaseNote
+ * 2.0.1 compatibility ES6
  * 2.0.0 migrating to JSS v8 and change name persistance to persistence
  * 1.4.2 fix bug compatibility
  * 1.4.1 add require
@@ -21,81 +22,67 @@ if (! jSuites && typeof(require) === 'function') {
 
 ;(function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    global.jss_persistenceFlag = factory();
+        typeof define === 'function' && define.amd ? define(factory) :
+            global.jss_persistenceFlag = factory();
 }(this, (function () {
     return (function(spreadsheet, options, spreadsheetConfig) {
 
         // Plugin object
-        var plugin = {};
-        var flagElement = null;
-        var messageElement = null;
-        var iconElement = null;
-        var overrideNotificationVisible = null;
-        var countQuery = 0;
-        var timeLoop = 0;
+        const plugin = {};
+        let flagElement = null;
+        let messageElement = null;
+        let iconElement = null;
+        let overrideNotificationVisible = null;
+        let countQuery = 0;
+        let timeLoop = 0;
 
         // Set options
         plugin.options = Object.assign({},options);
 
-
         // Options
-        var defaultOptions = {
-              showText: true,
-              showOnlyTime: false,
-              icon_error: 'error',
-              text_error: jSuites.translate('not saved'),
-              icon_success: 'check_circle',
-              text_success: jSuites.translate('saved at {date}'),
-              icon_progress: 'cached',
-              css_progress: '',
-              text_progress: jSuites.translate('saving'),
-              dateFormat : { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }
+        const defaultOptions = {
+            showText: true,
+            showOnlyTime: false,
+            iconError: 'error',
+            textError: jSuites.translate('not saved'),
+            iconSuccess: 'check_circle',
+            textSuccess: jSuites.translate('saved at {date}'),
+            iconProgress: 'cached',
+            cssProgress: '',
+            textProgress: jSuites.translate('saving'),
+            dateFormat : { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }
+        };
+
+        // Set default value
+        if(plugin.options==null) {
+            plugin.options = {};
         }
-
-
-       // Set default value
-       if(plugin.options==null) {
-           plugin.options = {};
-       }
-       for(var property in defaultOptions) {
+        for(var property in defaultOptions) {
             if (!plugin.options.hasOwnProperty(property) || plugin.options[property]==null ) {
                 plugin.options[property] = defaultOptions[property];
             }
-       }
-       
-       /**
-         * On load
-         * @type onload
-         */
-        var baseOnload = spreadsheetConfig.onload;
-        spreadsheetConfig.onload = function() {
-            // load ended
-            if(baseOnload) {
-                baseOnload.apply(spreadsheet, arguments);
-            }
-            
-            createFlag();
         }
-
 
         /**
          * Jspreadsheet events
          */
         plugin.onevent = function(event, worksheet) {
-            if(event=="onbeforesave" && spreadsheet.config.toolbar) { 
+            if(event=="onload") {
+                createFlag();
+            }
+            if(event=="onbeforesave" && spreadsheet.config.toolbar) {
                 if(countQuery<0) {
                     countQuery = 0;
                 }
 
                 if(!overrideNotificationVisible) {
-                   overrideNotificationVisible = jSuites.notification.isVisible;
+                    overrideNotificationVisible = jSuites.notification.isVisible;
                 }
 
                 if(countQuery==0) {
                     jSuites.notification.isVisible = function() {
                         return true;
-                    }
+                    };
                 }
                 countQuery++;
                 plugin.setInProgress();
@@ -104,21 +91,21 @@ if (! jSuites && typeof(require) === 'function') {
                     reset();
                 } else {
                     setTimeout(reset, 1000);
-                }            
+                }
             } else if(event=="onsave" && spreadsheet.config.toolbar) {
-                var options = arguments[4];
+                const options = arguments[4];
                 if(options.success) {
                     countQuery--;
                     if(countQuery<=0) {
-                      plugin.setSuccess();
+                        plugin.setSuccess();
                     }
                 } else {
-                   countQuery = 0;
-                   plugin.setError();
-                   console.error(options);
+                    countQuery = 0;
+                    plugin.setError();
+                    console.error(options);
                 }
             }
-        }
+        };
 
         function reset() {
             if(countQuery <= 0) {
@@ -130,7 +117,7 @@ if (! jSuites && typeof(require) === 'function') {
                 timeLoop ++;
                 if(timeLoop>5) {
                     console.error("TimeOut Reset", countQuery);
-                    countQuery = 0;  
+                    countQuery = 0;
                     plugin.setSuccess();
                 }
                 setTimeout(reset, 1000);
@@ -138,20 +125,20 @@ if (! jSuites && typeof(require) === 'function') {
         }
 
         plugin.change = function(icon, message, applyCSS, iconColor) {
+            const date = new Date();
+            let strDate;
             if(message.indexOf("{date}")!=-1) {
-                var date = new Date();
                 if(plugin.options.showOnlyTime) {
-                    var str_date = date.toLocaleTimeString(undefined);
+                    strDate = date.toLocaleTimeString(undefined);
                 } else {
-                    var str_date = date.toLocaleDateString(undefined, plugin.options.dateFormat);
+                    strDate = date.toLocaleDateString(undefined, plugin.options.dateFormat);
                 }
-                message = message.replace("{date}", str_date);
+                message = message.replace("{date}", strDate);
             }
-            
+
             if(message.indexOf("{time}")!=-1) {
-                var date = new Date();
-                var str_date = date.toLocaleTimeString(undefined);
-                message = message.replace("{time}", str_date);
+                strDate = date.toLocaleTimeString(undefined);
+                message = message.replace("{time}", strDate);
             }
 
 
@@ -162,11 +149,11 @@ if (! jSuites && typeof(require) === 'function') {
                 } else {
                     iconElement.style.color = "inherit";
                 }
-                if(plugin.options.css_progress) {
+                if(plugin.options.cssProgress) {
                     if(applyCSS===true) {
-                        iconElement.classList.add(plugin.options.css_progress);
+                        iconElement.classList.add(plugin.options.cssProgress);
                     } else {
-                        iconElement.classList.remove(plugin.options.css_progress);
+                        iconElement.classList.remove(plugin.options.cssProgress);
                     }
                 }
             }
@@ -174,19 +161,19 @@ if (! jSuites && typeof(require) === 'function') {
             if(messageElement) {
                 messageElement.innerHTML = message;
             }
-        }
+        };
 
         plugin.setInProgress = function() {
-            plugin.change(plugin.options.icon_progress, plugin.options.text_progress, true);
-        }
+            plugin.change(plugin.options.iconProgress, plugin.options.textProgress, true);
+        };
 
         plugin.setSuccess = function() {
-            plugin.change(plugin.options.icon_success, plugin.options.text_success, false, "green");
-        }
+            plugin.change(plugin.options.iconSuccess, plugin.options.textSuccess, false, "green");
+        };
 
         plugin.setError = function() {
-            plugin.change(plugin.options.icon_error, plugin.options.text_error, false, "red");
-        }
+            plugin.change(plugin.options.iconError, plugin.options.textError, false, "red");
+        };
 
 
         function createFlag() {
@@ -208,8 +195,8 @@ if (! jSuites && typeof(require) === 'function') {
 
             spreadsheet.toolbar.children[0].appendChild(flagElement);
         }
-        
+
         return plugin;
     });
-    
-})));   
+
+})));
