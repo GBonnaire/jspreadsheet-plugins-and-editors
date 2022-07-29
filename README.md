@@ -84,7 +84,12 @@ All files in JSDelivr : [Package JSDelivr.com](https://www.jsdelivr.com/package/
 
 ## NPM for Free plugins
 
-All free plugins are availables on NPM : [NPMJS jspreadsheet packages](https://www.npmjs.com/org/jspreadsheet)
+All free plugins are availables on NPMJS : [NPMJS jspreadsheet packages](https://www.npmjs.com/org/jspreadsheet)
+
+
+## NPM/YARN for premiums plugins
+
+All premiums plugins (vof JSSV8Pro, JSSV9Pro) are availables on repo : [Repo GBonnaire.fr JSS](https://repo.gbonnaire.fr/category/jss)
 
 # Repository
 
