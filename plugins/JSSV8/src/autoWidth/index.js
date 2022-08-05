@@ -1,12 +1,12 @@
 /**
  * Plugin for auto width cols
- * 
- * @version 2.1.4
+ *
+ * @version 2.2.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description auto size width of columns
  * - autosize all columns without width property
- * 
+ *
  * @license This plugin is distribute under MIT License
  */
 if (! jspreadsheet && typeof(require) === 'function') {
@@ -15,8 +15,8 @@ if (! jspreadsheet && typeof(require) === 'function') {
 
 ;(function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    global.jss_autoWidth = factory();
+        typeof define === 'function' && define.amd ? define(factory) :
+            global.jss_autoWidth = factory();
 }(this, (function () {
     return (function(spreadsheet, options, spreadsheetConfig) {
         // check Version of JSS
@@ -24,26 +24,28 @@ if (! jspreadsheet && typeof(require) === 'function') {
             console.error("Plugin \"auto Width\" not compatible with jspreadsheet " + jspreadsheet.version().version + ", Please use an older version of this plugin compatible. Go to https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/");
             return {};
         }
-        
+
         // Plugin object
-        var plugin = {};
-         // Set options
+        const plugin = {};
+        // Set options
         plugin.options = Object.assign({},options);
-        
-        var oldValue_styleTable = "";
-        
-        var columnsToResize = [];
-        
+
+        let oldValue_styleTable = "";
+
+        let columnsToResize = [];
+        let saveIgnore={};
+
         // Options
-        var defaultOptions = {
+        const defaultOptions = {
             fullsizeTable: false,
-        }
+            parseAllData: true,
+        };
 
         // Set default value
         if(plugin.options==null) {
-           plugin.options = {};
+            plugin.options = {};
         }
-        for(var property in defaultOptions) {
+        for(let property in defaultOptions) {
             if (!plugin.options.hasOwnProperty(property) || plugin.options[property]==null ) {
                 plugin.options[property] = defaultOptions[property];
             }
@@ -53,146 +55,180 @@ if (! jspreadsheet && typeof(require) === 'function') {
          * jspreadsheet events
          */
         plugin.onevent = function(event, worksheet) {
-            if(event=="onresizecolumn") {      
+            if(event === "onresizecolumn") {
                 plugin.beforeinit(worksheet);
                 run(worksheet);
-            } 
-        }
-        
+            }
+        };
+
         plugin.beforeinit = function(worksheet) {
             columnsToResize = [];
-            for(var ite_col=0; ite_col<worksheet.options.columns.length; ite_col++) {
-                var column = worksheet.options.columns[ite_col];
-                if(column.width==null || column.width=='' || column.width=='auto') {
+            for(let ite_col=0; ite_col<worksheet.options.columns.length; ite_col++) {
+                const column = worksheet.options.columns[ite_col];
+                if(column.width == null || column.width === '' || column.width === 'auto') {
                     columnsToResize.push(ite_col);
                     worksheet.options.columns[ite_col].width = 100;
                 }
             }
-        }
-        
-        plugin.init = function(worksheet) { 
-            run(worksheet);             
-        }
+        };
+
+        plugin.init = function(worksheet) {
+            run(worksheet);
+        };
 
         /**
          * run calculate width of columns and apply
          * @returns {undefined}
          */
-        var run = function(worksheet) {
+        const run = function(worksheet) {
             saveStyle(worksheet);
             setLayoutAuto(worksheet);
-            var colsWidth = getWidthColumns(worksheet);
+            const colsWidth = getWidthColumns(worksheet);
             removeLayoutAuto(worksheet);
             setWidthColumn(colsWidth, worksheet);
-        }
-        
+        };
+
         /**
          * save old style before change
          * @param {object} worksheet
          * @returns {undefined}
          */
-        function saveStyle(worksheet) {
+        const saveStyle = function(worksheet) {
             oldValue_styleTable = worksheet.table.style.cssText;
-        }
-        
+        };
+
         /**
          * set style table layout
          * @param {object} worksheet
          * @returns {undefined}
          */
-        function setLayoutAuto(worksheet) {
+        const setLayoutAuto = function(worksheet) {
             worksheet.table.style.tableLayout="auto";
-        }
-        
+        };
+
         /**
          * remove style table layout
          * @param {object} worksheet
          * @returns {undefined}
          */
-        function removeLayoutAuto(worksheet) {
+        const removeLayoutAuto = function(worksheet) {
             worksheet.table.style.cssText = oldValue_styleTable;
-        }
-        
+        };
+
         /**
          * get Width offset of columns
          * @param {object} worksheet
          * @returns {Array}
          */
-        function getWidthColumns(worksheet) {
-            var cols = [];
-            if(worksheet.rows.length == 0) {
+        const getWidthColumns = function(worksheet) {
+            const cols = [];
+            if(worksheet.rows.length === 0) {
                 return cols;
             }
-            var tr = worksheet.rows[0].element;
+            const tr = worksheet.rows[0].element;
             if(tr) {
-                for(var ite_td=0; ite_td < tr.children.length; ite_td++) {
-                    if(ite_td == 0) { // Skip index
-                        continue; 
+                for(let ite_td=0; ite_td < tr.children.length; ite_td++) {
+                    if(ite_td === 0) { // Skip index
+                        continue;
                     }
-                    var td = tr.children[ite_td];
-                    cols.push(td.offsetWidth);
+                    const td = tr.children[ite_td];
+                    let width = td.offsetWidth;
+                    if(plugin.options.parseAllData) {
+                        let maxLength = tr.children[0].innerText.length;
+                        let widthInit = width;
+                        for(let ite_row=0; ite_row<worksheet.rows.length; ite_row++) {
+                            const valueRow = worksheet.getValueFromCoords(ite_td-1, ite_row, true);
+                            if(worksheet.rows[ite_row].element == null) {
+                                width = Math.max(Math.ceil((valueRow.length / maxLength) * widthInit), width);
+                            } else {
+                                maxLength = Math.max(valueRow.length, maxLength);
+                            }
+                        }
+
+                    }
+                    cols.push(width);
                 }
-            }     
+            }
             return cols;
-        }
-        
+        };
+
         /**
          * defined new columns width
          * @param {array} colsWidth
          * @param {object} worksheet
          * @returns {undefined}
          */
-        function setWidthColumn(colsWidth, worksheet) {
-            
-            // Autorize changement colsWidth
-            var editable = worksheet.options.editable;
+        const setWidthColumn = function(colsWidth, worksheet) {
+
+            // Authorize edit colsWidth
+            let editable = worksheet.options.editable;
             worksheet.options.editable = true;
             enableIgnoreDispatch(worksheet.parent);
-            
-            if(worksheet.options.defaultColWidth==null || worksheet.options.defaultColWidth=="" || worksheet.options.defaultColWidth=="auto") {
+
+            if(worksheet.options.defaultColWidth == null || worksheet.options.defaultColWidth === "" || worksheet.options.defaultColWidth === "auto") {
                 worksheet.options.defaultColWidth = 50;
             } else if(typeof worksheet.options.defaultColWidth == "string") {
-                worksheet.options.defaultColWidth = parseInt(worksheet.options.defaultColWidth);                
+                worksheet.options.defaultColWidth = parseInt(worksheet.options.defaultColWidth);
             }
-            
+
             // Parse cols - calculate good size
-            var width_table = 0;
-            var cols_size_total = 0;
-            
+            let width_table = 0;
+            let cols_size_total = 0;
+
             // Manage Option fullsizeTable
             if(plugin.options.fullsizeTable) {
-                width_table = worksheet.table.parentNode.parentNode.offsetWidth - 50 - 5;
-                cols_size_total = colsWidth.reduce(function(acc,v) { return acc+v;});
-                for(var ite_col=0; ite_col<worksheet.options.columns.length; ite_col++) {
-                    var column = worksheet.options.columns[ite_col];
+                width_table = worksheet.table.parentNode.parentNode.offsetWidth - 26;
+
+                if(!worksheet.table.classList.contains("jss_hidden_index")) {
+                    width_table -= 50;
+                }
+
+                cols_size_total = colsWidth.reduce(function(accVal,val, index) {
+                    if(columnsToResize.indexOf(index) > -1) {
+                        if(index === 1 && columnsToResize.indexOf(0) === -1) {
+                            return val;
+                        } else {
+                            return accVal+val;
+                        }
+                    } else {
+                        if(index === 1 && columnsToResize.indexOf(0) === -1) {
+                            return 0;
+                        } else {
+                            return accVal;
+                        }
+                    }
+                });
+
+                for(let ite_col=0; ite_col<worksheet.options.columns.length; ite_col++) {
+                    const column = worksheet.options.columns[ite_col];
                     // Exclude hidden column
-                    if(column.type == "hidden") {
+                    if(column.type === "hidden") {
                         continue;
                     }
-                    
-                    if(columnsToResize.indexOf(ite_col) == -1) {
+
+                    if(columnsToResize.indexOf(ite_col) === -1) {
                         width_table = Math.max(0, width_table - parseFloat(column.width));
-                        cols_size_total = Math.max(0, cols_size_total - colsWidth[ite_col]);
                     } else if(colsWidth[ite_col]<100) {
                         cols_size_total = Math.max(0, cols_size_total + (100-colsWidth[ite_col]));
-                    } 
+                    }
                 }
             }
-            
+
             width_table = width_table - 7;
-            
+
             // Parse cols - set width
-            for(var ite_col=0; ite_col<worksheet.options.columns.length; ite_col++) {
-                var column = worksheet.options.columns[ite_col];
+            for(let ite_col=0; ite_col<worksheet.options.columns.length; ite_col++) {
+                const column = worksheet.options.columns[ite_col];
+                let newWidth;
                 // Exclude hidden column
-                if(column.type == "hidden") {
+                if(column.type === "hidden") {
                     continue;
                 }
                 if(columnsToResize.indexOf(ite_col) > -1) {
                     if(colsWidth[ite_col]) {
-                        var newWidth = Math.max(worksheet.options.defaultColWidth, colsWidth[ite_col]);
+                        newWidth = Math.max(worksheet.options.defaultColWidth, colsWidth[ite_col]);
                     } else {
-                        var newWidth = worksheet.options.defaultColWidth;
+                        newWidth = worksheet.options.defaultColWidth;
                     }
                     if(plugin.options.fullsizeTable && cols_size_total < width_table) {
                         newWidth = (newWidth / cols_size_total) * width_table;
@@ -200,32 +236,37 @@ if (! jspreadsheet && typeof(require) === 'function') {
                     worksheet.setWidth(ite_col, newWidth);
                 }
             }
-            
+
             // Resize old value
             disableIgnoreDispatch(worksheet.parent);
             worksheet.options.editable = editable;
-        }
-        
-        var saveIgnore={};
-        function enableIgnoreDispatch(inst) {
-            if(saveIgnore["ignoreEvents"]==null) {saveIgnore["ignoreEvents"] = inst.ignoreEvents;}
+        };
+
+        /**
+         * enableIgnoreDispatch
+         * @param {object} inst
+         */
+        const enableIgnoreDispatch = function(inst) {
+            if(saveIgnore.ignoreEvents==null) {saveIgnore.ignoreEvents = inst.ignoreEvents;}
             inst.ignoreEvents = true;
-            if(saveIgnore["ignoreCloud"]==null) {saveIgnore["ignoreCloud"] = inst.ignoreCloud;}
-            //inst.ignoreCloud = true;
-            if(saveIgnore["ignoreHistory"]==null) {saveIgnore["ignoreHistory"] = inst.ignoreHistory;}
+            if(saveIgnore.ignoreCloud==null) {saveIgnore.ignoreCloud = inst.ignoreCloud;}
+            if(saveIgnore.ignoreHistory==null) {saveIgnore.ignoreHistory = inst.ignoreHistory;}
             inst.ignoreHistory = true;
-            if(saveIgnore["ignorePersistence"]==null) {saveIgnore["ignorePersistence"] = inst.ignorePersistence;}
+            if(saveIgnore.ignorePersistence==null) {saveIgnore.ignorePersistence = inst.ignorePersistence;}
             inst.ignorePersistence = true;
-        }
-        
-        function disableIgnoreDispatch(inst) {
-            inst.ignoreEvents = saveIgnore["ignoreEvents"];
-            //inst.ignoreCloud = saveIgnore["ignoreCloud"];;
-            inst.ignoreHistory = saveIgnore["ignoreHistory"];;
-            inst.ignorePersistence = saveIgnore["ignorePersistence"];
+        };
+
+        /**
+         * disableIgnoreDispatch
+         * @param {object} inst
+         */
+        const disableIgnoreDispatch = function(inst) {
+            inst.ignoreEvents = saveIgnore.ignoreEvents;
+            inst.ignoreHistory = saveIgnore.ignoreHistory;
+            inst.ignorePersistence = saveIgnore.ignorePersistence;
             saveIgnore = {};
-        }
-        
+        };
+
         return plugin;
     });
 
