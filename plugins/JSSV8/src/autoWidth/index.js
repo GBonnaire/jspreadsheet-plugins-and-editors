@@ -1,7 +1,7 @@
 /**
  * Plugin for auto width cols
  *
- * @version 2.2.0
+ * @version 2.2.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description auto size width of columns
@@ -137,7 +137,14 @@ if (! jspreadsheet && typeof(require) === 'function') {
                         let maxLength = tr.children[0].innerText.length;
                         let widthInit = width;
                         for(let ite_row=0; ite_row<worksheet.rows.length; ite_row++) {
-                            const valueRow = worksheet.getValueFromCoords(ite_td-1, ite_row, true);
+                            let valueRow = worksheet.getValueFromCoords(ite_td-1, ite_row, true);
+                            if(typeof valueRow !== "string") {
+                                if(valueRow === null) {
+                                    valueRow = "";
+                                } else {
+                                    valueRow = "" + valueRow;
+                                }
+                            }
                             if(worksheet.rows[ite_row].element == null) {
                                 width = Math.max(Math.ceil((valueRow.length / maxLength) * widthInit), width);
                             } else {
