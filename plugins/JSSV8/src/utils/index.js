@@ -1,7 +1,7 @@
 /**
  * Plugin to add utils feature on jspreadsheet Pro
  *
- * @version 1.0.0
+ * @version 1.1.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description Plugin to add utils feature on jspreadsheet Pro like :
@@ -32,6 +32,9 @@ if(! jspreadsheet && typeof(require) === 'function') {
     return (function(spreadsheet, options, spreadsheetConfig) {
         // Plugin object
         const plugin = {};
+
+        // var
+        let saveIgnore = {};
 
         // Set options
         plugin.options = Object.assign({},options);
@@ -86,42 +89,47 @@ if(! jspreadsheet && typeof(require) === 'function') {
             if(event == "onload") {
                 tab.onload(spreadsheet.element, spreadsheet.element.tabs);
             }
+            if(event == "onresize") {
+                zoom.updateViewport(arguments[1], arguments[2]);
+            }
+            if(event == "onopenworksheet" || event == "oncreateworksheet") {
+                zoom.update(worksheet);
+            }
+
         };
 
         /**
          * Run on toolbar
          */
         plugin.toolbar = function(toolbar) {
-            if(plugin.options.allow.zoom && getCurrentWorksheet().options.tableOverflow && parseInt(jspreadsheet.version().version.split(".")[0]) >= 9) { // Reserve only for v9
-                const itemZoomIn = {
-                    type: 'i',
-                    content: 'zoom_in',
-                    onclick: function () {
-                        zoom.in();
-                    }
-                };
-                const itemZoomOut = {
-                    type: 'i',
-                    content: 'zoom_out',
-                    onclick: function () {
-                        zoom.out();
-                    }
-                };
-                const itemZoomValue = {
-                    type: 'label',
-                    content: '100%',
-                    id: 'zoom_label',
-                    onclick: function () {
-                        const newValue = prompt(jSuites.translate("Set new zoom value"), zoom.value);
-                        zoom.set(newValue);
-                    }
-                };
+            const itemZoomIn = {
+                type: 'i',
+                content: 'zoom_in',
+                onclick: function () {
+                    zoom.in(10);
+                }
+            };
+            const itemZoomOut = {
+                type: 'i',
+                content: 'zoom_out',
+                onclick: function () {
+                    zoom.out(10);
+                }
+            };
+            const itemZoomValue = {
+                type: 'label',
+                content: '100%',
+                id: 'zoom_label',
+                onclick: function () {
+                    const newValue = prompt(jSuites.translate("Set new zoom value"), zoom.get());
+                    zoom.set(newValue);
+                }
+            };
 
-                toolbar.items.push({type: "divisor"});
-                toolbar.items.push(itemZoomOut);
-                toolbar.items.push(itemZoomValue);
-                toolbar.items.push(itemZoomIn);
-            }
+            toolbar.items.push({type: "divisor"});
+            toolbar.items.push(itemZoomOut);
+            toolbar.items.push(itemZoomValue);
+            toolbar.items.push(itemZoomIn);
 
             return toolbar;
         };
@@ -528,62 +536,123 @@ if(! jspreadsheet && typeof(require) === 'function') {
                 });
 
                 header.insertBefore(menuEl, header.firstChild);
-            }
+            };
 
             return component;
         }();
 
         const zoom = function() {
             const component = {};
-            component.value = 100;
 
-            component.set = function(value) {
+            component.init = function(instance) {
+                if(instance == null) {
+                    instance = getCurrentWorksheet();
+                }
+
+                if(instance.options.pluginOptions == null) {
+                    instance.options.pluginOptions = {};
+                }
+                if(instance.options.pluginOptions.zoom == null) {
+                    instance.options.pluginOptions.zoom = {
+                        value: 100,
+                    };
+                    component.updateViewport();
+
+                    if(!instance.options.tableOverflow) {
+                        window.addEventListener('scroll', function() {
+                            const instance = getCurrentWorksheet();
+                            const scale = zoom.get(instance) / 100;
+
+                            var offset = document.body.scrollTop - (document.body.scrollTop / scale);
+
+                            for(const header of instance.headerContainer.children) {
+                                header.style.top = `${-offset}px`;
+                            }
+                        });
+                    }
+                }
+            };
+
+            component.updateViewport = function (w, h, instance) {
+                if(instance == null) {
+                    instance = getCurrentWorksheet();
+                }
+
+                component.init(instance);
+                if(w == null) {
+                    w = parseInt(instance.content.style.width ? instance.content.style.width : instance.content.style.maxWidth);
+                }
+                if(h == null) {
+                    h = parseInt(instance.content.style.height ? instance.content.style.height : instance.content.style.maxHeight);
+                }
+
+                instance.options.pluginOptions.zoom.tableWidthInit = parseInt(w * component.get(instance) / 100);
+                instance.options.pluginOptions.zoom.tableHeightInit = parseInt(h * component.get(instance) / 100);
+
+            };
+
+            component.update = function(instance) {
+                if(instance == null) {
+                    instance = getCurrentWorksheet();
+                }
+                component.init(instance);
+
+                spreadsheet.toolbar.querySelector("#zoom_label").innerText = component.get(instance) + "%";
+                const h = (instance.options.pluginOptions.zoom.tableHeightInit) / (component.get(instance) / 100);
+                instance.content.style.marginBottom = `${instance.options.pluginOptions.zoom.tableHeightInit-parseInt(h)}px`;
+            };
+
+            component.set = function(value, instance) {
                 if(isNaN(parseInt(value))) {
                     return;
                 }
-                component.value = Math.max(10,Math.min(200, parseInt(value)));
 
-                const instance = getCurrentWorksheet();
+                if(instance == null) {
+                    instance = getCurrentWorksheet();
+                }
+
+                const valueZoom = Math.max(10,Math.min(200, parseInt(value)));
+
                 if(instance) {
-                    instance.content.style.transform = "scale(" + (component.value / 100) + ")";
+                    instance.content.style.transform = "scale(" + (valueZoom / 100) + ")";
                     instance.content.style.transformOrigin = "top left";
 
-                    if(instance.options.pluginOptions == null) {
-                        instance.options.pluginOptions = {};
-                    }
-                    if(instance.options.pluginOptions.zoom == null) {
-                        instance.options.pluginOptions.zoom = {};
-                    }
-                    if(instance.options.pluginOptions.zoom.tableWidthInit == null) {
-                        instance.options.pluginOptions.zoom.tableWidthInit = parseInt(instance.content.style.width ? instance.content.style.width : instance.content.style.maxWidth);
-                    }
-                    if(instance.options.pluginOptions.zoom.tableHeightInit == null) {
-                        instance.options.pluginOptions.zoom.tableHeightInit = parseInt(instance.content.style.height ? instance.content.style.height : instance.content.style.maxHeight);
-                    }
+                    component.init(instance);
 
-                    const w = (instance.options.pluginOptions.zoom.tableWidthInit) / (component.value / 100);
-                    const h = (instance.options.pluginOptions.zoom.tableHeightInit) / (component.value / 100);
+                    instance.options.pluginOptions.zoom.value = valueZoom;
+
+                    const w = (instance.options.pluginOptions.zoom.tableWidthInit) / (valueZoom / 100);
+                    const h = (instance.options.pluginOptions.zoom.tableHeightInit) / (valueZoom / 100);
+
                     instance.content.style.marginBottom = `${instance.options.pluginOptions.zoom.tableHeightInit-parseInt(h)}px`;
 
                     if(instance.options.tableOverflow) {
+                        enableIgnoreDispatch();
                         instance.setViewport(parseInt(w), parseInt(h));
+                        disableIgnoreDispatch();
                     }
 
-                    spreadsheet.toolbar.querySelector("#zoom_label").innerText = component.value + "%";
+                    component.update(instance);
                 }
             };
 
-            component.get = function() {
-                return component.value;
+            component.get = function(instance) {
+                if(instance == null) {
+                    instance = getCurrentWorksheet();
+                }
+                component.init(instance);
+
+                return instance.options.pluginOptions.zoom.value;
             };
 
-            component.in = function(step = 10) {
-                this.set(component.value + step);
+            component.in = function(step, instance) {
+                this.set(component.get() + step, instance);
             };
 
-            component.out = function(step = 10) {
-                this.set(component.value - step);
+            component.out = function(step, instance) {
+                this.set(component.get() - step, instance);
             };
+
 
             return component;
         }();
@@ -601,6 +670,31 @@ if(! jspreadsheet && typeof(require) === 'function') {
             }
             return spreadsheet.worksheets[0];
         }
+
+        /**
+         * enableIgnoreDispatch
+         */
+        const enableIgnoreDispatch = function() {
+            if(saveIgnore.ignoreEvents==null) {saveIgnore.ignoreEvents = spreadsheet.ignoreEvents;}
+            spreadsheet.ignoreEvents = true;
+            if(saveIgnore.ignoreCloud==null) {saveIgnore.ignoreCloud = spreadsheet.ignoreCloud;}
+            //spreadsheet.ignoreCloud = true;
+            if(saveIgnore.ignoreHistory==null) {saveIgnore.ignoreHistory = spreadsheet.ignoreHistory;}
+            spreadsheet.ignoreHistory = true;
+            if(saveIgnore.ignorePersistence==null) {saveIgnore.ignorePersistence = spreadsheet.ignorePersistence;}
+            spreadsheet.ignorePersistence = true;
+        };
+
+        /**
+         * disableIgnoreDispatch
+         */
+        const disableIgnoreDispatch = function() {
+            spreadsheet.ignoreEvents = saveIgnore.ignoreEvents;
+            spreadsheet.ignoreHistory = saveIgnore.ignoreHistory;
+            spreadsheet.ignorePersistence = saveIgnore.ignorePersistence;
+            spreadsheet.ignoreCloud = saveIgnore.ignoreCloud;
+            saveIgnore = {};
+        };
 
         return plugin;
     });

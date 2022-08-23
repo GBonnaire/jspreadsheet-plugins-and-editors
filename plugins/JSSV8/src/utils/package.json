@@ -11,6 +11,7 @@
         "url" : "https://github.com/GBonnaire/jspreadsheet-plugins-and-editors.git"
     },
     "keywords": [
+        "zoom",
         "row",
         "column",
         "feature",
@@ -27,8 +28,8 @@
         "data-spreadsheet"
     ],
     "dependencies": {
-        "jspreadsheet": "^8.1.0"
+        "jspreadsheet": "^9.0.0"
     },
     "main": "index.js",
-    "version": "1.0.0"
+    "version": "1.1.0"
 }
