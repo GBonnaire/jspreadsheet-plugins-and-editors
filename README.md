@@ -32,8 +32,8 @@ You can buy premium plugin on [Web site plugins&editors JSpreadsheet Pro](https:
 - [Row Header rename](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/rowHeaderRename)
 - [Status bar](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/statusbar)
 - [Sync Input](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/syncInput)
-- [Top menu](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/topmenu)
-- [Utils](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/utils)
+- [Top menu](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/topmenu)
+- [Utils](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src/utils)
 
 ## Free Editors for v8Pro+
 In editor use only file with name start by `jss.`
