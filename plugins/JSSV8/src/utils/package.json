@@ -1,7 +1,7 @@
 {
-    "name": "@jspreadsheet/topmenu",
-    "title": "Jspreadsheet plugins: add topmenu bar on sheet of jSpreadsheet.",
-    "description": "Jspreadsheet plugins: add topmenu bar on sheet of jSpreadsheet",
+    "name": "@jspreadsheet/utils",
+    "title": "Jspreadsheet plugins: features utils for JSS.",
+    "description": "features columns of jspreadsheet-pro like move row, duplicate row, hide column, show column, hide sheet, sheet selector.",
     "author": {
         "name": "Guillaume Bonnaire <contact@gbonnaire.fr>",
         "url": "https://repo.gbonnaire.fr"
@@ -11,11 +11,10 @@
         "url" : "https://github.com/GBonnaire/jspreadsheet-plugins-and-editors.git"
     },
     "keywords": [
-        "menu",
-        "topmenu",
-        "menubar",
-        "file",
-        "edit",
+        "row",
+        "column",
+        "feature",
+        "util",
         "spreadsheet",
         "spreadsheets",
         "tables",
@@ -28,8 +27,8 @@
         "data-spreadsheet"
     ],
     "dependencies": {
-        "jspreadsheet": "^8.0.0"
+        "jspreadsheet": "^8.1.0"
     },
     "main": "index.js",
-    "version": "2.0.3"
+    "version": "1.0.0"
 }

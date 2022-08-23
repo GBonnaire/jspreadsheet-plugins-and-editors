@@ -1,7 +1,7 @@
 /**
  * Plugin for top menu
  *
- * @version 2.0.2
+ * @version 2.0.3
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description add top menu on sheet
@@ -63,11 +63,11 @@ if(! jspreadsheet && typeof(require) === 'function') {
                 "File": function(el, i, menuButton) {
                     let items = [];
 
-                    let tabSelected = el.querySelector(".jtabs-selected");
+                    let tabSelected = el.tabs.headers.querySelector(".jtabs-selected");
                     let WorksheetIndex = spreadsheet.getWorksheetActive();
                     let countTab = Array.isArray(el.jspreadsheet) ? el.jspreadsheet.length : 1;
 
-                    if(spreadsheet.config.tabs == true) {
+                    if(spreadsheet.config.tabs != false && spreadsheet.config.tabs.allowCreate == true) {
                         items.push({
                             icon: 'tab',
                             disabled: !i.options.editable,
@@ -79,7 +79,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
 
 
 
-                        if(spreadsheet.config.allowRenameWorksheet == true) {
+                        if(tabSelected && spreadsheet.config.allowRenameWorksheet == true) {
                             items.push({
                                 icon: 'edit',
                                 disabled: !i.options.editable,
@@ -95,7 +95,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                             });
                         }
 
-                        if(spreadsheet.config.allowDeleteWorksheet == true && countTab>1) {
+                        if(tabSelected && spreadsheet.config.allowDeleteWorksheet == true && countTab>1) {
                             items.push({
                                 icon: 'tab_unselected',
                                 disabled: !i.options.editable,
@@ -103,7 +103,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                                 onclick: function () {
                                     if(tabSelected!=null) {
                                         if(confirm(jSuites.translate('Are you sure to delete this worksheet?'), tabSelected.innerText)) {
-                                            spreadsheet.deleteWorksheet(tabSelected);
+                                            spreadsheet.deleteWorksheet(WorksheetIndex);
                                         }
                                     }
                                 }
@@ -476,7 +476,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
             spreadsheet.tools.insertBefore(plugin.topmenu, spreadsheet.tools.firstChild);
 
             contextMenuElement = document.createElement("DIV");
-            contextMenuElement.className = 'jexcel_contextmenu';
+            contextMenuElement.className = 'jss_contextmenu';
 
             contextMenu = jSuites.contextmenu(contextMenuElement, {
                 onclick:function() {
