@@ -1,7 +1,7 @@
 /**
  * Plugin to add utils feature on jspreadsheet Pro
  *
- * @version 1.1.1
+ * @version 1.1.2
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description Plugin to add utils feature on jspreadsheet Pro like :
@@ -636,6 +636,8 @@ if(! jspreadsheet && typeof(require) === 'function') {
                         enableIgnoreDispatch();
                         instance.setViewport(parseInt(w), parseInt(h));
                         disableIgnoreDispatch();
+                    } else {
+                        spreadsheet.toolbar.querySelector("#zoom_label").innerText = component.get(instance) + "%";
                     }
 
                     component.update(instance);
