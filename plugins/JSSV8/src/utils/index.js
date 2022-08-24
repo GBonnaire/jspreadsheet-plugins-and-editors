@@ -1,7 +1,7 @@
 /**
  * Plugin to add utils feature on jspreadsheet Pro
  *
- * @version 1.1.0
+ * @version 1.1.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description Plugin to add utils feature on jspreadsheet Pro like :
@@ -11,10 +11,13 @@
  *  - Hide columns / show columns
  *  - Zoom
  *
+ *  @event onzoom(worksheet: Object, zoomValue: int) dispatch on onevent in options of JSS
+ *
  * @license This plugin is distribute under MIT License
  *
  * ReleaseNote :
  * 1.0 : Create plugin
+ * 1.1 : Add zoom feature
  */
 if(! jSuites && typeof(require) === 'function') {
     var jSuites = require('jsuites');
@@ -102,6 +105,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
          * Run on toolbar
          */
         plugin.toolbar = function(toolbar) {
+
             const itemZoomIn = {
                 type: 'i',
                 content: 'zoom_in',
@@ -123,6 +127,9 @@ if(! jspreadsheet && typeof(require) === 'function') {
                 onclick: function () {
                     const newValue = prompt(jSuites.translate("Set new zoom value"), zoom.get());
                     zoom.set(newValue);
+                },
+                updateState(toolbarElement, toolbarInstance, itemElement, worksheet) {
+                    itemElement.innerText = zoom.get(worksheet) + "%";
                 }
             };
 
@@ -597,7 +604,6 @@ if(! jspreadsheet && typeof(require) === 'function') {
                 }
                 component.init(instance);
 
-                spreadsheet.toolbar.querySelector("#zoom_label").innerText = component.get(instance) + "%";
                 const h = (instance.options.pluginOptions.zoom.tableHeightInit) / (component.get(instance) / 100);
                 instance.content.style.marginBottom = `${instance.options.pluginOptions.zoom.tableHeightInit-parseInt(h)}px`;
             };
@@ -633,6 +639,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                     }
 
                     component.update(instance);
+                    instance.dispatch("onzoom", instance, valueZoom);
                 }
             };
 
@@ -699,4 +706,4 @@ if(! jspreadsheet && typeof(require) === 'function') {
         return plugin;
     });
 
-})));
+}))); 
