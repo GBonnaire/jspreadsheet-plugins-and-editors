@@ -1,7 +1,7 @@
 /**
  * Plugin to add utils feature on jspreadsheet Pro
  *
- * @version 1.1.2
+ * @version 1.2.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description Plugin to add utils feature on jspreadsheet Pro like :
@@ -18,6 +18,7 @@
  * ReleaseNote :
  * 1.0 : Create plugin
  * 1.1 : Add zoom feature
+ * 1.2 : Add hide / show row feature
  */
 if(! jSuites && typeof(require) === 'function') {
     var jSuites = require('jsuites');
@@ -49,12 +50,15 @@ if(! jspreadsheet && typeof(require) === 'function') {
                 duplicateRow: true,
                 hideSheet: true,
                 hideColumn: true,
+                hideRow: true,
                 zoom: true,
             },
             icon: {
                 moveUpRow:'arrow_upward',
                 moveDownRow:'arrow_downward',
                 duplicateRow:'content_copy',
+                hideRow:'visibility_off',
+                showRow:'visibility',
                 hideColumn:'visibility_off',
                 showColumn:'visibility',
                 hideWorksheet:'visibility_off',
@@ -63,6 +67,8 @@ if(! jspreadsheet && typeof(require) === 'function') {
                 moveUpRow: jSuites.translate('Move up row(s) selected'),
                 moveDownRow: jSuites.translate('Move down row(s) selected'),
                 duplicateRow: jSuites.translate('Duplicate row(s) selected'),
+                hideRow: jSuites.translate('Hide row(s) selected'),
+                showRow: jSuites.translate('Show row ({0})'),
                 hideColumn: jSuites.translate('Hide column(s) selected'),
                 showColumn: jSuites.translate('Show column ({0})'),
                 hideWorksheet: jSuites.translate("Hide this worksheet"),
@@ -148,7 +154,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
         plugin.contextMenu = function(obj, x, y, e, items, target) {
             const instance = getCurrentWorksheet();
 
-            if(x==null && y!=null && obj.getSelectedRows().length) {
+            if(x==null && y!=null && obj.getSelectedRows(true).length) {
                 let positionDivisor = 0;
                 for(const ite_items in items) {
                     if(items[ite_items].type == "divisor" || items[ite_items].type == "line") {
@@ -162,17 +168,16 @@ if(! jspreadsheet && typeof(require) === 'function') {
                     const newItemMoveUp = {
                         title:plugin.options.text.moveUpRow,
                         onclick:function() {
-                            const rows = obj.getSelectedRows();
+                            const rows = obj.getSelectedRows(true);
                             rows.forEach(function (row) {
-                                const y = parseInt(row.getAttribute('data-y'));
-                                obj.moveRow(y,y-1);
+                                obj.moveRow(row,row-1);
                             });
 
                             // Update selection
                             const x1 = 0;
-                            const y1 = parseInt(rows[0].getAttribute('data-y'));
+                            const y1 = Math.min(rows);
                             const x2 = obj.options.data[0].length-1;
-                            const y2 = parseInt(rows[rows.length-1].getAttribute('data-y'));
+                            const y2 = Math.max(rows);
                             obj.updateSelectionFromCoords(x1, y1, x2, y2);
                         }
                     };
@@ -188,17 +193,16 @@ if(! jspreadsheet && typeof(require) === 'function') {
                     const newItemMoveDown = {
                         title:plugin.options.text.moveDownRow,
                         onclick:function() {
-                            const rows = obj.getSelectedRows();
+                            const rows = obj.getSelectedRows(true);
                             rows.reverse().forEach(function (row) {
-                                const y = parseInt(row.getAttribute('data-y'));
-                                obj.moveRow(y,y+1);
+                                obj.moveRow(row,row+1);
                             });
 
                             // Update selection
                             const x1 = 0;
-                            const y1 = parseInt(rows[0].getAttribute('data-y'));
+                            const y1 = Math.min(rows);
                             const x2 = obj.options.data[0].length-1;
-                            const y2 = parseInt(rows[rows.length-1].getAttribute('data-y'));
+                            const y2 = Math.max(rows);
                             obj.updateSelectionFromCoords(x1, y1, x2, y2);
                         }
                     };
@@ -216,8 +220,8 @@ if(! jspreadsheet && typeof(require) === 'function') {
                     const newItemDuplicateRow = {
                         title: plugin.options.text.duplicateRow,
                         onclick: function () {
-                            const rows = obj.getSelectedRows();
-                            let indexLastRow = parseInt(rows[rows.length - 1].getAttribute('data-y'));
+                            const rows = obj.getSelectedRows(true);
+                            let indexLastRow = Math.max(rows);
 
                             const dataRowsSelected = obj.getData(true);
 
@@ -229,7 +233,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
 
                             // Update selection
                             const x1 = 0;
-                            const y1 = parseInt(rows[0].getAttribute('data-y'));
+                            const y1 = Math.min(rows);
                             const x2 = obj.options.data[0].length - 1;
                             const y2 = indexLastRow;
                             obj.updateSelectionFromCoords(x1, y1, x2, y2);
@@ -242,6 +246,67 @@ if(! jspreadsheet && typeof(require) === 'function') {
 
                     items.splice(positionDivisor, 0, newItemDuplicateRow);
                     positionDivisor++;
+                }
+
+                if(plugin.options.allow.hideRow) {
+                    // HideRow
+                    const newItemHideRow = {
+                        title: plugin.options.text.hideRow,
+                        onclick: function () {
+                            const rows = obj.getSelectedRows(true);
+                            // hide rows
+                            rows.forEach(function (row) {
+                                obj.hideRow(row);
+                            });
+                        }
+                    };
+
+                    if (plugin.options.icon.hideRow) {
+                        newItemHideRow.icon = plugin.options.icon.hideRow;
+                    }
+
+                    items.splice(positionDivisor, 0, newItemHideRow);
+                    positionDivisor++;
+
+                    const startRow = Math.min(obj.getSelectedRows(true));
+                    const endRow = Math.min(obj.getSelectedRows(true));
+
+                    const rowBefore = obj.getRow(startRow - 1);
+                    const rowAfter = obj.getRow(endRow + 1);
+
+                    if (rowBefore && rowBefore.visible === false) {
+                        // ShowRowBefore
+                        const newItemShowRowBefore = {
+                            title: plugin.options.text.showRow.replace("{0}", rowBefore.title ?? (startRow + 1 - 1) ),
+                            onclick: function () {
+                                obj.showRow(startRow - 1);
+                            }
+                        };
+
+                        if (plugin.options.icon.showRow) {
+                            newItemShowRowBefore.icon = plugin.options.icon.showRow;
+                        }
+
+                        items.splice(positionDivisor, 0, newItemShowRowBefore);
+                        positionDivisor++;
+                    }
+
+                    if (rowAfter && rowAfter.visible === false) {
+                        // ShowRowAfter
+                        const newItemShowRowAfter = {
+                            title: plugin.options.text.showRow.replace("{0}", rowAfter.title ?? (endRow + 1 + 1)),
+                            onclick: function () {
+                                obj.showRow(endRow + 1);
+                            }
+                        };
+
+                        if (plugin.options.icon.showRow) {
+                            newItemShowRowAfter.icon = plugin.options.icon.showRow;
+                        }
+
+                        items.splice(positionDivisor, 0, newItemShowRowAfter);
+                        positionDivisor++;
+                    }
                 }
 
                 items.splice(positionDivisor, 0, {type:"line"});
@@ -379,17 +444,16 @@ if(! jspreadsheet && typeof(require) === 'function') {
                         const newItemMoveUp = {
                             title:plugin.options.text.moveUpRow,
                             onclick:function() {
-                                const rows = obj.getSelectedRows();
+                                const rows = obj.getSelectedRows(true);
                                 rows.forEach(function (row) {
-                                    const y = parseInt(row.getAttribute('data-y'));
-                                    obj.moveRow(y,y-1);
+                                    obj.moveRow(row,row-1);
                                 });
 
                                 // Update selection
                                 const x1 = 0;
-                                const y1 = parseInt(rows[0].getAttribute('data-y'));
+                                const y1 = Math.min(rows);
                                 const x2 = obj.options.data[0].length-1;
-                                const y2 = parseInt(rows[rows.length-1].getAttribute('data-y'));
+                                const y2 = Math.max(rows);
                                 obj.updateSelectionFromCoords(x1, y1, x2, y2);
                             }
                         };
@@ -404,17 +468,16 @@ if(! jspreadsheet && typeof(require) === 'function') {
                         const newItemMoveDown = {
                             title:plugin.options.text.moveDownRow,
                             onclick:function() {
-                                const rows = obj.getSelectedRows();
+                                const rows = obj.getSelectedRows(true);
                                 rows.reverse().forEach(function (row) {
-                                    const y = parseInt(row.getAttribute('data-y'));
-                                    obj.moveRow(y,y+1);
+                                    obj.moveRow(row,row+1);
                                 });
 
                                 // Update selection
                                 const x1 = 0;
-                                const y1 = parseInt(rows[0].getAttribute('data-y'));
+                                const y1 = Math.min(rows);
                                 const x2 = obj.options.data[0].length-1;
-                                const y2 = parseInt(rows[rows.length-1].getAttribute('data-y'));
+                                const y2 = Math.max(rows);
                                 obj.updateSelectionFromCoords(x1, y1, x2, y2);
                             }
                         };
@@ -430,8 +493,8 @@ if(! jspreadsheet && typeof(require) === 'function') {
                     const newItemDuplicate = {
                         title:plugin.options.text.duplicateRow,
                         onclick:function() {
-                            const rows = obj.getSelectedRows();
-                            let indexLastRow = parseInt(rows[rows.length-1].getAttribute('data-y'));
+                            const rows = obj.getSelectedRows(true);
+                            let indexLastRow = Math.max(rows);
 
                             const dataRowsSelected = obj.getData(true);
 
@@ -443,7 +506,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
 
                             // Update selection
                             const x1 = 0;
-                            const y1 = parseInt(rows[0].getAttribute('data-y'));
+                            const y1 = Math.min(rows);
                             const x2 = obj.options.data[0].length-1;
                             const y2 = indexLastRow;
                             obj.updateSelectionFromCoords(x1, y1, x2, y2);
@@ -587,14 +650,20 @@ if(! jspreadsheet && typeof(require) === 'function') {
 
                 component.init(instance);
                 if(w == null) {
-                    w = parseInt(instance.content.style.width ? instance.content.style.width : instance.content.style.maxWidth);
+                    w = parseInt(instance.content.style.width ? instance.content.style.width : instance.content.offsetWidth);
                 }
                 if(h == null) {
-                    h = parseInt(instance.content.style.height ? instance.content.style.height : instance.content.style.maxHeight);
+                    h = parseInt(instance.content.style.height ? instance.content.style.height : instance.content.style.offsetHeight);
                 }
 
                 instance.options.pluginOptions.zoom.tableWidthInit = parseInt(w * component.get(instance) / 100);
+                if(isNaN(instance.options.pluginOptions.zoom.tableWidthInit)) {
+                    instance.options.pluginOptions.zoom.tableWidthInit = null;
+                }
                 instance.options.pluginOptions.zoom.tableHeightInit = parseInt(h * component.get(instance) / 100);
+                if(isNaN(instance.options.pluginOptions.zoom.tableHeightInit)) {
+                    instance.options.pluginOptions.zoom.tableHeightInit = null;
+                }
 
             };
 
@@ -637,7 +706,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                         instance.setViewport(parseInt(w), parseInt(h));
                         disableIgnoreDispatch();
                     } else {
-                        spreadsheet.toolbar.querySelector("#zoom_label").innerText = component.get(instance) + "%";
+                        spreadsheet.toolbar.querySelector("#zoom_label").innerText = valueZoom + "%";
                     }
 
                     component.update(instance);
@@ -708,4 +777,4 @@ if(! jspreadsheet && typeof(require) === 'function') {
         return plugin;
     });
 
-}))); 
+})));

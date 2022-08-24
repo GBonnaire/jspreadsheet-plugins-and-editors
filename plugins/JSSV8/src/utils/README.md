@@ -11,7 +11,8 @@ This plugin is **Free**
 - Duplicate Row
 - Hide Sheet
 - Hide columns / show columns
-- Zoom (only for v9 with option tableOverflow)
+- Hide rows / show rows
+- Zoom (only for v9 - beta version)
 
 
 ## What is jSpreadsheet ?
@@ -39,12 +40,15 @@ options = {
         duplicateRow: true,
         hideSheet: true,
         hideColumn: true,
+        hideRow: true,
         zoom: true,
     },
     icon: {
         moveUpRow:'arrow_upward',
         moveDownRow:'arrow_downward',
         duplicateRow:'content_copy',
+        hideRow:'visibility_off',
+        showRow:'visibility',
         hideColumn:'visibility_off',
         showColumn:'visibility',
         hideWorksheet:'visibility_off',
@@ -53,6 +57,8 @@ options = {
         moveUpRow: 'Move up row(s) selected',
         moveDownRow: 'Move down row(s) selected',
         duplicateRow: 'Duplicate row(s) selected',
+        hideRow: 'Hide row(s) selected',
+        showRow: 'Show row ({0})', // use {0} to set position for column title
         hideColumn: 'Hide column(s) selected',
         showColumn: 'Show column ({0})', // use {0} to set position for column title
         hideWorksheet: 'Hide this worksheet',
@@ -70,6 +76,8 @@ jSuites.setDictionary({
     'Move up row(s) selected' : "YOURTRANLSATION",
     'Move down row(s) selected' : "YOURTRANLSATION",
     'Duplicate row(s) selected' : "YOURTRANLSATION",
+    'Hide row(s) selected' : "YOURTRANLSATION",
+    'Show row ({0})' : "YOURTRANLSATION",
     'Hide column(s) selected' : "YOURTRANLSATION",
     'Show column ({0})' : "YOURTRANLSATION",
     'Hide this worksheet' : "YOURTRANLSATION",
