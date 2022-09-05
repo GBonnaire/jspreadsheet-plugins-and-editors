@@ -19,6 +19,7 @@ You can buy premium plugin on [Web site plugins&editors JSpreadsheet Pro](https:
 - [Conditional style](https://repo.gbonnaire.fr/product/jss-plugin-conditionalstyle)
 - [Formula editors advanced](https://repo.gbonnaire.fr/product/jss-plugin-formula)
 - [Open File](https://repo.gbonnaire.fr/product/jss-plugin-openfile)
+- [Pivot table](https://repo.gbonnaire.fr/product/jss-plugin-pivottable)
 - [Print](https://repo.gbonnaire.fr/product/jss-plugin-print)
 - [Statistics Formula](https://repo.gbonnaire.fr/product/jss-formula-statistics)
 - [Summary](https://repo.gbonnaire.fr/product/jss-plugin-summary)
@@ -48,7 +49,7 @@ In editor use only file with name start by `jss.`
 ## Premium plugins for v7Pro
 - [Conditional style](https://repo.gbonnaire.fr/product/jexcel-plugin-conditionalstyle)
 - [Formula editors advanced](https://repo.gbonnaire.fr/product/jexcel-plugin-formula)
-- [Mobile](https://repo.gbonnaire.fr/product/jexcel-plugin-mobile)
+- [Mobile](https://repo.gbonnaire.fr/product/jexcel-plugin-mobile) *Deprecated for JSS v8+*
 - [Open File](https://repo.gbonnaire.fr/product/jexcel-plugin-openfile)
 - [PivotTable](https://repo.gbonnaire.fr/product/jexcel-plugin-pivottable)
 - [Print](https://repo.gbonnaire.fr/product/jexcel-plugin-print)
@@ -60,11 +61,11 @@ In editor use only file with name start by `jss.`
 
 ## Free plugins for v7Pro
 - [Auto Width](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/autoWidth)
-- [Contextmenu Rows Advanced Actions](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/contextmenu_rowsAdvancedActions)
-- [Contextmenu Shortcut](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/contextmenu_shortcut)
+- [Contextmenu Rows Advanced Actions](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/contextmenu_rowsAdvancedActions) *Deprecated for JSS v8+*
+- [Contextmenu Shortcut](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/contextmenu_shortcut) *Deprecated for JSS v8+*
 - [Copy Paste advanced (when access to clipboard navigator is denied)](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/copypaste_advanced)
 - [Persistance Flag](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/persistanceFlag)
-- [Row Header rename](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/rowHeaderRename)
+- [Row Header rename](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/rowHeaderRename) *Deprecated for JSS v8+*
 - [Status bar](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/statusbar)
 - [Sync Input](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/syncInput)
 - [Top menu](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/src/topmenu)
