@@ -6,6 +6,8 @@ The topmenu plugin add a top menu bar on jSpreadsheet.
 
 This plugin is **Free**
 
+[Available for JSS v8+](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src)
+
 ### Features
 
 - Add top menu bar
