@@ -4,6 +4,8 @@ The autoWidth plugin add possibility to set auto width of columns.
 
 This plugin is **Free**
 
+[Available for JSS v8+](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src)
+
 
 ### Features
 
