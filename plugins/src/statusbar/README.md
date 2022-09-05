@@ -7,6 +7,8 @@
 
 This plugin is **Free**
 
+[Available for JSS v8+](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src)
+
 ## What is jSpreadsheet ?
 
 jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create exceptional web-based interactive tables and spreadsheets. Compatible with most widely-used spreadsheet software, such as Excel or Google Spreadsheet, it offers users an unrivalled Excel-like user experience. It also works well with prominent modern frameworks and flexibly utilizes a large collection of events, extensions and configurations to meet different application requirements. Impress your clients with a better user experience and a great dynamic interactive data management tool.
