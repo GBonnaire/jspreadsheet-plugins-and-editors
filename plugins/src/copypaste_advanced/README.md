@@ -6,6 +6,8 @@ The Copypaste_advanced plugin improves the copy paste functionality of jSpreadsh
 
 This plugin is **Free**
 
+[Available for JSS v8+](https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/tree/master/plugins/JSSV8/src)
+
 ### Features
 
 - Add items cut, copy, paste on default toolbar
