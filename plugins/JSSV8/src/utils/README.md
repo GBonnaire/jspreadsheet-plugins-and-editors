@@ -49,8 +49,10 @@ options = {
         duplicateRow:'content_copy',
         hideRow:'visibility_off',
         showRow:'visibility',
+        showRows: 'visibility',
         hideColumn:'visibility_off',
         showColumn:'visibility',
+        showColumns:'visibility',
         hideWorksheet:'visibility_off',
     },
     text: {
@@ -58,9 +60,11 @@ options = {
         moveDownRow: 'Move down row(s) selected',
         duplicateRow: 'Duplicate row(s) selected',
         hideRow: 'Hide row(s) selected',
-        showRow: 'Show row ({0})', // use {0} to set position for column title
+        showRow: 'Show hidden row ({0})',
+        showRows: 'Show hidden rows',
         hideColumn: 'Hide column(s) selected',
-        showColumn: 'Show column ({0})', // use {0} to set position for column title
+        showColumn: 'Show hidden column ({0})',
+        showColumns: 'Show hidden columns',
         hideWorksheet: 'Hide this worksheet',
     }
 };
@@ -77,9 +81,11 @@ jSuites.setDictionary({
     'Move down row(s) selected' : "YOURTRANLSATION",
     'Duplicate row(s) selected' : "YOURTRANLSATION",
     'Hide row(s) selected' : "YOURTRANLSATION",
-    'Show row ({0})' : "YOURTRANLSATION",
+    'Show hidden row ({0})' : "YOURTRANLSATION",
+    'Show hidden rows': "YOURTRANSLATION",
     'Hide column(s) selected' : "YOURTRANLSATION",
-    'Show column ({0})' : "YOURTRANLSATION",
+    'Show hidden column ({0})' : "YOURTRANLSATION",
+    'Show hidden columns': "YOURTRANSLATION",
     'Hide this worksheet' : "YOURTRANLSATION",
     'Set new zoom value' : "YOURTRANLSATION",
     '(hidden)' : "YOURTRANLSATION",

@@ -1,7 +1,7 @@
 /**
  * Plugin to add utils feature on jspreadsheet Pro
  *
- * @version 1.2.0
+ * @version 1.3.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description Plugin to add utils feature on jspreadsheet Pro like :
@@ -9,6 +9,7 @@
  *  - Duplicate Row
  *  - Hide Sheet
  *  - Hide columns / show columns
+ *  - Hide rows / show rows
  *  - Zoom
  *
  *  @event onzoom(worksheet: Object, zoomValue: int) dispatch on onevent in options of JSS
@@ -19,6 +20,7 @@
  * 1.0 : Create plugin
  * 1.1 : Add zoom feature
  * 1.2 : Add hide / show row feature
+ * 1.3 : Add show hidden rows and columns in 1 time
  */
 if(! jSuites && typeof(require) === 'function') {
     var jSuites = require('jsuites');
@@ -59,8 +61,10 @@ if(! jspreadsheet && typeof(require) === 'function') {
                 duplicateRow:'content_copy',
                 hideRow:'visibility_off',
                 showRow:'visibility',
+                showRows: 'visibility',
                 hideColumn:'visibility_off',
                 showColumn:'visibility',
+                showColumns:'visibility',
                 hideWorksheet:'visibility_off',
             },
             text: {
@@ -68,9 +72,11 @@ if(! jspreadsheet && typeof(require) === 'function') {
                 moveDownRow: jSuites.translate('Move down row(s) selected'),
                 duplicateRow: jSuites.translate('Duplicate row(s) selected'),
                 hideRow: jSuites.translate('Hide row(s) selected'),
-                showRow: jSuites.translate('Show row ({0})'),
+                showRow: jSuites.translate('Show hidden row ({0})'),
+                showRows: jSuites.translate('Show hidden rows'),
                 hideColumn: jSuites.translate('Hide column(s) selected'),
-                showColumn: jSuites.translate('Show column ({0})'),
+                showColumn: jSuites.translate('Show hidden column ({0})'),
+                showColumns: jSuites.translate('Show hidden columns'),
                 hideWorksheet: jSuites.translate("Hide this worksheet"),
             }
         };
@@ -268,8 +274,8 @@ if(! jspreadsheet && typeof(require) === 'function') {
                     items.splice(positionDivisor, 0, newItemHideRow);
                     positionDivisor++;
 
-                    const startRow = Math.min(obj.getSelectedRows(true));
-                    const endRow = Math.min(obj.getSelectedRows(true));
+                    const startRow = Math.min(...obj.getSelectedRows(true));
+                    const endRow = Math.max(...obj.getSelectedRows(true));
 
                     const rowBefore = obj.getRow(startRow - 1);
                     const rowAfter = obj.getRow(endRow + 1);
@@ -277,7 +283,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                     if (rowBefore && rowBefore.visible === false) {
                         // ShowRowBefore
                         const newItemShowRowBefore = {
-                            title: plugin.options.text.showRow.replace("{0}", rowBefore.title ?? (startRow + 1 - 1) ),
+                            title: plugin.options.text.showRow.replace("{0}", rowBefore.title ? rowBefore.title : (startRow + 1 - 1) ),
                             onclick: function () {
                                 obj.showRow(startRow - 1);
                             }
@@ -294,7 +300,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                     if (rowAfter && rowAfter.visible === false) {
                         // ShowRowAfter
                         const newItemShowRowAfter = {
-                            title: plugin.options.text.showRow.replace("{0}", rowAfter.title ?? (endRow + 1 + 1)),
+                            title: plugin.options.text.showRow.replace("{0}", rowAfter.title ? rowAfter.title : (endRow + 1 + 1)),
                             onclick: function () {
                                 obj.showRow(endRow + 1);
                             }
@@ -306,6 +312,41 @@ if(! jspreadsheet && typeof(require) === 'function') {
 
                         items.splice(positionDivisor, 0, newItemShowRowAfter);
                         positionDivisor++;
+                    }
+
+                    if(startRow != endRow) {
+                        let flagHaveHideRows = false;
+                        for(let ite_row = startRow + 1; ite_row < endRow; ite_row++) {
+                            const row = obj.getRow(ite_row);
+                            if(row.visible == false) {
+                                flagHaveHideRows = true;
+                                break;
+                            }
+                        }
+
+                        if(flagHaveHideRows) {
+                            // ShowRows
+                            const newItemShowRows = {
+                                title: plugin.options.text.showRows,
+                                onclick: function (startRow, endRow) {
+                                    return function () {
+                                        for(let ite_row = startRow + 1; ite_row < endRow; ite_row++) {
+                                            const row = obj.getRow(ite_row);
+                                            if (row.visible == false) {
+                                                obj.showRow(ite_row);
+                                            }
+                                        }
+                                    };
+                                }(startRow, endRow)
+                            };
+
+                            if (plugin.options.icon.showRows) {
+                                newItemShowRows.icon = plugin.options.icon.showRows;
+                            }
+
+                            items.splice(positionDivisor, 0, newItemShowRows);
+                            positionDivisor++;
+                        }
                     }
                 }
 
@@ -340,8 +381,8 @@ if(! jspreadsheet && typeof(require) === 'function') {
                     items.splice(positionDivisor, 0, newItemHideColumn);
                     positionDivisor++;
 
-                    const startColumn = Math.min(obj.getSelectedColumns());
-                    const endColumn = Math.min(obj.getSelectedColumns());
+                    const startColumn = Math.min(...obj.getSelectedColumns());
+                    const endColumn = Math.max(...obj.getSelectedColumns());
 
                     const colBefore = obj.getColumn(startColumn - 1);
                     const colAfter = obj.getColumn(endColumn + 1);
@@ -378,6 +419,41 @@ if(! jspreadsheet && typeof(require) === 'function') {
 
                         items.splice(positionDivisor, 0, newItemShowColumnAfter);
                         positionDivisor++;
+                    }
+
+                    if(startColumn != endColumn) {
+                        let flagHaveHideColumns = false;
+                        for(let ite_col = startColumn + 1; ite_col < endColumn; ite_col++) {
+                            const col = obj.getColumn(ite_col);
+                            if(col.visible == false) {
+                                flagHaveHideColumns = true;
+                                break;
+                            }
+                        }
+
+                        if(flagHaveHideColumns) {
+                            // ShowColumns
+                            const newItemShowColumns = {
+                                title: plugin.options.text.showColumns,
+                                onclick: function (startColumn, endColumn) {
+                                    return function () {
+                                        for(let ite_col = startColumn + 1; ite_col < endColumn; ite_col++) {
+                                            const col = obj.getColumn(ite_col);
+                                            if (col.visible == false) {
+                                                obj.showColumn(ite_col);
+                                            }
+                                        }
+                                    };
+                                }(startColumn, endColumn)
+                            };
+
+                            if (plugin.options.icon.showColumns) {
+                                newItemShowColumns.icon = plugin.options.icon.showColumns;
+                            }
+
+                            items.splice(positionDivisor, 0, newItemShowColumns);
+                            positionDivisor++;
+                        }
                     }
                 }
             } else if (x==null && y==null && target == "tabs") {
