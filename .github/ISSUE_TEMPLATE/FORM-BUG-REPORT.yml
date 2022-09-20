@@ -46,7 +46,7 @@ body:
   validations:
     required: true
 - type: markdown
-attributes:
-  value: |
-    We suggest to complet in second message with screenshot, or videos or JSFiddle to explain with more detail your problem.
-    Thanks for taking the time to fill out this bug report.
+  attributes:
+    value: |
+      We suggest to complet in second message with screenshot, or videos or JSFiddle to explain with more detail your problem.
+      Thanks for taking the time to fill out this bug report.
