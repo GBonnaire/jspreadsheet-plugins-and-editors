@@ -2,51 +2,51 @@ name: Bug Report
 description: Form a bug report
 labels: ["bug"]
 body:
-  - type: markdown
-    attributes:
-      value: "## Thank you for contributing to our project!"
-  - type: input
-    id: plugin
-    attributes:
-      label: Plugin Name with version
-      description: Specify which is the plugin where the bug is (specify the version)
-      placeholder: ex. Formula advanced 2.3.4
-    validations:
-      required: true
-  - type: dropdown
-    id: jss-version
-    attributes:
-      label: JSpreadsheet version
-      description: Specify which version of jspreadsheet (v8, v9) is used
-      options:
-        - v7.x
-        - v8.x
-        - v9.x
-    validations:
-      required: true
-  - type: textarea
-    id: describe-bug
-    attributes:
-      label: Describe the bug
-      description: A clear and concise description of what the bug is.
-      placeholder: Tell us what happened!
-    validations:
-      required: true
-  - type: textarea
-    id: reproduct-bug
-    attributes:
-      label: Reproduction steps
-      description: A clear and concise description of what the bug is.
-      value: |
-        1.
-        2.
-        3.
-        ...
-      render: bash
-    validations:
-      required: true
- - type: markdown
+- type: markdown
   attributes:
+    value: "## Thank you for contributing to our project!"
+- type: input
+  id: plugin
+  attributes:
+    label: Plugin Name with version
+    description: Specify which is the plugin where the bug is (specify the version)
+    placeholder: ex. Formula advanced 2.3.4
+  validations:
+    required: true
+- type: dropdown
+  id: jss-version
+  attributes:
+    label: JSpreadsheet version
+    description: Specify which version of jspreadsheet (v8, v9) is used
+    options:
+      - v7.x
+      - v8.x
+      - v9.x
+  validations:
+    required: true
+- type: textarea
+  id: describe-bug
+  attributes:
+    label: Describe the bug
+    description: A clear and concise description of what the bug is.
+    placeholder: Tell us what happened!
+  validations:
+    required: true
+- type: textarea
+  id: reproduct-bug
+  attributes:
+    label: Reproduction steps
+    description: A clear and concise description of what the bug is.
     value: |
-      We suggest to complet in second message with screenshot, or videos or JSFiddle to explain with more detail your problem.
-      Thanks for taking the time to fill out this bug report.
+      1.
+      2.
+      3.
+      ...
+    render: bash
+  validations:
+    required: true
+- type: markdown
+attributes:
+  value: |
+    We suggest to complet in second message with screenshot, or videos or JSFiddle to explain with more detail your problem.
+    Thanks for taking the time to fill out this bug report.
