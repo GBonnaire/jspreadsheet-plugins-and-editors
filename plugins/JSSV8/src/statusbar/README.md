@@ -154,6 +154,30 @@ You can use this CDN link
 npm install @jspreadsheet/statusbar
 ```javascript
 import jss_statusBar from '@jspreadsheet/statusbar';
+import '@jspreadsheet/statusbar/style.css';
+```
+
+Exemple app.js
+```javascript
+import 'material-icons/iconfont/material-icons.css';
+import jSuites from 'jsuites';
+import 'jsuites/dist/jsuites.css';
+import jspreadsheet from 'jspreadsheet';
+import 'jspreadsheet/dist/jspreadsheet.css';
+import formula from '@jspreadsheet/formula-pro';
+import jss_statusbar from '@jspreadsheet/statusbar';
+import '@jspreadsheet/statusbar/style.css';
+
+jspreadsheet.setLicense("YourLicensekey");
+
+jspreadsheet.setExtensions( { formula } );
+
+const myTable = jspreadsheet(document.getElementById('myTable'), {
+        minDimensions: [50, 50],
+        toolbar: true,
+        plugins: [{name: 'status', plugin: jss_statusbar, options: {}}],
+});
+
 ```
 
 ## Copyright and license
