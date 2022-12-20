@@ -157,7 +157,7 @@ import jss_statusBar from '@jspreadsheet/statusbar';
 import '@jspreadsheet/statusbar/style.css';
 ```
 
-Exemple app.js
+Example for webpack
 ```javascript
 import 'material-icons/iconfont/material-icons.css';
 import jSuites from 'jsuites';

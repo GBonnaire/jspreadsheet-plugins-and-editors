@@ -1,7 +1,7 @@
 /**
  * Plugin for top menu
  *
- * @version 2.0.3
+ * @version 2.0.4
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description add top menu on sheet

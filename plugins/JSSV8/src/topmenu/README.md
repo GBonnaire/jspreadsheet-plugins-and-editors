@@ -261,6 +261,7 @@ You can use this CDN link
 npm install @jspreadsheet/topmenu
 ```javascript
 import jss_topmenu from  '@jspreadsheet/topmenu';
+import '@jspreadsheet/topmenu/style.css';
 ```
 
 ## Copyright and license

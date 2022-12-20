@@ -1,7 +1,7 @@
 /**
  * Plugin for change notification of persistence for jSpreadsheet Pro
  *
- * @version 2.0.1
+ * @version 2.0.2
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  *

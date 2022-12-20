@@ -1,7 +1,7 @@
 /**
  * Plugin for auto width cols
  *
- * @version 2.2.1
+ * @version 2.2.2
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description auto size width of columns

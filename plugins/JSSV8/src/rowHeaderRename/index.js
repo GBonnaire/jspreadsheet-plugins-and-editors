@@ -3,7 +3,7 @@
  * 
  * @deprecated on version 8, please use rows title property
  * 
- * @version 2.0.1
+ * @version 2.0.2
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description Can row index rename and header of index, resize row index

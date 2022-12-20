@@ -1,7 +1,7 @@
 /**
  * Plugin to add utils feature on jspreadsheet Pro
  *
- * @version 1.3.0
+ * @version 1.3.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description Plugin to add utils feature on jspreadsheet Pro like :
