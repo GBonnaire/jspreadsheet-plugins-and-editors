@@ -1,7 +1,7 @@
 /**
  * Plugin copy paste advance for jSpreadsheet
  * 
- * @version 3.0.1
+ * @version 3.0.3
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description upgrade copy paste function for work with clipboard permission denied or error
@@ -15,8 +15,9 @@
  * 2.0.1 : transform jexcel to jspreadsheet
  * 2.0.0 : compatibility NPM + add special paste (paste only value, paste only style, paste style from clipboard)
  */
-if (! jspreadsheet && typeof(require) === 'function') {
-    var jspreadsheet = require('jspreadsheet');
+
+if(! jSuites && typeof(require) === 'function') {
+    var jSuites = require('jsuites');
 }
 
 ;(function (global, factory) {
@@ -25,6 +26,10 @@ if (! jspreadsheet && typeof(require) === 'function') {
     global.jss_copypaste_advanced = factory();
 }(this, (function () {
     return (function(instance, options) {
+        const jspreadsheet = this;
+        if(!jspreadsheet) {
+            throw new Error("JSpreadsheet must loaded before");
+        }
         // check Version of JSS
         if(parseInt(jspreadsheet.version().version.split(".")[0]) < 8) {
             console.error("Plugin \"Copy paste advanced\" not compatible with jspreadsheet " + jspreadsheet.version().version + ", Please use an older version of this plugin compatible. Go to https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/");
