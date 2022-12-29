@@ -1,7 +1,7 @@
 /**
  * Plugin copy paste advance for jSpreadsheet
  * 
- * @version 3.0.3
+ * @version 3.0.4
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description upgrade copy paste function for work with clipboard permission denied or error
@@ -490,13 +490,10 @@ if(! jSuites && typeof(require) === 'function') {
         }
         
         
-        /**
-         * override events paste for add pasteStyleFromClipboard
-         * @type jspreadsheet.pasteControls
-         */
+
         if(plugin.options.allow_pastestyle) {
             var BasedPasteControls = jspreadsheet.events.paste;
-            jspreadsheet.pasteControls = function(e) {
+            jspreadsheet.events.paste = function(e) {
                 BasedPasteControls(e);
                 if (jspreadsheet.current && jspreadsheet.current.selectedCell) {
                     if (!jspreadsheet.current.edition) {
@@ -505,13 +502,21 @@ if(! jSuites && typeof(require) === 'function') {
                                 var pasteData = e.clipboardData.getData('text/html');
                                 pasteStyleFromClipboard(pasteData);
                             }
-                        } else {
-                            if (window.clipboardData && window.clipboardData.types && window.clipboardData.getData) {
-                                if (((window.clipboardData.types instanceof DOMStringList) && window.clipboardData.types.contains("text/html")) || (window.clipboardData.types.indexOf && window.clipboardData.types.indexOf('text/html') !== -1)) {
-                                    var pasteData = window.clipboardData.getData('text/html');
-                                    pasteStyleFromClipboard(pasteData);
-                                }
+                        } else if (window.clipboardData && window.clipboardData.types && window.clipboardData.getData) {
+                            if (((window.clipboardData.types instanceof DOMStringList) && window.clipboardData.types.contains("text/html")) || (window.clipboardData.types.indexOf && window.clipboardData.types.indexOf('text/html') !== -1)) {
+                                var pasteData = window.clipboardData.getData('text/html');
+                                pasteStyleFromClipboard(pasteData);
                             }
+                            
+                        } else if (navigator && navigator.clipboard) {
+                            navigator.clipboard.read().then(function(data) {
+                                data[0].getType("text/html").then(function(item) {
+                                    var res = new Response(item).text().then(function(text) {
+                                        pasteStyleFromClipboard(text);
+                                    });
+                                    return res;
+                                });
+                            });
                         }
                     }
                 }
