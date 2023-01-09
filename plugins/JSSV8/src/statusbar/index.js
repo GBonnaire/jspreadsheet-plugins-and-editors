@@ -1,10 +1,10 @@
 /**
  * Plugin statusbar for JSpreadsheet Pro
  * 
- * @version 2.1.2
+ * @version 2.1.3
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
- * @summary Add status bar on bottom of JExcel
+ * @summary Add status bar on bottom of JSS
  * @namespace jss_statusbar
  * 
  * @requires Formula or Formula-Pro
@@ -26,6 +26,8 @@
  * 
  * @description Status bar is a plugin for add a status bar on bottom of the sheet like Excel. On this status bar you can add new row with button, and show information on selection (Range selected, Formulas, etc.)
  * Release notes
+ * Version 2.1.3: Fix check data in row
+ * Version 2.1.2: Fix error build on webpack
  * Version 2.1.1: Fix error build on webpack
  * Version 2.1.0: add compatibility v9
  * Version 2.0.1: compatibility ES6
@@ -179,7 +181,7 @@
                 let info = "";
                 const instance = getCurrentWorksheet();
                 // Test if data is Empty
-                const isEmpty = (instance.getData(true).join("") == "");
+                const isEmpty = (instance.getData(true).join("").replace(/,/gm,"") == "");
     
                 // Create all parameters
                 if(RangeSelection==null) {
