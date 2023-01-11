@@ -1,14 +1,14 @@
 /**
  * Plugin copy paste advance for jSpreadsheet
- * 
- * @version 3.0.4
+ *
+ * @version 3.0.5
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description upgrade copy paste function for work with clipboard permission denied or error
  * and add button on toolbar copy/cut/paste
- * 
+ *
  * @license This plugin is distribute under MIT License
- * 
+ *
  * ReleaseNote
  * 3.0.0 : version for v8
  * 2.1.0 : add topmenu compatibility
@@ -22,8 +22,8 @@ if(! jSuites && typeof(require) === 'function') {
 
 ;(function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    global.jss_copypaste_advanced = factory();
+        typeof define === 'function' && define.amd ? define(factory) :
+            global.jss_copypaste_advanced = factory();
 }(this, (function () {
     return (function(instance, options) {
         const jspreadsheet = this;
@@ -35,11 +35,11 @@ if(! jSuites && typeof(require) === 'function') {
             console.error("Plugin \"Copy paste advanced\" not compatible with jspreadsheet " + jspreadsheet.version().version + ", Please use an older version of this plugin compatible. Go to https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/");
             return {};
         }
-        
+
         // Plugin object
         var plugin = {};
-        
-         // Set options
+
+        // Set options
         plugin.options = Object.assign({},options);
 
         // Options
@@ -52,14 +52,14 @@ if(! jSuites && typeof(require) === 'function') {
 
         // Set default value
         if(plugin.options==null) {
-           plugin.options = {};
+            plugin.options = {};
         }
         for(var property in defaultOptions) {
             if (!plugin.options.hasOwnProperty(property) || plugin.options[property]==null ) {
                 plugin.options[property] = defaultOptions[property];
             }
         }
-        
+
         plugin.init = function(worksheet) {
             // Init for each worksheet
         }
@@ -90,19 +90,19 @@ if(! jSuites && typeof(require) === 'function') {
             if(!flag_found_paste && position_copy!=-1 && (jspreadsheet.dataCopied || (navigator && navigator.clipboard))) {
                 // Add paste after copy
                 var item_paste = {
-                            title: jSuites.translate("Paste"),
-                            icon: "content_paste",
-                            shortcut: 'Ctrl + V',
-                            onclick: function() {
-                                if (obj.selectedCell) {
-                                    if(plugin.options.allow_pastestyle) {
-                                        plugin.paste();
-                                    } else {
-                                        plugin.pasteOnlyValue();
-                                    }
-                                }
+                    title: jSuites.translate("Paste"),
+                    icon: "content_paste",
+                    shortcut: 'Ctrl + V',
+                    onclick: function() {
+                        if (obj.selectedCell) {
+                            if(plugin.options.allow_pastestyle) {
+                                plugin.paste();
+                            } else {
+                                plugin.pasteOnlyValue();
                             }
                         }
+                    }
+                }
                 items.splice(position_copy+1, 0, item_paste);
             }
 
@@ -134,8 +134,8 @@ if(! jSuites && typeof(require) === 'function') {
 
             return items;
         }
-        
-        
+
+
         plugin.topMenu = function(name, items, menuButton, shortcut_base) {
             if(name=="Edit") {
                 var flag_found_paste = false;
@@ -160,19 +160,19 @@ if(! jSuites && typeof(require) === 'function') {
                 if(!flag_found_paste && position_copy!=-1 && (jspreadsheet.dataCopied || (navigator && navigator.clipboard))) {
                     // Add paste after copy
                     var item_paste = {
-                                title: jSuites.translate("Paste"),
-                                icon: 'content_paste',
-                                shortcut: shortcut_base+' V',
-                                onclick: function() {
-                                    if (jspreadsheet.current.selectedCell) {
-                                        if(plugin.options.allow_pastestyle) {
-                                            plugin.paste();
-                                        } else {
-                                            plugin.pasteOnlyValue();
-                                        }
-                                    }
+                        title: jSuites.translate("Paste"),
+                        icon: 'content_paste',
+                        shortcut: shortcut_base+' V',
+                        onclick: function() {
+                            if (jspreadsheet.current.selectedCell) {
+                                if(plugin.options.allow_pastestyle) {
+                                    plugin.paste();
+                                } else {
+                                    plugin.pasteOnlyValue();
                                 }
                             }
+                        }
+                    }
                     items.splice(position_copy+1, 0, item_paste);
                 }
 
@@ -202,7 +202,7 @@ if(! jSuites && typeof(require) === 'function') {
                     items.splice(position_copy+2, 0, item_paste_special);
                 }
             }
-            
+
             return items;
         }
 
@@ -218,7 +218,7 @@ if(! jSuites && typeof(require) === 'function') {
                         plugin.paste();
                     }
                 }
-            }
+            };
             var item_cut = {
                 type: 'i',
                 content: 'content_cut',
@@ -227,7 +227,7 @@ if(! jSuites && typeof(require) === 'function') {
                         jspreadsheet.current.copy(true);
                     }
                 }
-            }
+            };
             var item_copy = {
                 type: 'i',
                 content: 'content_copy',
@@ -236,7 +236,7 @@ if(! jSuites && typeof(require) === 'function') {
                         jspreadsheet.current.copy();
                     }
                 }
-            }
+            };
             for(var ite_items in toolbar.items) {
                 var item = toolbar.items[ite_items];
                 if(item.content == "redo") {
@@ -245,7 +245,7 @@ if(! jSuites && typeof(require) === 'function') {
                     toolbar.items.splice(parseInt(ite_items)+1, 0, item_cut);
                     break;
                 }
-            }
+            };
 
             return toolbar;
         }
@@ -275,14 +275,14 @@ if(! jSuites && typeof(require) === 'function') {
                 }
             }
         }
-        
-        
+
+
         /**
          * copy function
          * @param {type} cut
          * @returns {undefined}
          */
-        plugin.copy = function(cut) {   
+        plugin.copy = function(cut) {
             if(jspreadsheet.current) {
                 return jspreadsheet.current.copy(cut);
             }
@@ -297,11 +297,11 @@ if(! jSuites && typeof(require) === 'function') {
             if(onlyValue==null) {
                 onlyValue = false;
             }
-            
+
             var x1 = parseInt(jspreadsheet.current.selectedCell[0]);
             var y1 = parseInt(jspreadsheet.current.selectedCell[1]);
 
-            if (navigator && navigator.clipboard) {
+            if (navigator && navigator.clipboard && navigator.clipboard.read) {
                 navigator.clipboard.read().then(function(data) {
                     data[0].getType("text/plain").then(function(item) {
                         var res = new Response(item).text().then(function(text) {
@@ -380,7 +380,7 @@ if(! jSuites && typeof(require) === 'function') {
                         style.push(rowStyle);
                     }
                     styleToCopy = style;
-                }   
+                }
             } else if (navigator && navigator.clipboard) {
                 navigator.clipboard.read().then(function(data) {
                     data[0].getType("text/html").then(function(item) {
@@ -488,8 +488,8 @@ if(! jSuites && typeof(require) === 'function') {
 
             return styleResults;
         }
-        
-        
+
+
 
         if(plugin.options.allow_pastestyle) {
             var BasedPasteControls = jspreadsheet.events.paste;
@@ -507,8 +507,8 @@ if(! jSuites && typeof(require) === 'function') {
                                 var pasteData = window.clipboardData.getData('text/html');
                                 pasteStyleFromClipboard(pasteData);
                             }
-                            
-                        } else if (navigator && navigator.clipboard) {
+
+                        } else if (navigator && navigator.clipboard && navigator.clipboard.read) {
                             navigator.clipboard.read().then(function(data) {
                                 data[0].getType("text/html").then(function(item) {
                                     var res = new Response(item).text().then(function(text) {
@@ -522,8 +522,8 @@ if(! jSuites && typeof(require) === 'function') {
                 }
             }
         }
-        
+
         return plugin;
     });
-    
+
 })));
