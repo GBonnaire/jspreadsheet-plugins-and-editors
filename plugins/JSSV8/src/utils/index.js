@@ -1,7 +1,7 @@
 /**
  * Plugin to add utils feature on jspreadsheet Pro
- *
- * @version 1.3.1
+ * 
+ * @version 1.4.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description Plugin to add utils feature on jspreadsheet Pro like :
@@ -13,14 +13,15 @@
  *  - Zoom
  *
  *  @event onzoom(worksheet: Object, zoomValue: int) dispatch on onevent in options of JSS
- *
+ * 
  * @license This plugin is distribute under MIT License
- *
+ * 
  * ReleaseNote :
  * 1.0 : Create plugin
  * 1.1 : Add zoom feature
  * 1.2 : Add hide / show row feature
  * 1.3 : Add show hidden rows and columns in 1 time
+ * 1.4 : Replace default contextmenu
  */
 if(! jSuites && typeof(require) === 'function') {
     var jSuites = require('jsuites');
@@ -32,10 +33,10 @@ if(! jspreadsheet && typeof(require) === 'function') {
 
 ;(function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-        typeof define === 'function' && define.amd ? define(factory) :
-            global.jss_utils = factory();
+    typeof define === 'function' && define.amd ? define(factory) :
+    global.jss_utils = factory();
 }(this, (function () {
-    return (function(spreadsheet, options, spreadsheetConfig) {
+    return (function(spreadsheet, options, spreadsheetConfig) {    
         // Plugin object
         const plugin = {};
 
@@ -81,11 +82,11 @@ if(! jspreadsheet && typeof(require) === 'function') {
             }
         };
 
-        // Set default value
-        if(plugin.options==null) {
-            plugin.options = {};
-        }
-        for(const property in defaultOptions) {
+       // Set default value
+       if(plugin.options==null) {
+           plugin.options = {};
+       }
+       for(const property in defaultOptions) {
             if (!plugin.options.hasOwnProperty(property) || plugin.options[property]==null ) {
                 plugin.options[property] = defaultOptions[property];
             } else if(typeof defaultOptions[property] == "object" && !Array.isArray(defaultOptions[property])) {
@@ -95,21 +96,21 @@ if(! jspreadsheet && typeof(require) === 'function') {
                     }
                 }
             }
-        }
+       }
 
         /**
          * jSpreadsheet events
          */
         plugin.onevent = function(event, worksheet) {
-            if(event == "onload") {
-                tab.onload(spreadsheet.element, spreadsheet.element.tabs);
-            }
-            if(event == "onresize") {
-                zoom.updateViewport(arguments[1], arguments[2]);
-            }
-            if(event == "onopenworksheet" || event == "oncreateworksheet") {
-                zoom.update(worksheet);
-            }
+           if(event == "onload") {
+               tab.onload(spreadsheet.element, spreadsheet.element.tabs);
+           }
+           if(event == "onresize") {
+               zoom.updateViewport(arguments[1], arguments[2]);
+           }
+           if(event == "onopenworksheet" || event == "oncreateworksheet") {
+               zoom.update(worksheet);
+           }
 
         };
 
@@ -255,6 +256,14 @@ if(! jspreadsheet && typeof(require) === 'function') {
                 }
 
                 if(plugin.options.allow.hideRow) {
+                    let positionHideRow = -1;
+                    for(const ite_items in items) {
+                        if(items[ite_items].title == jSuites.translate("Hide")) {
+                            positionHideRow = parseInt(ite_items);
+                            break;
+                        }
+                    }
+
                     // HideRow
                     const newItemHideRow = {
                         title: plugin.options.text.hideRow,
@@ -271,8 +280,17 @@ if(! jspreadsheet && typeof(require) === 'function') {
                         newItemHideRow.icon = plugin.options.icon.hideRow;
                     }
 
-                    items.splice(positionDivisor, 0, newItemHideRow);
-                    positionDivisor++;
+                    if(positionHideRow == -1) {
+                        items.splice(positionDivisor, 0, newItemHideRow);
+                        positionHideRow = positionDivisor;
+                    } else {
+                        items[positionHideRow] = newItemHideRow;
+                        if(items[parseInt(positionHideRow) + 1].title == jSuites.translate("Show")) {
+                            items.splice(parseInt(positionHideRow) + 1, 1);
+                        }
+                    }
+
+                    positionHideRow++;
 
                     const startRow = Math.min(...obj.getSelectedRows(true));
                     const endRow = Math.max(...obj.getSelectedRows(true));
@@ -293,8 +311,8 @@ if(! jspreadsheet && typeof(require) === 'function') {
                             newItemShowRowBefore.icon = plugin.options.icon.showRow;
                         }
 
-                        items.splice(positionDivisor, 0, newItemShowRowBefore);
-                        positionDivisor++;
+                        items.splice(positionHideRow, 0, newItemShowRowBefore);
+                        positionHideRow++;
                     }
 
                     if (rowAfter && rowAfter.visible === false) {
@@ -310,8 +328,8 @@ if(! jspreadsheet && typeof(require) === 'function') {
                             newItemShowRowAfter.icon = plugin.options.icon.showRow;
                         }
 
-                        items.splice(positionDivisor, 0, newItemShowRowAfter);
-                        positionDivisor++;
+                        items.splice(positionHideRow, 0, newItemShowRowAfter);
+                        positionHideRow++;
                     }
 
                     if(startRow != endRow) {
@@ -344,13 +362,11 @@ if(! jspreadsheet && typeof(require) === 'function') {
                                 newItemShowRows.icon = plugin.options.icon.showRows;
                             }
 
-                            items.splice(positionDivisor, 0, newItemShowRows);
-                            positionDivisor++;
+                            items.splice(positionHideRow, 0, newItemShowRows);
+                            positionHideRow++;
                         }
                     }
                 }
-
-                items.splice(positionDivisor, 0, {type:"line"});
             } else if(y==null && x!=null &&  obj.getSelectedColumns().length) {
                 let positionDivisor = 0;
                 for(const ite_items in items) {
@@ -361,6 +377,14 @@ if(! jspreadsheet && typeof(require) === 'function') {
                 }
 
                 if(plugin.options.allow.hideColumn) {
+                    let positionHideCol = -1;
+                    for(const ite_items in items) {
+                        if(items[ite_items].title == jSuites.translate("Hide")) {
+                            positionHideCol = parseInt(ite_items);
+                            break;
+                        }
+                    }
+
                     // HideColumn
                     const newItemHideColumn = {
                         title: plugin.options.text.hideColumn,
@@ -378,8 +402,16 @@ if(! jspreadsheet && typeof(require) === 'function') {
                         newItemHideColumn.icon = plugin.options.icon.hideColumn;
                     }
 
-                    items.splice(positionDivisor, 0, newItemHideColumn);
-                    positionDivisor++;
+                    if(positionHideCol == -1) {
+                        items.splice(positionDivisor, 0, newItemHideColumn);
+                        positionHideCol = positionDivisor;
+                    } else {
+                        items[positionHideCol] = newItemHideColumn;
+                        if(items[parseInt(positionHideCol) + 1].title == jSuites.translate("Show")) {
+                            items.splice(parseInt(positionHideCol) + 1, 1);
+                        }
+                    }
+                    positionHideCol++;
 
                     const startColumn = Math.min(...obj.getSelectedColumns());
                     const endColumn = Math.max(...obj.getSelectedColumns());
@@ -400,8 +432,8 @@ if(! jspreadsheet && typeof(require) === 'function') {
                             newItemShowColumnBefore.icon = plugin.options.icon.showColumn;
                         }
 
-                        items.splice(positionDivisor, 0, newItemShowColumnBefore);
-                        positionDivisor++;
+                        items.splice(positionHideCol, 0, newItemShowColumnBefore);
+                        positionHideCol++;
                     }
 
                     if (colAfter && colAfter.visible === false) {
@@ -417,8 +449,8 @@ if(! jspreadsheet && typeof(require) === 'function') {
                             newItemShowColumnAfter.icon = plugin.options.icon.showColumn;
                         }
 
-                        items.splice(positionDivisor, 0, newItemShowColumnAfter);
-                        positionDivisor++;
+                        items.splice(positionHideCol, 0, newItemShowColumnAfter);
+                        positionHideCol++;
                     }
 
                     if(startColumn != endColumn) {
@@ -451,14 +483,14 @@ if(! jspreadsheet && typeof(require) === 'function') {
                                 newItemShowColumns.icon = plugin.options.icon.showColumns;
                             }
 
-                            items.splice(positionDivisor, 0, newItemShowColumns);
-                            positionDivisor++;
+                            items.splice(positionHideCol, 0, newItemShowColumns);
+                            positionHideCol++;
                         }
                     }
                 }
             } else if (x==null && y==null && target == "tabs") {
                 let countTab = Array.isArray(spreadsheet.el.jspreadsheet) ? spreadsheet.el.jspreadsheet.length : 1;
-
+                
                 if(countTab > 1) {
                     if(plugin.options.allow.hideSheet) {
                         const newItemHideWorksheet = {
@@ -498,17 +530,17 @@ if(! jspreadsheet && typeof(require) === 'function') {
                 }
             }
 
-            return items;
+           return items;
         };
-
+        
         /**
-         * Top menu
-         * @param {string} name
-         * @param {Array} items
-         * @param {type} menuButton
-         * @param {type} shortcut_base
-         * @returns {array}
-         */
+        * Top menu
+        * @param {string} name
+        * @param {Array} items
+        * @param {type} menuButton
+        * @param {type} shortcut_base
+        * @returns {array}
+        */
         plugin.topMenu = function(name, items, menuButton, shortcut_base) {
             if(name === "Edit") {
                 const instance = getCurrentWorksheet();
@@ -565,7 +597,7 @@ if(! jspreadsheet && typeof(require) === 'function') {
                         items.push(newItemMoveDown);
                     }
 
-                    // Duplicate
+                    // Duplicate    
                     const newItemDuplicate = {
                         title:plugin.options.text.duplicateRow,
                         onclick:function() {
@@ -852,5 +884,5 @@ if(! jspreadsheet && typeof(require) === 'function') {
 
         return plugin;
     });
-
-})));
+    
+}))); 
