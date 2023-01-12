@@ -2,7 +2,7 @@
 
  Status bar is a plugin for add a status bar on bottom of the sheet like Excel. On this status bar you can add new row with button, and show information on selection (Range selected, Formulas, etc.)
 
-![preview](https://user-images.githubusercontent.com/52194475/94404123-c484cd00-016e-11eb-8f27-c978019f181e.png)
+![preview](https://user-images.githubusercontent.com/52194475/212060949-f1c1b9ef-85ff-4070-96e5-83ba29dee0b3.png)
 
 
 This plugin is **Free**
@@ -76,9 +76,8 @@ you can use jSuites dictionary for translate this plugin
 	</thead>
 	<tbody>
 		<tr>
-			<td><code>text_AddRowButton</code><br>
-				{*} = input box, previous this is button and after is text</td>
-			<td>Add {*} row(s)</td>
+			<td><code>label</code></td>
+			<td>Add</td>
 		</tr>
 	</tbody>
 </table>

@@ -1,15 +1,15 @@
 /**
  * Plugin CSS status bar for Jspreadsheet Pro
  * 
- * @version 2.1.1
+ * @version 2.2.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
- * @website https://repo.gbonnaire.fr
- *
- *
+ * @website https://repo.gbonnaire.fr 
+ * 
+ * 
  * @license This plugin is distribute under MIT License
  */
 
-.jss_content {
+ .jss_content {
     padding-bottom: 0px!important;
 }
 
@@ -22,6 +22,7 @@
     width: calc(100% - 3px);
     height: 26px;
     display: flex;
+    align-items: center;
     margin-left: 1px;
     margin-right: 1px;
     z-index: 2;
@@ -30,23 +31,29 @@
 .jss_statusbar * {
     font-size:  12px;
     color: #666;
-    padding: 2px;
+    margin: 1px 1px;
+    vertical-align: middle;
 }
 
 .jss_statusbar .jss_statusbar_addrows button {
     background-color: #F3F3F3;
-    border: 1px solid #CCCCCC;
+    border: 1px solid #CCCCCC; 
     text-align: center;
     text-decoration: none;
     display: inline-block;
     margin-right: 2px;
     padding: 1px 3px 1px 3px;
     height: 20px;
+    cursor: pointer;
+}
+
+.jss_statusbar .jss_statusbar_addrows button:hover {
+    background-color: #F6F6F6;
 }
 
 .jss_statusbar .jss_statusbar_addrows input {
     width: 50px;
-    height: 16px;
+    height: 20px;
     display: inline-block;
     border: 1px solid #CCCCCC;
     padding: 1px 3px 1px 3px;
@@ -71,5 +78,5 @@
     color: #CCCCCC;
     margin-left: 2px;
     margin-right: 2px;
-
+        
 }
