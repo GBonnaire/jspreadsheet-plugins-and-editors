@@ -37,15 +37,33 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 	<tbody>
 		<tr>
 			<td><code>showAddRowButton</code></td>
-			<td>For show or hide add row button on left of status bar<br>Values availables : true / false / "before" / "after"<br>true for all, false none, before for only add before, after for only add after</td>
+			<td>For show or hide add row button on left of status bar<br>
+			Values availables : <br>
+			 - <code>true</code> for all,<br>
+			 - <code>false</code> none,<br>
+			 - <code>"before"</code> for only add before row,<br>
+			 - <code>"after"</code> for only add after row
+			 </td>
 			<td><code>Boolean or String</code></td>
 			<td><code>true</code></td>
 		</tr>
 		<tr>
 			<td><code>showAddColButton</code></td>
-			<td>For show or hide add col button on left of status bar<br>Values availables : true / false / "before" / "after"<br>true for all, false none, before for only add before, after for only add after</td>
+			<td>For show or hide add col button on left of status bar
+			Values availables : <br>
+			 - <code>true</code> for all,<br>
+			 - <code>false</code> none,<br>
+			 - <code>"before"</code> for only add before column,<br>
+			 - <code>"after"</code> for only add after column
+			</td>
 			<td><code>Boolean or String</code></td>
 			<td><code>true</code></td>
+		</tr>
+		<tr>
+			<td><code>defaultQuantity</code></td>
+			<td>Define defautlQuantity on input</td>
+			<td><code>Integer</code></td>
+			<td><code>10</code></td>
 		</tr>
 		<tr>
 			<td><code>formulas</code></td>

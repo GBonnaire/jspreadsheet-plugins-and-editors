@@ -1,7 +1,7 @@
 /**
  * Plugin statusbar for JSpreadsheet Pro
  * 
- * @version 2.3.0
+ * @version 2.3.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @summary Add status bar on bottom of JSpreadsheet
@@ -12,7 +12,8 @@
  * @property {Object} options - List options of plugin
  * @property {Boolean|String} [options.showAddRowButton=true] - Add button on right of bar for add row (value : true / false / "after" / "before")
  * @property {Boolean|String} [options.showAddColButton=true] - Add button on right of bar for add col (value : true / false / "after" / "before")
- * @property {String} [label="Add"] - Label for button
+ * @property {String} [options.label="Add"] - Label for button action
+ * @property {int} [options.defaultQuantity=10] - Quantity for button action
  * @property {Object} [options.formulas] - Formulas showed on statusbar. object.key = title of formula, object.value = formula. In formula you can use this shortcut {range} (Ref to range selected), {cells} (Ref to array of cells selected), {x1} (Ref to start col of selection), {y1} (Ref to start row of selection), {x2} (Ref to end col to selection), {y2} (Ref to end row to selection)
  * 
  * @link https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/plugins/JSSV8/src/statusbar/README.mdgithub
@@ -28,6 +29,7 @@
  * 
  * @description Status bar is a plugin for add a status bar on bottom of the sheet like Excel. On this status bar you can add new row with button, and show information on selection (Range selected, Formulas, etc.)
  * Release notes
+ * Version 2.3.1: Add property quantity
  * Version 2.3.0: Add possibility to insert after/before row/column
  * Version 2.2.1: Fix style and checker empty selection, add property
  * Version 2.2.0: Add possibility to add column
@@ -82,6 +84,7 @@
                      "MIN":"=MIN({range})"
                  },
                  label: jSuites.translate("Add"),
+                 defaultQuantity: 10,
             };
     
             // Set default value
@@ -144,7 +147,7 @@
                 inputAddQuantity.addEventListener("keydown", function(e) {
                     e.stopPropagation();
                 });
-                inputAddQuantity.value = 1;
+                inputAddQuantity.value = plugin.options.defaultQuantity;
     
                 const buttonAddRows = document.createElement("button");
                 buttonAddRows.innerHTML = "<svg style=\"width:15px;height:15px\" viewBox=\"0 0 24 24\"> <path fill=\"currentColor\" d=\"M22,10A2,2 0 0,1 20,12H4A2,2 0 0,1 2,10V3H4V5H8V3H10V5H14V3H16V5H20V3H22V10M4,10H8V7H4V10M10,10H14V7H10V10M20,10V7H16V10H20M11,14H13V17H16V19H13V22H11V19H8V17H11V14Z\" /></svg>";
