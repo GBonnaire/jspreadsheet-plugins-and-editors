@@ -1,7 +1,7 @@
 /**
  * Plugin statusbar for JSpreadsheet Pro
  * 
- * @version 2.2.1
+ * @version 2.3.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @summary Add status bar on bottom of JSpreadsheet
@@ -10,8 +10,8 @@
  * @requires Formula or Formula-Pro
  * 
  * @property {Object} options - List options of plugin
- * @property {Boolean} [options.showAddRowButton=true] - Add button on right of bar for add row
- * @property {Boolean} [options.showAddColButton=true] - Add button on right of bar for add row
+ * @property {Boolean|String} [options.showAddRowButton=true] - Add button on right of bar for add row (value : true / false / "after" / "before")
+ * @property {Boolean|String} [options.showAddColButton=true] - Add button on right of bar for add col (value : true / false / "after" / "before")
  * @property {String} [label="Add"] - Label for button
  * @property {Object} [options.formulas] - Formulas showed on statusbar. object.key = title of formula, object.value = formula. In formula you can use this shortcut {range} (Ref to range selected), {cells} (Ref to array of cells selected), {x1} (Ref to start col of selection), {y1} (Ref to start row of selection), {x2} (Ref to end col to selection), {y2} (Ref to end row to selection)
  * 
@@ -28,6 +28,7 @@
  * 
  * @description Status bar is a plugin for add a status bar on bottom of the sheet like Excel. On this status bar you can add new row with button, and show information on selection (Range selected, Formulas, etc.)
  * Release notes
+ * Version 2.3.0: Add possibility to insert after/before row/column
  * Version 2.2.1: Fix style and checker empty selection, add property
  * Version 2.2.0: Add possibility to add column
  * Version 2.1.1: Fix error build on webpack
@@ -148,7 +149,7 @@
                 const buttonAddRows = document.createElement("button");
                 buttonAddRows.innerHTML = "<svg style=\"width:15px;height:15px\" viewBox=\"0 0 24 24\"> <path fill=\"currentColor\" d=\"M22,10A2,2 0 0,1 20,12H4A2,2 0 0,1 2,10V3H4V5H8V3H10V5H14V3H16V5H20V3H22V10M4,10H8V7H4V10M10,10H14V7H10V10M20,10V7H16V10H20M11,14H13V17H16V19H13V22H11V19H8V17H11V14Z\" /></svg>";
                 buttonAddRows.onclick = function (e) {
-                    if(plugin.options.showAddRowButton) {
+                    if(plugin.options.showAddRowButton === true || plugin.options.showAddRowButton == "after") {
                         const worksheet = getCurrentWorksheet();
                         if (worksheet.options.allowInsertRow) {
                             // Detect if need insert or add the end
@@ -161,10 +162,26 @@
                     }
                 };
     
+                const buttonAddRowsBefore = document.createElement("button");
+                buttonAddRowsBefore.innerHTML = "<svg style=\"width:15px;height:15px;transform: rotate(180deg);\" viewBox=\"0 0 24 24\"> <path fill=\"currentColor\" d=\"M22,10A2,2 0 0,1 20,12H4A2,2 0 0,1 2,10V3H4V5H8V3H10V5H14V3H16V5H20V3H22V10M4,10H8V7H4V10M10,10H14V7H10V10M20,10V7H16V10H20M11,14H13V17H16V19H13V22H11V19H8V17H11V14Z\" /></svg>";
+                buttonAddRowsBefore.onclick = function (e) {
+                    if(plugin.options.showAddRowButton === true || plugin.options.showAddRowButton == "before") {
+                        const worksheet = getCurrentWorksheet();
+                        if (worksheet.options.allowInsertRow) {
+                            // Detect if need insert or add the end
+                            if(worksheet.getSelectedRows(true).length == 1 && worksheet.getSelectedColumns().length == worksheet.options.data[0].length) {
+                                worksheet.insertRow(parseInt(inputAddQuantity.value), parseInt(worksheet.getSelectedRows(true)[0]), true);
+                            } else {
+                                worksheet.insertRow(parseInt(inputAddQuantity.value), 0 , true);
+                            }
+                        }
+                    }
+                };
+    
                 const buttonAddCols = document.createElement("button");
                 buttonAddCols.innerHTML = "<svg style=\"width:15px;height:15px\" viewBox=\"0 0 24 24\"><path fill=\"currentColor\" d=\"M11,2A2,2 0 0,1 13,4V20A2,2 0 0,1 11,22H2V2H11M4,10V14H11V10H4M4,16V20H11V16H4M4,4V8H11V4H4M15,11H18V8H20V11H23V13H20V16H18V13H15V11Z\" /></svg>";
                 buttonAddCols.onclick = function (e) {
-                    if(plugin.options.showAddColButton) {
+                    if(plugin.options.showAddColButton === true || plugin.options.showAddColButton == "after") {
                         const worksheet = getCurrentWorksheet();
                         if (worksheet.options.allowInsertColumn) {
                             // Detect if need insert or add the end
@@ -177,6 +194,22 @@
                     }
                 };
     
+                const buttonAddColsBefore = document.createElement("button");
+                buttonAddColsBefore.innerHTML = "<svg style=\"width:15px;height:15px;transform: rotate(180deg);\" viewBox=\"0 0 24 24\"><path fill=\"currentColor\" d=\"M11,2A2,2 0 0,1 13,4V20A2,2 0 0,1 11,22H2V2H11M4,10V14H11V10H4M4,16V20H11V16H4M4,4V8H11V4H4M15,11H18V8H20V11H23V13H20V16H18V13H15V11Z\" /></svg>";
+                buttonAddColsBefore.onclick = function (e) {
+                    if(plugin.options.showAddColButton === true || plugin.options.showAddColButton == "before") {
+                        const worksheet = getCurrentWorksheet();
+                        if (worksheet.options.allowInsertColumn) {
+                            // Detect if need insert or add the end
+                            if(worksheet.getSelectedColumns().length == 1 && worksheet.getSelectedRows(true).length == worksheet.options.data.length) {
+                                worksheet.insertColumn(parseInt(inputAddQuantity.value), parseInt(worksheet.getSelectedColumns()[0]), true);
+                            } else {
+                                worksheet.insertColumn(parseInt(inputAddQuantity.value), 0, true);
+                            }
+                        }
+                    }
+                };
+    
                 const spanAddLabel = document.createElement("span");
                 spanAddLabel.innerHTML = plugin.options.label;
     
@@ -184,11 +217,21 @@
                 divAddAction.appendChild(spanAddLabel);
                 divAddAction.appendChild(inputAddQuantity);
     
-                if(plugin.options.showAddRowButton) {
-                    divAddAction.appendChild(buttonAddRows);
+                if(plugin.options.showAddRowButton !== false) {
+                    if(plugin.options.showAddRowButton === true || plugin.options.showAddRowButton == "before") {
+                        divAddAction.appendChild(buttonAddRowsBefore);
+                    }
+                    if(plugin.options.showAddRowButton === true || plugin.options.showAddRowButton == "after") {
+                        divAddAction.appendChild(buttonAddRows);
+                    }
                 }
-                if(plugin.options.showAddColButton) {
-                    divAddAction.appendChild(buttonAddCols);
+                if(plugin.options.showAddColButton !== false) {
+                    if(plugin.options.showAddColButton === true || plugin.options.showAddColButton == "before") {
+                        divAddAction.appendChild(buttonAddColsBefore);
+                    }
+                    if(plugin.options.showAddColButton === true || plugin.options.showAddColButton == "after") {
+                        divAddAction.appendChild(buttonAddCols);
+                    }
                 }
     
                 // Apprend Add Row Element

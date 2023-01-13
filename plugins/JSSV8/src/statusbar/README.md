@@ -37,14 +37,14 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 	<tbody>
 		<tr>
 			<td><code>showAddRowButton</code></td>
-			<td>For show or hide add row button on left of status bar</td>
-			<td><code>Boolean</code></td>
+			<td>For show or hide add row button on left of status bar<br>Values availables : true / false / "before" / "after"<br>true for all, false none, before for only add before, after for only add after</td>
+			<td><code>Boolean or String</code></td>
 			<td><code>true</code></td>
 		</tr>
 		<tr>
 			<td><code>showAddColButton</code></td>
-			<td>For show or hide add col button on left of status bar</td>
-			<td><code>Boolean</code></td>
+			<td>For show or hide add col button on left of status bar<br>Values availables : true / false / "before" / "after"<br>true for all, false none, before for only add before, after for only add after</td>
+			<td><code>Boolean or String</code></td>
 			<td><code>true</code></td>
 		</tr>
 		<tr>
