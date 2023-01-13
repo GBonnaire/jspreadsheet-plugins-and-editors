@@ -42,6 +42,12 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 			<td><code>true</code></td>
 		</tr>
 		<tr>
+			<td><code>showAddColButton</code></td>
+			<td>For show or hide add col button on left of status bar</td>
+			<td><code>Boolean</code></td>
+			<td><code>true</code></td>
+		</tr>
+		<tr>
 			<td><code>formulas</code></td>
 			<td>Object of formulas, you can use quick reference on formulas<br>
       <code>{range}</code> : Range name A1:B3<br>

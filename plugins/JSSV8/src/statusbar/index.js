@@ -1,20 +1,22 @@
 /**
  * Plugin statusbar for JSpreadsheet Pro
  * 
- * @version 2.2.0
+ * @version 2.2.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
- * @summary Add status bar on bottom of JExcel
+ * @summary Add status bar on bottom of JSpreadsheet
  * @namespace jss_statusbar
  * 
  * @requires Formula or Formula-Pro
  * 
  * @property {Object} options - List options of plugin
- * @property {Boolean} [options.showAddRowButton=false] - Add button on right of bar for add row
+ * @property {Boolean} [options.showAddRowButton=true] - Add button on right of bar for add row
+ * @property {Boolean} [options.showAddColButton=true] - Add button on right of bar for add row
  * @property {String} [label="Add"] - Label for button
  * @property {Object} [options.formulas] - Formulas showed on statusbar. object.key = title of formula, object.value = formula. In formula you can use this shortcut {range} (Ref to range selected), {cells} (Ref to array of cells selected), {x1} (Ref to start col of selection), {y1} (Ref to start row of selection), {x2} (Ref to end col to selection), {y2} (Ref to end row to selection)
  * 
- * @link https://github.com/Guillaume-Bo/jexcel-plugins-and-editors/blob/master/plugins/statusbar/README.md Documentation official
+ * @link https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/blob/master/plugins/JSSV8/src/statusbar/README.mdgithub
+ * Documentation official
  * 
  * @example 
  * jexcel(document.getElementById('spreadsheet'), {
@@ -26,6 +28,7 @@
  * 
  * @description Status bar is a plugin for add a status bar on bottom of the sheet like Excel. On this status bar you can add new row with button, and show information on selection (Range selected, Formulas, etc.)
  * Release notes
+ * Version 2.2.1: Fix style and checker empty selection, add property
  * Version 2.2.0: Add possibility to add column
  * Version 2.1.1: Fix error build on webpack
  * Version 2.1.0: add compatibility v9
@@ -70,6 +73,7 @@
             // Options
             const defaultOptions = {
                  showAddRowButton: true,
+                 showAddColButton: true,
                  formulas: {
                      "Range":"{range}",
                      "SUM":"=SUM({range})",
@@ -126,10 +130,10 @@
                 statusBarElement.classList.add("jss_statusbar");
     
                 // Add Row Element
-                const divAddRows = document.createElement("div");
-                divAddRows.classList.add("jss_statusbar_addrows");
-                if(!plugin.options.showAddRowButton) {
-                    divAddRows.style.display = "none";
+                const divAddAction= document.createElement("div");
+                divAddAction.classList.add("jss_statusbar_addaction");
+                if(!plugin.options.showAddRowButton && !plugin.options.showAddColButton) {
+                    divAddAction.style.display = "none";
                 }
     
                 const inputAddQuantity = document.createElement("input");
@@ -160,7 +164,7 @@
                 const buttonAddCols = document.createElement("button");
                 buttonAddCols.innerHTML = "<svg style=\"width:15px;height:15px\" viewBox=\"0 0 24 24\"><path fill=\"currentColor\" d=\"M11,2A2,2 0 0,1 13,4V20A2,2 0 0,1 11,22H2V2H11M4,10V14H11V10H4M4,16V20H11V16H4M4,4V8H11V4H4M15,11H18V8H20V11H23V13H20V16H18V13H15V11Z\" /></svg>";
                 buttonAddCols.onclick = function (e) {
-                    if(plugin.options.showAddRowButton) {
+                    if(plugin.options.showAddColButton) {
                         const worksheet = getCurrentWorksheet();
                         if (worksheet.options.allowInsertColumn) {
                             // Detect if need insert or add the end
@@ -177,14 +181,18 @@
                 spanAddLabel.innerHTML = plugin.options.label;
     
                 // Append all elements
-                divAddRows.appendChild(spanAddLabel);
-                divAddRows.appendChild(inputAddQuantity);
+                divAddAction.appendChild(spanAddLabel);
+                divAddAction.appendChild(inputAddQuantity);
     
-                divAddRows.appendChild(buttonAddRows);
-                divAddRows.appendChild(buttonAddCols);
+                if(plugin.options.showAddRowButton) {
+                    divAddAction.appendChild(buttonAddRows);
+                }
+                if(plugin.options.showAddColButton) {
+                    divAddAction.appendChild(buttonAddCols);
+                }
     
                 // Apprend Add Row Element
-                statusBarElement.appendChild(divAddRows);
+                statusBarElement.appendChild(divAddAction);
     
                 // Information Element
                 const statusBarInformationElement = document.createElement("div");
@@ -205,7 +213,7 @@
                 let info = "";
                 const instance = getCurrentWorksheet();
                 // Test if data is Empty
-                const isEmpty = (instance.getData(true).join("") == "");
+                const isEmpty = (instance.getData(true).join("").replace(/,/gm,"") == "");
     
                 // Create all parameters
                 if(RangeSelection==null) {
