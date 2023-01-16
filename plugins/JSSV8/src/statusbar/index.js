@@ -1,7 +1,7 @@
 /**
  * Plugin statusbar for JSpreadsheet Pro
  * 
- * @version 2.3.1
+ * @version 2.3.2
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @summary Add status bar on bottom of JSpreadsheet
@@ -12,6 +12,7 @@
  * @property {Object} options - List options of plugin
  * @property {Boolean|String} [options.showAddRowButton=true] - Add button on right of bar for add row (value : true / false / "after" / "before")
  * @property {Boolean|String} [options.showAddColButton=true] - Add button on right of bar for add col (value : true / false / "after" / "before")
+ * @property {Boolean} [options.closeInsertionOnly=false] - option to defined behavior insertion method
  * @property {String} [options.label="Add"] - Label for button action
  * @property {int} [options.defaultQuantity=10] - Quantity for button action
  * @property {Object} [options.formulas] - Formulas showed on statusbar. object.key = title of formula, object.value = formula. In formula you can use this shortcut {range} (Ref to range selected), {cells} (Ref to array of cells selected), {x1} (Ref to start col of selection), {y1} (Ref to start row of selection), {x2} (Ref to end col to selection), {y2} (Ref to end row to selection)
@@ -29,6 +30,7 @@
  * 
  * @description Status bar is a plugin for add a status bar on bottom of the sheet like Excel. On this status bar you can add new row with button, and show information on selection (Range selected, Formulas, etc.)
  * Release notes
+ * Version 2.3.2: Add property closeInsertionOnly + auto scroll
  * Version 2.3.1: Add property quantity
  * Version 2.3.0: Add possibility to insert after/before row/column
  * Version 2.2.1: Fix style and checker empty selection, add property
@@ -77,6 +79,7 @@
             const defaultOptions = {
                  showAddRowButton: true,
                  showAddColButton: true,
+                 closeInsertionOnly: false,
                  formulas: {
                      "Range":"{range}",
                      "SUM":"=SUM({range})",
@@ -156,9 +159,11 @@
                         const worksheet = getCurrentWorksheet();
                         if (worksheet.options.allowInsertRow) {
                             // Detect if need insert or add the end
-                            if(worksheet.getSelectedRows(true).length == 1 && worksheet.getSelectedColumns().length == worksheet.options.data[0].length) {
-                                worksheet.insertRow(parseInt(inputAddQuantity.value), parseInt(worksheet.getSelectedRows(true)[0]));
+                            if((worksheet.getSelectedRows(true).length == 1 && worksheet.getSelectedColumns().length == worksheet.options.data[0].length) || plugin.options.closeInsertionOnly) {
+                                console.log(parseInt(inputAddQuantity.value), getMaxPosition(worksheet.getSelectedRows(true)), Math.max(...worksheet.getSelectedRows(true)), worksheet.getSelectedRows(true));
+                                worksheet.insertRow(parseInt(inputAddQuantity.value), getMaxPosition(worksheet.getSelectedRows(true)));
                             } else {
+                                worksheet.goto(worksheet.options.data.length,getMinPosition(worksheet.getSelectedColumns()));
                                 worksheet.insertRow(parseInt(inputAddQuantity.value));
                             }
                         }
@@ -172,9 +177,10 @@
                         const worksheet = getCurrentWorksheet();
                         if (worksheet.options.allowInsertRow) {
                             // Detect if need insert or add the end
-                            if(worksheet.getSelectedRows(true).length == 1 && worksheet.getSelectedColumns().length == worksheet.options.data[0].length) {
-                                worksheet.insertRow(parseInt(inputAddQuantity.value), parseInt(worksheet.getSelectedRows(true)[0]), true);
+                            if((worksheet.getSelectedRows(true).length == 1 && worksheet.getSelectedColumns().length == worksheet.options.data[0].length) || plugin.options.closeInsertionOnly) {
+                                worksheet.insertRow(parseInt(inputAddQuantity.value), getMinPosition(worksheet.getSelectedRows(true)), true);
                             } else {
+                                worksheet.goto(0,getMinPosition(worksheet.getSelectedColumns()));
                                 worksheet.insertRow(parseInt(inputAddQuantity.value), 0 , true);
                             }
                         }
@@ -188,9 +194,10 @@
                         const worksheet = getCurrentWorksheet();
                         if (worksheet.options.allowInsertColumn) {
                             // Detect if need insert or add the end
-                            if(worksheet.getSelectedColumns().length == 1 && worksheet.getSelectedRows(true).length == worksheet.options.data.length) {
-                                worksheet.insertColumn(parseInt(inputAddQuantity.value), parseInt(worksheet.getSelectedColumns()[0]));
+                            if((worksheet.getSelectedColumns().length == 1 && worksheet.getSelectedRows(true).length == worksheet.options.data.length) || plugin.options.closeInsertionOnly) {
+                                worksheet.insertColumn(parseInt(inputAddQuantity.value), getMaxPosition(worksheet.getSelectedColumns()));
                             } else {
+                                worksheet.goto(getMinPosition(worksheet.getSelectedRows(true)),worksheet.options.data[0].length);
                                 worksheet.insertColumn(parseInt(inputAddQuantity.value));
                             }
                         }
@@ -204,9 +211,10 @@
                         const worksheet = getCurrentWorksheet();
                         if (worksheet.options.allowInsertColumn) {
                             // Detect if need insert or add the end
-                            if(worksheet.getSelectedColumns().length == 1 && worksheet.getSelectedRows(true).length == worksheet.options.data.length) {
-                                worksheet.insertColumn(parseInt(inputAddQuantity.value), parseInt(worksheet.getSelectedColumns()[0]), true);
+                            if((worksheet.getSelectedColumns().length == 1 && worksheet.getSelectedRows(true).length == worksheet.options.data.length) || plugin.options.closeInsertionOnly) {
+                                worksheet.insertColumn(parseInt(inputAddQuantity.value), getMinPosition(worksheet.getSelectedColumns()), true);
                             } else {
+                                worksheet.goto(getMinPosition(worksheet.getSelectedRows(true)),0);
                                 worksheet.insertColumn(parseInt(inputAddQuantity.value), 0, true);
                             }
                         }
@@ -389,6 +397,40 @@
                     return spreadsheet.worksheets[spreadsheet.getWorksheetActive()];
                 }
                 return spreadsheet.worksheets[0];
+            }
+    
+            function getMaxPosition(values) {
+                if(typeof values == "object" && !Array.isArray(values)) {
+                    values = Object.values(values);
+                }
+                if(typeof values == "object" && Array.isArray(values)) {
+                    if(values.length == 0) {
+                        return 0;
+                    } else if(values.length == 1) {
+                        return parseInt(values[0]);
+                    } else {
+                        return parseInt(Math.max(...values));
+                    }
+                } else {
+                    return parseInt(values);
+                }
+            }
+    
+            function getMinPosition(values) {
+                if(typeof values == "object" && !Array.isArray(values)) {
+                    values = Object.values(values);
+                }
+                if(typeof values == "object" && Array.isArray(values)) {
+                    if(values.length == 0) {
+                        return 0;
+                    } else if(values.length == 1) {
+                        return parseInt(values[0]);
+                    } else {
+                        return parseInt(Math.min(...values));
+                    }
+                } else {
+                    return parseInt(values);
+                }
             }
     
     

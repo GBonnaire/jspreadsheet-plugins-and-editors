@@ -66,6 +66,12 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 			<td><code>10</code></td>
 		</tr>
 		<tr>
+			<td><code>closeInsertionOnly</code></td>
+			<td>option to defined behavior insertion method</td>
+			<td><code>Boolean</code></td>
+			<td><code>false</code></td>
+		</tr>
+		<tr>
 			<td><code>formulas</code></td>
 			<td>Object of formulas, you can use quick reference on formulas<br>
       <code>{range}</code> : Range name A1:B3<br>
