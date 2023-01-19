@@ -1,7 +1,7 @@
 /**
  * Plugin statusbar for JSpreadsheet Pro
  * 
- * @version 2.3.2
+ * @version 2.3.3
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @summary Add status bar on bottom of JSpreadsheet
@@ -30,6 +30,7 @@
  * 
  * @description Status bar is a plugin for add a status bar on bottom of the sheet like Excel. On this status bar you can add new row with button, and show information on selection (Range selected, Formulas, etc.)
  * Release notes
+ * Version 2.3.3: Manage after change cell content
  * Version 2.3.2: Add property closeInsertionOnly + auto scroll
  * Version 2.3.1: Add property quantity
  * Version 2.3.0: Add possibility to insert after/before row/column
@@ -113,7 +114,9 @@
                     const x2 = arguments[4];
                     const y2 = arguments[5];
     
-                    RangeSelection = [x1,y1,x2,y2];
+                    RangeSelection = [x1, y1, x2, y2];
+                    plugin.generateInformation();
+                } else if(event == "onafterchanges") {
                     plugin.generateInformation();
                 } else if(event == "onblur") {
                     const statusBarInformationElement = getStatusBarInformationElement();
