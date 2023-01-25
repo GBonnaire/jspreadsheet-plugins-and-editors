@@ -1,7 +1,7 @@
 /**
  * Plugin statusbar for JSpreadsheet Pro
  * 
- * @version 2.3.3
+ * @version 2.3.4
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @summary Add status bar on bottom of JSpreadsheet
@@ -163,7 +163,6 @@
                         if (worksheet.options.allowInsertRow) {
                             // Detect if need insert or add the end
                             if((worksheet.getSelectedRows(true).length == 1 && worksheet.getSelectedColumns().length == worksheet.options.data[0].length) || plugin.options.closeInsertionOnly) {
-                                console.log(parseInt(inputAddQuantity.value), getMaxPosition(worksheet.getSelectedRows(true)), Math.max(...worksheet.getSelectedRows(true)), worksheet.getSelectedRows(true));
                                 worksheet.insertRow(parseInt(inputAddQuantity.value), getMaxPosition(worksheet.getSelectedRows(true)));
                             } else {
                                 worksheet.goto(worksheet.options.data.length,getMinPosition(worksheet.getSelectedColumns()));
