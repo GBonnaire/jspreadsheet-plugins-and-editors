@@ -1,7 +1,7 @@
 /**
  * Plugin statusbar for JSpreadsheet Pro
  * 
- * @version 2.3.4
+ * @version 2.3.5
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @summary Add status bar on bottom of JSpreadsheet
@@ -30,6 +30,8 @@
  * 
  * @description Status bar is a plugin for add a status bar on bottom of the sheet like Excel. On this status bar you can add new row with button, and show information on selection (Range selected, Formulas, etc.)
  * Release notes
+ * Version 2.3.5: Fix #17
+ * Version 2.3.4: Fix #16
  * Version 2.3.3: Manage after change cell content
  * Version 2.3.2: Add property closeInsertionOnly + auto scroll
  * Version 2.3.1: Add property quantity
@@ -271,25 +273,13 @@
                 // Test if data is Empty
                 const isEmpty = (instance.getData(true).join("").replace(/,/gm,"") == "");
     
-                // Create all parameters
-                if(RangeSelection==null) {
-                    RangeSelection = instance.selectedCell;
-                }
-                let RangeStart = jspreadsheet.helpers.getColumnNameFromCoords(RangeSelection[0],RangeSelection[1]);
-                let RangeEnd;
-                if(RangeSelection[0]!=RangeSelection[2] || RangeSelection[1]!=RangeSelection[3]) {
-                    RangeEnd = jspreadsheet.helpers.getColumnNameFromCoords(RangeSelection[2],RangeSelection[3]);
-                } else {
-                    RangeEnd = "";
-                }
-    
                 // Convert range tokens
                 const tokensUpdate = function(tokens) {
                     const f = [];
                     const token = tokens.split(':');
     
                     if(!token[1]) {
-                        return "[" + token[0] + "]"; 
+                        return "[" + token[0] + "]";
                     }
     
                     const e1 = jspreadsheet.helpers.getCoordsFromColumnName(token[0]);
@@ -322,41 +312,56 @@
                     return "[" + f.join(',') + "]";
                 };
     
-                const parameters = {};
-                parameters.range = RangeStart + (RangeEnd!=""?":"+RangeEnd:"");
-                parameters.cells = tokensUpdate(parameters["range"]);
-                parameters.x1 = parseInt(RangeSelection[0]);
-                parameters.y1 = parseInt(RangeSelection[1]);
-                parameters.x2 = parseInt(RangeSelection[2]);
-                parameters.y2 = parseInt(RangeSelection[3]);
+                // Create all parameters
+                if(RangeSelection==null) {
+                    RangeSelection = instance.selectedCell;
+                }
+    
+                if(RangeSelection) {
+                    let RangeStart = jspreadsheet.helpers.getColumnNameFromCoords(RangeSelection[0],RangeSelection[1]);
+                    let RangeEnd;
+                    if(RangeSelection[0]!=RangeSelection[2] || RangeSelection[1]!=RangeSelection[3]) {
+                        RangeEnd = jspreadsheet.helpers.getColumnNameFromCoords(RangeSelection[2],RangeSelection[3]);
+                    } else {
+                        RangeEnd = "";
+                    }
+    
+                    const parameters = {};
+                    parameters.range = RangeStart + (RangeEnd!=""?":"+RangeEnd:"");
+                    parameters.cells = tokensUpdate(parameters["range"]);
+                    parameters.x1 = parseInt(RangeSelection[0]);
+                    parameters.y1 = parseInt(RangeSelection[1]);
+                    parameters.x2 = parseInt(RangeSelection[2]);
+                    parameters.y2 = parseInt(RangeSelection[3]);
     
     
-                // Execute all formulas
-                for(let label_formula in plugin.options.formulas) {
-                    const formula = plugin.options.formulas[label_formula];
-                    if(formula.substr(0,1)=="=") {
-                        if(!isEmpty) {
+                    // Execute all formulas
+                    for(let label_formula in plugin.options.formulas) {
+                        const formula = plugin.options.formulas[label_formula];
+                        if(formula.substr(0,1)==="=") {
+                            if(!isEmpty) {
+                                if(info!="") {
+                                    info += "<span class='divisor'></span>";
+                                }
+                                const result = instance.executeFormula(prepareFormula(formula, parameters));
+                                if(result!==null) {
+                                    info += label_formula + " : " + result;
+                                }
+                            } else {
+    
+                            }
+                        } else {
                             if(info!="") {
                                 info += "<span class='divisor'></span>";
                             }
-                            const result = instance.executeFormula(prepareFormula(formula, parameters));
-                            if(result!==null) {
-                                info += label_formula + " : " + result;
-                            }
-                        } else {
-    
+                            info += label_formula + " : " + prepareFormula(formula, parameters);
                         }
-                    } else {
-                        if(info!="") {
-                            info += "<span class='divisor'></span>";
-                        }
-                        info += label_formula + " : " + prepareFormula(formula, parameters);
                     }
+    
+                    RangeSelection = null;
                 }
     
-                RangeSelection = null;
-    
-                // Set informations
+                // Set information
                 const statusBarInformationElement = getStatusBarInformationElement();
                 if(statusBarInformationElement != null) {
                     statusBarInformationElement.innerHTML = info;
