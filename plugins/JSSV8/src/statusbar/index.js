@@ -1,7 +1,7 @@
 /**
  * Plugin statusbar for JSpreadsheet Pro
  * 
- * @version 2.3.5
+ * @version 2.3.6
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @summary Add status bar on bottom of JSpreadsheet
@@ -30,6 +30,7 @@
  * 
  * @description Status bar is a plugin for add a status bar on bottom of the sheet like Excel. On this status bar you can add new row with button, and show information on selection (Range selected, Formulas, etc.)
  * Release notes
+ * Version 2.3.6: Fix #18
  * Version 2.3.5: Fix #17
  * Version 2.3.4: Fix #16
  * Version 2.3.3: Manage after change cell content
@@ -165,7 +166,9 @@
                         if (worksheet.options.allowInsertRow) {
                             // Detect if need insert or add the end
                             if((worksheet.getSelectedRows(true).length == 1 && worksheet.getSelectedColumns().length == worksheet.options.data[0].length) || plugin.options.closeInsertionOnly) {
-                                worksheet.insertRow(parseInt(inputAddQuantity.value), getMaxPosition(worksheet.getSelectedRows(true)));
+                                if(worksheet.selectedCell) {
+                                    worksheet.insertRow(parseInt(inputAddQuantity.value), getMaxPosition(worksheet.getSelectedRows(true)));
+                                }
                             } else {
                                 worksheet.goto(worksheet.options.data.length,getMinPosition(worksheet.getSelectedColumns()));
                                 worksheet.insertRow(parseInt(inputAddQuantity.value));
@@ -182,7 +185,9 @@
                         if (worksheet.options.allowInsertRow) {
                             // Detect if need insert or add the end
                             if((worksheet.getSelectedRows(true).length == 1 && worksheet.getSelectedColumns().length == worksheet.options.data[0].length) || plugin.options.closeInsertionOnly) {
-                                worksheet.insertRow(parseInt(inputAddQuantity.value), getMinPosition(worksheet.getSelectedRows(true)), true);
+                                if(worksheet.selectedCell) {
+                                    worksheet.insertRow(parseInt(inputAddQuantity.value), getMinPosition(worksheet.getSelectedRows(true)), true);
+                                }
                             } else {
                                 worksheet.goto(0,getMinPosition(worksheet.getSelectedColumns()));
                                 worksheet.insertRow(parseInt(inputAddQuantity.value), 0 , true);
@@ -199,7 +204,9 @@
                         if (worksheet.options.allowInsertColumn) {
                             // Detect if need insert or add the end
                             if((worksheet.getSelectedColumns().length == 1 && worksheet.getSelectedRows(true).length == worksheet.options.data.length) || plugin.options.closeInsertionOnly) {
-                                worksheet.insertColumn(parseInt(inputAddQuantity.value), getMaxPosition(worksheet.getSelectedColumns()));
+                                if(worksheet.selectedCell) {
+                                    worksheet.insertColumn(parseInt(inputAddQuantity.value), getMaxPosition(worksheet.getSelectedColumns()));
+                                }
                             } else {
                                 worksheet.goto(getMinPosition(worksheet.getSelectedRows(true)),worksheet.options.data[0].length);
                                 worksheet.insertColumn(parseInt(inputAddQuantity.value));
@@ -216,7 +223,9 @@
                         if (worksheet.options.allowInsertColumn) {
                             // Detect if need insert or add the end
                             if((worksheet.getSelectedColumns().length == 1 && worksheet.getSelectedRows(true).length == worksheet.options.data.length) || plugin.options.closeInsertionOnly) {
-                                worksheet.insertColumn(parseInt(inputAddQuantity.value), getMinPosition(worksheet.getSelectedColumns()), true);
+                                if(worksheet.selectedCell) {
+                                    worksheet.insertColumn(parseInt(inputAddQuantity.value), getMinPosition(worksheet.getSelectedColumns()), true);
+                                }
                             } else {
                                 worksheet.goto(getMinPosition(worksheet.getSelectedRows(true)),0);
                                 worksheet.insertColumn(parseInt(inputAddQuantity.value), 0, true);
@@ -406,6 +415,9 @@
                 return spreadsheet.worksheets[0];
             }
     
+            /**
+             * get max position
+             */
             function getMaxPosition(values) {
                 if(typeof values == "object" && !Array.isArray(values)) {
                     values = Object.values(values);
@@ -423,6 +435,9 @@
                 }
             }
     
+            /**
+             * get min position
+             */
             function getMinPosition(values) {
                 if(typeof values == "object" && !Array.isArray(values)) {
                     values = Object.values(values);
