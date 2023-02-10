@@ -1,7 +1,7 @@
 /**
  * Plugin statusbar for JSpreadsheet Pro
  * 
- * @version 2.3.6
+ * @version 2.4.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @summary Add status bar on bottom of JSpreadsheet
@@ -13,6 +13,7 @@
  * @property {Boolean|String} [options.showAddRowButton=true] - Add button on right of bar for add row (value : true / false / "after" / "before")
  * @property {Boolean|String} [options.showAddColButton=true] - Add button on right of bar for add col (value : true / false / "after" / "before")
  * @property {Boolean} [options.closeInsertionOnly=false] - option to defined behavior insertion method
+ * @property {Boolean} [options.autoButtonDisable=true] - option to defined behavior action bar
  * @property {String} [options.label="Add"] - Label for button action
  * @property {int} [options.defaultQuantity=10] - Quantity for button action
  * @property {Object} [options.formulas] - Formulas showed on statusbar. object.key = title of formula, object.value = formula. In formula you can use this shortcut {range} (Ref to range selected), {cells} (Ref to array of cells selected), {x1} (Ref to start col of selection), {y1} (Ref to start row of selection), {x2} (Ref to end col to selection), {y2} (Ref to end row to selection)
@@ -30,6 +31,7 @@
  * 
  * @description Status bar is a plugin for add a status bar on bottom of the sheet like Excel. On this status bar you can add new row with button, and show information on selection (Range selected, Formulas, etc.)
  * Release notes
+ * Version 2.4.0: Add disabled buttons features + event
  * Version 2.3.6: Fix #18
  * Version 2.3.5: Fix #17
  * Version 2.3.4: Fix #16
@@ -72,8 +74,8 @@
     
             // Plugin object
             const plugin = {};
+            const elements = {};
             let RangeSelection = null;
-            let statusBarElement = null;
     
             // Set options
             plugin.options = Object.assign({},options);
@@ -84,6 +86,7 @@
                  showAddRowButton: true,
                  showAddColButton: true,
                  closeInsertionOnly: false,
+                 autoButtonDisable: true,
                  formulas: {
                      "Range":"{range}",
                      "SUM":"=SUM({range})",
@@ -111,6 +114,7 @@
             plugin.onevent = function(event, worksheet) {
                 if(event == "onload") {
                     plugin.createStatusbar(worksheet); // Here worksheet = workbook
+                    worksheet.dispatch("statusbar_onload", worksheet, elements);
                 } else if(event == "onselection") {
                     const x1 = arguments[2];
                     const y1 = arguments[3];
@@ -122,10 +126,15 @@
                 } else if(event == "onafterchanges") {
                     plugin.generateInformation();
                 } else if(event == "onblur") {
-                    const statusBarInformationElement = getStatusBarInformationElement();
-                    if(statusBarInformationElement) {
-                        statusBarInformationElement.innerHTML = "";
+                    if(elements.informationBar) {
+                        elements.informationBar.innerHTML = "";
                     }
+                }
+    
+                if(worksheet.selectedCell == null) {
+                    disableActionBar(worksheet);
+                } else {
+                    enableActionBar(worksheet);
                 }
             };
     
@@ -139,17 +148,20 @@
                 const el = workbook.element;
                 const content = el.querySelector(":scope > .jtabs-content");
     
-                statusBarElement = document.createElement("div");
+                const statusBarElement = document.createElement("div");
+                elements.statusBar = statusBarElement;
                 statusBarElement.classList.add("jss_statusbar");
     
                 // Add Row Element
                 const divAddAction= document.createElement("div");
+                elements.actionBar = divAddAction;
                 divAddAction.classList.add("jss_statusbar_addaction");
                 if(!plugin.options.showAddRowButton && !plugin.options.showAddColButton) {
                     divAddAction.style.display = "none";
                 }
     
                 const inputAddQuantity = document.createElement("input");
+                elements.quantity = inputAddQuantity;
                 inputAddQuantity.setAttribute("type","number");
                 inputAddQuantity.setAttribute("min","1");
                 inputAddQuantity.setAttribute("step","1");
@@ -235,6 +247,7 @@
                 };
     
                 const spanAddLabel = document.createElement("span");
+                elements.labelAdd = spanAddLabel;
                 spanAddLabel.innerHTML = plugin.options.label;
     
                 // Append all elements
@@ -244,17 +257,21 @@
                 if(plugin.options.showAddRowButton !== false) {
                     if(plugin.options.showAddRowButton === true || plugin.options.showAddRowButton == "before") {
                         divAddAction.appendChild(buttonAddRowsBefore);
+                        elements.buttonAddRowsBefore = buttonAddRowsBefore;
                     }
                     if(plugin.options.showAddRowButton === true || plugin.options.showAddRowButton == "after") {
                         divAddAction.appendChild(buttonAddRows);
+                        elements.buttonAddRows = buttonAddRows;
                     }
                 }
                 if(plugin.options.showAddColButton !== false) {
                     if(plugin.options.showAddColButton === true || plugin.options.showAddColButton == "before") {
                         divAddAction.appendChild(buttonAddColsBefore);
+                        elements.buttonAddColsBefore = buttonAddColsBefore;
                     }
                     if(plugin.options.showAddColButton === true || plugin.options.showAddColButton == "after") {
                         divAddAction.appendChild(buttonAddCols);
+                        elements.buttonAddCols = buttonAddCols;
                     }
                 }
     
@@ -264,6 +281,7 @@
                 // Information Element
                 const statusBarInformationElement = document.createElement("div");
                 statusBarInformationElement.classList.add("jss_statusbar_information");
+                elements.informationBar = statusBarInformationElement;
     
                 // Append Information Element
                 statusBarElement.appendChild(statusBarInformationElement);
@@ -371,9 +389,8 @@
                 }
     
                 // Set information
-                const statusBarInformationElement = getStatusBarInformationElement();
-                if(statusBarInformationElement != null) {
-                    statusBarInformationElement.innerHTML = info;
+                if(elements.informationBar) {
+                    elements.informationBar.innerHTML = info;
                 }
             };
     
@@ -391,14 +408,29 @@
     
                 return formula;
             }
-            
+    
             /**
-             * Return Element of status bar information area
-             * @private
-             * @returns {HTMLElement}
+             * Disable action bar
              */
-            function getStatusBarInformationElement() {
-                return statusBarElement.querySelector(".jss_statusbar_information");
+            function disableActionBar(worksheet) {
+                if(elements.actionBar && options.autoButtonDisable && !elements.actionBar.classList.contains("disabled") && options.closeInsertionOnly) {
+                    elements.actionBar.classList.add("disabled");
+                    if(typeof worksheet.dispatch == "function") {
+                        worksheet.dispatch("statusbar_buttons_disable", worksheet, elements);
+                    }
+                }
+            }
+    
+            /**
+             * Enable action bar
+             */
+            function enableActionBar(worksheet) {
+                if(elements.actionBar && options.autoButtonDisable && elements.actionBar.classList.contains("disabled")) {
+                    elements.actionBar.classList.remove("disabled");
+                    if(typeof worksheet.dispatch == "function") {
+                        worksheet.dispatch("statusbar_buttons_enable", worksheet, elements);
+                    }
+                }
             }
             
             /**

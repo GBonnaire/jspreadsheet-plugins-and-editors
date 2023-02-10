@@ -72,6 +72,12 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 			<td><code>false</code></td>
 		</tr>
 		<tr>
+			<td><code>autoButtonDisable</code></td>
+			<td>option to defined behavior action bar. Automatic button disable when no action it's possible</td>
+			<td><code>Boolean</code></td>
+			<td><code>false</code></td>
+		</tr>
+		<tr>
 			<td><code>formulas</code></td>
 			<td>Object of formulas, you can use quick reference on formulas<br>
       <code>{range}</code> : Range name A1:B3<br>
@@ -94,6 +100,31 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 </table>
 
 You can modify CSS file for change separator of formulas
+
+### Events
+This plugin dispatch this events
+<table>
+	<thead>
+		<tr>
+			<th>Event name</th>
+			<th>Args</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>statusbar_onload</code></td>
+			<td>WorkBook, Elements(Array of elements)</td>
+		</tr>
+		<tr>
+			<td><code>statusbar_buttons_disable</code></td>
+			<td>Worksheet, Elements(Array of elements)</td>
+		</tr>
+		<tr>
+			<td><code>statusbar_buttons_enable</code></td>
+			<td>Worksheet, Elements(Array of elements)</td>
+		</tr>
+	</tbody>
+</table>
 
 ### For translation
 you can use jSuites dictionary for translate this plugin
