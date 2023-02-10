@@ -75,7 +75,7 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 			<td><code>autoButtonDisable</code></td>
 			<td>option to defined behavior action bar. Automatic button disable when no action it's possible</td>
 			<td><code>Boolean</code></td>
-			<td><code>false</code></td>
+			<td><code>true</code></td>
 		</tr>
 		<tr>
 			<td><code>formulas</code></td>
