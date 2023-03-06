@@ -22,7 +22,7 @@ You can buy premium plugin on [Web site plugins&editors JSpreadsheet Pro](https:
 - [Open File](https://repo.gbonnaire.fr/product/jss-plugin-openfile)
 - [Pivot table](https://repo.gbonnaire.fr/product/jss-plugin-pivottable)
 - [Print](https://repo.gbonnaire.fr/product/jss-plugin-print)
-- [Statistics Formula](https://repo.gbonnaire.fr/product/jss-formula-statistics)
+- [Statistics Formula](https://repo.gbonnaire.fr/product/jss-formulas-statistics)
 - [Summary](https://repo.gbonnaire.fr/product/jss-plugin-summary)
 - [Tooltip](https://repo.gbonnaire.fr/product/jss-plugin-tooltip)
 
