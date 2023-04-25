@@ -87,13 +87,14 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
       <code>{x2}</code> : x end selection<br>
       <code>{y2}</code> : y end selection<br>
       the key property of object is the name showing before result<br>If you use custom formula, for not show empty result, return null.
-      </td>
-			<td><code>Object</code></td>
+      <br><code>function args : (instance: {JspreadSheetCurrent}, parameters: {Object with range, cells, x1, y1, x2, y2}, values: {values of selected range})</code>
+            </td>
+			<td><code>Object of string or function</code></td>
 			<td><code>{
 "Range":"{range}", // Format A1:B5
 "SUM":"=SUM({range})",
 "MAX":"=MAX({range})",
-"MIN":"=MIN({range})"
+"MIN":"=MIN({range})",
 },</code></td>
 		</tr>
 	</tbody>
