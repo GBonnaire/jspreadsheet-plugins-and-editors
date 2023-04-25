@@ -59,6 +59,18 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 			<td><code>Boolean or String</code></td>
 			<td><code>true</code></td>
 		</tr>
+        <tr>
+			<td><code>showAddCalculateButton</code></td>
+			<td>For show all time calculate button</td>
+			<td><code>Boolean</code></td>
+			<td><code>false</code></td>
+		</tr>
+        <tr>
+			<td><code>limitCalculation</code></td>
+			<td>Define limit Calculation for autocalculate. 0 = no limit</td>
+			<td><code>Integer</code></td>
+			<td><code>0</code></td>
+		</tr>
 		<tr>
 			<td><code>defaultQuantity</code></td>
 			<td>Define defautlQuantity on input</td>
@@ -141,6 +153,14 @@ you can use jSuites dictionary for translate this plugin
 			<td><code>label</code></td>
 			<td>Add</td>
 		</tr>
+        <tr>
+			<td><code>labelTooMuchData</code></td>
+			<td>Too much data</td>
+		</tr>
+        <tr>
+			<td><code>labelButtonCalculate</code></td>
+			<td>Calculate</td>
+		</tr>
 	</tbody>
 </table>
 
@@ -191,7 +211,8 @@ jspreadsheet(document.getElementById('spreadsheet'), {
 	plugins: [
       ...
       { name:'statusBar', plugin:jss_statusbar, options: { 
-                 showAddRowButton: false, 
+                 showAddRowButton: false,
+                 limitCalculation: 1000,
                  formulas:{
                     "COUNT":"=COUNT({range})",
                     "My Formula": function(instance, parameters, values) {

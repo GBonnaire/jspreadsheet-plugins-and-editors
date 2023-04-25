@@ -28,5 +28,5 @@
         "jspreadsheet": ">9.0.0"
     },
     "main": "index.js",
-    "version": "2.5.0"
+    "version": "2.6.0"
 }

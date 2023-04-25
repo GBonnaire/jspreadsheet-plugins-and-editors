@@ -1,7 +1,7 @@
 /**
  * Plugin statusbar for JSpreadsheet Pro
  *
- * @version 2.5.0
+ * @version 2.6.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @summary Add status bar on bottom of JSpreadsheet
@@ -12,9 +12,13 @@
  * @property {Object} options - List options of plugin
  * @property {Boolean|String} [options.showAddRowButton=true] - Add button on right of bar for add row (value : true / false / "after" / "before")
  * @property {Boolean|String} [options.showAddColButton=true] - Add button on right of bar for add col (value : true / false / "after" / "before")
+ * @property {Boolean} [options.showAddCalculateButton=false] - Alwayse show calculate button
  * @property {Boolean} [options.closeInsertionOnly=false] - option to defined behavior insertion method
  * @property {Boolean} [options.autoButtonDisable=true] - option to defined behavior action bar
+ * @property {int} [options.limitCalculation=0] - Option to set limit cells count autostart calculation (0 = no limit)
  * @property {String} [options.label="Add"] - Label for button action
+ * @property {String} [options.labelTooMuchData="Too much data"] - Label for button status too much data
+ * @property {String} [options.labelButtonCalculate="Calculate"] - Label for button calculate
  * @property {int} [options.defaultQuantity=10] - Quantity for button action
  * @property {Object} [options.formulas] - Formulas showed on statusbar. object.key = title of formula, object.value = formula. In formula you can use this shortcut {range} (Ref to range selected), {cells} (Ref to array of cells selected), {x1} (Ref to start col of selection), {y1} (Ref to start row of selection), {x2} (Ref to end col to selection), {y2} (Ref to end row to selection), or function(instance, parameters(range, cells, x1, y1, x2, y2), values)
  *
@@ -31,6 +35,7 @@
  *
  * @description Status bar is a plugin for add a status bar on bottom of the sheet like Excel. On this status bar you can add new row with button, and show information on selection (Range selected, Formulas, etc.)
  * Release notes
+ * Version 2.6.0: Add limit calculation
  * Version 2.5.0: Add support function on formula
  * Version 2.4.0: Add disabled buttons features + event
  * Version 2.3.6: Fix #18
@@ -86,8 +91,10 @@ if(! jSuites && typeof(require) === 'function') {
         const defaultOptions = {
             showAddRowButton: true,
             showAddColButton: true,
+            showAddCalculateButton: false,
             closeInsertionOnly: false,
             autoButtonDisable: true,
+            limitCalculation: 0,
             formulas: {
                 "Range":"{range}",
                 "SUM":"=SUM({range})",
@@ -95,6 +102,8 @@ if(! jSuites && typeof(require) === 'function') {
                 "MIN":"=MIN({range})"
             },
             label: jSuites.translate("Add"),
+            labelTooMuchData: jSuites.translate("Too much data"),
+            labelButtonCalculate: jSuites.translate("Calculate"),
             defaultQuantity: 10,
         };
 
@@ -295,8 +304,9 @@ if(! jSuites && typeof(require) === 'function') {
          * @memberOf jss_statusbar
          * @returns {undefined}
          */
-        plugin.generateInformation = function() {
+        plugin.generateInformation = function(force = false) {
             let info = "";
+            let addButtonCalculate = false;
             const instance = getCurrentWorksheet();
             // Test if data is Empty
             const isEmpty = (instance.getData(true).join("").replace(/,/gm,"") == "");
@@ -362,48 +372,66 @@ if(! jSuites && typeof(require) === 'function') {
                 parameters.x2 = parseInt(RangeSelection[2]);
                 parameters.y2 = parseInt(RangeSelection[3]);
 
+                if(force || plugin.options.limitCalculation <= 0 || (instance.getSelected()!=null && instance.getSelected().length <= plugin.options.limitCalculation)) {
+                    // Execute all formulas
+                    for(let label_formula in plugin.options.formulas) {
+                        const formula = plugin.options.formulas[label_formula];
+                        if(typeof formula == "string") {
+                            if(formula.substr(0,1)==="=") {
+                                if(!isEmpty) {
+                                    if(info!="") {
+                                        info += "<span class='divisor'></span>";
+                                    }
+                                    const result = instance.executeFormula(prepareFormula(formula, parameters));
+                                    if(result!==null) {
+                                        info += label_formula + " : " + result;
+                                    }
+                                } else {
 
-                // Execute all formulas
-                for(let label_formula in plugin.options.formulas) {
-                    const formula = plugin.options.formulas[label_formula];
-                    if(typeof formula == "string") {
-                        if(formula.substr(0,1)==="=") {
-                            if(!isEmpty) {
+                                }
+                            } else {
                                 if(info!="") {
                                     info += "<span class='divisor'></span>";
                                 }
-                                const result = instance.executeFormula(prepareFormula(formula, parameters));
-                                if(result!==null) {
-                                    info += label_formula + " : " + result;
-                                }
-                            } else {
-
+                                info += label_formula + " : " + prepareFormula(formula, parameters);
                             }
-                        } else {
+                        } else if(typeof formula == "function") {
                             if(info!="") {
                                 info += "<span class='divisor'></span>";
                             }
-                            info += label_formula + " : " + prepareFormula(formula, parameters);
-                        }
-                    } else if(typeof formula == "function") {
-                        if(info!="") {
-                            info += "<span class='divisor'></span>";
+
+                            const result = formula(instance, parameters, instance.getJson(true, true));
+                            if(result!==null) {
+                                info += label_formula + " : " + result;
+                            }
                         }
 
-                        const result = formula(instance, parameters, instance.getJson(true, true));
-                        if(result!==null) {
-                            info += label_formula + " : " + result;
-                        }
                     }
 
+                    RangeSelection = null;
+                } else {
+                    info = plugin.options.labelTooMuchData;
+                    addButtonCalculate = true;
                 }
-
-                RangeSelection = null;
             }
+
+
+
 
             // Set information
             if(elements.informationBar) {
                 elements.informationBar.innerHTML = info;
+                if(addButtonCalculate || plugin.options.showAddCalculateButton) {
+                    const btnCalculate = document.createElement("button");
+                    btnCalculate.classList.add("jss-statusbar-calculate");
+                    btnCalculate.innerHTML = plugin.options.labelButtonCalculate;
+                    btnCalculate.addEventListener("click", (e) => {
+                        plugin.generateInformation(true);
+                    });
+
+                    elements.informationBar.append(btnCalculate);
+
+                }
             }
         };
 
