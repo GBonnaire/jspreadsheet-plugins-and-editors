@@ -194,6 +194,9 @@ jspreadsheet(document.getElementById('spreadsheet'), {
                  showAddRowButton: false, 
                  formulas:{
                     "COUNT":"=COUNT({range})",
+                    "My Formula": function(instance, parameters, values) {
+                        return parameters.range;
+                    }
                  } // End formulas
             } // End options
       },
