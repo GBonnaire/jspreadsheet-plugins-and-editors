@@ -1,7 +1,7 @@
 /**
  * Plugin copy paste advance for jSpreadsheet
  *
- * @version 3.0.5
+ * @version 3.1.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description upgrade copy paste function for work with clipboard permission denied or error
@@ -10,10 +10,11 @@
  * @license This plugin is distribute under MIT License
  *
  * ReleaseNote
- * 3.0.0 : version for v8
- * 2.1.0 : add topmenu compatibility
+ * 3.1 : Add option position_toolbar
+ * 3.0 : version for v8
+ * 2.1. : add topmenu compatibility
  * 2.0.1 : transform jexcel to jspreadsheet
- * 2.0.0 : compatibility NPM + add special paste (paste only value, paste only style, paste style from clipboard)
+ * 2.0 : compatibility NPM + add special paste (paste only value, paste only style, paste style from clipboard)
  */
 
 if(! jSuites && typeof(require) === 'function') {
@@ -47,7 +48,8 @@ if(! jSuites && typeof(require) === 'function') {
             allow_pastestyle: true,
             text_paste_special: jSuites.translate("Paste special"),
             text_paste_only_style: jSuites.translate("Paste only format"),
-            text_paste_only_value: jSuites.translate("Paste only value")
+            text_paste_only_value: jSuites.translate("Paste only value"),
+            position_toolbar: null,
         }
 
         // Set default value
@@ -210,6 +212,9 @@ if(! jSuites && typeof(require) === 'function') {
          * Run on toolbar
          */
         plugin.toolbar = function(toolbar) {
+            if(plugin.options.position_toolbar === false) {
+                return toolbar;
+            }
             var item_paste = {
                 type: 'i',
                 content: 'content_paste',
@@ -237,15 +242,23 @@ if(! jSuites && typeof(require) === 'function') {
                     }
                 }
             };
-            for(var ite_items in toolbar.items) {
-                var item = toolbar.items[ite_items];
-                if(item.content == "redo") {
-                    toolbar.items.splice(parseInt(ite_items)+1, 0, item_paste);
-                    toolbar.items.splice(parseInt(ite_items)+1, 0, item_copy);
-                    toolbar.items.splice(parseInt(ite_items)+1, 0, item_cut);
-                    break;
+
+            if(plugin.options.position_toolbar !== null) {
+                toolbar.items.splice(parseInt(plugin.options.position_toolbar)+1, 0, item_paste);
+                toolbar.items.splice(parseInt(plugin.options.position_toolbar)+1, 0, item_copy);
+                toolbar.items.splice(parseInt(plugin.options.position_toolbar)+1, 0, item_cut);
+            } else {
+                for(var ite_items in toolbar.items) {
+                    var item = toolbar.items[ite_items];
+                    if(item.type == "divisor") {
+                        toolbar.items.splice(parseInt(ite_items)+1, 0, {type: "divisor"});
+                        toolbar.items.splice(parseInt(ite_items)+1, 0, item_paste);
+                        toolbar.items.splice(parseInt(ite_items)+1, 0, item_copy);
+                        toolbar.items.splice(parseInt(ite_items)+1, 0, item_cut);
+                        break;
+                    }
                 }
-            };
+            }
 
             return toolbar;
         }

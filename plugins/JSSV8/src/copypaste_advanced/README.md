@@ -50,6 +50,12 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 			<td><code>Boolean</code></td>
 			<td><code>true</code></td>
 		</tr>
+		<tr>
+			<td><code>position_toolbar</code></td>
+			<td>Define position in toolbar (null: default behavior, found first divisor and add after, false: not add, int: add specific position</td>
+			<td><code>int/null/false</code></td>
+			<td><code>null</code></td>
+		</tr>
 	</tbody>
 </table>
 
@@ -106,10 +112,10 @@ you can use jSuites dictionary for translate this plugin
 
 Header on page
 ```HTML
-<script src="https://jspreadsheet.com/v8/jspreadsheet.js"></script>
+<script src="https://jspreadsheet.com/v9/jspreadsheet.js"></script>
 <script src="https://jsuites.net/v4/jsuites.js"></script>
 <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
-<link rel="stylesheet" href="https://jspreadsheet.com/v8/jspreadsheet.css" type="text/css" />
+<link rel="stylesheet" href="https://jspreadsheet.com/v9/jspreadsheet.css" type="text/css" />
 
 <script src="/path/to/copypaste_advanced.min.js"></script>
 ```
