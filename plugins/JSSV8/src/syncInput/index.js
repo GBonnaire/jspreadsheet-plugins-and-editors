@@ -1,7 +1,7 @@
 /**
  * Plugin for sync data (json) in jSpreadsheet pro in input
  *
- * @version 2.1.1
+ * @version 2.1.2
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description sync data (json) in JSpreadsheet in input

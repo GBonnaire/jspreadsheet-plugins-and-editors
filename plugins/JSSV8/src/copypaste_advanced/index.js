@@ -1,7 +1,7 @@
 /**
  * Plugin copy paste advance for jSpreadsheet
  *
- * @version 3.1.0
+ * @version 3.1.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description upgrade copy paste function for work with clipboard permission denied or error

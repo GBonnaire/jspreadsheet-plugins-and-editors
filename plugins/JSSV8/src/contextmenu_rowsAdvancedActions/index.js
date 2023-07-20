@@ -1,7 +1,7 @@
 /**
  * Plugin advanced actions for rows in context menu for jSpreadSheet Pro
  * 
- * @version 2.0.1
+ * @version 2.0.2
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description add item on contextmenu for rows

@@ -24,9 +24,9 @@
         "data-grid",
         "data-spreadsheet"
     ],
-    "dependencies": {
-        "jspreadsheet": ">8.1.0"
+    "peerDependencies": {
+        "jspreadsheet": ">8.1.0 <10"
     },
     "main": "index.js",
-    "version": "2.2.2"
+    "version": "2.2.3"
 }
