@@ -17,11 +17,11 @@ body:
   id: jss-version
   attributes:
     label: JSpreadsheet version
-    description: Specify which version of jspreadsheet (v8, v9) is used
+    description: Specify which version of jspreadsheet (v8, v9 or v10) is used
     options:
-      - v7.x
       - v8.x
       - v9.x
+      - v10.x
   validations:
     required: true
 - type: textarea
@@ -48,5 +48,5 @@ body:
 - type: markdown
   attributes:
     value: |
-      We suggest to complet in second message with screenshot, or videos or JSFiddle to explain with more detail your problem.
+      We suggest to complet in second message with screenshot, configuration (code), or videos or JSFiddle to explain with more detail your problem.
       Thanks for taking the time to fill out this bug report.
