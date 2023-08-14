@@ -10,8 +10,8 @@ jSpreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 
 - [Download JSpreadsheet Pro](https://www.jspreadsheet.com) 
 
-** Plugin for JSpreadsheet v10 will be available on CDN 1st Septembre 2023 **
-for plugin compatibility with JSpreadsheet v9 please keep this version : 2.5.10 !
+**Plugin for JSpreadsheet v10 will be available on CDN 1st Septembre 2023**
+ ==> *for plugin compatibility with JSpreadsheet v9 please keep this version : 2.5.10 !*
 
 ## Demos of plugins
 - Demo of plugins premium and free for JSS v8+ are available on [Demo JSpreadsheet plugins GBonnaire.fr](https://demo.gbonnaire.fr/jss/)
