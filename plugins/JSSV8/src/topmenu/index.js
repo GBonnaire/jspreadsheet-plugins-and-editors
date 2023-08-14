@@ -1,11 +1,12 @@
 /**
  * Plugin for top menu
  *
- * @version 2.0.5
+ * @version 2.1.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description add top menu on sheet
  * ReleaseNote:
+ * 2.1 : Migrate on JSS v10
  * 2.0 : Migrate on JSS v8
  * 1.1 : New organisation item
  * 1.0 : Init plugin

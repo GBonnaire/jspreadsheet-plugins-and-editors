@@ -1,7 +1,7 @@
 /**
  * Plugin for change notification of persistence for jSpreadsheet Pro
  *
- * @version 2.0.3
+ * @version 2.0.4
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  *
@@ -9,6 +9,7 @@
  *
  * @description change notification of persistence
  * ReleaseNote
+ * 2.0.4 migration v10
  * 2.0.1 compatibility ES6
  * 2.0.0 migrating to JSS v8 and change name persistance to persistence
  * 1.4.2 fix bug compatibility
@@ -52,6 +53,7 @@ if (! jSuites && typeof(require) === 'function') {
             textProgress: jSuites.translate('saving'),
             dateFormat : { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }
         };
+
 
         // Set default value
         if(plugin.options==null) {

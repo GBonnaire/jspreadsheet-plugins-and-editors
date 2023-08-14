@@ -1,7 +1,7 @@
 /**
  * Plugin for auto width cols
  *
- * @version 2.2.3
+ * @version 2.3.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description auto size width of columns
@@ -19,11 +19,6 @@ if (! jspreadsheet && typeof(require) === 'function') {
             global.jss_autoWidth = factory();
 }(this, (function () {
     return (function(spreadsheet, options, spreadsheetConfig) {
-        // check Version of JSS
-        if(parseInt(jspreadsheet.version().version.split(".")[0]) < 8) {
-            console.error("Plugin \"auto Width\" not compatible with jspreadsheet " + jspreadsheet.version().version + ", Please use an older version of this plugin compatible. Go to https://github.com/GBonnaire/jspreadsheet-plugins-and-editors/");
-            return {};
-        }
 
         // Plugin object
         const plugin = {};
@@ -40,6 +35,17 @@ if (! jspreadsheet && typeof(require) === 'function') {
             fullsizeTable: false,
             parseAllData: true,
         };
+
+        const configurationColumns = {};
+        if(spreadsheet.config.worksheets) {
+            for(const worksheetOptions of spreadsheet.config.worksheets) {
+                const worksheetId = getWorksheetId(worksheetOptions);
+                configurationColumns[worksheetId] = [];
+                for(const colIndex in worksheetOptions.columns) {
+                    configurationColumns[worksheetId][colIndex] = worksheetOptions.columns[colIndex].width;
+                }
+            }
+        }
 
         // Set default value
         if(plugin.options==null) {
@@ -65,9 +71,11 @@ if (! jspreadsheet && typeof(require) === 'function') {
             columnsToResize = [];
             for(let ite_col=0; ite_col<worksheet.options.columns.length; ite_col++) {
                 const column = worksheet.options.columns[ite_col];
-                if(column.width == null || column.width === '' || column.width === 'auto') {
+                const worksheetId = getWorksheetId(worksheet.options);
+                if(column.width == null || column.width === '' || column.width === 'auto' || (configurationColumns[worksheetId] && (configurationColumns[worksheetId][ite_col] == null || configurationColumns[worksheetId][ite_col] === ""))) {
                     columnsToResize.push(ite_col);
                     worksheet.options.columns[ite_col].width = 100;
+                    configurationColumns[worksheetId][ite_col] = 100;
                 }
             }
         };
@@ -273,6 +281,15 @@ if (! jspreadsheet && typeof(require) === 'function') {
             inst.ignorePersistence = saveIgnore.ignorePersistence;
             saveIgnore = {};
         };
+
+        function getWorksheetId(worksheetOptions) {
+            let worksheet_sn = worksheetOptions.worksheetId;
+            if(worksheet_sn === "" || worksheet_sn === undefined || worksheet_sn === null) {
+                worksheet_sn = jSuites.guid();
+                worksheetOptions.worksheetId = worksheet_sn;
+            }
+            return worksheet_sn;
+        }
 
         return plugin;
     });

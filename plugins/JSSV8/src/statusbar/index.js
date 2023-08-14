@@ -1,7 +1,7 @@
 /**
  * Plugin statusbar for JSpreadsheet Pro
  *
- * @version 2.6.1
+ * @version 2.7.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @summary Add status bar on bottom of JSpreadsheet
@@ -35,6 +35,7 @@
  *
  * @description Status bar is a plugin for add a status bar on bottom of the sheet like Excel. On this status bar you can add new row with button, and show information on selection (Range selected, Formulas, etc.)
  * Release notes
+ * Version 2.7.0: Migration to v10
  * Version 2.6.0: Add limit calculation
  * Version 2.5.0: Add support function on formula
  * Version 2.4.0: Add disabled buttons features + event
@@ -114,6 +115,12 @@ if(! jSuites && typeof(require) === 'function') {
         for(var property in defaultOptions) {
             if (!plugin.options.hasOwnProperty(property) || plugin.options[property]==null ) {
                 plugin.options[property] = defaultOptions[property];
+            }
+        }
+
+        for(const formula in plugin.options.formulas) {
+            if(typeof plugin.options.formulas[formula] == "string" && plugin.options.formulas[formula].substring(0,1) == "=") {
+                plugin.options.formulas[formula] = jspreadsheet.helpers.secureFormula(plugin.options.formulas[formula]);
             }
         }
 
@@ -377,7 +384,7 @@ if(! jSuites && typeof(require) === 'function') {
                     for(let label_formula in plugin.options.formulas) {
                         const formula = plugin.options.formulas[label_formula];
                         if(typeof formula == "string") {
-                            if(formula.substr(0,1)==="=") {
+                            if(formula.substring(0,1)==="=") {
                                 if(!isEmpty) {
                                     if(info!="") {
                                         info += "<span class='divisor'></span>";

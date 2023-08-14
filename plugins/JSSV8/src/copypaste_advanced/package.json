@@ -26,8 +26,8 @@
         "data-spreadsheet"
     ],
     "peerDependencies": {
-        "jspreadsheet": ">8.1.0 <10"
+        "jspreadsheet": ">10.0.31"
     },
     "main": "index.js",
-    "version": "3.1.1"
+    "version": "3.2.0"
 }

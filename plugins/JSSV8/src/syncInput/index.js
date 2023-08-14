@@ -1,11 +1,12 @@
 /**
  * Plugin for sync data (json) in jSpreadsheet pro in input
  *
- * @version 2.1.2
+ * @version 2.2.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description sync data (json) in JSpreadsheet in input
  * ReleaseNote:
+ * 2.2 : Migrate on JSS v10
  * 2.1 : Manage multiple worksheets
  * 2.0 : Migrate on JSS v8
  * @license This plugin is distribute under MIT License
@@ -62,8 +63,10 @@ if(! jspreadsheet && typeof(require) === 'function') {
                 init();
                 syncData(worksheet); // Here worksheet = workbook
             } else if(event == "onchange") {
-                if(plugin.options.worksheetId == null || (typeof plugin.options.worksheetId == "string" && getWorksheetId(worksheet) == plugin.options.worksheetId) || (Array.isArray(plugin.options.worksheetId) && getWorksheetId(worksheet) in plugin.options.worksheetId)) {
-                    syncData(worksheet.parent);
+                if(plugin.options.inputElement) {
+                    if(plugin.options.worksheetId == null || (typeof plugin.options.worksheetId == "string" && getWorksheetId(worksheet) == plugin.options.worksheetId) || (Array.isArray(plugin.options.worksheetId) && getWorksheetId(worksheet) in plugin.options.worksheetId)) {
+                        syncData(worksheet.parent);
+                    }
                 }
             }
         };
@@ -134,7 +137,13 @@ if(! jspreadsheet && typeof(require) === 'function') {
             }
 
             // Set Data in inputElement
-            plugin.options.inputElement.value = JSON.stringify(resData);
+            if(plugin.options.inputElement.tagName == "textarea" || plugin.options.inputElement.tagName == "input") {
+                plugin.options.inputElement.value = JSON.stringify(resData);
+            } else {
+                plugin.options.inputElement.textContent = JSON.stringify(resData);
+            }
+
+
         }
 
         /**
@@ -147,13 +156,17 @@ if(! jspreadsheet && typeof(require) === 'function') {
             }
 
             var Id = plugin.options.inputId;
-
-            var inputEl = document.createElement("input");
-            inputEl.id = Id;
-            inputEl.name = Id;
-            inputEl.type = "hidden";
-            spreadsheet.el.append(inputEl);
-            plugin.options.inputElement = inputEl;
+            var element = document.getElementById(Id);
+            if(element) {
+                plugin.options.inputElement = element;
+            } else {
+                var inputEl = document.createElement("input");
+                inputEl.id = Id;
+                inputEl.name = Id;
+                inputEl.type = "hidden";
+                spreadsheet.el.append(inputEl);
+                plugin.options.inputElement = inputEl;
+            }
         }
 
         /**
@@ -220,14 +233,20 @@ if(! jspreadsheet && typeof(require) === 'function') {
          * @returns {object}
          */
         function getWorksheet() {
-            for(let ite_worksheet=0; ite_worksheet<spreadsheet.worksheets.length; ite_worksheet++) {
-                var worksheet = spreadsheet.worksheets[ite_worksheet];
-                if(plugin.options.worksheetId === getWorksheetId(worksheet)) {
-                    return worksheet;
+            if(plugin.options.worksheetId === null && spreadsheet.worksheets.length == 1) {
+                return spreadsheet.worksheets[0];
+            }
+            if(plugin.options.worksheetId) {
+                for (let ite_worksheet = 0; ite_worksheet < spreadsheet.worksheets.length; ite_worksheet++) {
+                    var worksheet = spreadsheet.worksheets[ite_worksheet];
+                    if (plugin.options.worksheetId === getWorksheetId(worksheet)) {
+                        return worksheet;
+                    }
                 }
             }
             return null;
         }
+
 
         /**
          * get worksheet id / serial number

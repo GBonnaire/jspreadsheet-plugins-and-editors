@@ -4,7 +4,6 @@ The utils plugin add features for rows, columns, sheet, viewport. Like Move row,
 
 This plugin is **Free**
 
-
 ### Features
 
 - Move rows
@@ -12,7 +11,7 @@ This plugin is **Free**
 - Hide Sheet
 - Hide columns / show columns
 - Hide rows / show rows
-- Zoom (only for v9 - beta version)
+- Zoom (only for v9/v10 - beta version)
 
 
 ## What is jSpreadsheet ?
@@ -28,6 +27,8 @@ jspreadsheet, a lightweight Vanilla JavaScript plugin, can help you create excep
 - [jSpreadsheet Pro v8](https://www.jspreadsheet.com/v8) 
 -   or
 - [jSpreadsheet Pro v9](https://www.jspreadsheet.com/v9)
+- or
+- [jSpreadsheet Pro v10](https://www.jspreadsheet.com/v10)
 
 if you have a lot a plugins, add on the top autoWidth
 
@@ -99,10 +100,10 @@ jSuites.setDictionary({
 
 Header on page
 ```HTML
-<script src="https://jspreadsheet.com/v9/jspreadsheet.js"></script>
-<script src="https://jsuites.net/v4/jsuites.js"></script>
-<link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
-<link rel="stylesheet" href="https://jspreadsheet.com/v9/jspreadsheet.css" type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/jspreadsheet/dist/index.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jspreadsheet/dist/jspreadsheet.min.css" type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/jsuites/dist/jsuites.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsuites/dist/jsuites.min.css" type="text/css" />
 
 <script src="/path/to/utils.min.js"></script>
 ```
