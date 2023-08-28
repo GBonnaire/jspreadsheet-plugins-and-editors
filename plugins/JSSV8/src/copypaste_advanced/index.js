@@ -1,16 +1,18 @@
 /**
  * Plugin copy paste advance for jSpreadsheet
  *
- * @version 3.2.0
+ * @version 3.3.0
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description upgrade copy paste function for work with clipboard permission denied or error
  * and add button on toolbar copy/cut/paste
  *
- * @license This plugin is distribute under MIT License
+ * @license This plugin is distributed under MIT License
  *
  * ReleaseNote
- * 3.1.0 : Migration V10, Select several cells and copy & paste (same relative position/as row/as column)
+ * 3.3.0 : Add Transpose paste + Add paste only value and formula
+ * 3.2.0 : Select several cells to copy & paste
+ * 3.1.0 : Migration V10
  * 3.0.0 : version for v8 and v9
  * 2.1.0 : add topmenu compatibility
  * 2.0.1 : transform jexcel to jspreadsheet
@@ -40,6 +42,7 @@ if (! jSuites && typeof(require) === 'function') {
         var list_borders = [];
         var previous_selection = null;
         var flag_copy_run = false;
+        var fx_to_apply_on_before_paste = null;
 
         var keyboard_CTRL_Pressed = false;
 
@@ -55,8 +58,11 @@ if (! jSuites && typeof(require) === 'function') {
             text_paste_special: jSuites.translate("Paste special"),
             text_paste_only_style: jSuites.translate("Paste only format"),
             text_paste_only_value: jSuites.translate("Paste only value"),
-            text_paste_as_column: jSuites.translate("Paste as column"),
-            text_paste_as_row: jSuites.translate("Paste as row"),
+            text_paste_only_formula: jSuites.translate("Paste only value and formula"),
+            text_transpose: jSuites.translate("Transpose"),
+            text_paste_transpose: jSuites.translate("Paste with transpose"),
+            text_paste_transpose_only_value: jSuites.translate("Paste only value with transpose"),
+            text_paste_transpose_only_formula: jSuites.translate("Paste only value and formula with transpose"),
             position_toolbar: null,
         }
 
@@ -145,12 +151,49 @@ if (! jSuites && typeof(require) === 'function') {
                             }
                         },
                         {
+                            title: plugin.options.text_paste_only_formula,
+                            onclick: function() {
+                                if(obj.selectedCell) {
+                                    plugin.pasteOnlyValueAndFormula();
+                                }
+                            }
+                        },
+                        {
                             title: plugin.options.text_paste_only_style,
                             onclick: function() {
                                 if(obj.selectedCell) {
                                     plugin.pasteOnlyStyle();
                                 }
                             }
+                        },
+                        {
+                            title: plugin.options.text_transpose,
+                            submenu: [
+                                {
+                                    title: plugin.options.text_paste_transpose,
+                                    onclick: function() {
+                                        if(obj.selectedCell) {
+                                            plugin.pasteTranspose();
+                                        }
+                                    }
+                                },
+                                {
+                                    title: plugin.options.text_paste_transpose_only_value,
+                                    onclick: function() {
+                                        if(obj.selectedCell) {
+                                            plugin.pasteTransposeOnlyValue();
+                                        }
+                                    }
+                                },
+                                {
+                                    title: plugin.options.text_paste_transpose_only_formula,
+                                    onclick: function() {
+                                        if(obj.selectedCell) {
+                                            plugin.pasteTransposeOnlyValueAndFormula();
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     ]
                 };
@@ -319,6 +362,7 @@ if (! jSuites && typeof(require) === 'function') {
                 var xEnd = parseInt(coords[2]);
                 var yEnd = parseInt(coords[3]);
 
+
                 if(list_borders.length > 0) {
                     var obj = arguments[1];
                     changeBorderToCopy(worksheet);
@@ -348,6 +392,16 @@ if (! jSuites && typeof(require) === 'function') {
                     }
                 }
             }
+            if(event=="onbeforepaste") {
+                if(fx_to_apply_on_before_paste != null && typeof fx_to_apply_on_before_paste == "function") {
+                    const newdata = fx_to_apply_on_before_paste(arguments[2], false, arguments[4], arguments[3]);
+                    if(arguments[5].length > 0) {
+                        fx_to_apply_on_before_paste(arguments[5], true, arguments[4], arguments[3]);
+                    }
+                    fx_to_apply_on_before_paste = null;
+                    return newdata;
+                }
+            }
             if(event=="onpaste") {
                 changeBorderToCopy(worksheet);
             }
@@ -371,7 +425,10 @@ if (! jSuites && typeof(require) === 'function') {
          * paste function
          * @returns {undefined}
          */
-        plugin.paste = function(onlyValue) {
+        plugin.paste = function(onlyValue, processed = true, functionToApply) {
+            if(functionToApply != null && typeof functionToApply == "function") {
+                fx_to_apply_on_before_paste = functionToApply;
+            }
             if(onlyValue==null) {
                 onlyValue = !plugin.options.allow_pastestyle;
             }
@@ -386,9 +443,7 @@ if (! jSuites && typeof(require) === 'function') {
             var x1 = parseInt(worksheet.selectedCell[0]);
             var y1 = parseInt(worksheet.selectedCell[1]);
 
-            console.log(list_borders)
-
-            if (navigator && navigator.clipboard && list_borders.length == 0) {
+            if (processed && navigator && navigator.clipboard && list_borders.length == 0) {
                 navigator.clipboard.read().then(function(data) {
                     data[0].getType("text/plain").then(function(item) {
                         var res = new Response(item).text().then(function(text) {
@@ -427,14 +482,20 @@ if (! jSuites && typeof(require) === 'function') {
                     }
                 }).catch(function(err) {
                     if (jspreadsheet.dataCopied && onlyValue) {
-                        const data = getDataToPaste(worksheet, jspreadsheet.dataCopied, x1, y1);
+                        const data = getDataToPaste(worksheet, jspreadsheet.dataCopied, processed, x1, y1);
                         if(onlyValue) {
                             var bordersCopying = worksheet.borders.copying;
                             worksheet.borders.copying = null;
+                            if(hash) {
+                                jspreadsheet.clipboard.hash = 0;
+                            }
                         }
                         worksheet.paste(x1, y1, arrayToCSV(data));
                         if(onlyValue) {
                             worksheet.borders.copying = bordersCopying;
+                            if(hash) {
+                                jspreadsheet.clipboard.hash = hash;
+                            }
                         }
                     }
                     if(!onlyValue && !worksheet.borders.copying && jspreadsheet.styleCopied) {
@@ -442,15 +503,20 @@ if (! jSuites && typeof(require) === 'function') {
                     }
                 });
             } else if (jspreadsheet.dataCopied) {
-                const data = getDataToPaste(worksheet, jspreadsheet.dataCopied, x1, y1);
-
+                const data = getDataToPaste(worksheet, jspreadsheet.dataCopied, processed, x1, y1);
                 if(onlyValue) {
                     var bordersCopying = worksheet.borders.copying;
                     worksheet.borders.copying = null;
+                    if(hash) {
+                        jspreadsheet.clipboard.hash = 0;
+                    }
                 }
                 worksheet.paste(x1, y1, arrayToCSV(data));
                 if(onlyValue) {
                     worksheet.borders.copying = bordersCopying;
+                    if(hash) {
+                        jspreadsheet.clipboard.hash = hash;
+                    }
                 }
 
                 if(!onlyValue && jspreadsheet.styleCopied) {
@@ -510,8 +576,42 @@ if (! jSuites && typeof(require) === 'function') {
          * @returns {undefined}
          */
         plugin.pasteOnlyValue = function() {
-            plugin.paste(true);
+            plugin.paste(true, true);
         }
+
+        /**
+         * pasteStyle
+         * @returns {undefined}
+         */
+        plugin.pasteOnlyValueAndFormula = function() {
+            plugin.paste(true, false);
+        }
+
+        /**
+         * pasteTranspose
+         * @returns {undefined}
+         */
+        plugin.pasteTranspose = function(onlyValue = false, processed = true) {
+            plugin.paste(onlyValue, processed, transposeArray);
+        }
+
+        /**
+         * pasteTransposeOnlyValue
+         * @returns {undefined}
+         */
+        plugin.pasteTransposeOnlyValue = function() {
+            plugin.pasteTranspose(true, true);
+        }
+
+        /**
+         * pasteTransposeOnlyValueAndFormula
+         * @returns {undefined}
+         */
+        plugin.pasteTransposeOnlyValueAndFormula = function() {
+            plugin.pasteTranspose(true, false);
+        }
+
+
 
         /**
          * paqteStyle
@@ -734,7 +834,7 @@ if (! jSuites && typeof(require) === 'function') {
         }
 
 
-        const getDataToPaste = function(worksheet, data, toX, toY) {
+        const getDataToPaste = function(worksheet, data, processed, toX, toY) {
             if(typeof data == "string") {
                 data = jspreadsheet.helpers.parseCSV(data, "\t");
             }
@@ -754,14 +854,14 @@ if (! jSuites && typeof(require) === 'function') {
                     const row = [];
                     for(let x = minX; x <= maxX; x++) {
                         if(data && toX!=undefined && toY!=undefined) {
-                            if(list_cellsSelected[x+","+y] !== undefined) {
+                            if(processed && list_cellsSelected[x+","+y] !== undefined) {
                                 row.push(data[y-minY][x-minX]);
                             } else {
-                                row.push(worksheet.getValueFromCoords(x-minX+toX, y-minY+toY));
+                                row.push(worksheet.getValueFromCoords(x-minX+toX, y-minY+toY, processed));
                             }
                         } else {
                             if(list_cellsSelected[x+","+y] !== undefined) {
-                                row.push(worksheet.getValueFromCoords(x, y));
+                                row.push(worksheet.getValueFromCoords(x, y, processed));
                             } else {
                                 row.push(null);
                             }
@@ -772,6 +872,23 @@ if (! jSuites && typeof(require) === 'function') {
                 }
 
                 return newdata;
+            } else if(flag_copy_run && jspreadsheet.clipboard) {
+                if(processed) {
+                    return jspreadsheet.clipboard.value;
+                } else {
+                    let minX = jspreadsheet.clipboard.selection[0], minY = jspreadsheet.clipboard.selection[1], maxX = jspreadsheet.clipboard.selection[2], maxY = jspreadsheet.clipboard.selection[3];
+                    const newdata = [];
+                    for(let y = minY; y <= maxY; y++) {
+                        const row = [];
+                        for(let x = minX; x <= maxX; x++) {
+                            row.push(worksheet.getValueFromCoords(x,y, processed));
+                        }
+                        newdata.push(row);
+                    }
+
+                    return newdata;
+                }
+
             } else {
                 return data;
             }
@@ -839,6 +956,45 @@ if (! jSuites && typeof(require) === 'function') {
             }
             text = text.replace(new RegExp('"', 'g'), '""');
             return text;
+        }
+
+        const transposeArray = function(data, isStyle = true, x, y) {
+            const numRows = data.length;
+            const numCols = data[0].length;
+
+            const maxDimension = Math.max(numCols, numRows);
+
+            for (let i = 0; i < maxDimension; i++) {
+                for (let j = i + 1; j < maxDimension; j++) {
+                    const temp = data[i][j];
+                    if(data[j] == null) {
+                        data[j] = [];
+                    }
+
+                    if(isStyle) {
+                        data[i][j] = data[j][i];
+                        data[j][i] = temp;
+                    } else {
+                        data[i][j] = transposteReferenceInFormula(data[j][i], y+j, x+i);
+                        data[j][i] = transposteReferenceInFormula(temp, y+i, x+j);
+                    }
+                }
+            }
+
+            data.splice(numCols);
+            for (let i = 0; i < numCols; i++) {
+                data[i].splice(numRows);
+            }
+            return data;
+        }
+
+        const transposteReferenceInFormula = function(formula,x, y) {
+            if(formula && formula.toString().substring(0, 1) == "=") {
+                const cellReferenceRegex = /([A-Z0-9]+[\!\.])?([A-Z]+[0-9]+(?:\:[A-Z]*[0-9]*)?)/gm;
+                return formula.replace(cellReferenceRegex, "#REF!");
+            } else {
+                return formula;
+            }
         }
 
         /**

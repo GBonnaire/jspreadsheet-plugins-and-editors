@@ -102,3 +102,11 @@ All premiums plugins (vof JSSV8Pro, JSSV9Pro) are availables on repo : [Repo GBo
 You can find all premium products on [ProgiDev Repository : repo.gbonnaire.fr](https://repo.gbonnaire.fr)
 
 If you doesn't found your plugin, or you want a custom plugin for your application, contact me on contact@gbonnaire.fr (Français / English)
+
+# Sponsors
+Our esteemed sponsors who have played a pivotal role in making this project possible
+- Figlinq B.V.
+
+_If you're interested in participating in the development of this project as a sponsor, we welcome your contribution. To get in touch with us and discuss sponsorship opportunities, please reach out to us at contact@gbonnaire.fr. Your support will play a significant role in shaping the future of this project._
+
+_Thank you for considering sponsorship and being a part of our journey!_
