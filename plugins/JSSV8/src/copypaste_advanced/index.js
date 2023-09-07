@@ -1,7 +1,7 @@
 /**
  * Plugin copy paste advance for jSpreadsheet
  *
- * @version 3.3.0
+ * @version 3.3.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @description upgrade copy paste function for work with clipboard permission denied or error
@@ -57,12 +57,12 @@ if (! jSuites && typeof(require) === 'function') {
             allow_pastestyle: true,
             text_paste_special: jSuites.translate("Paste special"),
             text_paste_only_style: jSuites.translate("Paste only format"),
-            text_paste_only_value: jSuites.translate("Paste only value"),
-            text_paste_only_formula: jSuites.translate("Paste only value and formula"),
+            text_paste_only_value: jSuites.translate("Paste only values"),
+            text_paste_only_formula: jSuites.translate("Paste only values and formulas"),
             text_transpose: jSuites.translate("Transpose"),
-            text_paste_transpose: jSuites.translate("Paste with transpose"),
-            text_paste_transpose_only_value: jSuites.translate("Paste only value with transpose"),
-            text_paste_transpose_only_formula: jSuites.translate("Paste only value and formula with transpose"),
+            text_paste_transpose: jSuites.translate("Format, formulas and values"),
+            text_paste_transpose_only_value: jSuites.translate("Values only"),
+            text_paste_transpose_only_formula: jSuites.translate("Formulas and values"),
             position_toolbar: null,
         }
 
@@ -443,7 +443,7 @@ if (! jSuites && typeof(require) === 'function') {
             var x1 = parseInt(worksheet.selectedCell[0]);
             var y1 = parseInt(worksheet.selectedCell[1]);
 
-            if (processed && navigator && navigator.clipboard && list_borders.length == 0) {
+            if (processed && navigator && navigator.clipboard && navigator.clipboard.read && list_borders.length == 0) {
                 navigator.clipboard.read().then(function(data) {
                     data[0].getType("text/plain").then(function(item) {
                         var res = new Response(item).text().then(function(text) {
@@ -534,7 +534,7 @@ if (! jSuites && typeof(require) === 'function') {
             const worksheet = getCurrentWorksheet();
             if(worksheet.borders.copying) {
                 styleToCopy = getStyleToPaste(worksheet);
-            } else if (navigator && navigator.clipboard) {
+            } else if (navigator && navigator.clipboard && navigator.clipboard.read) {
                 navigator.clipboard.read().then(function(data) {
                     if(data[0].types.indexOf('text/html') !== -1) {
                         data[0].getType("text/html").then(function(item) {
@@ -944,6 +944,9 @@ if (! jSuites && typeof(require) === 'function') {
         }
 
         const arrayToCSV = function(data) {
+            if(typeof data == "string") {
+                return data;
+            }
             let text = "";
             if(typeof data == "object" && Array.isArray(data)) {
                 for(var i = 0; i < data.length; i++) {
