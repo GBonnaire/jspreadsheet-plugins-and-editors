@@ -29,6 +29,5 @@
         "jspreadsheet": ">10.0.31"
     },
     "main": "index.js",
-    "version": "3.3.1git",
-    
+    "version": "3.3.1"
 }
