@@ -1,7 +1,7 @@
 /**
  * Plugin statusbar for JSpreadsheet Pro
  *
- * @version 2.7.0
+ * @version 2.7.1
  * @author Guillaume Bonnaire <contact@gbonnaire.fr>
  * @website https://repo.gbonnaire.fr
  * @summary Add status bar on bottom of JSpreadsheet
@@ -461,7 +461,7 @@ if(! jSuites && typeof(require) === 'function') {
          * Disable action bar
          */
         function disableActionBar(worksheet) {
-            if(elements.actionBar && options.autoButtonDisable && !elements.actionBar.classList.contains("disabled") && options.closeInsertionOnly) {
+            if(elements.actionBar && plugin.options.autoButtonDisable && !elements.actionBar.classList.contains("disabled") && plugin.options.closeInsertionOnly) {
                 elements.actionBar.classList.add("disabled");
                 if(typeof worksheet.dispatch == "function") {
                     worksheet.dispatch("statusbar_buttons_disable", worksheet, elements);
@@ -473,7 +473,7 @@ if(! jSuites && typeof(require) === 'function') {
          * Enable action bar
          */
         function enableActionBar(worksheet) {
-            if(elements.actionBar && options.autoButtonDisable && elements.actionBar.classList.contains("disabled")) {
+            if(elements.actionBar && plugin.options.autoButtonDisable && elements.actionBar.classList.contains("disabled")) {
                 elements.actionBar.classList.remove("disabled");
                 if(typeof worksheet.dispatch == "function") {
                     worksheet.dispatch("statusbar_buttons_enable", worksheet, elements);
