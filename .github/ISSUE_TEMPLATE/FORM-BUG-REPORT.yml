@@ -22,6 +22,7 @@ body:
       - v8.x
       - v9.x
       - v10.x
+      - V11.x
   validations:
     required: true
 - type: textarea
